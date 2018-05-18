@@ -1,5 +1,5 @@
 PATH
-  remote: ../nose
+  remote: nose
   specs:
     nose (0.1.0pre5)
       cassandra-driver (~> 3.1.0, >= 3.1.0)
