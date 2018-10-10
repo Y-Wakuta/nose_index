@@ -13,6 +13,8 @@ NoSE::Workload.new do
                             write_medium: 7.65,
                             write_heavy: 7.65 do
     Q 'SELECT users.nickname, users.password FROM users WHERE users.id = ? -- 1'
+    Q 'SELECT users.nickname, users.password FROM users WHERE users.password = ? -- 1'
+    Q 'SELECT users.nickname, users.password FROM users WHERE users.lastname = ? -- 1'
     # XXX Must have at least one equality predicate
     Q 'SELECT categories.id, categories.name FROM categories WHERE ' \
       'categories.dummy = 1 -- 2'

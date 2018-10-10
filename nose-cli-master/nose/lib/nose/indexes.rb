@@ -8,7 +8,7 @@ module NoSE
                 :graph
 
     def initialize(hash_fields, order_fields, extra, graph,
-                   saved_key: nil)
+                   saved_key= nil) #yusuke ここの:を=に変更した。
       order_set = order_fields.to_set
       @hash_fields = hash_fields.to_set
       @order_fields = order_fields.delete_if { |e| hash_fields.include? e }
