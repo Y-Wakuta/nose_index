@@ -16,6 +16,8 @@ module NoSE
         @port = config[:port]
         @keyspace = config[:keyspace]
         @generator = Cassandra::Uuid::Generator.new
+        @table_names = []
+        @pkeys = []
       end
 
       # Generate a random UUID
@@ -71,8 +73,13 @@ module NoSE
 
       # Check if the given index is empty
       def index_empty?(index)
+        begin #yusuke ここはもっとしっかりした確認方法があると思う
         query = "SELECT COUNT(*) FROM \"#{index.key}\" LIMIT 1"
         client.execute(query).first.values.first.zero?
+        rescue => e
+          p e
+          return false #yusuke　この関数は空かどうかを確認する関数なので、この確認方法はNG
+        end
       end
 
       # Check if a given index exists in the target database
@@ -123,12 +130,49 @@ module NoSE
         end
       end
 
+      #yusuke 試しにsecondary indexに置き換えるかどうか判断するメソッドを作成してみる。
+      # index.all_fields-index.hash_fields-index.order_fields の数が一定値以上なら置き換えるにしよう。ひとまず、今は1つ以上あれば置き換えるコードで。
+      def is_replace_2nd_index(index)
+        non_key_field_num_threadthord = 0
+        non_key_fields = index.all_fields - index.hash_fields - index.order_fields
+        p non_key_fields.count
+        non_key_fields.count > non_key_field_num_threadthord
+      end
+
+      #yusuke 同じmysql上のテーブルに言及しているindexの名前を記録しておいて返します
+      def get_relevant_index(index)
+        mySQL_table_name = (field_names index.hash_fields).split(',').first.to_s.split('_').first.to_s
+        if @table_names.empty? || !@table_names.transpose[0].include?(mySQL_table_name) then
+          @table_names.append [mySQL_table_name,index.key]
+          return ""
+        end
+
+
+        if !is_replace_2nd_index index
+          return ""
+        end
+
+        if @pkeys.empty? ||  @pkeys.include?(mySQL_table_name) then
+          @pkeys.append((field_names index.hash_fields).split(','))
+          return @table_names.select {|tn| tn[0] == mySQL_table_name}.first[1] #yusuke secondary indexを貼る対象のkeyを取得する
+        end
+
+        return ""
+      end
+
       # Produce the CQL to create the definition for a given index
       # @return [String]
-      def index_cql(index)
+      def index_cql(index) #yusuke ここでplan_fileの内容からCQLを生成している
+        if !(pre_key = get_relevant_index(index)).empty?
+          ddl = "CREATE INDEX #{index.key} ON #{pre_key}(#{(field_names index.hash_fields).split(',').first});"
+          return ddl
+        end
+
         ddl = "CREATE COLUMNFAMILY \"#{index.key}\" (" \
           "#{field_names index.all_fields, true}, " \
           "PRIMARY KEY((#{field_names index.hash_fields})"
+
+        mySQL_table_name = (field_names index.hash_fields).split(',').first.to_s.split('_').first
 
         cluster_key = index.order_fields
         ddl += ", #{field_names cluster_key}" unless cluster_key.empty?
