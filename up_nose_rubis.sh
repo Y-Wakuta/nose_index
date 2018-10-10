@@ -3,9 +3,9 @@
 set -e
 
 cd ./backend
-docker-compose down
-docker-compose build --no-cache
-docker-compose up -d
+#docker-compose down
+#docker-compose build --no-cache
+#docker-compose up -d
 
 sleep 14
 cd ../nose-cli-master/nose/experiments/rubis/
