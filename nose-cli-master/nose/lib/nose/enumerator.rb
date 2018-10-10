@@ -34,6 +34,7 @@ module NoSE
     end
 
     # Produce all possible indices for a given workload
+    #yusuke secondary indexを足すならここのsupportクエリのような感じになりそう
     # @return [Set<Index>]
     def indexes_for_workload(additional_indexes = [], by_id_graph = false)
       queries = @workload.queries

@@ -129,7 +129,7 @@ module NoSE
         file = File.read(plan_file)
 
         case File.extname(plan_file)
-        when '.json'
+        when '.json' #yusuke ここでjsonを読み込んでる！多分searchの結果を受けれるのはここだけ！
           result = representer.from_json(file)
         when '.rb'
           result = Search::Results.new
@@ -240,13 +240,13 @@ module NoSE
 
         # Output selected indexes
         header = "Indexes\n" + '━' * 50
-        output_indexes_txt header, result.indexes, file
+        output_indexes_txt header, result.indexes, file #yusuke 出力ファイルの上半分のIndexesはここ
 
         file.puts Formatador.parse('  Total size: ' \
                                    "[blue]#{result.total_size}[/]\n\n")
 
         # Output query plans for the discovered indices
-        header = "Query plans\n" + '━' * 50
+        header = "Query plans\n" + '━' * 50 #yusuke 出力ファイルの下半分のQuery plansはここ
         file.puts Formatador.parse("[blue]#{header}[/]")
         weights = result.workload.statement_weights
         weights = result.weights if weights.nil? || weights.empty?

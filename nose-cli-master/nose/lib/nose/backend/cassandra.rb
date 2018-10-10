@@ -34,7 +34,7 @@ module NoSE
 
             begin
               drop_index(index) if drop_existing && index_exists?(index)
-              client.execute(ddl) if execute
+              client.execute(ddl) if execute #yusuke ここのclientはホストのcassandra client
             rescue Cassandra::Errors::AlreadyExistsError => exc
               next if skip_existing
 

@@ -92,7 +92,7 @@ module NoSE
 
       # Set the query plans which should be used based on the entire tree
       # @return [void]
-      def plans_from_trees(trees)
+      def plans_from_trees(trees) #yusuke このmethodでtreeの経路の選択をしている.返すのは引数で渡した複数のtreeの中の１つのtreeのさらに１つの経路
         @plans = trees.map do |tree|
           # Exclude support queries since they will be in update plans
           query = tree.query

@@ -232,6 +232,7 @@ module NoSE
       end
 
       # Find a tree of plans for the given query
+      #yusuke このmethodが１つのtreeの作成に対応
       # @return [QueryPlanTree]
       # @raise [NoPlanException]
       def find_plans_for_query(query)
@@ -239,8 +240,8 @@ module NoSE
         state.freeze
         tree = QueryPlanTree.new state, @cost_model
 
-        indexes_by_joins = indexes_for_query(query, state.joins)
-        find_plans_for_step tree.root, indexes_by_joins
+        indexes_by_joins = indexes_for_query(query, state.joins) #yusuke 複数のentityをクエリに答えれるようにhashの形でjoinしているみたい
+        find_plans_for_step tree.root, indexes_by_joins #yusuke このmethodの中で再帰的にtreeを作成している。step.children.children.childrenみたいな感じで辿れるみたい
 
         if tree.root.children.empty?
           tree = QueryPlanTree.new state, @cost_model
@@ -300,16 +301,16 @@ module NoSE
 
       # Find possible query plans for a query starting at the given step
       # @return [void]
-      def find_plans_for_step(step, indexes_by_joins, prune: true)
+      def find_plans_for_step(step, indexes_by_joins, prune: true) #yusuke １つ１つのplanを作成しているのはこのmethod.第一引数のstepにrootを渡したら全体のplanが取れるっぽい
         return if step.state.answered?
 
-        steps = find_steps_for_state step, step.state, indexes_by_joins
+        steps = find_steps_for_state step, step.state, indexes_by_joins #yusuke 第一引数のstepをparentとしてそのchildrenとなりうるindexlookupのstepsを取得する
 
         if !steps.empty?
           step.children = steps
           steps.each { |new_step| new_step.calculate_cost @cost_model }
           steps.each do |child_step|
-            find_plans_for_step child_step, indexes_by_joins
+            find_plans_for_step child_step, indexes_by_joins #yusuke ここで自methodを呼び出して再帰
 
             # Remove this step if finding a plan from here failed
             if child_step.children.empty? && !child_step.state.answered?
@@ -327,21 +328,21 @@ module NoSE
       # @return [Array<PlanStep>]
       def find_nonindexed_steps(parent, state)
         steps = []
-        return steps if parent.is_a? RootPlanStep
+        return steps if parent.is_a? RootPlanStep #yusuke もしrootstepならsteps==[]のまま返す
 
         [SortPlanStep, FilterPlanStep, LimitPlanStep].each \
           { |step| steps.push step.apply(parent, state) }
         steps.flatten!
         steps.compact!
 
-        steps
+        steps #yusuke sort,filter,limit処理の時以外はsteps==[]で帰る
       end
 
       # Get a list of possible next steps for a query in the given state
       # @return [Array<PlanStep>]
       def find_steps_for_state(parent, state, indexes_by_joins)
         steps = find_nonindexed_steps parent, state
-        return steps unless steps.empty?
+        return steps unless steps.empty? #yusuke find_noindexed_stepsでparentがrootではなく、sort,filter,limit処理の時はここでstepsを返す。
 
         # Don't allow indices to be used multiple times
         indexes = (indexes_by_joins[state.joins.first] || Set.new).to_set

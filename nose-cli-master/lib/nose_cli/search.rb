@@ -72,7 +72,7 @@ module NoSE
         begin
           backend = get_backend options, result
           send(('output_' + options[:format]).to_sym,
-               result, file, options[:enumerated], backend)
+               result, file, options[:enumerated], backend) #yusuke ここでnose_cli.output_txtを呼んで結果をファイルに出力している
         rescue
           nil
         ensure

@@ -87,7 +87,7 @@ module NoSE
         result = solve_mipper query_weights.keys, indexes, **solver_params
 
         result.workload = @workload
-        result.plans_from_trees trees
+        result.plans_from_trees trees #yusuke この中でresult.plansが追加されてる
         result.cost_model = @cost_model
 
         # Select the relevant update plans
@@ -175,24 +175,24 @@ module NoSE
           query_cost planner, query, weight
         end
         costs = Hash[query_weights.each_key.map.with_index do |query, q|
-          [query, results[q].first]
+          [query, results[q].first] #yusuke results[q].firstはquery_cost
         end]
 
-        [costs, results.map(&:last)]
+        [costs, results.map(&:last)] #yusuke results[q].lastはtree。
       end
 
       # Get the cost for indices for an individual query
       def query_cost(planner, query, weight)
         query_costs = {}
 
-        tree = planner.find_plans_for_query(query)
-        tree.each do |plan|
-          steps_by_index = []
+        tree = planner.find_plans_for_query(query) #yusuke このmethodがquery用の１つのtreeを返す
+        tree.each do |plan| #yusuke この書き方でtreeの１つの経路であるplanが取れる(少し意外だがそうっぽい？)
+          steps_by_index = [] #yusuke あるplanを構成する(stepの配列)を１つの要素として配列を構成する二次元配列
           plan.each do |step|
-            if step.is_a? Plans::IndexLookupPlanStep
-              steps_by_index.push [step]
+            if step.is_a? Plans::IndexLookupPlanStep #yusuke secondary index用にSecondaryIndexLookupPlanStepも宣言した方がいいかも
+              steps_by_index.push [step] #yusuke ここのコードを見る感じ、１つのplanの中に２つのindexlookupが入ることはないのかも。
             else
-              steps_by_index.last.push step
+              steps_by_index.last.push step #yusuke indexlookup以外(sort,limit,filter)を最後に持ってくる.filterが最後なのは改善の余地があるかも？
             end
           end
 
@@ -213,7 +213,7 @@ module NoSE
         # the cost of all plan steps for the part of the query graph
         steps_by_index.each do |steps|
           # Get the indexes for these plan steps
-          index_step = steps.first
+          index_step = steps.first #yusuke 各planの最初はIndexLookUp
 
           # Calculate the cost for just these steps in the plan
           cost = steps.sum_by(&:cost) * weight
