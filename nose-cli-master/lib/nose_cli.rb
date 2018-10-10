@@ -146,14 +146,17 @@ module NoSE
       # Load plans either from an explicit file or the name
       # of something in the plans/ directory
       def load_plans(plan_file, options)
+        plan_file = "#{plan_file}.json" #yusuke こここんなに泥臭いことしなくてもいいと思いたい
         if File.exist? plan_file
           result = load_results(plan_file, options[:mix])
         else
           schema = Schema.load plan_file
           result = OpenStruct.new
+          p schema.model
           result.workload = Workload.new schema.model
           result.indexes = schema.indexes.values
         end
+      #  result.workload.model = "rubis"
         backend = get_backend(options, result)
 
         [result, backend]
