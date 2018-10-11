@@ -2,12 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="178525ed-8ebd-4c03-8ecf-3b259da1e49c" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/nose/lib/nose/search/create_index.rb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nose/lib/nose/backend/cassandra.rb" beforeDir="false" afterPath="$PROJECT_DIR$/nose/lib/nose/backend/cassandra.rb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nose/lib/nose/search.rb" beforeDir="false" afterPath="$PROJECT_DIR$/nose/lib/nose/search.rb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nose/lib/nose/search/problem.rb" beforeDir="false" afterPath="$PROJECT_DIR$/nose/lib/nose/search/problem.rb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nose/lib/nose/search/results.rb" beforeDir="false" afterPath="$PROJECT_DIR$/nose/lib/nose/search/results.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nose/lib/nose/search/create_index.rb" beforeDir="false" afterPath="$PROJECT_DIR$/nose/lib/nose/search/create_index.rb" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -16,7 +11,7 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="CoverageDataManager">
-    <SUITE FILE_PATH="coverage/nose_cli_master@NoSEIndex.rcov" NAME="NoSEIndex Coverage Results" MODIFIED="1539263247488" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" MODULE_NAME="nose-cli-master" />
+    <SUITE FILE_PATH="coverage/nose_cli_master@NoSEIndex.rcov" NAME="NoSEIndex Coverage Results" MODIFIED="1539265732570" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" MODULE_NAME="nose-cli-master" />
     <SUITE FILE_PATH="coverage/nose_cli_master@Unnamed.rcov" NAME="NoSEIndex Coverage Results" MODIFIED="1539255400688" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" MODULE_NAME="nose-cli-master" />
   </component>
   <component name="FUSProjectUsageTrigger">
@@ -24,10 +19,11 @@
       <usages-collector id="statistics.lifecycle.project">
         <counts>
           <entry key="project.closed" value="8" />
+          <entry key="project.open.time.0" value="1" />
           <entry key="project.open.time.2" value="2" />
           <entry key="project.open.time.3" value="3" />
           <entry key="project.open.time.5" value="4" />
-          <entry key="project.opened" value="9" />
+          <entry key="project.opened" value="10" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
@@ -49,12 +45,12 @@
       <usages-collector id="statistics.actions.runAnything" />
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="rb" value="856" />
+          <entry key="rb" value="1142" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="Ruby" value="856" />
+          <entry key="Ruby" value="1142" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.vcs.git.usages" />
@@ -65,7 +61,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/lib/nose_cli.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="238">
+            <state relative-caret-position="1824">
               <caret line="114" selection-start-line="114" selection-end-line="114" />
             </state>
           </provider>
@@ -74,7 +70,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/nose/lib/nose/search.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="552">
+            <state relative-caret-position="2240">
               <caret line="140" selection-start-line="140" selection-end-line="140" />
             </state>
           </provider>
@@ -83,7 +79,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/nose/lib/nose/search/problem.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="209">
+            <state relative-caret-position="1552">
               <caret line="97" selection-start-line="97" selection-end-line="97" />
             </state>
           </provider>
@@ -92,26 +88,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/nose/lib/nose/search/create_index.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="384">
-              <caret line="36" column="37" lean-forward="true" selection-start-line="36" selection-start-column="37" selection-end-line="36" selection-end-column="37" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/nose/schemas/json4_2nd_index.json">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="219">
-              <caret line="1890" column="23" lean-forward="true" selection-start-line="1890" selection-start-column="23" selection-end-line="1890" selection-end-column="23" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/nose/workloads/rubis.rb">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="199">
-              <caret line="26" column="50" selection-start-line="26" selection-start-column="36" selection-end-line="26" selection-end-column="50" />
+            <state relative-caret-position="480">
+              <caret line="31" column="16" lean-forward="true" selection-start-line="31" selection-start-column="16" selection-end-line="31" selection-end-column="16" />
             </state>
           </provider>
         </entry>
@@ -137,7 +115,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/lib/nose_cli/search.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="362">
+            <state relative-caret-position="864">
               <caret line="54" selection-start-line="54" selection-end-line="54" />
             </state>
           </provider>
@@ -162,6 +140,8 @@
       <find>get_mysql</find>
       <find>&quot;parent&quot;: &quot;items&quot;</find>
       <find>where items.id</find>
+      <find>item.id</find>
+      <find>where item.id</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -177,6 +157,7 @@
         <option value="$PROJECT_DIR$/nose/lib/nose/search/results.rb" />
         <option value="$PROJECT_DIR$/nose/lib/nose/search/problem.rb" />
         <option value="$PROJECT_DIR$/nose/lib/nose/backend/cassandra.rb" />
+        <option value="$PROJECT_DIR$/nose/workloads/rubis.rb" />
         <option value="$PROJECT_DIR$/nose/lib/nose/search/create_index.rb" />
       </list>
     </option>
@@ -199,7 +180,7 @@
   <component name="ProjectFrameBounds" extendedState="4">
     <option name="x" value="1080" />
     <option name="y" value="190" />
-    <option name="width" value="1720" />
+    <option name="width" value="1430" />
     <option name="height" value="1442" />
   </component>
   <component name="ProjectView">
@@ -254,14 +235,6 @@
               <item name="lib" type="462c0819:PsiDirectoryNode" />
               <item name="nose" type="462c0819:PsiDirectoryNode" />
               <item name="backend" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="nose-cli-master" type="b2602c69:ProjectViewProjectNode" />
-              <item name="nose-cli-master" type="462c0819:PsiDirectoryNode" />
-              <item name="nose" type="462c0819:PsiDirectoryNode" />
-              <item name="lib" type="462c0819:PsiDirectoryNode" />
-              <item name="nose" type="462c0819:PsiDirectoryNode" />
-              <item name="search" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="nose-cli-master" type="b2602c69:ProjectViewProjectNode" />
@@ -345,11 +318,12 @@
       <workItem from="1539254144670" duration="2064000" />
       <workItem from="1539256341344" duration="7000" />
       <workItem from="1539256421928" duration="6307000" />
+      <workItem from="1539264346267" duration="2345000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="12098000" />
+    <option name="totallyTimeSpent" value="14443000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -361,16 +335,16 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="1080" y="190" width="1720" height="1442" extended-state="4" />
+    <frame x="1080" y="190" width="1430" height="1442" extended-state="4" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.12962963" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.158237" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
       <window_info anchor="bottom" id="Run" order="2" weight="0.44241038" />
-      <window_info active="true" anchor="bottom" id="Debug" order="3" visible="true" weight="0.48131198" />
+      <window_info anchor="bottom" id="Debug" order="3" visible="true" weight="0.48131198" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.32925898" />
@@ -435,16 +409,6 @@
           <line>97</line>
           <option name="timeStamp" value="20" />
         </line-breakpoint>
-        <line-breakpoint enabled="true" type="ruby-line">
-          <url>file://$PROJECT_DIR$/nose/lib/nose/search/create_index.rb</url>
-          <line>47</line>
-          <option name="timeStamp" value="36" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="ruby-line">
-          <url>file://$PROJECT_DIR$/nose/lib/nose/search/create_index.rb</url>
-          <line>39</line>
-          <option name="timeStamp" value="48" />
-        </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
   </component>
@@ -493,9 +457,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/nose/Gemfile">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
     <entry file="file://$USER_HOME$/.rbenv/versions/2.5.1/lib/ruby/2.5.0/psych/parser.rb">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="611">
@@ -540,8 +501,29 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/lib/nose_cli.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
+        <state relative-caret-position="1824">
           <caret line="114" selection-start-line="114" selection-end-line="114" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/nose/lib/nose/search.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2240">
+          <caret line="140" selection-start-line="140" selection-end-line="140" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/nose/lib/nose/search/problem.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1552">
+          <caret line="97" selection-start-line="97" selection-end-line="97" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/nose/lib/nose/backend/cassandra.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="272">
+          <caret line="17" column="51" selection-start-line="17" selection-start-column="51" selection-end-line="17" selection-end-column="51" />
         </state>
       </provider>
     </entry>
@@ -554,50 +536,32 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/lib/nose_cli/search.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="362">
+        <state relative-caret-position="864">
           <caret line="54" selection-start-line="54" selection-end-line="54" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/nose/lib/nose/search.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="552">
-          <caret line="140" selection-start-line="140" selection-end-line="140" />
-        </state>
-      </provider>
+    <entry file="file://$PROJECT_DIR$/nose/Gemfile">
+      <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/nose/lib/nose/backend/cassandra.rb">
+    <entry file="file://$PROJECT_DIR$/nose/workloads/rubis.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="272">
-          <caret line="17" column="51" selection-start-line="17" selection-start-column="51" selection-end-line="17" selection-end-column="51" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/nose/lib/nose/search/problem.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="209">
-          <caret line="97" selection-start-line="97" selection-end-line="97" />
+        <state relative-caret-position="199">
+          <caret line="28" column="61" selection-start-line="28" selection-start-column="47" selection-end-line="28" selection-end-column="61" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/nose/schemas/json4_2nd_index.json">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="219">
-          <caret line="1890" column="23" lean-forward="true" selection-start-line="1890" selection-start-column="23" selection-end-line="1890" selection-end-column="23" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/nose/workloads/rubis.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="199">
-          <caret line="26" column="50" selection-start-line="26" selection-start-column="36" selection-end-line="26" selection-end-column="50" />
+          <caret line="1890" column="23" selection-start-line="1890" selection-start-column="23" selection-end-line="1890" selection-end-column="23" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/nose/lib/nose/search/create_index.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="384">
-          <caret line="36" column="37" lean-forward="true" selection-start-line="36" selection-start-column="37" selection-end-line="36" selection-end-column="37" />
+        <state relative-caret-position="480">
+          <caret line="31" column="16" lean-forward="true" selection-start-line="31" selection-start-column="16" selection-end-line="31" selection-end-column="16" />
         </state>
       </provider>
     </entry>
