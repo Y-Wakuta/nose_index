@@ -93,7 +93,7 @@ module NoSE
         # TODO: Update for indexes grouped by ID path
         result.total_size = selected_indexes.sum_by(&:size)
         result.total_cost = @objective_value
-        result.has_index_hash = CreateIndex.new(selected_indexes).get_has_index_hash
+        result.has_index_hash = CreateIndex.new.get_has_index_hash(selected_indexes)
 
         result
       end
