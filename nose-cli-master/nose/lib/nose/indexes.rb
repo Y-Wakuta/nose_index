@@ -6,6 +6,7 @@ module NoSE
     attr_reader :hash_fields, :order_fields, :extra, :all_fields, :path,
                 :entries, :entry_size, :size, :hash_count, :per_hash_count,
                 :graph
+    attr_accessor :has_index
 
     def initialize(hash_fields, order_fields, extra, graph,
                    saved_key= nil) #yusuke ここの:を=に変更した。
@@ -32,6 +33,11 @@ module NoSE
 
       build_hash saved_key
     end
+
+    #yusuke has_indexを作成
+  #  def set_has_index(has_index)
+  #    @has_index = has_index
+   # end
 
     # Check if this index maps from the primary key to fields from one entity
     # @return [Boolean]

@@ -3,6 +3,7 @@
 require 'json-schema'
 require 'representable'
 require 'representable/json'
+require 'representable/json/hash'
 require 'representable/yaml'
 
 # XXX Caching currently breaks the use of multiple formatting modules
@@ -25,7 +26,7 @@ module NoSE
     # Validate a string of JSON based on the schema
     def validate_json(json)
       schema_file = File.join File.dirname(__FILE__), '..', '..',
-                              'data', 'nose', 'nose-schema.json'
+                              'data', 'nose', 'nose-schema.json'#yusuke ここfile名ベタ書きだけど大丈夫か？
       schema = JSON.parse File.read(schema_file)
 
       data = JSON.parse json
@@ -140,6 +141,12 @@ module NoSE
       property :size
       property :hash_count
       property :per_hash_count
+
+    end
+
+    #yusuke ここに追加することでjsonに出力されるか確認
+    class HasIndexRepresenter < Representable::Decorator
+      include Representable::JSON::Hash
     end
 
     # Represents all data of a field
@@ -697,6 +704,11 @@ module NoSE
       collection :enumerated_indexes, decorator: FullIndexRepresenter,
                                       class: Object,
                                       deserialize: IndexBuilder.new
+
+      #yusuke has_index_hashの表示を試みる
+      collection :has_index_hash, decorator: HasIndexRepresenter
+                                      #class: Hash,
+                                      #deserialize: Hash.new
 
       # The backend cost model used to generate the schema
       # @return [Hash]

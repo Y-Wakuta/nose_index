@@ -80,6 +80,7 @@ module NoSE
         @selected_indexes = @index_vars.each_key.select do |index|
           @index_vars[index].value
         end.to_set
+
       end
 
       #yusuke ここでresultに{index_id => boolean}でsecondary indexを作成するかを決定するhashを追加しよう
@@ -88,12 +89,18 @@ module NoSE
       def result
         result = Results.new self, @data[:by_id_graph]
         result.enumerated_indexes = indexes
+
+        #yusuke ここでfreezeしてるオブジェクトは変更できないと怒られる
+     #   has_index_hash = CreateIndex.new.get_has_index_hash(selected_indexes)
+      #  selected_indexes.map do |index|
+       #   index.has_index = has_index_hash.select {|hih| hih[:key] == index.key}.first[:has_index]
+        #end
         result.indexes = selected_indexes
 
         # TODO: Update for indexes grouped by ID path
         result.total_size = selected_indexes.sum_by(&:size)
         result.total_cost = @objective_value
-        result.has_index_hash = CreateIndex.new.get_has_index_hash(selected_indexes)
+        result.has_index_hash=CreateIndex.new.get_has_index_hash(selected_indexes)
 
         result
       end
