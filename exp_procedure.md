@@ -50,4 +50,10 @@ NoSEを使用して実験を行うための手順をメモする。
     * regions.dummyでも発生したので`update regions set dummy = '1'`を実行
 * NoSEは上手く動いていたっぽいが、「Lost connection to MySQL server during query (Mysql2::Error)」が出た。
 
+# RubyMineの実行設定を消してしまった場合
 
+RUN/Debug Configurationで以下の設定を行う。
+
+Bundlerタブで「Run the script in context of the bundle」にチェックを入れる.
+Ruby script: /home/yusuke/Dropbox/NoSEIndex/nose-cli-master/bin/nose
+Script arguments: search rubis or create SCHEMA etc.
