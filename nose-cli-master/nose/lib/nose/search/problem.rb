@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 require 'logging'
-
+require_relative './create_index'
 require 'mipper'
 begin
   require 'mipper/cbc'
@@ -82,6 +82,7 @@ module NoSE
         end.to_set
       end
 
+      #yusuke ここでresultに{index_id => boolean}でsecondary indexを作成するかを決定するhashを追加しよう
       # Return relevant data on the results of the ILP
       # @return [Results]
       def result
@@ -92,6 +93,7 @@ module NoSE
         # TODO: Update for indexes grouped by ID path
         result.total_size = selected_indexes.sum_by(&:size)
         result.total_cost = @objective_value
+        result.has_index_hash = CreateIndex.new(selected_indexes).get_has_index_hash
 
         result
       end

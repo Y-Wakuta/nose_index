@@ -117,6 +117,7 @@ module NoSE
         end.compact
       end
 
+      #yusuke ここでsolverを使って解いてるみたい
       # Solve the index selection problem using MIPPeR
       # @return [Results]
       def solve_mipper(queries, indexes, data)
