@@ -4,7 +4,8 @@ NoSEを使用して実験を行うための手順をメモする。
 
 1. `bundle exec nose search rubis --format json`でindexやplanを作成する。formatはjson形式を指定。
 2. DB側の準備で`TestNoSE/up_nose_rubis.sh`を実行する
-3. `bundle exec nose create $SCHEMA`でDBにスキーマを適用する
+3. `bundle exec nose create $SCHEMA`でDBにスキーマを適用する。ここで1で出力したjsonファイルを`nose-cli-master/nose/schemas`の中に入れる必要がある。
+4. `bundle exec nose load $SCHEMA`でレコードを入力する
 
 ## secondary indexの効果を確認する
 
