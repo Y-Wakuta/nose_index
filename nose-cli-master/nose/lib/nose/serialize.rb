@@ -65,7 +65,7 @@ module NoSE
       include Uber::Callable
 
       def call(_,fragment:,user_options:,**)
-        HasIndex.new(fragment['index_key'], fragment['index_value'])
+        HasIndex.new(fragment['index_key'], fragment['index_value'],fragment['parent_table_id'])
       end
     end
 
@@ -162,6 +162,7 @@ module NoSE
       include Representable::Uncached
       property :index_key
       property :index_value
+      property :parent_table_id
     end
 
     # Represents all data of a field

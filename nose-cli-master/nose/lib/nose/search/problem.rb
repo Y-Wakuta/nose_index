@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 require 'logging'
-require_relative './create_index'
+require_relative './secondary_index'
 require 'mipper'
 begin
   require 'mipper/cbc'
