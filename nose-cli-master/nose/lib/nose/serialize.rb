@@ -6,6 +6,10 @@ require 'representable/json'
 require 'representable/json/hash'
 require 'representable/yaml'
 
+#yusuke 参考
+# https://github.com/trailblazer/representable
+# http://trailblazer.to/gems/representable/3.0/api.html#tohash-and-fromhash
+
 # XXX Caching currently breaks the use of multiple formatting modules
 #     see https://github.com/apotonick/representable/issues/180
 module Representable
@@ -146,7 +150,10 @@ module NoSE
 
     #yusuke ここに追加することでjsonに出力されるか確認
     class HasIndexRepresenter < Representable::Decorator
-      include Representable::JSON::Hash
+      include Representable::YAML
+      include Representable::Uncached
+      property :index_key
+      property :index_value
     end
 
     # Represents all data of a field

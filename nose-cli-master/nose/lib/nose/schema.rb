@@ -15,10 +15,11 @@ module NoSE
 
       #yusuke ここいじったが本来いじらなくて良さそうな気がする(こんな方法でしかjsonファイルが取り込めないとは思いにくい)
       filename = ""
-      if File.exist? File.expand_path "../../../schemas/#{name}.rb", __FILE__ then
-      filename = File.expand_path "../../../schemas/#{name}.rb", __FILE__
-      elsif File.exist? File.expand_path "../../../schemas/#{name}.json", __FILE__ then
-        filename = File.expand_path "../../../schemas/#{name}.json", __FILE__
+      dir_name = "../../../schemas/"
+      if File.exist? File.expand_path dir_name + "#{name}.rb", __FILE__ then
+      filename = File.expand_path dir_name + "#{name}.rb", __FILE__
+      elsif File.exist? File.expand_path dir_name + "#{name}.json", __FILE__ then
+        filename = File.expand_path dir_name + "#{name}.json", __FILE__
       end
 
       contents = File.read(filename)
