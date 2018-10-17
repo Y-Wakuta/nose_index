@@ -300,7 +300,6 @@ module NoSE
         end
 
         #yusuke serialize周りをいじるとここで何も表示されなくなる
-        p Serialize::SearchResultRepresenter.represent(result).to_hash
         file.puts JSON.pretty_generate \
           Serialize::SearchResultRepresenter.represent(result).to_hash
 
