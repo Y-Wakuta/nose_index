@@ -6,3 +6,5 @@ FROM spotify/cassandra:latest
 #ADD ./cassandra.yaml /etc/cassandra/
 
 #RUN echo "batch_size_fail_threshold_in_kb: 9192" >> /etc/cassandra/cassandra.yaml
+WORKDIR /tools
+COPY ./create_keyspace.sh .
