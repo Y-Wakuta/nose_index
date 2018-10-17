@@ -159,7 +159,7 @@ module NoSE
       #  result.workload.model = "rubis"
         backend = get_backend(options, result)
 
-        [result.has_index_hash, backend]
+        [result, backend]
       end
 
       # Output a list of indexes as text

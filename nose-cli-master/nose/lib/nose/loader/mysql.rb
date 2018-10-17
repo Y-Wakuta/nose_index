@@ -20,13 +20,13 @@ module NoSE
       end
 
       # Load a generated set of indexes with data from MySQL
-      def load(indexes, config, show_progress = false, limit = nil,
+      def load(indexes,has_index_hash, config, show_progress = false, limit = nil,
                skip_existing = true)
-        indexes.map!(&:to_id_graph).uniq! if @backend.by_id_graph
+        indexes.map!(&:to_id_graph).uniq! if @backend.by_id_graph #yusuke このid_graph周りがわかってない
 
         # XXX Assuming backend is thread-safe
         Parallel.each(indexes, in_threads: 2) do |index|
-          load_index index, config, show_progress, limit, skip_existing
+          load_index index, has_index_hash,config, show_progress, limit, skip_existing
         end
       end
 
@@ -60,6 +60,7 @@ module NoSE
                              username: config[:username],
                              password: config[:password],
                              database: config[:database]
+
         else
           @query_options = false
           @array_options = false
@@ -70,13 +71,24 @@ module NoSE
 
       # Load a single index into the backend
       # @return [void]
-      def load_index(index, config, show_progress, limit, skip_existing)
+      def load_index(index,has_index_hash, config, show_progress, limit, skip_existing)
         client = new_client config
 
-        # Skip this index if it's not empty
-        if skip_existing && !@backend.index_empty?(index)
-          @logger.info "Skipping index #{index.inspect}" if show_progress
+        # yusuke indexをsecondary indexとして宣言しているか取得します
+        has_index = has_index_hash.select{|has_in| has_in.index_key == index.key and has_in.index_value == true}
+
+
+        # yusuke secondary indexを持っている場合もskipします
+        # yusuke ただし、ここでskipするのではなく、whereのorを取る形でレコードを入れる必要があるはず。
+        if !has_index.empty? then
+          @logger.info "Since it's secondary index,Skipping index #{index.inspect}" if show_progress
           return
+        end
+
+        # Skip this index if it's not empty
+        if skip_existing && !@backend.index_empty?(index) then
+            @logger.info "Skipping index #{index.inspect}" if show_progress
+            return
         end
         @logger.info index.inspect if show_progress
 

@@ -756,14 +756,14 @@
           "parent": "categories"
         }
       ],
-      "graph": [ 
+      "graph": {
         "nodes": [
           "categories"
         ],
         "edges": [
 
         ]
-      ],
+      },
       "entries": 50,
       "entry_size": 44,
       "size": 2200,
@@ -8326,52 +8326,54 @@
       "per_hash_count": 1.0
     }
   ],
- # "has_index_hash": [
- #   {
- #     "i2906147889": null,
- #     "false": null
- #   },
- #   {
- #     "i3157175159": null,
- #     "false": null
- #   },
- #   {
- #     "i801216542": null,
- #     "true": null
- #   },
- #   {
- #     "i3072603312": null,
- #     "true": null
- #   },
- #   {
- #     "i154863668": null,
- #     "false": null
- #   },
- #   {
- #     "i590232953": null,
- #     "false": null
- #   },
- #   {
- #     "i1888493477": null,
- #     "false": null
- #   },
- #   {
- #     "i193173044": null,
- #     "false": null
- #   },
- #   {
- #     "i3220017915": null,
- #     "false": null
- #   },
- #   {
- #     "i546546186": null,
- #     "false": null
- #   },
- #   {
- #     "i3722443462": null,
- #     "false": null
- #   }
- # ],
+  "has_index_hash": [
+    {
+      "index_key": "i2906147889",
+      "index_value": false
+    },
+    {
+      "index_key": "i3157175159",
+      "index_value": false
+    },
+    {
+      "index_key": "i801216542",
+      "index_value": true,
+      "parent_table_id": "i2906147889"
+    },
+    {
+      "index_key": "i3072603312",
+      "index_value": true,
+      "parent_table_id": "i2906147889"
+    },
+    {
+      "index_key": "i154863668",
+      "index_value": false
+    },
+    {
+      "index_key": "i590232953",
+      "index_value": false
+    },
+    {
+      "index_key": "i1888493477",
+      "index_value": false
+    },
+    {
+      "index_key": "i193173044",
+      "index_value": false
+    },
+    {
+      "index_key": "i3220017915",
+      "index_value": false
+    },
+    {
+      "index_key": "i546546186",
+      "index_value": false
+    },
+    {
+      "index_key": "i3722443462",
+      "index_value": false
+    }
+  ],
   "cost_model": {
     "name": "request_count"
   },
@@ -8772,7 +8774,7 @@
   ],
   "total_size": 56074445,
   "total_cost": 116.47999999999999,
-  "revision": "a4f19113e221484ea664152d6b19b617534fd916",
-  "time": "Fri, 12 Oct 2018 03:56:35 +0900",
-  "command": "/home/yusuke/Dropbox/NoSEIndex/nose-cli-master/bin/nose search rubis --format json"
+  "revision": "c9d83d288630f7804c66101daa3ebb1cc4a26776",
+  "time": "Wed, 17 Oct 2018 21:04:18 +0900",
+  "command": "/home/yusuke/Dropbox/NoSEIndex/nose-cli-master/bin/nose search rubis --format json --output rubis_index.json"
 }

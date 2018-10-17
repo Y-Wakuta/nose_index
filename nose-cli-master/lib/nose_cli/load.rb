@@ -36,7 +36,7 @@ module NoSE
 
         # Create a new instance of the loader class and execute
         loader = get_class('loader', options).new result.workload, backend
-        loader.load result.indexes, options[:loader], options[:progress],
+        loader.load result.indexes,result.has_index_hash, options[:loader], options[:progress],
                     options[:limit], options[:skip_nonempty]
       end
     end

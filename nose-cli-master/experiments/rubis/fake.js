@@ -2,10 +2,12 @@ var Table = require('mysql-faker').Table,
     insert = require('mysql-faker').insert;
 
 var categories = (new Table('categories', 500));
-categories.lorem_words('name', 2);
+categories.lorem_words('name', 2)
+          .random_number('dummy',{min: 0,max: 1000}); //yusuke dummyが空だとcassandraへのload時にコケるので乱数を入れる
 
 var regions = (new Table('regions', 50));
-regions.lorem_words('name', 2);
+regions.lorem_words('name', 2)
+       .random_number('dummy',{min:0,max:1000});//yusuke dummyが空だとcassandraへのload時にコケるので乱数を入れる
 
 var users = (new Table('users', 200000));
 users.name_firstName('firstname')
