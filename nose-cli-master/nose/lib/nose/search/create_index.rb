@@ -12,16 +12,6 @@ class CreateIndex
     index.hash_fields.first.to_s.split('.').first
   end
 
-  #indexがsecondary indexを持つかどうかを保持するためのclass
-  class HasIndex
-    attr_accessor :index_key,:index_value
-
-    def initialize(key,value)
-      @index_key =key
-      @index_value = value
-    end
-  end
-
   def get_has_index_hash(indexes)
     indexes = indexes.to_a.sort_by do |i| #yusuke ここでtable名でsortし、それぞれのtable名の中でfieldの数が降順に並ぶようにする
       [get_MySQL_table_name_by_index(i),i.all_fields.length]
@@ -49,5 +39,16 @@ class CreateIndex
       next HasIndex.new(index.key,true) #yusuke 上記の条件を全てクリアした場合、index作成
     end
     has_index_array
+  end
+end
+
+
+#indexがsecondary indexを持つかどうかを保持するためのclass
+class HasIndex
+  attr_accessor :index_key,:index_value
+
+  def initialize(key,value)
+    @index_key =key
+    @index_value = value
   end
 end

@@ -61,6 +61,14 @@ module NoSE
       end
     end
 
+    class HasIndexBuilder
+      include Uber::Callable
+
+      def call(_,fragment:,user_options:,**)
+        HasIndex.new(fragment['index_key'], fragment['index_value'])
+      end
+    end
+
     # Represents a field just by the entity and name
     class FieldRepresenter < Representable::Decorator
       include Representable::Hash
@@ -713,9 +721,9 @@ module NoSE
                                       deserialize: IndexBuilder.new
 
       #yusuke has_index_hashの表示を試みる
-      collection :has_index_hash, decorator: HasIndexRepresenter
-                                      #class: Hash,
-                                      #deserialize: Hash.new
+      collection :has_index_hash, decorator: HasIndexRepresenter,
+                                      class: Object,
+                                      deserialize: HasIndexBuilder.new
 
       # The backend cost model used to generate the schema
       # @return [Hash]

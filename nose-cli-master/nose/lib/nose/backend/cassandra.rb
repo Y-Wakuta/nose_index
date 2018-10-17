@@ -25,11 +25,11 @@ module NoSE
 
       # Produce the DDL necessary for column families for the given indexes
       # and optionally execute them against the server
-      def indexes_ddl(execute = false, skip_existing = false,
+      def indexes_ddl(has_index_hash,execute = false, skip_existing = false,
                       drop_existing = false)
         Enumerator.new do |enum|
           @indexes.map do |index|
-            ddl = index_cql index
+            ddl = index_cql index,has_index_hash
             enum.yield ddl
 
             begin
@@ -131,8 +131,8 @@ module NoSE
       #yusuke このfunctionにhas_indexのハッシュも渡す？
       # Produce the CQL to create the definition for a given index
       # @return [String]
-      def index_cql(index) #yusuke ここでplan_fileの内容からCQLを生成している
-        if !(pre_key = get_relevant_index(index)).empty?
+      def index_cql(index,has_index_hash) #yusuke ここでplan_fileの内容からCQLを生成している
+        if !has_index_hash.select{|has_index| has_index.index_key ==  index.key && has_index.index_value}.empty?
           ddl = "CREATE INDEX IF NOT EXISTS #{index.key} ON #{pre_key}(#{(field_names index.hash_fields).split(',').first});"
           return ddl
         end
