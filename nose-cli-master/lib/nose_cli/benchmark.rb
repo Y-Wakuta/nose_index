@@ -130,6 +130,7 @@ module NoSE
 
       private
 
+      # yusuke いじるとすれば、queryの発行先のテーブルをsecondary indexを貼ってる先の実テーブルにするか？
       # Get a sample of values from each index used by the queries
       # @return [Hash]
       def index_values(indexes, backend, iterations, fail_on_empty = true)
