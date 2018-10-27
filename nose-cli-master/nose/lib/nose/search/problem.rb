@@ -42,6 +42,7 @@ module NoSE
         setup_model
       end
 
+      #yusuke ここでsolverを走らせている
       # Run the solver and make the selected indexes available
       # @return [void]
       def solve(previous_type = nil)

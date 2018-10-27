@@ -9,7 +9,7 @@ module NoSE
       # Rough cost estimate as the number of requests made
       # @return [Numeric]
       def index_lookup_cost(step)
-        # We always start with a single lookup, then the number
+        # We always start with a single lookup, then the number #yusuke ここのstart with single lookupとあるのはもしかすると、indexlookupが今の所１つしか確認できていないことに対応している？
         # of lookups is determined by the cardinality at the preceding step
         if step.parent.is_a?(Plans::RootPlanStep)
           1

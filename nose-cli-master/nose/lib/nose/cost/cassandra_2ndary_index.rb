@@ -3,12 +3,12 @@
 module NoSE
   module Cost
     # A cost model which estimates the number of requests to the backend
-    class CassandraCost < Cost
+    class Cassandra2ndaryIndexCost < Cost
       include Subtype
 
       # Rough cost estimate as the number of requests made
       # @return [Numeric]
-      def index_lookup_cost(step)
+      def index_lookup_cost(step,aggregated_steps = nil)
         return nil if step.state.nil?
         rows = step.state.cardinality
         parts = step.state.hash_cardinality
