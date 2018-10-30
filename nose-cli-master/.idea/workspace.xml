@@ -2,16 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="178525ed-8ebd-4c03-8ecf-3b259da1e49c" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nose/lib/nose/cost/cassandra_2ndary_index.rb" beforeDir="false" afterPath="$PROJECT_DIR$/nose/lib/nose/cost/cassandra_2ndary_index.rb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nose/lib/nose/indexes.rb" beforeDir="false" afterPath="$PROJECT_DIR$/nose/lib/nose/indexes.rb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/nose/lib/nose/plans.rb" beforeDir="false" afterPath="$PROJECT_DIR$/nose/lib/nose/plans.rb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/nose/lib/nose/plans/query_planner.rb" beforeDir="false" afterPath="$PROJECT_DIR$/nose/lib/nose/plans/query_planner.rb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/nose/lib/nose/search.rb" beforeDir="false" afterPath="$PROJECT_DIR$/nose/lib/nose/search.rb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nose/lib/nose/search/problem.rb" beforeDir="false" afterPath="$PROJECT_DIR$/nose/lib/nose/search/problem.rb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/nose/lib/nose/search/results.rb" beforeDir="false" afterPath="$PROJECT_DIR$/nose/lib/nose/search/results.rb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nose/lib/nose/search/secondary_index.rb" beforeDir="false" afterPath="$PROJECT_DIR$/nose/lib/nose/search/secondary_index.rb" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -48,7 +42,7 @@
           <entry key="js" value="1" />
           <entry key="json" value="16" />
           <entry key="md" value="12" />
-          <entry key="rb" value="204" />
+          <entry key="rb" value="205" />
           <entry key="yml" value="1" />
         </counts>
       </usages-collector>
@@ -57,7 +51,7 @@
           <entry key="JSON" value="16" />
           <entry key="JavaScript" value="1" />
           <entry key="Markdown" value="12" />
-          <entry key="Ruby" value="210" />
+          <entry key="Ruby" value="211" />
           <entry key="YAML" value="1" />
         </counts>
       </usages-collector>
@@ -89,15 +83,6 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/nose/lib/nose/search/results.rb">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="384">
-              <caret line="24" selection-start-line="24" selection-end-line="24" />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/nose/lib/nose/plans/query_planner.rb">
           <provider selected="true" editor-type-id="text-editor">
@@ -161,11 +146,20 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/nose/lib/nose/search/problem.rb">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="377">
               <caret line="255" column="64" selection-start-line="255" selection-start-column="64" selection-end-line="255" selection-end-column="64" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/nose/lib/nose/cost/cassandra_2ndary_index.rb">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="624">
+              <caret line="39" column="2" selection-start-line="39" selection-start-column="2" selection-end-line="39" selection-end-column="2" />
             </state>
           </provider>
         </entry>
@@ -426,12 +420,12 @@
       <workItem from="1540729650563" duration="1093000" />
       <workItem from="1540730757330" duration="1492000" />
       <workItem from="1540732911382" duration="35677000" />
-      <workItem from="1540891180481" duration="77000" />
+      <workItem from="1540891180481" duration="746000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="127610000" />
+    <option name="totallyTimeSpent" value="128279000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -446,7 +440,7 @@
     <frame x="1080" y="190" width="2267" height="1440" extended-state="4" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.8016781" visible="true" weight="0.15533544" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.8016781" visible="true" weight="0.15533544" />
       <window_info id="Structure" order="1" sideWeight="0.5017065" side_tool="true" weight="0.19304556" />
       <window_info id="Favorites" order="2" sideWeight="0.1983219" side_tool="true" weight="0.1539847" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -918,13 +912,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/nose/lib/nose/cost/cassandra_2ndary_index.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="24" selection-start-column="24" selection-end-column="24" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/nose/lib/nose/plans.rb">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1200">
@@ -1141,6 +1128,13 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="377">
           <caret line="255" column="64" selection-start-line="255" selection-start-column="64" selection-end-line="255" selection-end-column="64" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/nose/lib/nose/cost/cassandra_2ndary_index.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="624">
+          <caret line="39" column="2" selection-start-line="39" selection-start-column="2" selection-end-line="39" selection-end-column="2" />
         </state>
       </provider>
     </entry>

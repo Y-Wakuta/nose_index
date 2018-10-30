@@ -240,8 +240,9 @@ module NoSE
         state.freeze
         tree = QueryPlanTree.new state, @cost_model
 
+        aggregated_steps = Set.new
         indexes_by_joins = indexes_for_query(query, state.joins) #yusuke 複数のentityをクエリに答えれるようにhashの形でjoinしているみたい
-        find_plans_for_step tree.root, indexes_by_joins #yusuke このmethodの中で再帰的にtreeを作成している。step.children.children.childrenみたいな感じで辿れるみたい
+        find_plans_for_step tree.root, indexes_by_joins,aggregated_steps #yusuke このmethodの中で再帰的にtreeを作成している。step.children.children.childrenみたいな感じで辿れるみたい
 
         if tree.root.children.empty?
           tree = QueryPlanTree.new state, @cost_model
@@ -301,16 +302,17 @@ module NoSE
 
       # Find possible query plans for a query starting at the given step
       # @return [void]
-      def find_plans_for_step(step, indexes_by_joins, prune: true) #yusuke １つ１つのplanを作成しているのはこのmethod.第一引数のstepにrootを渡したら全体のplanが取れるっぽい
+      def find_plans_for_step(step, indexes_by_joins,aggregated_steps, prune: true) #yusuke １つ１つのplanを作成しているのはこのmethod.第一引数のstepにrootを渡したら全体のplanが取れるっぽい
         return if step.state.answered?
 
         steps = find_steps_for_state step, step.state, indexes_by_joins #yusuke 第一引数のstepをparentとしてそのchildrenとなりうるindexlookupのstepsを取得する
 
         if !steps.empty?
           step.children = steps
-          steps.each { |new_step| new_step.calculate_cost @cost_model }
+          aggregated_steps.add(step)#yusuke 各stepの親として選択されているstepを集約する
+          steps.each { |new_step| new_step.calculate_cost @cost_model,aggregated_steps }
           steps.each do |child_step|
-            find_plans_for_step child_step, indexes_by_joins #yusuke ここで自methodを呼び出して再帰
+            find_plans_for_step child_step, indexes_by_joins,aggregated_steps #yusuke ここで自methodを呼び出して再帰
 
             # Remove this step if finding a plan from here failed
             if child_step.children.empty? && !child_step.state.answered?

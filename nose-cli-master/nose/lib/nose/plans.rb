@@ -73,8 +73,12 @@ module NoSE
 
       # Calculate the cost of executing this step in the plan
       # @return [Fixnum]
-      def calculate_cost(cost_model)
-        @cost = cost_model.method((subtype_name + '_cost').to_sym).call self
+      def calculate_cost(cost_model,aggregated_steps = nil)
+        if subtype_name == "index_lookup" then
+          @cost = cost_model.method((subtype_name + '_cost').to_sym).call self,aggregated_steps
+        else
+          @cost = cost_model.method((subtype_name + '_cost').to_sym).call self
+        end
       end
 
       # Add the Subtype module to all step classes
