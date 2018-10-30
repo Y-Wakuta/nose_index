@@ -328,7 +328,7 @@ module NoSE
       # @return [Array<PlanStep>]
       def find_nonindexed_steps(parent, state)
         steps = []
-        return steps if parent.is_a? RootPlanStep #yusuke もしrootstepならsteps==[]のまま返す
+        return steps if parent.is_a? RootPlanStep
 
         [SortPlanStep, FilterPlanStep, LimitPlanStep].each \
           { |step| steps.push step.apply(parent, state) }

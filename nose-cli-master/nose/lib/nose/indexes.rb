@@ -127,7 +127,7 @@ module NoSE
       hash
       key
       calculate_size
-      freeze
+      freeze #yusuke もしsizeを再計算したりするなら、このfreezeは取り除く必要があるかも
     end
 
     # Check for valid hash fields in an index
@@ -171,6 +171,9 @@ module NoSE
         end
     end
 
+    # yusuke secondary indexを使用してcostを再計算するとすれば、
+    # このメソッドを内部的なall_fieldsをhash_fieldsとtargetになるfield分の２つに対してcost計算を行うようにするか？
+    # sizeはattr_readerで定義されているので、@sizeの値を設定しているのはこのメソッドだけっぽい。
     # Precalculate the size of the index
     # @return [void]
     def calculate_size

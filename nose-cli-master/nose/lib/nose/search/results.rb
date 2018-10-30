@@ -18,10 +18,11 @@ module NoSE
         @query_indexes = Hash.new { |h, k| h[k] = Set.new }
         @problem.query_vars.each do |index, query_vars|
           query_vars.each do |query, var|
-            next unless var.value
-            @query_indexes[query].add index
+            next unless var.value #yusuke おそらくここで最適化の結果使用しないことになったものを蹴っている.Mipper.Variable.valueで定義されていて、最適化の結果弾くものはvalue==0.0で弾くことができるみたい
+            @query_indexes[query].add index #yusuke query_indexがqueryとそれに対応するindexを紐付けているっぽい
           end
         end
+        @query_indexes
       end
 
       # Provide access to the underlying model in the workload

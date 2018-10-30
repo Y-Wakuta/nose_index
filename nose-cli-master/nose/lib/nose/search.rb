@@ -42,7 +42,7 @@ module NoSE
 
         solver_params = {
           max_space: max_space,
-          costs: costs,
+          costs: costs, #yusuke costsは{query=>query_cost}のhash
           update_costs: update_costs,
           cost_model: @cost_model,
           by_id_graph: @by_id_graph
@@ -82,7 +82,7 @@ module NoSE
       # Run the solver and get the results of search
       # @return [Results]
       def search_result(query_weights, indexes, solver_params, trees,
-                        update_plans)
+                        update_plans) #yusuke indexesは呼び出し元のenumerated_indexes
         # Solve the LP using MIPPeR
         result = solve_mipper query_weights.keys, indexes, **solver_params
 
