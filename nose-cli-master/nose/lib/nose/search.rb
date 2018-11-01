@@ -83,8 +83,10 @@ module NoSE
       # @return [Results]
       def search_result(query_weights, indexes, solver_params, trees,
                         update_plans) #yusuke indexesは呼び出し元のenumerated_indexes
+
         # Solve the LP using MIPPeR
-        result = solve_mipper query_weights.keys, indexes, **solver_params
+        #result = solve_mipper query_weights.keys, indexes, **solver_params
+        result = solve_mipper_with_2ndary_index query_weights.keys, indexes, **solver_params
 
         result.workload = @workload
         result.plans_from_trees trees #yusuke この中でresult.plansが追加されてる
@@ -118,9 +120,55 @@ module NoSE
         end.compact
       end
 
+      #yusuke 確定したindexから対応するqueryを取得
+      def get_query_by_index(query_indexes,index)
+        query_indexes.to_a.find{|qi| qi[1].to_a[0] == index}[0]
+      end
+
+      # yusuke あるqueryに紐付いたindexを取得します
+      def get_indexes_of_unconcrete_queries(indexes,concrete_queries)
+
+
+      end
+
       #yusuke ここでsolverを使って解いてるみたい
       # Solve the index selection problem using MIPPeR
       # @return [Results]
+      def solve_mipper_with_2ndary_index(queries, indexes, data)
+        # Construct and solve the ILP
+        selected_concrete_queries = []
+        tmp_selected_index = []
+
+        loop do
+          #yusuke queryを１つづつ確定させるならこの階層だろうか。この引数のqueriesから確定したものから順に抜いていけば、１つづつ確定させることはできそう
+          problem = Problem.new queries, @workload.updates, data, @objective,selected_concrete_queries
+          problem.solve #yusuke ここでindex_vars[index].valueにbool値を代入して、selected_indexesを確定している
+
+          # We won't get here if there's no valdi solution
+          @logger.debug 'Found solution with total cost ' \
+                        "#{problem.objective_value}"
+
+          # Return the selected indices #yusuke ここからindexに対応したqueryを取得する必要がある
+          selected_indexes = problem.selected_indexes
+
+          @logger.debug do
+            "Selected indexes:\n" + selected_indexes.map do |index|
+              "#{indexes.index index} #{index.inspect}"
+            end.join("\n")
+          end
+
+          @result = problem.result
+          selected_concrete_queries << get_query_by_index(@result.query_indexes,selected_indexes.to_a[0])
+          tmp_selected_index << selected_indexes.to_a[0]
+          queries -= selected_concrete_queries
+          if queries.size == 0 then #ここでresultの結果に含まれているのが、最後の一回分のみになってしまっている。1ループごとに前のループの結果をいい感じに引き継ぐ必要がある
+            problem.set_selected_indexes tmp_selected_index
+            problem.result #yusuke debug用に一時的にproblem.resultを二度呼ぶ。内部をみるため
+             return problem.result
+          end
+        end
+      end
+
       def solve_mipper(queries, indexes, data)
         # Construct and solve the ILP
         problem = Problem.new queries, @workload.updates, data, @objective

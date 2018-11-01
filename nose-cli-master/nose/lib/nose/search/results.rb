@@ -4,7 +4,7 @@ module NoSE
   module Search
     # A container for results from a schema search
     class Results
-      attr_reader :cost_model
+      attr_reader :cost_model,:query_indexes #yusuke 確定したindexから対応するqueryを取得するためにreadのみ可能にする
       attr_accessor :enumerated_indexes, :indexes, :total_size, :total_cost,
                     :workload, :update_plans, :plans,
                     :revision, :time, :command, :by_id_graph,:has_index_hash
@@ -111,7 +111,7 @@ module NoSE
         plan = tree.find do |tree_plan|
           tree_plan.indexes.to_set == @query_indexes[query]
         end
-        plan.instance_variable_set :@workload, @workload
+        plan.instance_variable_set :@workload, @workload １つのqueryごとにplanまで確定させてから,そのqueryを取り除かないと行けないが、search_
 
         fail InvalidResultsException if plan.nil?
         plan

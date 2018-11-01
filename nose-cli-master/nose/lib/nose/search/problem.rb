@@ -30,7 +30,7 @@ module NoSE
                   :index_vars, :query_vars, :indexes, :data,
                   :objective_type, :objective_value
 
-      def initialize(queries, updates, data, objective = Objective::COST)
+      def initialize(queries, updates, data, objective = Objective::COST,concrete_queries = nil)
         @queries = queries
         @updates = updates
         @data = data
@@ -39,7 +39,7 @@ module NoSE
         @status = nil
         @objective_type = objective
 
-        setup_model
+        setup_model concrete_queries
       end
 
       #yusuke ここでsolverを走らせている
@@ -81,7 +81,11 @@ module NoSE
         @selected_indexes = @index_vars.each_key.select do |index|
           @index_vars[index].value #yusuke ここのvalueはbool型で、solverによってtrueに設定されたものがselected_indexっぽい.これが最適化のどこでtrueになっているのか確認したい
         end.to_set
+      end
 
+      #yusuke secondary indexを使用する場合のためにselected_indexesを設定できるように設定。本来設定出来なくしてあったものを緩めるのは悲しいので別の案を考えたい
+      def set_selected_indexes(selected_indexes)
+        @selected_indexes = selected_indexes
       end
 
       # Return relevant data on the results of the ILP
@@ -168,12 +172,12 @@ module NoSE
 
       # Build the ILP by creating all the variables and constraints
       # @return [void]
-      def setup_model
+      def setup_model(concrete_queries)
         # Set up solver environment
         @model = MIPPeR::CbcModel.new
 
-        add_variables
-        prepare_sort_costs
+        add_variables concrete_queries
+        prepare_sort_costs concrete_queries
         @model.update
 
         add_constraints
@@ -214,10 +218,14 @@ module NoSE
 
       # Initialize query and index variables
       # @return [void]
-      def add_variables
+      def add_variables(concreted_queries)
         @index_vars = {}
         @query_vars = {}
         @indexes.each do |index|
+
+          #data[:cost]からselected_concrete_queriesに含まれるqueryを除くコード
+        #  next if concreted_queries.include?(data[:costs].key(index))
+
           @query_vars[index] = {}
           @queries.each_with_index do |query, q|
             query_var = "q#{q}_#{index.key}" if ENV['NOSE_LOG'] == 'debug'
@@ -259,10 +267,14 @@ module NoSE
 
       # Prepare variables and constraints to account for the cost of sorting
       # @return [void]
-      def prepare_sort_costs
+      def prepare_sort_costs(concrete_queries)
         @sort_costs = {}
         @sort_vars = {}
         @data[:costs].each do |query, index_costs|
+
+          #yusuke 既に確定しているqueryに対する処理は行わない
+          next if concrete_queries.include?(query)
+
           @sort_costs[query] = {}
           @sort_vars[query] = {}
 

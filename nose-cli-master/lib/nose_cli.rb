@@ -27,6 +27,8 @@ module NoSE
                             desc: 'enabled coloured output'
       class_option :interactive, type: :boolean, default: true,
                                  desc: 'allow actions which require user input'
+      class_option :secondary, type: :boolean,default: false,
+                   desc: 'use secondary index or not (made by yusuke)'
 
       def initialize(_options, local_options, config)
         super
