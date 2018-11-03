@@ -33,6 +33,21 @@ module NoSE
       end.uniq << query.materialize_view
     end
 
+    #yusuke indexを受け取ってそれに関係のあるindexを取得するための関数。indexes_for_workloadの実装を参考にできそう。secondary indexは１つのtableに対してのみ作成するので、単独entityとしてなら作成できる。
+    def get_secondary_indexes_by_indexes(indexes)
+      indexes.map do |index|
+        (index.extra - index.hash_fields - index.order_fields).to_a.map do |ex_field|
+          #yusuke order_fieldsはおそらくorder by用。secondary indexにorderbyは関係ないので、空配列にしておく.
+          # hashフィールドの中に元テーブルのprimary keyが含まれていないといけないみたい。なぜこの制約があるのかを論文から確認する->nose2016のp185
+          # "WE do not show it here, but we also include the ID of each entity along
+          # the path in the clustering key. This ensures we have a unique record for each guest reservation since the same guest and hotel may be connected multiple ways"
+          primary_hash_fields = index.hash_fields.select{ |hf| hf.primary_key} #yusuke MySQL上でprimary keyをしているものに対して2ndary indexを貼るようにする。ただし、これは書式的な問題であってindex createの構文には関係ないからどれでもいい。
+          target_hash_fields = primary_hash_fields.empty? ? index.hash_fields.to_a[0] : primary_hash_fields[0] #yusuke primary_hash_fieldをhash_fieldとして使えるといいが、使えなければそれ以外にする
+          Index.new([ex_field], [], [target_hash_fields],index.graph,is_secondary_index: true)
+        end
+      end.reject{|si| si.empty?}.flatten.uniq #yusuke 空の要素を除いて、flatにする
+    end
+
     # Produce all possible indices for a given workload
     #yusuke secondary indexを足すならここのsupportクエリのような感じになりそう
     # @return [Set<Index>]
@@ -41,6 +56,10 @@ module NoSE
       indexes = Parallel.map(queries) do |query|
         indexes_for_query(query).to_a
       end.inject(additional_indexes, &:+)
+
+      #ここでsecondary indexを取得できるようにする
+      secondary_indexes = get_secondary_indexes_by_indexes(indexes)
+      indexes += secondary_indexes
 
       # Add indexes generated for support queries
       supporting = support_indexes indexes, by_id_graph
@@ -84,6 +103,7 @@ module NoSE
       end
     end
 
+    #yusuke 複数のindexから１つのindexを生成するという点において,(１つのindexから複数を生成するsecondary indexとは逆だが、参考にできそう　)
     # Combine the data of indices based on matching hash fields
     def combine_indexes(indexes)
       no_order_indexes = indexes.select do |index|

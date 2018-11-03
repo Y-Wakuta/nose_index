@@ -5,11 +5,11 @@ module NoSE
   class Index
     attr_reader :hash_fields, :order_fields, :extra, :all_fields, :path,
                 :entries, :entry_size, :size, :hash_count, :per_hash_count,
-                :graph
+                :graph,:is_secondary_index
     attr_accessor :has_index
 
     def initialize(hash_fields, order_fields, extra, graph,
-                   saved_key= nil) #yusuke ここの:を=に変更した。
+                   saved_key= nil,is_secondary_index: false) #yusuke ここの:を=に変更した。
       order_set = order_fields.to_set
       @hash_fields = hash_fields.to_set
       @order_fields = order_fields.delete_if { |e| hash_fields.include? e }
@@ -29,7 +29,9 @@ module NoSE
       @path = graph.longest_path
       @path = nil unless @path.length == graph.size
 
-      validate_graph
+      @is_secondary_index = is_secondary_index;
+
+      validate_graph if !@is_secondary_index #yusuke ここでvalidateを飛ばしてしまったが正しいのか自信はない
 
       build_hash saved_key
     end
@@ -103,7 +105,7 @@ module NoSE
         @hash_fields.map(&:id).sort!,
         @order_fields.map(&:id),
         @extra.map(&:id).sort!,
-        @graph.unique_edges.map(&:canonical_params).sort!
+        @graph.unique_edges.map(&:canonical_params).sort! #yusuke secondary indexはgraphをベースのindexのをそのまま使ってしまっているのがここにも反映されてしまっている。問題がないといいが。
       ].to_s.freeze
     end
 
@@ -162,6 +164,8 @@ module NoSE
         unless entities == @graph.entities.to_set
     end
 
+    #yusuke hash_fieldsに含まれていないとだめなのはなんとなく分かる気はするが、なんでorder_fieldsに含まれていても良いのだろう。
+    # 少なくともsecondary indexにするindexについてこのvalidationを通るためにorder_fieldsにkeyを追加するよりは、このvalidation自体を行わないようにする方が筋がいいだろう
     # We must have the primary keys of the all entities in the graph
     # @return [void]
     def validate_graph_keys
