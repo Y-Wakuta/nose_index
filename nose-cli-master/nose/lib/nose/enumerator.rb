@@ -107,7 +107,7 @@ module NoSE
     # Combine the data of indices based on matching hash fields
     def combine_indexes(indexes)
       no_order_indexes = indexes.select do |index|
-        index.order_fields.empty?
+        index.order_fields.empty? && !index.is_secondary_index #yusuke secondary indexは他のindexと結合させる必要がないため、ここではじく
       end
       no_order_indexes = no_order_indexes.group_by do |index|
         [index.hash_fields, index.graph]

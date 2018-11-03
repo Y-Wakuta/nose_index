@@ -2,11 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="178525ed-8ebd-4c03-8ecf-3b259da1e49c" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/nose/lib/nose/enumerator.rb" beforeDir="false" afterPath="$PROJECT_DIR$/nose/lib/nose/enumerator.rb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nose/lib/nose/indexes.rb" beforeDir="false" afterPath="$PROJECT_DIR$/nose/lib/nose/indexes.rb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nose/lib/nose/search/constraints.rb" beforeDir="false" afterPath="$PROJECT_DIR$/nose/lib/nose/search/constraints.rb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nose/lib/nose/search/problem.rb" beforeDir="false" afterPath="$PROJECT_DIR$/nose/lib/nose/search/problem.rb" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -15,7 +11,7 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="CoverageDataManager">
-    <SUITE FILE_PATH="coverage/nose_cli_master@NoSEIndex.rcov" NAME="NoSEIndex Coverage Results" MODIFIED="1541234730262" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" MODULE_NAME="nose-cli-master" />
+    <SUITE FILE_PATH="coverage/nose_cli_master@NoSEIndex.rcov" NAME="NoSEIndex Coverage Results" MODIFIED="1541235185352" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" MODULE_NAME="nose-cli-master" />
     <SUITE FILE_PATH="coverage/nose_cli_master@Unnamed.rcov" NAME="NoSEIndex Coverage Results" MODIFIED="1539255400688" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" MODULE_NAME="nose-cli-master" />
   </component>
   <component name="CoverageViewManager">
@@ -45,7 +41,7 @@
           <entry key="js" value="1" />
           <entry key="json" value="16" />
           <entry key="md" value="12" />
-          <entry key="rb" value="239" />
+          <entry key="rb" value="241" />
           <entry key="sql" value="1" />
           <entry key="txt" value="2" />
           <entry key="yml" value="1" />
@@ -58,7 +54,7 @@
           <entry key="Markdown" value="12" />
           <entry key="PLAIN_TEXT" value="2" />
           <entry key="RHTML" value="1" />
-          <entry key="Ruby" value="245" />
+          <entry key="Ruby" value="247" />
           <entry key="SQL" value="1" />
           <entry key="YAML" value="1" />
         </counts>
@@ -71,7 +67,7 @@
           <entry key="gemspec" value="14" />
           <entry key="js" value="216" />
           <entry key="json" value="38" />
-          <entry key="rb" value="12655" />
+          <entry key="rb" value="12749" />
           <entry key="yml" value="146" />
         </counts>
       </usages-collector>
@@ -79,7 +75,7 @@
         <counts>
           <entry key="JSON" value="38" />
           <entry key="JavaScript" value="216" />
-          <entry key="Ruby" value="12737" />
+          <entry key="Ruby" value="12831" />
           <entry key="YAML" value="146" />
         </counts>
       </usages-collector>
@@ -91,20 +87,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/nose/lib/nose/indexes.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="82">
-              <caret line="11" column="31" selection-start-line="11" selection-start-column="31" selection-end-line="11" selection-end-column="31" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/nose/lib/nose/model/entity.rb">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="509">
-              <caret line="45" column="37" lean-forward="true" selection-start-line="45" selection-start-column="37" selection-end-line="45" selection-end-column="37" />
+            <state relative-caret-position="247">
+              <caret line="33" selection-start-line="33" selection-end-line="33" />
             </state>
           </provider>
         </entry>
@@ -121,8 +108,17 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/nose/lib/nose/enumerator.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="247">
-              <caret line="64" selection-start-line="64" selection-end-line="64" />
+            <state relative-caret-position="199">
+              <caret line="109" column="114" selection-start-line="109" selection-start-column="114" selection-end-line="109" selection-end-column="114" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$APPLICATION_HOME_DIR$/rubystubs25/array.rb">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="265">
+              <caret line="1742" column="8" selection-start-line="1742" selection-start-column="8" selection-end-line="1742" selection-end-column="8" />
             </state>
           </provider>
         </entry>
@@ -157,17 +153,17 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/nose/lib/nose/search/problem.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-10">
-              <caret line="285" column="13" lean-forward="true" selection-start-line="285" selection-start-column="13" selection-end-line="285" selection-end-column="13" />
+            <state relative-caret-position="166">
+              <caret line="296" selection-start-line="296" selection-end-line="296" />
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/nose/lib/nose/search/constraints.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="202">
-              <caret line="28" selection-start-line="28" selection-end-line="28" />
+            <state relative-caret-position="250">
+              <caret line="31" selection-start-line="31" selection-end-line="31" />
             </state>
           </provider>
         </entry>
@@ -175,7 +171,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$USER_HOME$/.rbenv/versions/2.5.1/lib/ruby/gems/2.5.0/gems/mipper-0.1.0/lib/mipper/variable.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="352">
+            <state relative-caret-position="380">
               <caret line="58" selection-start-line="58" selection-end-line="58" />
             </state>
           </provider>
@@ -255,8 +251,8 @@
         <option value="$PROJECT_DIR$/nose/lib/nose/search.rb" />
         <option value="$PROJECT_DIR$/nose/lib/nose/search/constraints.rb" />
         <option value="$PROJECT_DIR$/nose/lib/nose/search/problem.rb" />
-        <option value="$PROJECT_DIR$/nose/lib/nose/enumerator.rb" />
         <option value="$PROJECT_DIR$/nose/lib/nose/indexes.rb" />
+        <option value="$PROJECT_DIR$/nose/lib/nose/enumerator.rb" />
       </list>
     </option>
   </component>
@@ -440,12 +436,12 @@
       <workItem from="1541050922120" duration="5661000" />
       <workItem from="1541058697589" duration="13000" />
       <workItem from="1541075754691" duration="8821000" />
-      <workItem from="1541150843211" duration="14202000" />
+      <workItem from="1541150843211" duration="14662000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="156307000" />
+    <option name="totallyTimeSpent" value="156767000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -792,8 +788,8 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="ruby-line">
           <url>file://$PROJECT_DIR$/nose/lib/nose/enumerator.rb</url>
-          <line>64</line>
-          <option name="timeStamp" value="389" />
+          <line>111</line>
+          <option name="timeStamp" value="390" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
@@ -861,13 +857,6 @@
     </expressions>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/nose/lib/nose/timing.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="284">
-          <caret line="21" column="11" selection-start-line="21" selection-start-column="11" selection-end-line="21" selection-end-column="11" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/nose/experiments/rubis/README.md">
       <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
         <state split_layout="SPLIT">
@@ -1109,20 +1098,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$USER_HOME$/.rbenv/versions/2.5.1/lib/ruby/gems/2.5.0/gems/mipper-0.1.0/lib/mipper/variable.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="352">
-          <caret line="58" selection-start-line="58" selection-end-line="58" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/nose/lib/nose/search/constraints.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="202">
-          <caret line="28" selection-start-line="28" selection-end-line="28" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/hoge.txt">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="544">
@@ -1134,20 +1109,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="509">
           <caret line="45" column="37" lean-forward="true" selection-start-line="45" selection-start-column="37" selection-end-line="45" selection-end-column="37" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/nose_cli.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="349">
-          <caret line="119" selection-start-line="119" selection-end-line="119" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/nose/lib/nose/search/problem.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-10">
-          <caret line="285" column="13" lean-forward="true" selection-start-line="285" selection-start-column="13" selection-end-line="285" selection-end-column="13" />
         </state>
       </provider>
     </entry>
@@ -1172,17 +1133,52 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/nose/lib/nose/enumerator.rb">
+    <entry file="file://$PROJECT_DIR$/nose/lib/nose/indexes.rb">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="247">
-          <caret line="64" selection-start-line="64" selection-end-line="64" />
+          <caret line="33" selection-start-line="33" selection-end-line="33" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/nose/lib/nose/indexes.rb">
+    <entry file="file://$APPLICATION_HOME_DIR$/rubystubs25/array.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="82">
-          <caret line="11" column="31" selection-start-line="11" selection-start-column="31" selection-end-line="11" selection-end-column="31" />
+        <state relative-caret-position="265">
+          <caret line="1742" column="8" selection-start-line="1742" selection-start-column="8" selection-end-line="1742" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/nose/lib/nose/enumerator.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="199">
+          <caret line="109" column="114" selection-start-line="109" selection-start-column="114" selection-end-line="109" selection-end-column="114" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/nose_cli.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="349">
+          <caret line="119" selection-start-line="119" selection-end-line="119" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/nose/lib/nose/search/problem.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="166">
+          <caret line="296" selection-start-line="296" selection-end-line="296" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/.rbenv/versions/2.5.1/lib/ruby/gems/2.5.0/gems/mipper-0.1.0/lib/mipper/variable.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="380">
+          <caret line="58" selection-start-line="58" selection-end-line="58" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/nose/lib/nose/search/constraints.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="250">
+          <caret line="31" selection-start-line="31" selection-end-line="31" />
         </state>
       </provider>
     </entry>
