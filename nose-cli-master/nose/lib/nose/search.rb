@@ -41,7 +41,7 @@ module NoSE
         log_search_start costs, query_weights
 
         solver_params = {
-          max_space: max_space,
+          max_space: max_space, #yusuke space constraintでも言及されているので容量制約は、このmax_spaceで間違いなさそう
           costs: costs, #yusuke costsは{query=>query_cost}のhash
           update_costs: update_costs,
           cost_model: @cost_model,

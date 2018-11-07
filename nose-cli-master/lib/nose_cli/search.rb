@@ -20,7 +20,7 @@ module NoSE
       shared_option :format
       shared_option :output
 
-      option :max_space, type: :numeric, default: Float::INFINITY,
+      option :max_space, type: :numeric, default: Float::INFINITY, #yusuke 容量制約はこれ
                          aliases: '-s',
                          desc: 'maximum space allocated to indexes'
       option :enumerated, type: :boolean, default: false, aliases: '-e',
