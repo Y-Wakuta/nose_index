@@ -34,7 +34,7 @@ module NoSE
         @queries = queries
         @updates = updates
         @data = data
-        @indexes = @data[:costs].flat_map { |_, ic| ic.keys }.uniq
+        @indexes = @data[:costs].flat_map { |_, ic| ic.keys }.uniq #yusuke ここで@indexesにcostを計算したindexの
         @logger = Logging.logger['nose::search::problem']
         @status = nil
         @objective_type = objective
@@ -42,13 +42,14 @@ module NoSE
         setup_model
       end
 
+      #yusuke ここでsolverを走らせている
       # Run the solver and make the selected indexes available
       # @return [void]
       def solve(previous_type = nil)
         return unless @status.nil?
 
         # Run the optimization
-        @model.optimize
+        @model.optimize # yusuke optimizeをすると@model.pending_variablesと同じ要素数の@model.@solution.variable_valuesが生成されて0,1が入ってる
         @status = model.status
         fail NoSolutionException, @status if @status != :optimized
 
@@ -78,23 +79,17 @@ module NoSE
         return @selected_indexes if @selected_indexes
 
         @selected_indexes = @index_vars.each_key.select do |index|
-          @index_vars[index].value
+          @index_vars[index].value #yusuke ここのvalueはbool型で、solverによってtrueに設定されたものがselected_indexっぽい.これが最適化のどこでtrueになっているのか確認したい
         end.to_set
 
       end
 
-      #yusuke ここでresultに{index_id => boolean}でsecondary indexを作成するかを決定するhashを追加しよう
       # Return relevant data on the results of the ILP
       # @return [Results]
       def result
         result = Results.new self, @data[:by_id_graph]
         result.enumerated_indexes = indexes
 
-        #yusuke ここでfreezeしてるオブジェクトは変更できないと怒られる
-     #   has_index_hash = CreateIndex.new.get_has_index_hash(selected_indexes)
-      #  selected_indexes.map do |index|
-       #   index.has_index = has_index_hash.select {|hih| hih[:key] == index.key}.first[:has_index]
-        #end
         result.indexes = selected_indexes
 
         # TODO: Update for indexes grouped by ID path
@@ -114,6 +109,7 @@ module NoSE
         end.reduce(&:+)
       end
 
+      #yusuke ここで計算したcostの合計値を出している。最適化の箇所からも参照されている
       # Get the cost of all queries in the workload
       # @return [MIPPeR::LinExpr]
       def total_cost
@@ -219,8 +215,8 @@ module NoSE
       # Initialize query and index variables
       # @return [void]
       def add_variables
-        @index_vars = {}
-        @query_vars = {}
+        @index_vars = {} #yusuke まだ確信があるわけではないが、論文内のδ_i,jだろうか
+        @query_vars = {} #yusuke まだ確信があるわけではないが、論文内のδ_iだろうか
         @indexes.each do |index|
           @query_vars[index] = {}
           @queries.each_with_index do |query, q|
@@ -255,7 +251,10 @@ module NoSE
           @model << constr
         end
 
-        @index_vars.each_value { |var| @model << var }
+        @index_vars.each_value do |var|
+          @model << var # yusuke model.pending_variables(Mipper::VariableのArray)に要素が１つ増える.<<はmipper/model.rbの中で定義されている。
+        end #yusuke ここで最適なの対象になるmodelにindexのsolver用のvalueを入れている。
+        @model
       end
 
       # Prepare variables and constraints to account for the cost of sorting

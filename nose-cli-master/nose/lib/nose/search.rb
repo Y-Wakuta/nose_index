@@ -42,7 +42,7 @@ module NoSE
 
         solver_params = {
           max_space: max_space,
-          costs: costs,
+          costs: costs, #yusuke costsは{query=>query_cost}のhash
           update_costs: update_costs,
           cost_model: @cost_model,
           by_id_graph: @by_id_graph
@@ -82,13 +82,14 @@ module NoSE
       # Run the solver and get the results of search
       # @return [Results]
       def search_result(query_weights, indexes, solver_params, trees,
-                        update_plans)
+                        update_plans) #yusuke indexesは呼び出し元のenumerated_indexes
         # Solve the LP using MIPPeR
         result = solve_mipper query_weights.keys, indexes, **solver_params
 
         result.workload = @workload
         result.plans_from_trees trees #yusuke この中でresult.plansが追加されてる
-        result.cost_model = @cost_model
+        result.cost_model = @cost_model #yusuke この代入処理をcost_modelの代入演算子をoverrideしている都合上代入時にcostの再計算が走っているが、これはresult.cost_modelに代入する都合上起こっているものであり、ここで再計算する意図は元々ないものとして変更を進める
+
 
         # Select the relevant update plans
         update_plans = update_plans.values.flatten(1).select do |plan|

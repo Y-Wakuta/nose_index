@@ -1,4 +1,5 @@
-#yusuke index系列を受け取って{column_family_id => has_index}のhashを返す関数です
+#yusuke index系列を受け取って{column_family_id => has_index}のhashを返す関数
+# yusuke extension作成用
 class CreateIndex
   #yusuke 試しにsecondary indexに置き換えるかどうか判断するメソッドを作成してみる。
   # index.all_fields-index.hash_fields-index.order_fields の数が一定値以上なら置き換えるにしよう。ひとまず、今は1つ以上あれば置き換えるコードで。

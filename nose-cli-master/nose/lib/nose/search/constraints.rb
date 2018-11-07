@@ -18,6 +18,7 @@ module NoSE
       end
     end
 
+    #yusuke indexがmaterializeされるように決定づけているのはここ。
     # Constraints which force indexes to be present to be used
     class IndexPresenceConstraints < Constraint
       # Add constraint for indices being present
