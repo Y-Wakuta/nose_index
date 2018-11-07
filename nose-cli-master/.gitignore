@@ -30,7 +30,7 @@
 .rvmrc
 
 ## Configuration files
-*.yml
+#*.yml
 !.scrutinizer.yml
 !.travis.yml
 !.rubocop.yml
