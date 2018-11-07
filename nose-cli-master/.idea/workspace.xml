@@ -1,11 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="178525ed-8ebd-4c03-8ecf-3b259da1e49c" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/nose.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nose/lib/nose/search/problem.rb" beforeDir="false" afterPath="$PROJECT_DIR$/nose/lib/nose/search/problem.rb" afterDir="false" />
-    </list>
+    <list default="true" id="178525ed-8ebd-4c03-8ecf-3b259da1e49c" name="Default Changelist" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -147,8 +143,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/nose.yml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="160">
-              <caret line="10" column="17" selection-start-line="10" selection-start-column="17" selection-end-line="10" selection-end-column="17" />
+            <state relative-caret-position="464">
+              <caret line="29" column="13" lean-forward="true" selection-start-line="29" selection-start-column="13" selection-end-line="29" selection-end-column="13" />
             </state>
           </provider>
         </entry>
@@ -427,12 +423,12 @@
       <workItem from="1539763782826" duration="5586000" />
       <workItem from="1539769759036" duration="17704000" />
       <workItem from="1539927367848" duration="2393000" />
-      <workItem from="1541572540952" duration="102000" />
+      <workItem from="1541572540952" duration="1366000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="58676000" />
+    <option name="totallyTimeSpent" value="59940000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -447,12 +443,12 @@
     <frame x="1080" y="192" width="1720" height="1440" extended-state="4" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.2520908" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.2520908" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32925898" />
-      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.3842628" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.3842628" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.3911383" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -978,8 +974,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/nose.yml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="160">
-          <caret line="10" column="17" selection-start-line="10" selection-start-column="17" selection-end-line="10" selection-end-column="17" />
+        <state relative-caret-position="464">
+          <caret line="29" column="13" lean-forward="true" selection-start-line="29" selection-start-column="13" selection-end-line="29" selection-end-column="13" />
         </state>
       </provider>
     </entry>
