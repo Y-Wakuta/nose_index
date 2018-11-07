@@ -8,7 +8,7 @@ backend:
 
 # Cost model name and parameters
 cost_model:
-  name: cassandra
+  name: cassandra_2ndary_index
 
   #yusuke ここの各costの数値は先行研究のdbで測定されたものなので、再検証が必要。数値の取得元はrubis experimentsのREADME.mdの一部。
   index_cost: 0.0078395645
