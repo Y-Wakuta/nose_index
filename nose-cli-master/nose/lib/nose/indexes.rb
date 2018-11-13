@@ -11,9 +11,9 @@ module NoSE
     def initialize(hash_fields, order_fields, extra, graph,
                    saved_key= nil,is_secondary_index: false) #yusuke ここの:を=に変更した。
       order_set = order_fields.to_set
-      @hash_fields = hash_fields.to_set
-      @order_fields = order_fields.delete_if { |e| hash_fields.include? e }
-      @extra = extra.to_set.delete_if do |e|
+      @hash_fields = hash_fields.to_set #yusuke これがpartition key
+      @order_fields = order_fields.delete_if { |e| hash_fields.include? e } #yusuke これがclustering key
+      @extra = extra.to_set.delete_if do |e| #yusuke これがvalue
         @hash_fields.include?(e) || order_set.include?(e)
       end
       @all_fields = Set.new(@hash_fields).merge(order_set).merge(@extra)
