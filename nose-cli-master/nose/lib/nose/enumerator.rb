@@ -45,7 +45,7 @@ module NoSE
           primary_hash_fields = index.hash_fields.select{ |hf| hf.primary_key} #yusuke MySQL上でprimary keyをしているものに対して2ndary indexを貼るようにする。ただし、これは書式的な問題であってindex createの構文には関係ないからどれでもいい。
           target_hash_fields = primary_hash_fields.empty? ? index.hash_fields.to_a[0] : primary_hash_fields[0] #yusuke primary_hash_fieldをhash_fieldとして使えるといいが、使えなければそれ以外にする
           Index.new([target_hash_fields], [], [ex_field],index.graph,is_secondary_index: true)
-          hashフィールドに複数のfieldが含まれていた場合に対応出来ていない
+         # hashフィールドに複数のfieldが含まれていた場合に対応出来ていない.
         end
       end.reject{|si| si.empty?}.flatten.uniq #yusuke 空の要素を除いて、flatにする
       secondary
@@ -60,10 +60,6 @@ module NoSE
         indexes_for_query(query).to_a
       end.inject(additional_indexes, &:+)
 
-      #ここでsecondary indexを取得できるようにする
-      secondary_indexes = get_secondary_indexes_by_indexes(indexes)
-      indexes += secondary_indexes
-
       # Add indexes generated for support queries
       supporting = support_indexes indexes, by_id_graph
       supporting += support_indexes supporting, by_id_graph
@@ -73,6 +69,10 @@ module NoSE
       indexes.uniq!
       combine_indexes indexes
       indexes.uniq!
+
+      #ここでsecondary indexを取得できるようにする
+      secondary_indexes = get_secondary_indexes_by_indexes(indexes)
+      indexes += secondary_indexes
 
       @logger.debug do
         "Indexes for workload:\n" + indexes.map.with_index do |index, i|
