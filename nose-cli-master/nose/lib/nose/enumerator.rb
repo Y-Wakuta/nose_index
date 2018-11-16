@@ -37,18 +37,16 @@ module NoSE
     def get_secondary_indexes_by_indexes(indexes)
       primary_keys = indexes.map{|index| index.hash_fields.to_a}.flatten.uniq
 
-      secondary =  indexes.map do |index|
+      indexes.map do |index|
         (index.extra - index.hash_fields - index.order_fields).to_a.select{|f| primary_keys.include?(f)}.map do |ex_field|
           # hashフィールドの中に元テーブルのprimary keyが含まれていないといけないみたい。なぜこの制約があるのかを論文から確認する->nose2016のp185
           # "WE do not show it here, but we also include the ID of each entity along
           # the path in the clustering key. This ensures we have a unique record for each guest reservation since the same guest and hotel may be connected multiple ways"
-          primary_hash_fields = index.hash_fields.select{ |hf| hf.primary_key} #yusuke MySQL上でprimary keyをしているものに対して2ndary indexを貼るようにする。ただし、これは書式的な問題であってindex createの構文には関係ないからどれでもいい。
-          target_hash_fields = primary_hash_fields.empty? ? index.hash_fields.to_a[0] : primary_hash_fields[0] #yusuke primary_hash_fieldをhash_fieldとして使えるといいが、使えなければそれ以外にする
-          Index.new([target_hash_fields], [], [ex_field],index.graph,is_secondary_index: true)
-         # hashフィールドに複数のfieldが含まれていた場合に対応出来ていない.
+          index.hash_fields.map do |hf|
+            Index.new([hf], [], [ex_field],index.graph,is_secondary_index: true)
+          end
         end
       end.reject{|si| si.empty?}.flatten.uniq #yusuke 空の要素を除いて、flatにする
-      secondary
     end
 
     # Produce all possible indices for a given workload

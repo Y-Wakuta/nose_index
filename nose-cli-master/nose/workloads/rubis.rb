@@ -12,8 +12,8 @@ NoSE::Workload.new do
                             bidding: 7.65,
                             write_medium: 7.65,
                             write_heavy: 7.65 do
+    Q 'SELECT users.nickname, users.password FROM users WHERE users.password = ? AND users.lastname = ? -- 1' #yusuke secondary indexの例が欲しかったので追加
     Q 'SELECT users.nickname, users.password FROM users WHERE users.id = ? -- 1'
-    Q 'SELECT users.nickname, users.password FROM users WHERE users.password = ? -- 1' #yusuke secondary indexの例が欲しかったので追加
     Q 'SELECT users.nickname, users.password FROM users WHERE users.lastname = ? -- 1' #yusuke secondary indexの例が欲しかったので追加
     Q 'SELECT users.firstname,users.lastname, users.nickname FROM users WHERE users.password = ? -- 1' #yusuke secondary indexの例が欲しかったので追加
     # XXX Must have at least one equality predicate
