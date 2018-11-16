@@ -33,17 +33,18 @@ module NoSE
       end.uniq << query.materialize_view
     end
 
-    #yusuke indexを受け取ってそれに関係のあるindexを取得するための関数。indexes_for_workloadの実装を参考にできそう。secondary indexは１つのtableに対してのみ作成するので、単独entityとしてなら作成できる。
+    #yusuke indexを受け取ってそれに関係のあるindexを取得するための関数。indexes_for_workloadの実装を参考にできそう。
     def get_secondary_indexes_by_indexes(indexes)
+      primary_keys = indexes.map{|index| index.hash_fields.to_a}.flatten.uniq
+
       indexes.map do |index|
-        (index.extra - index.hash_fields - index.order_fields).to_a.map do |ex_field|
-          #yusuke order_fieldsはおそらくorder by用。secondary indexにorderbyは関係ないので、空配列にしておく.
+        (index.extra - index.hash_fields - index.order_fields).to_a.select{|f| primary_keys.include?(f)}.map do |ex_field|
           # hashフィールドの中に元テーブルのprimary keyが含まれていないといけないみたい。なぜこの制約があるのかを論文から確認する->nose2016のp185
           # "WE do not show it here, but we also include the ID of each entity along
           # the path in the clustering key. This ensures we have a unique record for each guest reservation since the same guest and hotel may be connected multiple ways"
-          primary_hash_fields = index.hash_fields.select{ |hf| hf.primary_key} #yusuke MySQL上でprimary keyをしているものに対して2ndary indexを貼るようにする。ただし、これは書式的な問題であってindex createの構文には関係ないからどれでもいい。
-          target_hash_fields = primary_hash_fields.empty? ? index.hash_fields.to_a[0] : primary_hash_fields[0] #yusuke primary_hash_fieldをhash_fieldとして使えるといいが、使えなければそれ以外にする
-          Index.new([ex_field], [], [target_hash_fields],index.graph,is_secondary_index: true)
+          index.hash_fields.map do |hf|
+            Index.new([hf], [], [ex_field],index.graph,is_secondary_index: true)
+          end
         end
       end.reject{|si| si.empty?}.flatten.uniq #yusuke 空の要素を除いて、flatにする
     end
@@ -57,10 +58,6 @@ module NoSE
         indexes_for_query(query).to_a
       end.inject(additional_indexes, &:+)
 
-      #ここでsecondary indexを取得できるようにする
-      secondary_indexes = get_secondary_indexes_by_indexes(indexes)
-      indexes += secondary_indexes
-
       # Add indexes generated for support queries
       supporting = support_indexes indexes, by_id_graph
       supporting += support_indexes supporting, by_id_graph
@@ -70,6 +67,10 @@ module NoSE
       indexes.uniq!
       combine_indexes indexes
       indexes.uniq!
+
+      #ここでsecondary indexを取得できるようにする
+      secondary_indexes = get_secondary_indexes_by_indexes(indexes)
+      indexes += secondary_indexes
 
       @logger.debug do
         "Indexes for workload:\n" + indexes.map.with_index do |index, i|

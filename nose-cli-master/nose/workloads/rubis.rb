@@ -6,15 +6,16 @@ NoSE::Workload.new do
   # Define queries and their relative weights, weights taken from below
   # http://rubis.ow2.org/results/SB-BMP/Bidding/JBoss-SB-BMP-Bi-1500/perf.html#run_stat
   # http://rubis.ow2.org/results/SB-BMP/Browsing/JBoss-SB-BMP-Br-1500/perf.html#run_stat
-  DefaultMix :browsing
+  DefaultMix :browsing #ここのbrowsingをbiddingとかに書き換えることでより多くのqueryに対してテストできそう
 
   Group 'BrowseCategories', browsing: 4.44,
                             bidding: 7.65,
                             write_medium: 7.65,
                             write_heavy: 7.65 do
+    Q 'SELECT users.nickname, users.password FROM users WHERE users.password = ? AND users.lastname = ? -- 1' #yusuke secondary indexの例が欲しかったので追加
     Q 'SELECT users.nickname, users.password FROM users WHERE users.id = ? -- 1'
-    Q 'SELECT users.nickname, users.password FROM users WHERE users.password = ? -- 1'
-    Q 'SELECT users.nickname, users.password FROM users WHERE users.lastname = ? -- 1'
+    Q 'SELECT users.nickname, users.password FROM users WHERE users.lastname = ? -- 1' #yusuke secondary indexの例が欲しかったので追加
+    Q 'SELECT users.firstname,users.lastname, users.nickname FROM users WHERE users.password = ? -- 1' #yusuke secondary indexの例が欲しかったので追加
     # XXX Must have at least one equality predicate
     Q 'SELECT categories.id, categories.name FROM categories WHERE ' \
       'categories.dummy = 1 -- 2'
@@ -78,6 +79,7 @@ NoSE::Workload.new do
                   write_heavy: 1.16 do
     Q 'SELECT users.nickname FROM users WHERE users.id=? -- 12'
     Q 'SELECT items.* FROM items WHERE items.id=? -- 13'
+    Q 'SELECT items.* FROM items WHERE items.name=? -- 13' #yusuke secondary indexの例が欲しかったので追加
   end
 
   Group 'StoreBuyNow', bidding: 1.10,
