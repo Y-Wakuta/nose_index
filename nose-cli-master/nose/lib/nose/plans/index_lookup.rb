@@ -49,18 +49,17 @@ module NoSE
       # @return [IndexLookupPlanStep]
       def self.apply(parent, index, state,indexes)
         # Validate several conditions which identify if this index is usable
-        #yusuke #35 ここで、secondary indexを渡しても、中でgraph以外の属性の確認もしているので、field数が減っていることもあり、おそらくごまかせない。この確認の箇所のみbaseになっているcfで行ってvalidationを突破してからSIを作成するか？
         if index.is_secondary_index
           target_index = indexes.select{|i| i.key == index.base_cf_key}[0]
         else target_index = index
         end
-        begin #yuske #35 ここで適していないindexを全て蹴ることで、適しているindexを選択しているっぽい？
+        begin #yuske ここで適していないindexを全て蹴ることで、適しているindexを選択しているっぽい
           check_joins target_index, state
           check_forward_lookup parent, target_index, state
           check_parent_index parent, target_index, state
           check_all_hash_fields parent, target_index, state
           check_graph_fields parent, target_index, state
-          check_last_fields target_index, state #yusuke #35 ここで蹴られているからsecondary indexがquery planに出てこない。ただし状況に適して居なければ蹴られるので、secondary indexが単に蹴られなくなれば良いというわけではない。
+          check_last_fields target_index, state
         rescue InvalidIndex
           return nil
         end

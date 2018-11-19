@@ -188,11 +188,11 @@ module NoSE
         query_costs = {}
 
         tree = planner.find_plans_for_query(query) #yusuke このmethodがquery用の１つのtreeを返す
-        tree.each do |plan| #yusuke この書き方でtreeの１つの経路であるplanが取れる(少し意外だがそうっぽい？)
+        tree.each do |plan| #yusuke query_plannerの中でeachおoverrideしているので、これでtree内の１つ１つのplanを取得することが出来ている。
           steps_by_index = [] #yusuke あるplanを構成する(stepの配列)を１つの要素として配列を構成する二次元配列
           plan.each do |step|
             if step.is_a? Plans::IndexLookupPlanStep #yusuke secondary index用にSecondaryIndexLookupPlanStepも宣言した方がいいかも
-              steps_by_index.push [step] #yusuke ここのコードを見る感じ、１つのplanの中に２つのindexlookupが入ることはないのかも。
+              steps_by_index.push [step]
             else
               steps_by_index.last.push step #yusuke indexlookup以外(sort,limit,filter)を最後に持ってくる.filterが最後なのは改善の余地があるかも？
             end

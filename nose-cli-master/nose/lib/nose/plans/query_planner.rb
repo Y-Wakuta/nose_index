@@ -335,7 +335,7 @@ module NoSE
         steps.flatten!
         steps.compact!
 
-        steps #yusuke sort,filter,limit処理の時以外はsteps==[]で帰る
+        steps #yusuke sort,filter,limit処理の時以外はsteps==[]で返す
       end
 
       # Get a list of possible next steps for a query in the given state

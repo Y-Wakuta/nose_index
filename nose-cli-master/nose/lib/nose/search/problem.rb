@@ -215,8 +215,8 @@ module NoSE
       # Initialize query and index variables
       # @return [void]
       def add_variables
-        @index_vars = {} #yusuke まだ確信があるわけではないが、論文内のδ_i,jだろうか
-        @query_vars = {} #yusuke まだ確信があるわけではないが、論文内のδ_iだろうか
+        @index_vars = {} #yusuke まだ確信があるわけではないが、論文内のδ_iだろうか
+        @query_vars = {} #yusuke まだ確信があるわけではないが、論文内のδ_i,jだろうか
         @indexes.each do |index|
           @query_vars[index] = {}
           @queries.each_with_index do |query, q|
