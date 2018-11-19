@@ -43,7 +43,7 @@ module NoSE
           # "WE do not show it here, but we also include the ID of each entity along
           # the path in the clustering key. This ensures we have a unique record for each guest reservation since the same guest and hotel may be connected multiple ways"
           index.hash_fields.map do |hf|
-            Index.new([hf], [], [ex_field],index.graph,is_secondary_index: true)
+            Index.new([hf], [], [ex_field],index.graph,base_cf_key: index.key)
           end
         end
       end.reject{|si| si.empty?}.flatten.uniq #yusuke 空の要素を除いて、flatにする
