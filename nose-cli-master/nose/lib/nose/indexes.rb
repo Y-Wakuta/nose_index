@@ -86,9 +86,15 @@ module NoSE
         '[' + field_group.map(&:inspect).join(', ') + ']'
       end
 
-      "[magenta]#{key}[/] #{fields[0]} #{fields[1]} → #{fields[2]}" \
+      str = "is_SI: #{@is_secondary_index} [magenta]#{key}[/] #{fields[0]} #{fields[1]} → #{fields[2]}" \
         " [yellow]$#{size}[/]" \
-        " [magenta]#{@graph.inspect}[/]"
+        " [magenta]#{@graph.inspect}"
+
+      if @is_secondary_index
+        str +="  base_cf_key: " + @base_cf_key
+      end
+      str += "[/]"
+      str
     end
     # :nocov:
 
