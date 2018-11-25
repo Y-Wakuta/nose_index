@@ -6,7 +6,7 @@ NoSE::Workload.new do
   # Define queries and their relative weights, weights taken from below
   # http://rubis.ow2.org/results/SB-BMP/Bidding/JBoss-SB-BMP-Bi-1500/perf.html#run_stat
   # http://rubis.ow2.org/results/SB-BMP/Browsing/JBoss-SB-BMP-Br-1500/perf.html#run_stat
-  DefaultMix :browsing #ここのbrowsingをbiddingとかに書き換えることでより多くのqueryに対してテストできそう
+  DefaultMix :bidding #ここのbrowsingをbiddingとかに書き換えることでより多くのqueryに対してテストできそう
 
   Group 'BrowseCategories', browsing: 4.44,
                             bidding: 7.65,
@@ -16,6 +16,7 @@ NoSE::Workload.new do
     Q 'SELECT users.nickname, users.password FROM users WHERE users.id = ? -- 1'
     Q 'SELECT users.nickname, users.password FROM users WHERE users.lastname = ? -- 1' #yusuke secondary indexの例が欲しかったので追加
     Q 'SELECT users.firstname,users.lastname, users.nickname FROM users WHERE users.password = ? -- 1' #yusuke secondary indexの例が欲しかったので追加
+    Q 'SELECT users.firstname,users.lastname, users.nickname FROM users WHERE users.firstname = ? -- 1' #yusuke secondary indexの例が欲しかったので追加
     # XXX Must have at least one equality predicate
     Q 'SELECT categories.id, categories.name FROM categories WHERE ' \
       'categories.dummy = 1 -- 2'
@@ -26,7 +27,7 @@ NoSE::Workload.new do
                           write_medium: 1.54,
                           write_heavy: 1.54 do
     Q 'SELECT items.name FROM items WHERE items.id = ? -- 3'
-    Q 'SELECT items.max_bid FROM items WHERE items.name = ? -- 3'
+    Q 'SELECT items.* FROM items WHERE items.name = ? -- 3'
     Q 'SELECT users.id, users.nickname, bids.id, item.id, bids.qty, ' \
       'bids.bid, bids.date FROM users.bids.item WHERE item.id = ? ' \
       'ORDER BY bids.date -- 4'
@@ -63,6 +64,10 @@ NoSE::Workload.new do
     Q 'SELECT users.* FROM users WHERE users.id = ? -- 8'
     Q 'SELECT comments.id, comments.rating, comments.date, comments.comment ' \
       'FROM comments.to_user WHERE to_user.id = ? -- 9'
+    Q 'SELECT comments.id, comments.rating, comments.date, comments.comment ' \
+      'FROM comments.to_user WHERE to_user.firstname = ? -- 9'
+    Q 'SELECT comments.id, comments.rating, comments.date, comments.comment ' \
+      'FROM comments.to_user WHERE to_user.lastname = ? -- 9'
   end
 
   Group 'RegisterItem', bidding: 0.53,
@@ -106,6 +111,17 @@ NoSE::Workload.new do
     Q 'SELECT items.* FROM items WHERE items.id=? -- 18'
     Q 'SELECT bids.qty, bids.date FROM bids.item WHERE item.id=? ' \
       'ORDER BY bids.bid LIMIT 2 -- 19'
+    Q 'SELECT bids.* FROM bids.item WHERE bids.id=? ' \
+      'ORDER BY bids.bid LIMIT 2 -- 19'
+    Q 'SELECT bids.* FROM bids.item WHERE item.id=? ' \
+      'ORDER BY bids.bid LIMIT 2 -- 19'
+    Q 'SELECT bids.* FROM bids.item WHERE item.initial_price=? ' \
+      'ORDER BY bids.bid LIMIT 2 -- 19'
+    Q 'SELECT bids.* FROM bids.item WHERE item.max_bid=? ' \
+      'ORDER BY bids.bid LIMIT 2 -- 19'
+    Q 'SELECT bids.* FROM bids.item WHERE item.start_date=? ' \
+      'ORDER BY bids.bid LIMIT 2 -- 19'
+
   end
 
   Group 'StoreBid', bidding: 3.74,
@@ -166,5 +182,9 @@ NoSE::Workload.new do
     # XXX Must have at least one equality predicate
     Q 'SELECT regions.id, regions.name FROM regions ' \
       'WHERE regions.dummy = 1 -- 36'
+    Q 'SELECT regions.* FROM regions ' \
+      'WHERE regions.id = 1 -- 36'
+    Q 'SELECT regions.* FROM regions ' \
+      'WHERE regions.name = 1 -- 36'
   end
 end
