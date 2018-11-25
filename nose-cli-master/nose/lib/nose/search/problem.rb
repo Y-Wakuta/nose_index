@@ -293,7 +293,8 @@ module NoSE
         [
           IndexPresenceConstraints,
           SpaceConstraint,
-          CompletePlanConstraints
+          CompletePlanConstraints,
+          SecondaryIndexPresenceConstraints
         ].each { |constraint| constraint.apply self }
 
         @logger.debug do
