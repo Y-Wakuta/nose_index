@@ -47,11 +47,21 @@ module NoSE
           cost_model: @cost_model,
           by_id_graph: @by_id_graph
         }
+
+        show_trees(trees) #yusuke 木の内容を表示
+
         search_result query_weights, indexes, solver_params, trees,
                       update_plans
       end
 
       private
+
+      #yusuke 木の形でquery planを表示
+      def show_trees(trees)
+        trees.each do |tree|
+          tree.root.show_till_end(0)
+        end
+      end
 
       # Combine the weights of queries and statements
       # @return [void]
@@ -125,6 +135,18 @@ module NoSE
         # Construct and solve the ILP
         problem = Problem.new queries, @workload.updates, data, @objective
         problem.solve
+
+      #  hoge = Hash.new { |h, k| h[k] = Set.new }
+      #  problem.query_vars.each do |index, query_vars|
+      #    query_vars.each do |query, var|
+      #      next unless var.value #yusuke おそらくここで最適化の結果使用しないことになったものを蹴っている.Mipper.Variable.valueで定義されていて、最適化の結果弾くものはvalue==0.0で弾くことができるみたい.SIを使用するものは全てvar.value==0.0になっているっぽい。
+      #      if hoge[query].empty?
+      #        hoge[query] = Set.new
+      #      end
+      #      hoge[query].add index #yusuke query_indexがqueryとそれに対応するindexを紐付けているっぽい
+      #    end
+      #  end
+      #  hoge
 
         # We won't get here if there's no valdi solution
         @logger.debug 'Found solution with total cost ' \
