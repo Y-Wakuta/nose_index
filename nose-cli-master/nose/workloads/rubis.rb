@@ -26,7 +26,7 @@ NoSE::Workload.new do
                           write_medium: 1.54,
                           write_heavy: 1.54 do
     Q 'SELECT items.name FROM items WHERE items.id = ? -- 3'
-    Q 'SELECT items.name FROM items WHERE items.name = ? -- 3'
+    Q 'SELECT items.max_bid FROM items WHERE items.name = ? -- 3'
     Q 'SELECT users.id, users.nickname, bids.id, item.id, bids.qty, ' \
       'bids.bid, bids.date FROM users.bids.item WHERE item.id = ? ' \
       'ORDER BY bids.date -- 4'
@@ -41,7 +41,7 @@ NoSE::Workload.new do
     Q 'SELECT items.* FROM items WHERE items.quantity = ? -- 5'
     Q 'SELECT items.* FROM items WHERE items.max_bid = ? -- 5'
     Q 'SELECT items.* FROM items WHERE items.start_date = ? -- 5'
-    Q 'SELECT items.* FROM items WHERE items.end_date = ? -- 5'
+    #Q 'SELECT items.* FROM items WHERE items.end_date = ? -- 5' #yusuke このクエリを戻すとエラーが出る。一体なんだ。
     Q 'SELECT items.* FROM items WHERE items.initial_price = ? -- 5'
     Q 'SELECT bids.* FROM items.bids WHERE items.id = ? -- 6'
   end
