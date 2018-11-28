@@ -60,11 +60,9 @@ module NoSE
           base_cf = problem.indexes.find{|cf| cf.key == si.base_cf_key} #yusuke SI生成元のCFを取得する
           base_cf_indexes = problem.indexes.select{|cf| !cf.is_secondary_index && cf.all_fields >= base_cf.all_fields} #yusuke あるsecondary indexについて、その元となったCFの実データを含むCFをリスト
           next if base_cf_indexes.empty?
-          cf_const_sum = problem.index_vars[base_cf_indexes[-1]] * -1
-          base_cf_indexes.pop
-          base_cf_indexes.each do |base_cf|
-            cf_const_sum = cf_const_sum + problem.index_vars[base_cf] * -1
-          end
+
+          #yusuke ここで使用している演算子はオーバーロードされていて制約同士でしか使用できない。そのため初期値として１つ目の要素を使用してその後に他の要素を足し合わせる。
+          cf_const_sum = base_cf_indexes[1..-1].inject(problem.index_vars[base_cf_indexes[0]] * -1){|sum,base_cf| sum + problem.index_vars[base_cf] * -1}
 
           constr = MIPPeR::Constraint.new problem.index_vars[si] * 1.0 + cf_const_sum,:<=,0,'si_const'
           problem.model << constr
