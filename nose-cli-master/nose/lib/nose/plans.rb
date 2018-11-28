@@ -43,6 +43,27 @@ module NoSE
         @fields += index.all_fields
       end
 
+      #yusuke #35 木の形式でquery planを表示
+      def show_till_end(space_count)
+        if self.is_a? IndexLookupPlanStep
+          index = self.index
+          if index.is_secondary_index
+            print "   " * space_count +"key: " + "\e[31m#{index.key.to_s}\e[0m"+ " base_cf_key: " + index.base_cf_key.to_s+ + " " + index.hash_str + "\n"
+          else
+            print "   " * space_count +"key: " + index.key.to_s + " " + index.hash_str + "\n"
+          end
+        elsif self.is_a? RootPlanStep
+          print "root: \e[33m #{self.state.query.text}\e[0m\n"#レイアウトを調整してbase_cf_keyが推薦されているか確認する
+          space_count = 0
+        else
+          print "   " * space_count + "#{self.class}\n"
+        end
+        sons = @children
+        return if sons.empty?
+
+        sons.each{|son| son.show_till_end(space_count + 1)}
+      end
+
       # Get the list of steps which led us here
       # If a cost model is not provided, statement plans using
       # this step cannot be evaluated on the basis of cost
@@ -75,6 +96,10 @@ module NoSE
       # @return [Fixnum]
       def calculate_cost(cost_model)
         @cost = cost_model.method((subtype_name + '_cost').to_sym).call self
+        if self.is_a?(Plans::IndexLookupPlanStep) && self.index.is_secondary_index
+          @cost = @cost / 100 #yusuke ここで強引に100分の1にしているので必ず修正する必要がある
+        end
+        @cost
       end
 
       # Add the Subtype module to all step classes

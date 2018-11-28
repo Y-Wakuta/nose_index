@@ -52,6 +52,25 @@ module NoSE
       end
     end
 
+    #yusuke secondary indexには実データを保持するcolumn familyが必ず必要という制約をもたせるConstraintクラス
+    class SecondaryIndexPresenceConstraints < Constraint
+      #yusuke δ_i はindex_varsと考えられる
+      def self.apply(problem)
+        problem.indexes.select{|si| si.is_secondary_index}.each do |si|
+          base_cf = problem.indexes.find{|cf| cf.key == si.base_cf_key} #yusuke SI生成元のCFを取得する
+          base_cf_indexes = problem.indexes.select{|cf| !cf.is_secondary_index && cf.all_fields >= base_cf.all_fields} #yusuke あるsecondary indexについて、その元となったCFの実データを含むCFをリスト
+          next if base_cf_indexes.empty?
+
+          #yusuke ここで使用している演算子はオーバーロードされていて制約同士でしか使用できない。そのため初期値として１つ目の要素を使用してその後に他の要素を足し合わせる。
+          cf_const_sum = base_cf_indexes[1..-1].inject(problem.index_vars[base_cf_indexes[0]] * -1){|sum,base_cf| sum + problem.index_vars[base_cf] * -1}
+
+          constr = MIPPeR::Constraint.new problem.index_vars[si] * 1.0 + cf_const_sum,:<=,0,'si_const'
+          problem.model << constr
+        end
+      end
+    end
+
+    #yusuke #35 SIが最適化の結果使用されない問題はここが一番臭う
     # Constraints that force each query to have an available plan
     class CompletePlanConstraints < Constraint
       # Add the discovered constraints to the problem

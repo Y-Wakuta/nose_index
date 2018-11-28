@@ -335,7 +335,7 @@ module NoSE
         steps.flatten!
         steps.compact!
 
-        steps #yusuke sort,filter,limit処理の時以外はsteps==[]で帰る
+        steps #yusuke sort,filter,limit処理の時以外はsteps==[]で返す
       end
 
       # Get a list of possible next steps for a query in the given state
@@ -348,7 +348,7 @@ module NoSE
         indexes = (indexes_by_joins[state.joins.first] || Set.new).to_set
         used_indexes = parent.parent_steps.indexes.to_set
         (indexes - used_indexes).each do |index|
-          new_step = IndexLookupPlanStep.apply parent, index, state
+          new_step = IndexLookupPlanStep.apply parent, index, state,indexes
           next if new_step.nil?
 
           new_step.add_fields_from_index index
