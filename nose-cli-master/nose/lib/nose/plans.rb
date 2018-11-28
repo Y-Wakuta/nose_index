@@ -96,6 +96,10 @@ module NoSE
       # @return [Fixnum]
       def calculate_cost(cost_model)
         @cost = cost_model.method((subtype_name + '_cost').to_sym).call self
+        if self.is_a?(Plans::IndexLookupPlanStep) && self.index.is_secondary_index
+          @cost = @cost / 100 #yusuke ここで強引に100分の1にしているので必ず修正する必要がある
+        end
+        @cost
       end
 
       # Add the Subtype module to all step classes
