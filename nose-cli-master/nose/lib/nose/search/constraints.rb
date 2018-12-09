@@ -70,7 +70,6 @@ module NoSE
       end
     end
 
-    #yusuke #35 SIが最適化の結果使用されない問題はここが一番臭う
     # Constraints that force each query to have an available plan
     class CompletePlanConstraints < Constraint
       # Add the discovered constraints to the problem

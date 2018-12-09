@@ -5,11 +5,11 @@ module NoSE
   class Index
     attr_reader :hash_fields, :order_fields, :extra, :all_fields, :path,
                 :entries, :entry_size, :size, :hash_count, :per_hash_count,
-                :graph,:is_secondary_index,:base_cf_key
+                :graph,:base_cf_key, :base_si_key
     attr_accessor :has_index
 
     def initialize(hash_fields, order_fields, extra, graph,
-                   saved_key= nil,base_cf_key: nil) #yusuke ここの:を=に変更した。
+                   saved_key= nil,base_cf_key: nil, base_si_key: nil) #yusuke ここの:を=に変更した。
       order_set = order_fields.to_set
       @hash_fields = hash_fields.to_set #yusuke これがpartition key
       @order_fields = order_fields.delete_if { |e| hash_fields.include? e } #yusuke これがclustering key
@@ -29,12 +29,20 @@ module NoSE
       @path = graph.longest_path
       @path = nil unless @path.length == graph.size
 
-      @base_cf_key = base_cf_key;
-      @is_secondary_index = !@base_cf_key.nil?;
+      @base_cf_key = base_cf_key
+      @base_si_key = base_si_key
 
-      validate_graph if !@is_secondary_index #yusuke ここでvalidateを飛ばしてしまったが正しいのか自信はない
+      validate_graph if !self.is_secondary_index #yusuke ここでvalidateを飛ばしてしまったが正しいのか自信はない
 
       build_hash saved_key
+    end
+
+    def is_secondary_index
+      !@base_cf_key.nil? and @base_si_key.nil?
+    end
+
+    def is_additional_cf
+      !base_cf_key.nil? and !base_si_key.nil?
     end
 
     #yusuke has_indexを作成
