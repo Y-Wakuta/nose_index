@@ -33,20 +33,36 @@ module NoSE
       end.uniq << query.materialize_view
     end
 
+    #yusuke p_keyで渡されたprimary keyを持つCFのextraにaddtional_attrを加えて列挙する
+    #graph内でnodeが追加されなくて良い場合のみに属性の追加を行う
+    def gen_attribute_appended_cf(indexes,p_key,additional_attr,base_si_key)
+      additionals = indexes.select{|index| (index.hash_fields - [p_key]).empty? && index.graph.entities.map{|entity| entity.name}.include?(p_key.to_s.split(".").first)}.map do |index|
+        generate_index(index.hash_fields,index.order_fields,index.extra + additional_attr,index.graph, base_cf_key: index.key,base_si_key: base_si_key)  #hash, order, extra, graph
+      end.select{|index| !index.nil?}#yusuke ここでvalidateを超えられなかったものは無視するようにしたが、なぜvalidateを超えられないのか確認が必要
+      additionals
+    end
+
     #yusuke indexを受け取ってそれに関係のあるindexを取得するための関数。indexes_for_workloadの実装を参考にできそう。
     def get_secondary_indexes_by_indexes(indexes)
       primary_keys = indexes.map{|index| index.hash_fields.to_a}.flatten.uniq
 
-      indexes.map do |index|
-        (index.extra - index.hash_fields - index.order_fields).to_a.select{|f| primary_keys.include?(f)}.map do |ex_field|
+      hoge = indexes.map do |index|
+        ex_fields = index.extra - index.hash_fields - index.order_fields
+        ex_fields.to_a.select{|f| primary_keys.include?(f)}.map do |ex_field|
           # hashフィールドの中に元テーブルのprimary keyが含まれていないといけないみたい。なぜこの制約があるのかを論文から確認する->nose2016のp185
           # "WE do not show it here, but we also include the ID of each entity along
           # the path in the clustering key. This ensures we have a unique record for each guest reservation since the same guest and hotel may be connected multiple ways"
           index.hash_fields.map do |hf|
-            Index.new([hf], [], [ex_field],index.graph,base_cf_key: index.key)
+            si = [Index.new([hf], [], [ex_field],index.graph,base_cf_key: index.key)]
+            field_diff = ex_fields - [ex_field]
+            if !field_diff.empty?
+              si += gen_attribute_appended_cf(indexes,ex_field,field_diff,si[0].key)
+            end
+            si
           end
         end
       end.reject{|si| si.empty?}.flatten.uniq #yusuke 空の要素を除いて、flatにする
+      hoge
     end
 
     # Produce all possible indices for a given workload
@@ -206,9 +222,9 @@ module NoSE
 
     # Generate a new index and ignore if invalid
     # @return [Index]
-    def generate_index(hash, order, extra, graph)
+    def generate_index(hash, order, extra, graph,base_cf_key: nil,base_si_key: nil)
       begin
-        index = Index.new hash, order.uniq, extra, graph
+        index = Index.new hash, order.uniq, extra, graph,base_cf_key: base_cf_key,base_si_key: base_si_key
         @logger.debug { "Enumerated #{index.inspect}" }
       rescue InvalidIndexException
         # This combination of fields is not valid, that's ok

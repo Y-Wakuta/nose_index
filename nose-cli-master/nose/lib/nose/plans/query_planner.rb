@@ -52,7 +52,7 @@ module NoSE
       # @return [Boolean]
       def answered?(check_limit: true)
         done = @fields.empty? && @eq.empty? && @range.nil? &&
-               @order_by.empty? && @joins.empty? && @graph.empty?
+               @order_by.empty? && @joins.empty? && @graph.empty? #yusuke なぜ、応答が完了したらここがtrueになるのか確認したい。
 
         # Check if the limit has been applied
         done &&= @cardinality <= @query.limit unless @query.limit.nil? ||

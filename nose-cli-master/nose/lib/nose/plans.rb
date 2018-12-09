@@ -48,9 +48,11 @@ module NoSE
         if self.is_a? IndexLookupPlanStep
           index = self.index
           if index.is_secondary_index
-            print "   " * space_count +"key: " + "\e[31m#{index.key.to_s}\e[0m"+ " base_cf_key: " + index.base_cf_key.to_s+ + " " + index.hash_str + "\n"
+            str = "   " * space_count +"key: " + "\e[31m#{index.key.to_s}\e[0m"+ " base_cf_key: " + index.base_cf_key.to_s+ + " " + index.hash_str + "\n"
+            print str
           else
-            print "   " * space_count +"key: " + index.key.to_s + " " + index.hash_str + "\n"
+            str = "   " * space_count +"key: " + index.key.to_s + " " + index.hash_str + "\n"
+            print str
           end
         elsif self.is_a? RootPlanStep
           print "root: \e[33m #{self.state.query.text}\e[0m\n"#レイアウトを調整してbase_cf_keyが推薦されているか確認する
