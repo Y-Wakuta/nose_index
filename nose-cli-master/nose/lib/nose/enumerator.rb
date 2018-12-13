@@ -70,8 +70,13 @@ module NoSE
     # @return [Set<Index>]
     def indexes_for_workload(additional_indexes = [], by_id_graph = false)
       queries = @workload.queries
+      si_additional_cfs = []
       indexes = Parallel.map(queries) do |query|
-        indexes_for_query(query).to_a
+        base_cfs = indexes_for_query(query).to_a
+
+        full_cf = base_cfs.sort_by { |index | index.all_fields.length }.reverse.first #yusuke #46 queryに単独で応答するcfを探したい。今はひとまず一番field数の多いものがそうだろうということで対処
+        si_additional_cfs += get_secondary_indexes_by_indexes(full_cf).reject { |index| index.nil? }.flatten.uniq
+        base_cfs
       end.inject(additional_indexes, &:+)
 
       # Add indexes generated for support queries
@@ -85,8 +90,7 @@ module NoSE
       indexes.uniq!
 
       #ここでsecondary indexを取得できるようにする
-      secondary_indexes = get_secondary_indexes_by_indexes(indexes)
-      indexes += secondary_indexes
+      indexes += si_additional_cfs
 
       @logger.debug do
         "Indexes for workload:\n" + indexes.map.with_index do |index, i|
