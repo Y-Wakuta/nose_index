@@ -23,7 +23,7 @@ module NoSE
 
         return if state.nil?
         @state = state.dup
-        update_state parent
+        update_state parent #yusuke ここでfieldの残りとかをupdateしている
         @state.freeze
       end
 

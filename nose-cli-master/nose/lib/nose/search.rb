@@ -35,7 +35,7 @@ module NoSE
 
         # Get the costs of all queries and updates
         query_weights = combine_query_weights indexes
-        costs, trees = query_costs query_weights, indexes
+        costs, trees = query_costs query_weights, indexes #yusuke ここで渡しているindexesまではSIが含まれているが、costsにはほとんどSIが含まれていない
         update_costs, update_plans = update_costs trees, indexes
 
         log_search_start costs, query_weights
