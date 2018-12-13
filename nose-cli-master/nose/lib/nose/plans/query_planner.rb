@@ -346,6 +346,12 @@ module NoSE
 
         # Don't allow indices to be used multiple times
         indexes = (indexes_by_joins[state.joins.first] || Set.new).to_set
+
+        #yusuke 親がSIならその次にはSIを使用しないようにする
+        if parent.is_a? Plans::IndexLookupPlanStep and parent.index.is_secondary_index
+          indexes = indexes.to_a.select{|index| !index.is_secondary_index}.to_set
+        end
+
         used_indexes = parent.parent_steps.indexes.to_set
         (indexes - used_indexes).each do |index|
           new_step = IndexLookupPlanStep.apply parent, index, state,indexes
