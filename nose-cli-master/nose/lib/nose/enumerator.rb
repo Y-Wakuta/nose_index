@@ -36,27 +36,21 @@ module NoSE
 
     #yusuke 引数で受け取ったindexを元にSIとSIの属性を抜いたりしたCFを列挙する。       ここで色々列挙しているが最終的にコマンドライン引数で「--enumerated」を入れた時に出力されるSIには数個しか含まれておらず、結果に含まれるのもその中のSIのみ。
     def get_secondary_indexes_by_indexes(index)
-      hoge = (index.hash_fields  + index.extra).to_a.map do |ex_field|
+      (index.hash_fields  + index.extra).to_a.map do |ex_field|
         # hashフィールドの中に元テーブルのprimary keyが含まれていないといけないみたい。なぜこの制約があるのかを論文から確認する->nose2016のp185
         # "WE do not show it here, but we also include the ID of each entity along
         # the path in the clustering key. This ensures we have a unique record for each guest reservation since the same guest and hotel may be connected multiple ways"
         index.hash_fields.map do |hf|
-          #si = Index.new([hf], [], [ex_field],index.graph,base_cf_key: index.key)
           si = generate_index([hf], [], [ex_field], index.graph,base_cf_key: index.key)
-          if si.extra.empty?
-            next
-          end
-          additional_cf = generate_index(si.extra , index.order_fields, index.extra + si.hash_fields,index.graph, base_si_key: si.key)
-          si_list = []
+          next if si.extra.empty?
+          additional_cf = generate_index(si.extra , index.order_fields, index.extra ,index.graph, base_si_key: si.key, base_cf_key: index.key)
+          si_list = [si] + [additional_cf]
           if hf != hf.parent.id_field
-            hoge_si = generate_index([hf],[], [hf.parent.id_field],index.graph, base_cf_key: index.key)
-            si_list += [hoge_si]
+            si_list += [generate_index([hf],[], [hf.parent.id_field],index.graph, base_cf_key: index.key)]
           end
-          si_list += [si] + [additional_cf]
           si_list
         end
-      end.reject{|index| index.nil?}.flatten.uniq
-      hoge
+      end
     end
 
     # Produce all possible indices for a given workload
@@ -69,7 +63,7 @@ module NoSE
         base_cfs = indexes_for_query(query).to_a
 
         full_cf = base_cfs.sort_by { |index | index.all_fields.length }.reverse.first #yusuke #46 queryに単独で応答するcfを探したい。今はひとまず一番field数の多いものがそうだろうということで対処
-        si_additional_cfs += get_secondary_indexes_by_indexes(full_cf).reject { |index| index.nil? }.flatten.uniq
+        si_additional_cfs += get_secondary_indexes_by_indexes(full_cf).flatten.reject { |index| index.nil? }.uniq
         base_cfs
       end.inject(additional_indexes, &:+)
 
@@ -84,7 +78,8 @@ module NoSE
       indexes.uniq!
 
       #ここでsecondary indexを取得できるようにする
-      indexes += si_additional_cfs
+      indexes += si_additional_cfs.uniq
+
 
       @logger.debug do
         "Indexes for workload:\n" + indexes.map.with_index do |index, i|

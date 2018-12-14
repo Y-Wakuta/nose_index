@@ -22,8 +22,8 @@ module NoSE
 
       @base_cf_key = base_cf_key
       @base_si_key = base_si_key
-      @is_secondary_index = !@base_cf_key.nil? and @base_si_key.nil?
-      @is_additional_cf = !@base_cf_key.nil? and !@base_si_key.nil?
+      @is_secondary_index = (!@base_cf_key.nil? and @base_si_key.nil?)
+      @is_additional_cf =   (!@base_cf_key.nil? and !@base_si_key.nil?)
 
       # Store whether this index is an identity
       @identity = @hash_fields == [
@@ -88,7 +88,7 @@ module NoSE
         '[' + field_group.map(&:inspect).join(', ') + ']'
       end
 
-      str = "is_SI: #{@is_secondary_index} [magenta]#{key}[/] #{fields[0]} #{fields[1]} → #{fields[2]}" \
+      str = "#{@is_secondary_index ? "\e[31m[Secondary Index]\e[0m " : "  "} [magenta]#{key}[/] #{fields[0]} #{fields[1]} → #{fields[2]}" \
         " [yellow]$#{size}[/]" \
         " [magenta]#{@graph.inspect}"
 

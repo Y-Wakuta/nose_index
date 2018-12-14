@@ -167,7 +167,6 @@ module NoSE
         res =  leaf_entities.all? do |entity|
           index_includes.call([entity.id_field]) || #yusuke ここでid_fieldを持っているか全てのfieldを持っているかの二択でIndexを評価している。
             (index.is_secondary_index and parent.is_a? Plans::RootPlanStep) ||
-           # (index.is_secondary_index) ||
             index_includes.call(state.fields.select { |f| f.parent == entity })
         end
         res
