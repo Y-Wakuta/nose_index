@@ -23,7 +23,7 @@ module NoSE
 
         return if state.nil?
         @state = state.dup
-        update_state parent
+        update_state parent #yusuke ここでfieldの残りとかをupdateしている
         @state.freeze
       end
 
@@ -49,17 +49,17 @@ module NoSE
       # @return [IndexLookupPlanStep]
       def self.apply(parent, index, state,indexes)
         # Validate several conditions which identify if this index is usable
-        if index.is_secondary_index
-          target_index = indexes.select{|i| i.key == index.base_cf_key}[0]
-        else target_index = index
-        end
+        #if index.is_secondary_index
+         #target_index = indexes.select{|i| i.key == index.base_cf_key}[0]
+        #else target_index = index
+        #end
         begin #yuske ここで適していないindexを全て蹴ることで、適しているindexを選択しているっぽい
-          check_joins target_index, state
-          check_forward_lookup parent, target_index, state
-          check_parent_index parent, target_index, state
-          check_all_hash_fields parent, target_index, state
-          check_graph_fields parent, target_index, state
-          check_last_fields target_index, state
+          check_joins index, state
+          check_forward_lookup parent, index, state
+          check_parent_index parent, index, state
+          check_all_hash_fields parent, index, state
+          check_graph_fields parent, index, state #yusuke 1段階目で使用されるSIはparent_indexが無いのでcheck_parent_indexでは蹴られないがここで蹴られている
+          check_last_fields parent, index, state #yusuke ここで弾かれてる1段階目のSIも結構ある
         rescue InvalidIndex
           return nil
         end
@@ -94,8 +94,10 @@ module NoSE
       # Check if this index can be used after the current parent
       # @return [Boolean]
       def self.invalid_parent_index?(state, index, parent_index)
-        return false if parent_index.nil?
+        return false if parent_index.nil? #yusuke そもそもSIは1段階目で使用したいので、ここで返る場合をまず考えるが、
+        #SIの次のstepがここで返るとすると子供がいないことになり、SIのクエリプランが提案されないことにつながる
 
+        #yusuke ここでSIが返されているっぽい。parent_indexが一度primary keyでentityに検索をかけてたら、このindexでは同じentityに対するqueryは許さないということか。
         # We don't do multiple lookups by ID for the same entity set
         return true if parent_index.identity? &&
                        index.graph == parent_index.graph
@@ -112,7 +114,8 @@ module NoSE
         # If we're looking up from a previous step, only allow lookup by ID
         return true unless (index.graph.size == 1 &&
                            parent_index.graph != index.graph) ||
-                           index.hash_fields == parent_ids
+                           (index.hash_fields == parent_ids) #||
+                          #   (parent_index.is_secondary_index and !index.is_secondary_index))
       end
       private_class_method :invalid_parent_index?
 
@@ -131,6 +134,8 @@ module NoSE
       def self.check_all_hash_fields(parent, index, state)
         fail InvalidIndex unless index.hash_fields.all? do |field|
           (parent.fields + state.given_fields).include? field
+          # (parent.is_a?(IndexLookupPlanStep) and parent.index.is_secondary_index) ? parent.index.extra.include?(field) : (parent.fields + state.given_fields).include?(field) #yusuke siの次はparentのextraをhash_fieldに持たないといけないという制約を入れる
+          #yusuke 上のは and (!parent.index.is_secondary_index or parent.index.ex_field.include?(field))
         end
       end
       private_class_method :check_all_hash_fields
@@ -143,13 +148,13 @@ module NoSE
         hash_entity = index.hash_fields.first.parent
         graph_fields = state.fields_for_graph(index.graph, hash_entity).to_set
         graph_fields -= parent.fields # exclude fields already fetched
-        fail InvalidIndex unless graph_fields.subset?(index.all_fields)
+        fail InvalidIndex unless graph_fields.subset?(index.all_fields) #yusuke graph_fieldsがindex.all_fieldsの部分集合である
       end
       private_class_method :check_graph_fields
 
       # Check that we have the required fields to move on with the next lookup
       # @return [Boolean]
-      def self.last_fields?(index, state)
+      def self.last_fields?(parent, index, state)
         index_includes = lambda do |fields|
           fields.all? { |f| index.all_fields.include? f }
         end
@@ -159,17 +164,19 @@ module NoSE
         leaf_entities = index.graph.entities.select do |entity|
           state.graph.leaf_entity?(entity)
         end
-        leaf_entities.all? do |entity|
-          index_includes.call([entity.id_field]) ||
+        res =  leaf_entities.all? do |entity|
+          index_includes.call([entity.id_field]) || #yusuke ここでid_fieldを持っているか全てのfieldを持っているかの二択でIndexを評価している。
+            (index.is_secondary_index and parent.is_a? Plans::RootPlanStep) ||
             index_includes.call(state.fields.select { |f| f.parent == entity })
         end
+        res
       end
       private_class_method :last_fields?
 
       # @raise [InvalidIndex]
       # @return [void]
-      def self.check_last_fields(index, state)
-        fail InvalidIndex unless last_fields?(index, state)
+      def self.check_last_fields(parent, index, state)
+        fail InvalidIndex unless last_fields?(parent,index, state)
       end
       private_class_method :check_last_fields
 

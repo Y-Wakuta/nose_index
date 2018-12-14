@@ -5,7 +5,7 @@ module NoSE
   class Index
     attr_reader :hash_fields, :order_fields, :extra, :all_fields, :path,
                 :entries, :entry_size, :size, :hash_count, :per_hash_count,
-                :graph,:base_cf_key, :base_si_key
+                :graph,:base_cf_key, :base_si_key, :is_secondary_index, :is_additional_cf
     attr_accessor :has_index
 
     def initialize(hash_fields, order_fields, extra, graph,
@@ -20,6 +20,11 @@ module NoSE
 
       validate_hash_fields
 
+      @base_cf_key = base_cf_key
+      @base_si_key = base_si_key
+      @is_secondary_index = (!@base_cf_key.nil? and @base_si_key.nil?)
+      @is_additional_cf =   (!@base_cf_key.nil? and !@base_si_key.nil?)
+
       # Store whether this index is an identity
       @identity = @hash_fields == [
         @hash_fields.first.parent.id_field
@@ -29,20 +34,9 @@ module NoSE
       @path = graph.longest_path
       @path = nil unless @path.length == graph.size
 
-      @base_cf_key = base_cf_key
-      @base_si_key = base_si_key
-
       validate_graph if !self.is_secondary_index #yusuke ここでvalidateを飛ばしてしまったが正しいのか自信はない
 
       build_hash saved_key
-    end
-
-    def is_secondary_index
-      !@base_cf_key.nil? and @base_si_key.nil?
-    end
-
-    def is_additional_cf
-      !base_cf_key.nil? and !base_si_key.nil?
     end
 
     #yusuke has_indexを作成
@@ -94,7 +88,7 @@ module NoSE
         '[' + field_group.map(&:inspect).join(', ') + ']'
       end
 
-      str = "is_SI: #{@is_secondary_index} [magenta]#{key}[/] #{fields[0]} #{fields[1]} → #{fields[2]}" \
+      str = "#{@is_secondary_index ? "\e[31m[Secondary Index]\e[0m " : "  "} [magenta]#{key}[/] #{fields[0]} #{fields[1]} → #{fields[2]}" \
         " [yellow]$#{size}[/]" \
         " [magenta]#{@graph.inspect}"
 

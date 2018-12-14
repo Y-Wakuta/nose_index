@@ -310,11 +310,11 @@ module NoSE
           step.children = steps
           steps.each { |new_step| new_step.calculate_cost @cost_model }
           steps.each do |child_step|
-            find_plans_for_step child_step, indexes_by_joins #yusuke ここで自methodを呼び出して再帰
+            find_plans_for_step child_step, indexes_by_joins #yusuke ここで再帰
 
             # Remove this step if finding a plan from here failed
             if child_step.children.empty? && !child_step.state.answered?
-              step.children.delete child_step
+              step.children.delete child_step #yusuke SIのplanを生成してもここで蹴られる場合が多い。
             end
           end
         elsif prune
@@ -346,6 +346,12 @@ module NoSE
 
         # Don't allow indices to be used multiple times
         indexes = (indexes_by_joins[state.joins.first] || Set.new).to_set
+
+        #yusuke 親がSIならその次にはSIを使用しないようにする
+        if parent.is_a? Plans::IndexLookupPlanStep and parent.index.is_secondary_index
+          indexes = indexes.to_a.select{|index| !index.is_secondary_index}.to_set
+        end
+
         used_indexes = parent.parent_steps.indexes.to_set
         (indexes - used_indexes).each do |index|
           new_step = IndexLookupPlanStep.apply parent, index, state,indexes

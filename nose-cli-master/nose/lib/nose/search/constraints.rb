@@ -57,8 +57,7 @@ module NoSE
       #yusuke δ_i はindex_varsと考えられる
       def self.apply(problem)
         problem.indexes.select{|si| si.is_secondary_index}.each do |si|
-          base_cf = problem.indexes.find{|cf| cf.key == si.base_cf_key} #yusuke SI生成元のCFを取得する
-          base_cf_indexes = problem.indexes.select{|cf| !cf.is_secondary_index && cf.all_fields >= base_cf.all_fields} #yusuke あるsecondary indexについて、その元となったCFの実データを含むCFをリスト
+          base_cf_indexes = problem.indexes.select{|cf| !cf.is_secondary_index && cf.hash_fields == si.extra} #yusuke あるSIについてそのextraと同じhash_fieldを持つcolumn familyのリスト
           next if base_cf_indexes.empty?
 
           #yusuke ここで使用している演算子はオーバーロードされていて制約同士でしか使用できない。そのため初期値として１つ目の要素を使用してその後に他の要素を足し合わせる。

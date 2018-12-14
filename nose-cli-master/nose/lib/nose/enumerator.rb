@@ -33,36 +33,24 @@ module NoSE
       end.uniq << query.materialize_view
     end
 
-    #yusuke p_keyで渡されたprimary keyを持つCFのextraにaddtional_attrを加えて列挙する
-    #graph内でnodeが追加されなくて良い場合のみに属性の追加を行う
-    def gen_attribute_appended_cf(indexes,p_key,additional_attr,base_si_key)
-      additionals = indexes.select{|index| (index.hash_fields - [p_key]).empty? && index.graph.entities.map{|entity| entity.name}.include?(p_key.to_s.split(".").first)}.map do |index|
-        generate_index(index.hash_fields,index.order_fields,index.extra + additional_attr,index.graph, base_cf_key: index.key,base_si_key: base_si_key)  #hash, order, extra, graph
-      end.select{|index| !index.nil?}#yusuke ここでvalidateを超えられなかったものは無視するようにしたが、なぜvalidateを超えられないのか確認が必要
-      additionals
-    end
 
-    #yusuke indexを受け取ってそれに関係のあるindexを取得するための関数。indexes_for_workloadの実装を参考にできそう。
-    def get_secondary_indexes_by_indexes(indexes)
-      primary_keys = indexes.map{|index| index.hash_fields.to_a}.flatten.uniq
-
-      hoge = indexes.map do |index|
-        ex_fields = index.extra - index.hash_fields - index.order_fields
-        ex_fields.to_a.select{|f| primary_keys.include?(f)}.map do |ex_field|
-          # hashフィールドの中に元テーブルのprimary keyが含まれていないといけないみたい。なぜこの制約があるのかを論文から確認する->nose2016のp185
-          # "WE do not show it here, but we also include the ID of each entity along
-          # the path in the clustering key. This ensures we have a unique record for each guest reservation since the same guest and hotel may be connected multiple ways"
-          index.hash_fields.map do |hf|
-            si = [Index.new([hf], [], [ex_field],index.graph,base_cf_key: index.key)]
-            field_diff = ex_fields - [ex_field]
-            if !field_diff.empty?
-              si += gen_attribute_appended_cf(indexes,ex_field,field_diff,si[0].key)
-            end
-            si
+    #yusuke 引数で受け取ったindexを元にSIとSIの属性を抜いたりしたCFを列挙する。       ここで色々列挙しているが最終的にコマンドライン引数で「--enumerated」を入れた時に出力されるSIには数個しか含まれておらず、結果に含まれるのもその中のSIのみ。
+    def get_secondary_indexes_by_indexes(index)
+      (index.hash_fields  + index.extra).to_a.map do |ex_field|
+        # hashフィールドの中に元テーブルのprimary keyが含まれていないといけないみたい。なぜこの制約があるのかを論文から確認する->nose2016のp185
+        # "WE do not show it here, but we also include the ID of each entity along
+        # the path in the clustering key. This ensures we have a unique record for each guest reservation since the same guest and hotel may be connected multiple ways"
+        index.hash_fields.map do |hf|
+          si = generate_index([hf], [], [ex_field], index.graph,base_cf_key: index.key)
+          next if si.extra.empty?
+          additional_cf = generate_index(si.extra , index.order_fields, index.extra ,index.graph, base_si_key: si.key, base_cf_key: index.key)
+          si_list = [si] + [additional_cf]
+          if hf != hf.parent.id_field
+            si_list += [generate_index([hf],[], [hf.parent.id_field],index.graph, base_cf_key: index.key)]
           end
+          si_list
         end
-      end.reject{|si| si.empty?}.flatten.uniq #yusuke 空の要素を除いて、flatにする
-      hoge
+      end
     end
 
     # Produce all possible indices for a given workload
@@ -70,8 +58,13 @@ module NoSE
     # @return [Set<Index>]
     def indexes_for_workload(additional_indexes = [], by_id_graph = false)
       queries = @workload.queries
+      si_additional_cfs = []
       indexes = Parallel.map(queries) do |query|
-        indexes_for_query(query).to_a
+        base_cfs = indexes_for_query(query).to_a
+
+        full_cf = base_cfs.sort_by { |index | index.all_fields.length }.reverse.first #yusuke #46 queryに単独で応答するcfを探したい。今はひとまず一番field数の多いものがそうだろうということで対処
+        si_additional_cfs += get_secondary_indexes_by_indexes(full_cf).flatten.reject { |index| index.nil? }.uniq
+        base_cfs
       end.inject(additional_indexes, &:+)
 
       # Add indexes generated for support queries
@@ -85,8 +78,8 @@ module NoSE
       indexes.uniq!
 
       #ここでsecondary indexを取得できるようにする
-      secondary_indexes = get_secondary_indexes_by_indexes(indexes)
-      indexes += secondary_indexes
+      indexes += si_additional_cfs.uniq
+
 
       @logger.debug do
         "Indexes for workload:\n" + indexes.map.with_index do |index, i|

@@ -35,7 +35,7 @@ module NoSE
 
         # Get the costs of all queries and updates
         query_weights = combine_query_weights indexes
-        costs, trees = query_costs query_weights, indexes
+        costs, trees = query_costs query_weights, indexes #yusuke ここで渡しているindexesまではSIが含まれているが、costsにはほとんどSIが含まれていない
         update_costs, update_plans = update_costs trees, indexes
 
         log_search_start costs, query_weights
@@ -48,7 +48,7 @@ module NoSE
           by_id_graph: @by_id_graph
         }
 
-        show_trees(trees) #yusuke 木の内容を表示
+       # show_trees(trees) #yusuke 木の内容を表示
 
         search_result query_weights, indexes, solver_params, trees,
                       update_plans
@@ -59,7 +59,7 @@ module NoSE
       #yusuke 木の形でquery planを表示
       def show_trees(trees)
         trees.each do |tree|
-          tree.root.show_till_end(0)
+          p tree
         end
       end
 
