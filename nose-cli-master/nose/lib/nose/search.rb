@@ -226,6 +226,18 @@ module NoSE
         [query_costs, tree]
       end
 
+      #yusuke treeの中にsecondary indexを使用するstepが存在するかを取得する
+      def is_include_secondary_index_step(tree)
+        tree.each do |plan|
+          plan.each do |step|
+            if step.index.is_secondary_index
+              return true
+            end
+          end
+        end
+        return false
+      end
+
       # Store the costs and indexes for this plan in a nested hash
       # @return [void]
       def populate_query_costs(query_costs, steps_by_index, weight,
@@ -249,8 +261,9 @@ module NoSE
           if query_costs.key? index_step.index
             current_cost = query_costs[index_step.index].last
 
-            # We must always have the same cost
-            if (current_cost - cost).abs >= 10E-6
+            # We must always have the same cost #yusuke NoSEではあるindexが使われる場面によってcostが違うのはバグだと判定しているようだが、SIと組み合わせて通信コストまで考慮するとそうではない。
+            #yusuke treeの中にSIを持つplanはどうしてもplanによって各indexのcostが変化してしまう。
+            if (current_cost - cost).abs >= 10E-6 and !is_include_secondary_index_step tree
               index = index_step.index
               p query
               puts "Index #{index.key} does not have equivalent cost"
