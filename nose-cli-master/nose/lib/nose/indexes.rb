@@ -89,7 +89,7 @@ module NoSE
       end
 
       str = "#{@is_secondary_index ? "\e[31m[Secondary Index]\e[0m " : "  "} [magenta]#{key}[/] #{fields[0]} #{fields[1]} → #{fields[2]}" \
-        " [yellow]$#{size}[/]" \
+        " [yellow]size: $#{size}[/]" \
         " [magenta]#{@graph.inspect}"
 
       if @is_secondary_index

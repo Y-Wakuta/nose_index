@@ -215,7 +215,7 @@ module NoSE
           file.puts "#{statement.inspect} * #{weight} = #{total_cost * weight}"
           plans.each do |plan|
             file.puts Formatador.parse(" for [magenta]#{plan.index.key}[/] " \
-                                       "[yellow]$#{plan.cost}[/]")
+                                       "[yellow]plan.cost: $#{plan.cost}[/]")
             query_weights = Hash[plan.query_plans.map do |query_plan|
               [query_plan.query, weight]
             end]
