@@ -48,7 +48,7 @@ module NoSE
           by_id_graph: @by_id_graph
         }
 
-       # show_trees(trees) #yusuke 木の内容を表示
+        show_trees(trees) #yusuke 木の内容を表示
 
         search_result query_weights, indexes, solver_params, trees,
                       update_plans
