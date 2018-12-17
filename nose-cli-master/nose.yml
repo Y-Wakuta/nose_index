@@ -16,6 +16,7 @@ cost_model:
   row_cost: 1.17093638386496e-005
   delete_cost: 0.0013287903
   insert_cost: 0.013329108
+  client_network_cost: 0.03 #yusuke なんとなくで設定した非常にデタラメな数値
 
 # Loader-specific configuration
 # The mysql loader is recommended, but csv might work as well if
