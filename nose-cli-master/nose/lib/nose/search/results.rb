@@ -117,7 +117,24 @@ module NoSE
         plan
       end
 
+      #yusuke 最適化の結果選択されたindexにおいてbase_cf_keyを貼り直す
+      def update_base_cf_key
+        @plans.select{|plan| plan.any?{|step| step.is_a? Plans::IndexLookupPlanStep and step.index.is_secondary_index}}.each do |plan|
+          plan.steps.select{|step| step.index.is_secondary_index }.each do |si_step|
+              plan.steps.select{|step| !step.index.is_secondary_index}.each do |cf_step|
+                if is_valid_base_cf(si_step.index,cf_step.index) and plan.steps.index(si_step) < plan.steps.index(cf_step)
+                  si_step.index.base_cf_key = cf_step.index.key
+              end
+            end
+          end
+        end
+      end
+
       private
+
+      def is_valid_base_cf(si, base_cf)
+        base_cf.hash_fields >= si.extra and base_cf.all_fields >= si.all_fields
+      end
 
       # Check that the indexes selected were actually enumerated
       # @return [void]
