@@ -14,7 +14,7 @@ module NoSE
       def initialize(query, model)
         @query = query
         @model = model
-        @fields = query.select
+        @fields = query.select #yusuke ここでselect句の中身のみを入れているからwhere句の条件にselect句の中身が含まれない物への対処が必要
         @eq = query.eq_fields.dup
         @range = query.range_field
         @graph = query.graph
