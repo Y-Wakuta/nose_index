@@ -13,7 +13,7 @@ class CreateIndex
     index.hash_fields.first.to_s.split('.').first
   end
 
-  def external(indexes)
+  def get_has_index_hash(indexes)
     indexes = indexes.to_a.sort_by do |i| #yusuke ここでtable名でsortし、それぞれのtable名の中でfieldの数が降順に並ぶようにする
       [get_MySQL_table_name_by_index(i),i.all_fields.length]
     end.reverse!
@@ -41,18 +41,6 @@ class CreateIndex
       next HasIndex.new(index.key,true,parent_table_id) #yusuke 上記の条件を全てクリアした場合、index作成
     end
     has_index_array
-  end
-
-  #yusuke 内部拡張機能としてsecondary indexを作成するだけのmethod。indexのis_secondary_indexフラグのみを見てhashを作成する
-  def internal(indexes)
-    indexes.map do |index|
-      HasIndex.new(index.key, index.is_secondary_index, index.base_cf_key)
-    end
-  end
-
-  def get_has_index_hash(indexes)
-    #return external(indexes)
-    return internal(indexes)
   end
 end
 

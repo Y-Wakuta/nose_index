@@ -75,7 +75,7 @@ module NoSE
         client = new_client config
 
         # yusuke indexをsecondary indexとして宣言しているか取得します
-        has_index = has_index_hash.select{|has_in| has_in.index_key == index.key and has_in.index_value == true}
+        has_index = has_index_hash.select{|has_in| has_in.index_key == index.key and has_in.index_value}
 
 
         # yusuke secondary indexを持っている場合もskipします
