@@ -41,3 +41,4 @@ gurobi.log
 .idea/**/tasks.xml
 
 
+/vendor/

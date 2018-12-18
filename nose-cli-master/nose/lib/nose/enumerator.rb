@@ -36,7 +36,7 @@ module NoSE
 
     #yusuke 引数で受け取ったindexを元にSIとSIの属性を抜いたりしたCFを列挙する。       ここで色々列挙しているが最終的にコマンドライン引数で「--enumerated」を入れた時に出力されるSIには数個しか含まれておらず、結果に含まれるのもその中のSIのみ。
     def get_secondary_indexes_by_indexes(index)
-      (index.hash_fields  + index.extra).to_a.map do |ex_field|
+      (index.order_fields.to_set  + index.extra).to_a.map do |ex_field|
         # hashフィールドの中に元テーブルのprimary keyが含まれていないといけないみたい。なぜこの制約があるのかを論文から確認する->nose2016のp185
         # "WE do not show it here, but we also include the ID of each entity along
         # the path in the clustering key. This ensures we have a unique record for each guest reservation since the same guest and hotel may be connected multiple ways"
