@@ -43,8 +43,9 @@ module NoSE
         index.hash_fields.map do |hf|
           si = generate_index([hf], [], [ex_field], index.graph,base_cf_key: index.key)
           next if si.extra.empty?
-          additional_cf = generate_index(si.extra , index.order_fields, index.extra ,index.graph, base_si_key: si.key, base_cf_key: index.key)
+          additional_cf = generate_index(si.extra , index.order_fields, index.extra + [hf].to_set ,index.graph, base_si_key: si.key, base_cf_key: index.key)
           si_list = [si] + [additional_cf]
+          si_list += [generate_index([hf],[], [ex_field.parent.id_field],index.graph, base_cf_key: index.key)] #yusuke entityをまたぐSIを作成
           if hf != hf.parent.id_field
             si_list += [generate_index([hf],[], [hf.parent.id_field],index.graph, base_cf_key: index.key)]
           end
