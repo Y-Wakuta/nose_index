@@ -57,7 +57,7 @@ module NoSE
       #yusuke δ_i はindex_varsと考えられる
       def self.apply(problem)
         problem.indexes.select{|si| si.is_secondary_index}.each do |si|
-          base_cf_indexes = problem.indexes.select{|cf| !cf.is_secondary_index && cf.hash_fields == si.extra} #yusuke あるSIについてそのextraと同じhash_fieldを持つcolumn familyのリスト
+          base_cf_indexes = problem.indexes.select{|cf| !cf.is_secondary_index && cf.hash_fields == si.extra and (cf.order_fields.to_set + cf.extra) >= si.hash_fields} #yusuke あるSIについてそのextraと同じhash_fieldを持つcolumn familyのリスト
           if base_cf_indexes.empty? #yusuke SIの実テーブルとして使用できるCFが存在しない場合
             constr = MIPPeR::Constraint.new problem.index_vars[si] * 1.0,:<=,0,'si_const'
           else
