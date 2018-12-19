@@ -130,7 +130,7 @@ module NoSE
 
         case File.extname(plan_file)
         when '.json' #yusuke ここでjsonを読み込んでる！多分searchの結果を受けれるのはここだけ！
-          result = representer.from_json(file)
+          result = representer.from_json(file) #yusuke ここからplan_fileを読み込む
         when '.rb'
           result = Search::Results.new
           workload = binding.eval file, plan_file
@@ -215,7 +215,7 @@ module NoSE
           file.puts "#{statement.inspect} * #{weight} = #{total_cost * weight}"
           plans.each do |plan|
             file.puts Formatador.parse(" for [magenta]#{plan.index.key}[/] " \
-                                       "[yellow]$#{plan.cost}[/]")
+                                       "[yellow]plan.cost: $#{plan.cost}[/]")
             query_weights = Hash[plan.query_plans.map do |query_plan|
               [query_plan.query, weight]
             end]

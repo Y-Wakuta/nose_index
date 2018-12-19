@@ -5,8 +5,8 @@ module NoSE
   class Index
     attr_reader :hash_fields, :order_fields, :extra, :all_fields, :path,
                 :entries, :entry_size, :size, :hash_count, :per_hash_count,
-                :graph,:base_cf_key, :base_si_key, :is_secondary_index, :is_additional_cf
-    attr_accessor :has_index
+                :graph, :base_si_key, :is_secondary_index, :is_additional_cf
+    attr_accessor :has_index,:base_cf_key
 
     def initialize(hash_fields, order_fields, extra, graph,
                    saved_key= nil,base_cf_key: nil, base_si_key: nil) #yusuke ここの:を=に変更した。
@@ -89,7 +89,7 @@ module NoSE
       end
 
       str = "#{@is_secondary_index ? "\e[31m[Secondary Index]\e[0m " : "  "} [magenta]#{key}[/] #{fields[0]} #{fields[1]} → #{fields[2]}" \
-        " [yellow]$#{size}[/]" \
+        " [yellow]size: $#{size}[/]" \
         " [magenta]#{@graph.inspect}"
 
       if @is_secondary_index

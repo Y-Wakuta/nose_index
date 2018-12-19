@@ -57,13 +57,14 @@ module NoSE
       #yusuke δ_i はindex_varsと考えられる
       def self.apply(problem)
         problem.indexes.select{|si| si.is_secondary_index}.each do |si|
-          base_cf_indexes = problem.indexes.select{|cf| !cf.is_secondary_index && cf.hash_fields == si.extra} #yusuke あるSIについてそのextraと同じhash_fieldを持つcolumn familyのリスト
-          next if base_cf_indexes.empty?
-
-          #yusuke ここで使用している演算子はオーバーロードされていて制約同士でしか使用できない。そのため初期値として１つ目の要素を使用してその後に他の要素を足し合わせる。
-          cf_const_sum = base_cf_indexes[1..-1].inject(problem.index_vars[base_cf_indexes[0]] * -1){|sum,base_cf| sum + problem.index_vars[base_cf] * -1}
-
-          constr = MIPPeR::Constraint.new problem.index_vars[si] * 1.0 + cf_const_sum,:<=,0,'si_const'
+          base_cf_indexes = problem.indexes.select{|cf| !cf.is_secondary_index && cf.hash_fields == si.extra and (cf.order_fields.to_set + cf.extra) >= si.hash_fields} #yusuke あるSIについてそのextraと同じhash_fieldを持つcolumn familyのリスト
+          if base_cf_indexes.empty? #yusuke SIの実テーブルとして使用できるCFが存在しない場合
+            constr = MIPPeR::Constraint.new problem.index_vars[si] * 1.0,:<=,0,'si_const'
+          else
+            #yusuke ここで使用している演算子はオーバーロードされていて制約同士でしか使用できない。そのため初期値として１つ目の要素を使用してその後に他の要素を足し合わせる。
+            cf_const_sum = base_cf_indexes[1..-1].inject(problem.index_vars[base_cf_indexes[0]] * -1){|sum,base_cf| sum + problem.index_vars[base_cf] * -1}
+            constr = MIPPeR::Constraint.new problem.index_vars[si] * 1.0 + cf_const_sum,:<=,0,'si_const'
+          end
           problem.model << constr
         end
       end
