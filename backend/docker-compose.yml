@@ -1,8 +1,14 @@
 version: '2'
 services:
+  db_data:
+    image: busybox
+    volumes:
+      - /var/lib/mysql
   mysql:
     container_name: mysql_nose
     build: ./mysql
+    volumes_from:
+      - db_data
     environment:
       MYSQL_ROOT_PASSWORD: root
     ports:
