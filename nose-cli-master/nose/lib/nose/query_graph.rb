@@ -113,6 +113,11 @@ module NoSE
         @nodes.empty?
       end
 
+      #yusuke edgeがあるかどうか確認する
+      def edges_empty?
+        @edges.empty?
+      end
+
       # Duplicate graphs ensuring that edges are correctly copied
       # @return [Graph]
       def dup
