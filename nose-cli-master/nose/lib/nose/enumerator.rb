@@ -33,6 +33,17 @@ module NoSE
       end.uniq << query.materialize_view
     end
 
+    #yusuke query plan生成時にindexes_by_joinsからentityをキーとして次のstepで使用できる可能性のあるindexを取得しているが、siに含まれるfield以外のentityを持っていると
+    def get_si_graph(fields, base_graph)
+      si_graph = base_graph.dup
+      used_entities = fields.to_a.map{|field| field.parent}
+      si_graph.remove_nodes(base_graph.entities - used_entities)
+      if si_graph.edges_empty? and si_graph.nodes.length > 1 #siに含まれないnodeを削除した結果edgeが無くなってしまう場合がある。その時は#39に書いたようにquery planで枝切りされる事になりそうだが元のindexのgraphを返して処理は続ける
+        return base_graph #こっちが使用されて同じentityにおけるものでもsecondary indexが使用されなくなっている。
+      end
+      si_graph#yusuke さらにここでsi_graphのみが返るようにしても必ずしも問題が起きるわけではなく、secondary indexも使用されるようになる
+    end
+
 
     #yusuke 引数で受け取ったindexを元にSIとSIの属性を抜いたりしたCFを列挙する。       ここで色々列挙しているが最終的にコマンドライン引数で「--enumerated」を入れた時に出力されるSIには数個しか含まれておらず、結果に含まれるのもその中のSIのみ。
     def get_secondary_indexes_by_indexes(index)
@@ -41,13 +52,13 @@ module NoSE
         # "WE do not show it here, but we also include the ID of each entity along
         # the path in the clustering key. This ensures we have a unique record for each guest reservation since the same guest and hotel may be connected multiple ways"
         index.hash_fields.map do |hf|
-          si = generate_index([hf], [], [ex_field], index.graph,base_cf_key: index.key)
+          si = generate_index([hf], [], [ex_field], get_si_graph([hf] + [ex_field],index.graph),base_cf_key: index.key)
           next if si.extra.empty?
           additional_cf = generate_index(si.extra , index.order_fields, index.extra + [hf].to_set ,index.graph, base_si_key: si.key, base_cf_key: index.key)
           si_list = [si] + [additional_cf]
-          si_list += [generate_index([hf],[], [ex_field.parent.id_field],index.graph, base_cf_key: index.key)] #yusuke entityをまたぐSIを作成
+          si_list += [generate_index([hf],[], [ex_field.parent.id_field],get_si_graph([hf] + [ex_field.parent.id_field],index.graph), base_cf_key: index.key)] #yusuke entityをまたぐSIを作成
           if hf != hf.parent.id_field
-            si_list += [generate_index([hf],[], [hf.parent.id_field],index.graph, base_cf_key: index.key)]
+            si_list += [generate_index([hf],[], [hf.parent.id_field],get_si_graph([hf] + [hf.parent.id_field],index.graph), base_cf_key: index.key)]
           end
           si_list
         end
