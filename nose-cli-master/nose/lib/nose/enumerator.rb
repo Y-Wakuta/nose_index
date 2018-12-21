@@ -36,15 +36,16 @@ module NoSE
 
     #yusuke 引数で受け取ったindexを元にSIとSIの属性を抜いたりしたCFを列挙する。       ここで色々列挙しているが最終的にコマンドライン引数で「--enumerated」を入れた時に出力されるSIには数個しか含まれておらず、結果に含まれるのもその中のSIのみ。
     def get_secondary_indexes_by_indexes(index)
-      (index.hash_fields  + index.extra).to_a.map do |ex_field|
+      (index.order_fields.to_set  + index.extra).to_a.map do |ex_field|
         # hashフィールドの中に元テーブルのprimary keyが含まれていないといけないみたい。なぜこの制約があるのかを論文から確認する->nose2016のp185
         # "WE do not show it here, but we also include the ID of each entity along
         # the path in the clustering key. This ensures we have a unique record for each guest reservation since the same guest and hotel may be connected multiple ways"
         index.hash_fields.map do |hf|
           si = generate_index([hf], [], [ex_field], index.graph,base_cf_key: index.key)
           next if si.extra.empty?
-          additional_cf = generate_index(si.extra , index.order_fields, index.extra ,index.graph, base_si_key: si.key, base_cf_key: index.key)
+          additional_cf = generate_index(si.extra , index.order_fields, index.extra + [hf].to_set ,index.graph, base_si_key: si.key, base_cf_key: index.key)
           si_list = [si] + [additional_cf]
+          si_list += [generate_index([hf],[], [ex_field.parent.id_field],index.graph, base_cf_key: index.key)] #yusuke entityをまたぐSIを作成
           if hf != hf.parent.id_field
             si_list += [generate_index([hf],[], [hf.parent.id_field],index.graph, base_cf_key: index.key)]
           end

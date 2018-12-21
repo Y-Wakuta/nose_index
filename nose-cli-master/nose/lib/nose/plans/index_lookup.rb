@@ -299,6 +299,7 @@ module NoSE
 
         # Remove fields resolved by this index
         @state.fields -= @index.all_fields
+        @state.fields += @index.hash_fields if @index.is_secondary_index #yusuke SIの時は次のindexにsiのhash_fieldが含まれて居なければならない
         @state.eq -= @eq_filter
 
         indexed_by_id = resolve_order

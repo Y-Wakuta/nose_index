@@ -117,6 +117,35 @@ module NoSE
         plan
       end
 
+      #yusuke 最適化の結果secondary indexの生成元であるcolumn familyが最適化の結果消えている可能性が高いため、secondary indexに対してその実テーブルとなるcolumn familyを再設定する
+      def set_has_index_hash
+        @has_index_hash = @plans.select{|plan| plan.any?{|step| step.is_a? Plans::IndexLookupPlanStep and step.index.is_secondary_index}}.map do |plan|
+          plan.steps.select{|step| step.index.is_secondary_index }.map do |si_step|
+            has_index = nil
+            plan.steps.select{|step| !step.index.is_secondary_index}.map do |cf_step|
+              if is_valid_base_cf(si_step.index,cf_step.index) and plan.steps.index(si_step) < plan.steps.index(cf_step)
+                has_index = HasIndex.new(si_step.index.key, true, cf_step.index.key)
+              end
+            end
+            if has_index.nil? #同じquery plan内に対応するcfが存在しない場合
+              @plans.select{|plan| plan.any?{|step| step.is_a? Plans::IndexLookupPlanStep}}.map do |plan|
+                plan.steps.select{|step| !step.index.is_secondary_index}.map do |cf_step|
+                  if is_valid_base_cf(si_step.index,cf_step.index) and plan.steps.index(si_step) < plan.steps.index(cf_step)
+                    has_index = HasIndex.new(si_step.index.key, true, cf_step.index.key)
+                  end
+                end
+              end
+            end
+            has_index
+          end
+        end.flatten
+      end
+
+      #yusuke secondary indexの実column familyとして使用できるかをfieldの包含関係のみから判定する
+      def is_valid_base_cf(si, base_cf)
+        base_cf.hash_fields >= si.extra and base_cf.all_fields >= si.all_fields
+      end
+
       private
 
       # Check that the indexes selected were actually enumerated

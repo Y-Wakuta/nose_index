@@ -28,7 +28,7 @@ module NoSE
       def indexes_ddl(has_index_hash,execute = false, skip_existing = false,
                       drop_existing = false)
         Enumerator.new do |enum|
-          @indexes.map do |index|
+          @indexes.sort_by{|index| index.is_secondary_index ? 1 : 0}.map do |index| #yusuke cfから先に生成するようにする
             ddl = index_cql index,has_index_hash
             enum.yield ddl
 
@@ -306,6 +306,7 @@ module NoSE
 
         # Produce the select CQL statement for a provided set of fields
         # @return [String]
+        # yusuke benchmarkの中で実際にselect句を発行している箇所
         def select_cql(select, conditions)
           select = expand_selected_fields select
           cql = "SELECT #{select.map { |f| "\"#{f.id}\"" }.join ', '} FROM " \
@@ -388,7 +389,7 @@ module NoSE
         def lookup_values(condition_set)
           condition_set.map do |condition|
             value = condition.value ||
-                    conditions[condition.field.id].value
+                    conditions[condition.field.id].value #yusuke ここでconditionsが存在しないと言って蹴られる
             fail if value.nil?
 
             if condition.field.is_a?(Fields::IDField)

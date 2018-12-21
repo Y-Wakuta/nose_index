@@ -48,7 +48,7 @@ module NoSE
           by_id_graph: @by_id_graph
         }
 
-        show_trees(trees) #yusuke 木の内容を表示
+        #show_trees(trees) #yusuke 木の内容を表示
 
         search_result query_weights, indexes, solver_params, trees,
                       update_plans
@@ -98,6 +98,7 @@ module NoSE
 
         result.workload = @workload
         result.plans_from_trees trees #yusuke この中でresult.plansが追加されてる
+        result.update_base_cf_key
         result.cost_model = @cost_model #yusuke この代入処理をcost_modelの代入演算子をoverrideしている都合上代入時にcostの再計算が走っているが、これはresult.cost_modelに代入する都合上起こっているものであり、ここで再計算する意図は元々ないものとして変更を進める
 
 

@@ -8,6 +8,7 @@ NoSE::Workload.new do
   # http://rubis.ow2.org/results/SB-BMP/Browsing/JBoss-SB-BMP-Br-1500/perf.html#run_stat
   DefaultMix :browsing #ここのbrowsingをbiddingとかに書き換えることでより多くのqueryに対してテストできそう
 #biddingの容量下限は 108000000
+  # browsingは55000000
 
   Group 'BrowseCategories', browsing: 4.44,
                             bidding: 7.65,
