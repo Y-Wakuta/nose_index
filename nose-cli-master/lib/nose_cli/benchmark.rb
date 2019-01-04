@@ -36,7 +36,7 @@ module NoSE
                       desc: 'the format of the output data'
 
       def benchmark(plan_file)
-        plan_file = plan_file + ".json" #yusuke tmpこれも必要じゃなさそうな気がする変更
+        plan_file = './nose/schemas/' + plan_file + ".json" #yusuke tmpこれも必要じゃなさそうな気がする変更
         label = File.basename plan_file, '.*'
         result = load_results plan_file, options[:mix]
 

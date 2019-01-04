@@ -2,7 +2,8 @@
 
 NoSE::Workload.new do
   Model 'rubis'
-
+#search rubis --max_space 192000 --enumerated
+#
   # Define queries and their relative weights, weights taken from below
   # http://rubis.ow2.org/results/SB-BMP/Bidding/JBoss-SB-BMP-Bi-1500/perf.html#run_stat
   # http://rubis.ow2.org/results/SB-BMP/Browsing/JBoss-SB-BMP-Br-1500/perf.html#run_stat
@@ -14,13 +15,13 @@ NoSE::Workload.new do
                             bidding: 7.65,
                             write_medium: 7.65,
                             write_heavy: 7.65 do
-  #  Q 'SELECT users.* FROM users WHERE users.password = ? AND users.lastname = ? -- 1' #yusuke secondary indexの例が欲しかったので追加
+ #   Q 'SELECT users.* FROM users WHERE users.password = ? AND users.lastname = ? -- 1' #yusuke secondary indexの例が欲しかったので追加
  #   Q 'SELECT users.* FROM users WHERE users.id = ? -- 1'
  #   Q 'SELECT users.* FROM users WHERE users.lastname = ? -- 1' #yusuke secondary indexの例が欲しかったので追加
  #   Q 'SELECT users.firstname,users.lastname, users.nickname FROM users WHERE users.firstname = ? -- 1' #yusuke secondary indexの例が欲しかったので追加
  #   # XXX Must have at least one equality predicate
-  #  Q 'SELECT categories.id, categories.name FROM categories WHERE ' \
-   #  'categories.dummy = 1 -- 2'
+ #   Q 'SELECT categories.id, categories.name FROM categories WHERE ' \
+ #     'categories.dummy = 1 -- 2'
     Q 'SELECT users.id, users.firstname,users.lastname,users.password FROM users WHERE users.id = ?'
     Q 'SELECT users.id, users.firstname,users.lastname,users.password,users.email FROM users WHERE users.firstname = ?'
   end
