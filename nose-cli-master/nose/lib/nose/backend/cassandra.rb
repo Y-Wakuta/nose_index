@@ -92,10 +92,16 @@ module NoSE
       end
 
       # Sample a number of values from the given index
-      def index_sample(index, count)
+      def index_sample(index,has_index_hash, count)
         field_list = index.all_fields.map { |f| "\"#{f.id}\"" }
-        query = "SELECT #{field_list.join ', '} " \
+        if index.is_secondary_index
+          has_index = has_index_hash.select{|has_in| has_in.index_key == index.key and has_in.index_value}[0]
+          query = "SELECT #{field_list.join ', '} " \
+                "FROM \"#{has_index.parent_table_id}\" LIMIT #{count}"
+        else
+          query = "SELECT #{field_list.join ', '} " \
                 "FROM \"#{index.key}\" LIMIT #{count}"
+        end
         rows = client.execute(query).rows
 
         # XXX Ignore null values for now
