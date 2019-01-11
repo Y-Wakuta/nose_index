@@ -1,0 +1,59 @@
+"bash -c ""RBENV_VERSION=2.5.1 /home/yusuke/.rbenv/bin/rbenv exec bundle exec ruby /home/yusuke/Dropbox/NoSEIndex/nose-cli-master/bin/nose benchmark internal_si --format csv --num_iterations 50""",,,,,,,,
+/home/yusuke/Dropbox/NoSEIndex/nose-cli-master/nose/lib/nose/model/fields.rb:171: warning: constant ::Fixnum is deprecated,,,,,,,,
+label,group,name,weight,mean,cost,,,
+internal_si,BrowseCategories,SELECT users.* FROM users WHERE users.password = ? AND users.lastname = ? -- 1,4.44,0.001087654,0.040753849,,,
+internal_si,BrowseCategories,SELECT users.* FROM users WHERE users.id = ? -- 1,4.44,0.001132738,3.129220552,,,
+internal_si,BrowseCategories,SELECT users.* FROM users WHERE users.lastname = ? -- 1,4.44,0.020255927,3.129220552,,,
+internal_si,BrowseCategories,"SELECT users.firstname,users.lastname, users.nickname FROM users WHERE users.firstname = ? -- 1",4.44,0.002803733,0.789220552,,,
+internal_si,BrowseCategories,"SELECT categories.id, categories.name FROM categories WHERE categories.dummy = 1 -- 2",4.44,0.000916686,5.43926739,,,
+internal_si,ViewBidHistory,SELECT items.name FROM items WHERE items.id = ? -- 3,2.38,0.001039657,0.609220552,,,
+internal_si,ViewBidHistory,SELECT items.* FROM items WHERE items.name = ? -- 3,2.38,0.371607002,8.928441105,,,
+internal_si,ViewBidHistory,"SELECT users.id, users.nickname, bids.id, item.id, bids.qty, bids.bid, bids.date FROM users.bids.item WHERE item.id = ? ORDER BY bids.date -- 4",2.38,0.022153116,38.34262483,,,
+internal_si,ViewItem,SELECT items.* FROM items WHERE items.id = ? -- 5,22.95,0.001156717,8.919220552,,,
+internal_si,ViewItem,SELECT items.* FROM items WHERE items.name = ? -- 5,22.95,0.361254901,8.928441105,,,
+internal_si,ViewItem,SELECT items.* FROM items WHERE items.quantity = ? -- 5,22.95,11.35292114,17762.83244,,,
+internal_si,ViewItem,SELECT items.* FROM items WHERE items.max_bid = ? -- 5,22.95,0.004848985,8.928441105,,,
+internal_si,ViewItem,SELECT items.* FROM items WHERE items.start_date = ? -- 5,22.95,0.00153303,8.928441105,,,
+internal_si,ViewItem,SELECT items.* FROM items WHERE items.initial_price = ? -- 5,22.95,0.005078487,8.928441105,,,
+internal_si,ViewItem,SELECT bids.* FROM items.bids WHERE items.id = ? -- 6,22.95,0.001231854,12.03932594,,,
+internal_si,SearchItemsByCategory,"SELECT items.id, items.name, items.initial_price, items.max_bid, items.nb_of_bids, items.end_date FROM items.category WHERE category.id = ? AND items.end_date >= ? LIMIT 25 -- 7",27.77,0.024208873,80.36186584,,,
+internal_si,ViewUserInfo,"SELECT comments.id, comments.rating, comments.date, comments.comment FROM comments.to_user WHERE to_user.id = ? -- 9",4.41,0.002988823,243.0397943,,,
+internal_si,ViewUserInfo,"SELECT comments.id, comments.rating, comments.date, comments.comment FROM comments.to_user WHERE to_user.firstname = ? -- 9",4.41,0.20203578,246.1690149,,,
+internal_si,ViewUserInfo,"SELECT comments.id, comments.rating, comments.date, comments.comment FROM comments.to_user WHERE to_user.lastname = ? -- 9",4.41,1.369129615,244.3090149,,,
+internal_si,SearchItemsByRegion,"SELECT items.id, items.name, items.initial_price, items.max_bid, items.nb_of_bids, items.end_date FROM items.seller WHERE seller.region.id = ? AND items.category.id = ? AND items.end_date >= ? LIMIT 25 -- 35",8.26,0.00248009,16.11930252,,,
+internal_si,BrowseRegions,"SELECT regions.id, regions.name FROM regions WHERE regions.dummy = 1 -- 36",3.21,0.000913821,0.654214698,,,
+internal_si,BrowseRegions,SELECT regions.* FROM regions WHERE regions.id = 1 -- 36,3.21,0.00113527,1.509220552,,,
+internal_si,BrowseRegions,SELECT regions.* FROM regions WHERE regions.name = 1 -- 36,3.21,0.001047544,1.509220552,,,
+,,,,,,,,
+,,,,,,,,
+,,,,,,,,
+,,,,,,,,
+,,,,,,,,
+,,,,,,,,
+,,,,,,,,
+,,,,,,,,
+,,,,,,,,
+,name,si_mean,cf_mean,cf_no_const_mean,,,si/cf,si/no_const_cf
+,SELECT users.* FROM users WHERE users.password = ? AND users.lastname = ? -- 1,0.001087654,0.019643709,0.001101335,,,0.055369055,0.987577009
+,SELECT users.* FROM users WHERE users.id = ? -- 1,0.001132738,0.00075724,0.001133557,,,1.495877476,0.999277584
+,SELECT users.* FROM users WHERE users.lastname = ? -- 1,0.020255927,0.01695,0.019290962,,,1.195039971,1.050021583
+,"SELECT users.firstname,users.lastname, users.nickname FROM users WHERE users.firstname = ? -- 1",0.002803733,0.001630274,0.00258644,,,1.719792786,1.084012568
+,"SELECT categories.id, categories.name FROM categories WHERE categories.dummy = 1 -- 2",0.000916686,0.000862239,0.001073898,,,1.063146377,0.853606163
+,SELECT items.name FROM items WHERE items.id = ? -- 3,0.001039657,0.000905663,0.001066624,,,1.147951161,0.974716979
+,SELECT items.* FROM items WHERE items.name = ? -- 3,0.371607002,7.1984303,0.235090906,,,0.051623338,1.580694924
+,"SELECT users.id, users.nickname, bids.id, item.id, bids.qty, bids.bid, bids.date FROM users.bids.item WHERE item.id = ? ORDER BY bids.date -- 4",0.022153116,0.019452736,0.00167044,,,1.138817489,13.26184521
+,SELECT items.* FROM items WHERE items.id = ? -- 5,0.001156717,0.00087981,0.000988187,,,1.314734867,1.170544363
+,SELECT items.* FROM items WHERE items.name = ? -- 5,0.361254901,8.443313725,0.235448815,,,0.042785915,1.534324569
+,SELECT items.* FROM items WHERE items.quantity = ? -- 5,11.35292114,198.6622262,7.157639595,,,0.057146854,1.586126403
+,SELECT items.* FROM items WHERE items.max_bid = ? -- 5,0.004848985,0.023518304,0.002496463,,,0.206179173,1.942341694
+,SELECT items.* FROM items WHERE items.start_date = ? -- 5,0.00153303,0.002543464,0.001062687,,,0.602733007,1.442597892
+,SELECT items.* FROM items WHERE items.initial_price = ? -- 5,0.005078487,0.045466651,0.002436872,,,0.11169696,2.084018284
+,SELECT bids.* FROM items.bids WHERE items.id = ? -- 6,0.001231854,0.001115423,0.001515571,,,1.104382213,0.81279841
+,"SELECT items.id, items.name, items.initial_price, items.max_bid, items.nb_of_bids, items.end_date FROM items.category WHERE category.id = ? AND items.end_date >= ? LIMIT 25 -- 7",0.024208873,0.024635142,0.002299502,,,0.982696711,10.52787656
+,"SELECT comments.id, comments.rating, comments.date, comments.comment FROM comments.to_user WHERE to_user.id = ? -- 9",0.002988823,0.003250936,0.002865046,,,0.919372943,1.043202498
+,"SELECT comments.id, comments.rating, comments.date, comments.comment FROM comments.to_user WHERE to_user.firstname = ? -- 9",0.20203578,0.218996321,0.077080401,,,0.922553306,2.621104416
+,"SELECT comments.id, comments.rating, comments.date, comments.comment FROM comments.to_user WHERE to_user.lastname = ? -- 9",1.369129615,1.453582623,0.349610686,,,0.941900098,3.916154936
+,"SELECT items.id, items.name, items.initial_price, items.max_bid, items.nb_of_bids, items.end_date FROM items.seller WHERE seller.region.id = ? AND items.category.id = ? AND items.end_date >= ? LIMIT 25 -- 35",0.00248009,2.965153919,0.002145186,,,0.000836412,1.156118851
+,"SELECT regions.id, regions.name FROM regions WHERE regions.dummy = 1 -- 36",0.000913821,0.000955349,0.000888006,,,0.95653106,1.029069968
+,SELECT regions.* FROM regions WHERE regions.id = 1 -- 36,0.00113527,0.001138783,0.000881546,,,0.996914934,1.287816284
+,SELECT regions.* FROM regions WHERE regions.name = 1 -- 36,0.001047544,0.001020757,0.000923386,,,1.026242158,1.134459214

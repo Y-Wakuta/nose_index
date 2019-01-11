@@ -52,7 +52,7 @@ module NoSE
         # "WE do not show it here, but we also include the ID of each entity along
         # the path in the clustering key. This ensures we have a unique record for each guest reservation since the same guest and hotel may be connected multiple ways"
         index.hash_fields.map do |hf|
-          si = generate_index([hf], [], [ex_field], get_si_graph([hf] + [ex_field],index.graph),base_cf_key: index.key)
+          si = generate_index([hf], [], [ex_field], get_si_graph([hf] + [ex_field],index.graph),base_cf_key: index.key) #yusuke CFを複数使う場合のみを考えるならpartition keyに対するSIのみで良いが、単独で応答するSIを考えるのであれば、これも残しておく
           next if si.extra.empty?
           additional_cf = generate_index(si.extra , index.order_fields, index.extra + [hf].to_set ,index.graph, base_si_key: si.key, base_cf_key: index.key)
           si_list = [si] + [additional_cf]

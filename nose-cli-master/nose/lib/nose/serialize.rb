@@ -127,7 +127,7 @@ module NoSE
 
         Index.new f.call(fragment['hash_fields']),
                   f.call(fragment['order_fields']),
-                  f.call(fragment['extra']), graph, fragment['key']
+                  f.call(fragment['extra']), graph, fragment['key'],base_cf_key: (fragment['is_secondary_index'] ? "temp" : nil)
       end
     end
 
@@ -153,6 +153,9 @@ module NoSE
       property :size
       property :hash_count
       property :per_hash_count
+      property :base_cf_key
+      property :base_si_key
+      property :is_secondary_index
 
     end
 

@@ -1,0 +1,26 @@
+bash -c "RBENV_VERSION=2.5.1 /home/yusuke/.rbenv/bin/rbenv exec bundle exec ruby /home/yusuke/Dropbox/NoSEIndex/nose-cli-master/bin/nose benchmark internal_cf --format csv --num_iterations 50"
+/home/yusuke/Dropbox/NoSEIndex/nose-cli-master/nose/lib/nose/model/fields.rb:171: warning: constant ::Fixnum is deprecated
+label,group,name,weight,mean,cost
+internal_cf,BrowseCategories,SELECT users.* FROM users WHERE users.password = ? AND users.lastname = ? -- 1,4.44,0.01964370854,3.1292205524638383
+internal_cf,BrowseCategories,SELECT users.* FROM users WHERE users.id = ? -- 1,4.44,0.00075724004,3.1292205524638383
+internal_cf,BrowseCategories,SELECT users.* FROM users WHERE users.lastname = ? -- 1,4.44,0.01694999954,3.1292205524638383
+internal_cf,BrowseCategories,"SELECT users.firstname,users.lastname, users.nickname FROM users WHERE users.firstname = ? -- 1",4.44,0.0016302738,0.7892205524638386
+internal_cf,BrowseCategories,"SELECT categories.id, categories.name FROM categories WHERE categories.dummy = 1 -- 2",4.44,0.00086223854,5.439267389919193
+internal_cf,ViewBidHistory,SELECT items.name FROM items WHERE items.id = ? -- 3,2.38,0.00090566278,0.6092205524638385
+internal_cf,ViewBidHistory,SELECT items.* FROM items WHERE items.name = ? -- 3,2.38,7.19843030044,10.008441104927677
+internal_cf,ViewBidHistory,"SELECT users.id, users.nickname, bids.id, item.id, bids.qty, bids.bid, bids.date FROM users.bids.item WHERE item.id = ? ORDER BY bids.date -- 4",2.38,0.019452735960000002,38.342624825015164
+internal_cf,ViewItem,SELECT items.* FROM items WHERE items.id = ? -- 5,22.95,0.0008798101799999999,8.919220552463837
+internal_cf,ViewItem,SELECT items.* FROM items WHERE items.name = ? -- 5,22.95,8.443313725220001,10.008441104927677
+internal_cf,ViewItem,SELECT items.* FROM items WHERE items.quantity = ? -- 5,22.95,198.66222620736,19202.862443062953
+internal_cf,ViewItem,SELECT items.* FROM items WHERE items.max_bid = ? -- 5,22.95,0.023518304419999997,9.678441104927677
+internal_cf,ViewItem,SELECT items.* FROM items WHERE items.start_date = ? -- 5,22.95,0.0025434639599999998,9.678441104927677
+internal_cf,ViewItem,SELECT items.* FROM items WHERE items.initial_price = ? -- 5,22.95,0.04546665098,9.678441104927677
+internal_cf,ViewItem,SELECT bids.* FROM items.bids WHERE items.id = ? -- 6,22.95,0.00111542318,12.039325936738386
+internal_cf,SearchItemsByCategory,"SELECT items.id, items.name, items.initial_price, items.max_bid, items.nb_of_bids, items.end_date FROM items.category WHERE category.id = ? AND items.end_date >= ? LIMIT 25 -- 7",27.77,0.02463514242,80.36186584079194
+internal_cf,ViewUserInfo,"SELECT comments.id, comments.rating, comments.date, comments.comment FROM comments.to_user WHERE to_user.id = ? -- 9",4.41,0.00325093646,243.03979431129193
+internal_cf,ViewUserInfo,"SELECT comments.id, comments.rating, comments.date, comments.comment FROM comments.to_user WHERE to_user.firstname = ? -- 9",4.41,0.2189963212,244.30901486375578
+internal_cf,ViewUserInfo,"SELECT comments.id, comments.rating, comments.date, comments.comment FROM comments.to_user WHERE to_user.lastname = ? -- 9",4.41,1.4535826229,246.16901486375576
+internal_cf,SearchItemsByRegion,"SELECT items.id, items.name, items.initial_price, items.max_bid, items.nb_of_bids, items.end_date FROM items.seller WHERE seller.region.id = ? AND items.category.id = ? AND items.end_date >= ? LIMIT 25 -- 35",8.26,2.9651539193,434.8797363272314
+internal_cf,BrowseRegions,"SELECT regions.id, regions.name FROM regions WHERE regions.dummy = 1 -- 36",3.21,0.0009553488,0.6542146977819193
+internal_cf,BrowseRegions,SELECT regions.* FROM regions WHERE regions.id = 1 -- 36,3.21,0.00113878272,1.5092205524638387
+internal_cf,BrowseRegions,SELECT regions.* FROM regions WHERE regions.name = 1 -- 36,3.21,0.00102075676,1.5092205524638387

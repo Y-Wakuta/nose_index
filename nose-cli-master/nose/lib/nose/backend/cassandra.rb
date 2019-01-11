@@ -92,10 +92,16 @@ module NoSE
       end
 
       # Sample a number of values from the given index
-      def index_sample(index, count)
+      def index_sample(index,has_index_hash, count)
         field_list = index.all_fields.map { |f| "\"#{f.id}\"" }
-        query = "SELECT #{field_list.join ', '} " \
+        if index.is_secondary_index
+          has_index = has_index_hash.select{|has_in| has_in.index_key == index.key and has_in.index_value}[0]
+          query = "SELECT #{field_list.join ', '} " \
+                "FROM \"#{has_index.parent_table_id}\" LIMIT #{count}"
+        else
+          query = "SELECT #{field_list.join ', '} " \
                 "FROM \"#{index.key}\" LIMIT #{count}"
+        end
         rows = client.execute(query).rows
 
         # XXX Ignore null values for now
@@ -134,7 +140,7 @@ module NoSE
       def index_cql(index,has_index_hash) #yusuke ここでplan_fileの内容からCQLを生成している
         has_index = has_index_hash.select{|has_index| has_index.index_key ==  index.key && has_index.index_value}.first
         if !has_index.nil?
-          ddl = "CREATE INDEX IF NOT EXISTS #{index.key} ON #{has_index.parent_table_id}(#{(field_names index.hash_fields).split(',').first});"
+          ddl = "CREATE CUSTOM INDEX IF NOT EXISTS #{index.key} ON #{has_index.parent_table_id}(#{(field_names index.hash_fields).split(',').first}) USING 'org.apache.cassandra.index.sasi.SASIIndex';"
           return ddl
         end
 
@@ -293,10 +299,10 @@ module NoSE
         # rubocop:enable Metrics/ParameterLists
 
         # Perform a column family lookup in Cassandra
-        def process(conditions, results)
+        def process(conditions, results,query_conditions)
           results = initial_results(conditions) if results.nil?
           condition_list = result_conditions conditions, results
-          new_result = fetch_all_queries condition_list, results
+          new_result = fetch_all_queries condition_list, results,query_conditions
 
           # Limit the size of the results in case we fetched multiple keys
           new_result[0..(@step.limit.nil? ? -1 : @step.limit)]
@@ -348,7 +354,7 @@ module NoSE
 
         # Lookup values from an index selecting the given
         # fields and filtering on the given conditions
-        def fetch_all_queries(condition_list, results)
+        def fetch_all_queries(condition_list, results, query_conditions)
           new_result = []
           @logger.debug { "  #{@prepared.cql} * #{condition_list.size}" }
 
@@ -356,7 +362,7 @@ module NoSE
           # Limit the total number of queries as well as the query limit
           condition_list.zip(results).each do |condition_set, result|
             # Loop over all pages to fetch results
-            values = lookup_values condition_set
+            values = lookup_values condition_set, query_conditions
             fetch_query_pages values, new_result, result
 
             # Don't continue with further queries
@@ -386,10 +392,10 @@ module NoSE
         end
 
         # Produce the values used for lookup on a given set of conditions
-        def lookup_values(condition_set)
+        def lookup_values(condition_set,query_conditions)
           condition_set.map do |condition|
             value = condition.value ||
-                    conditions[condition.field.id].value #yusuke ここでconditionsが存在しないと言って蹴られる
+              query_conditions[condition.field.id].value
             fail if value.nil?
 
             if condition.field.is_a?(Fields::IDField)

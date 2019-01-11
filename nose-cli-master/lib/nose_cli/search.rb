@@ -66,7 +66,7 @@ module NoSE
         file = if options[:output].nil?
                  $stdout
                else
-                 File.open(options[:output], 'w')
+                 File.open('./nose/schemas/' + options[:output], 'w')
                end
 
         begin
