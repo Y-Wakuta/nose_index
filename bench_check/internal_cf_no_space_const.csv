@@ -1,0 +1,26 @@
+bash -c "RBENV_VERSION=2.5.1 /home/yusuke/.rbenv/bin/rbenv exec bundle exec ruby /home/yusuke/Dropbox/NoSEIndex/nose-cli-master/bin/nose benchmark internal_cf_no_space_const --format csv --num_iterations 50"
+/home/yusuke/Dropbox/NoSEIndex/nose-cli-master/nose/lib/nose/model/fields.rb:171: warning: constant ::Fixnum is deprecated
+label,group,name,weight,mean,cost
+internal_cf_no_space_const,BrowseCategories,SELECT users.* FROM users WHERE users.password = ? AND users.lastname = ? -- 1,4.44,0.00110133546,0.04075384895468192
+internal_cf_no_space_const,BrowseCategories,SELECT users.* FROM users WHERE users.id = ? -- 1,4.44,0.00113355722,3.1292205524638383
+internal_cf_no_space_const,BrowseCategories,SELECT users.* FROM users WHERE users.lastname = ? -- 1,4.44,0.01929096248,3.1292205524638383
+internal_cf_no_space_const,BrowseCategories,"SELECT users.firstname,users.lastname, users.nickname FROM users WHERE users.firstname = ? -- 1",4.44,0.00258643968,0.7892205524638386
+internal_cf_no_space_const,BrowseCategories,"SELECT categories.id, categories.name FROM categories WHERE categories.dummy = 1 -- 2",4.44,0.0010738978000000001,5.439267389919193
+internal_cf_no_space_const,ViewBidHistory,SELECT items.name FROM items WHERE items.id = ? -- 3,2.38,0.00106662412,0.6092205524638385
+internal_cf_no_space_const,ViewBidHistory,SELECT items.* FROM items WHERE items.name = ? -- 3,2.38,0.23509090594,8.919220552463837
+internal_cf_no_space_const,ViewBidHistory,"SELECT users.id, users.nickname, bids.id, item.id, bids.qty, bids.bid, bids.date FROM users.bids.item WHERE item.id = ? ORDER BY bids.date -- 4",2.38,0.00167043994,25.239325936738386
+internal_cf_no_space_const,ViewItem,SELECT items.* FROM items WHERE items.id = ? -- 5,22.95,0.0009881873400000001,8.919220552463837
+internal_cf_no_space_const,ViewItem,SELECT items.* FROM items WHERE items.name = ? -- 5,22.95,0.23544881490000003,8.919220552463837
+internal_cf_no_space_const,ViewItem,SELECT items.* FROM items WHERE items.quantity = ? -- 5,22.95,7.15763959516,17760.062627570776
+internal_cf_no_space_const,ViewItem,SELECT items.* FROM items WHERE items.max_bid = ? -- 5,22.95,0.0024964632,8.919220552463837
+internal_cf_no_space_const,ViewItem,SELECT items.* FROM items WHERE items.start_date = ? -- 5,22.95,0.00106268676,8.919220552463837
+internal_cf_no_space_const,ViewItem,SELECT items.* FROM items WHERE items.initial_price = ? -- 5,22.95,0.00243687242,8.919220552463837
+internal_cf_no_space_const,ViewItem,SELECT bids.* FROM items.bids WHERE items.id = ? -- 6,22.95,0.00151557078,12.039325936738386
+internal_cf_no_space_const,SearchItemsByCategory,"SELECT items.id, items.name, items.initial_price, items.max_bid, items.nb_of_bids, items.end_date FROM items.category WHERE category.id = ? AND items.end_date >= ? LIMIT 25 -- 7",27.77,0.00229950202,50.28950157719596
+internal_cf_no_space_const,ViewUserInfo,"SELECT comments.id, comments.rating, comments.date, comments.comment FROM comments.to_user WHERE to_user.id = ? -- 9",4.41,0.00286504588,243.03979431129193
+internal_cf_no_space_const,ViewUserInfo,"SELECT comments.id, comments.rating, comments.date, comments.comment FROM comments.to_user WHERE to_user.firstname = ? -- 9",4.41,0.07708040128,243.03979431129193
+internal_cf_no_space_const,ViewUserInfo,"SELECT comments.id, comments.rating, comments.date, comments.comment FROM comments.to_user WHERE to_user.lastname = ? -- 9",4.41,0.34961068632,243.03979431129193
+internal_cf_no_space_const,SearchItemsByRegion,"SELECT items.id, items.name, items.initial_price, items.max_bid, items.nb_of_bids, items.end_date FROM items.seller WHERE seller.region.id = ? AND items.category.id = ? AND items.end_date >= ? LIMIT 25 -- 35",8.26,0.00214518566,16.11930251801071
+internal_cf_no_space_const,BrowseRegions,"SELECT regions.id, regions.name FROM regions WHERE regions.dummy = 1 -- 36",3.21,0.0008880064799999999,0.6542146977819193
+internal_cf_no_space_const,BrowseRegions,SELECT regions.* FROM regions WHERE regions.id = 1 -- 36,3.21,0.0008815461600000001,1.5092205524638387
+internal_cf_no_space_const,BrowseRegions,SELECT regions.* FROM regions WHERE regions.name = 1 -- 36,3.21,0.00092338588,1.5092205524638387
