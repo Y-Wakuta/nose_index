@@ -6,72 +6,72 @@ NoSE::Workload.new do
   # Define queries and their relative weights, weights taken from below
   # http://rubis.ow2.org/results/SB-BMP/Bidding/JBoss-SB-BMP-Bi-1500/perf.html#run_stat
   # http://rubis.ow2.org/results/SB-BMP/Browsing/JBoss-SB-BMP-Br-1500/perf.html#run_stat
-  DefaultMix :browsing #ここのbrowsingをbiddingとかに書き換えることでより多くのqueryに対してテストできそう
+  DefaultMix :browsing#ここのbrowsingをbiddingとかに書き換えることでより多くのqueryに対してテストできそう
 #biddingの容量下限は 108000000
-  # browsingは55000000
+  # browsingは52676935
 
   Group 'BrowseCategories', browsing: 4.44,
                             bidding: 7.65,
                             write_medium: 7.65,
                             write_heavy: 7.65 do
-  #  Q 'SELECT users.* FROM users WHERE users.password = ? AND users.lastname = ? -- 1' #yusuke secondary indexの例が欲しかったので追加
- #   Q 'SELECT users.* FROM users WHERE users.id = ? -- 1'
- #   Q 'SELECT users.* FROM users WHERE users.lastname = ? -- 1' #yusuke secondary indexの例が欲しかったので追加
- #   Q 'SELECT users.firstname,users.lastname, users.nickname FROM users WHERE users.firstname = ? -- 1' #yusuke secondary indexの例が欲しかったので追加
+    Q 'SELECT users.* FROM users WHERE users.password = ? AND users.lastname = ? -- 1' #yusuke secondary indexの例が欲しかったので追加
+    Q 'SELECT users.* FROM users WHERE users.id = ? -- 1'
+    Q 'SELECT users.* FROM users WHERE users.lastname = ? -- 1' #yusuke secondary indexの例が欲しかったので追加
+    Q 'SELECT users.firstname,users.lastname, users.nickname FROM users WHERE users.firstname = ? -- 1' #yusuke secondary indexの例が欲しかったので追加
  #   # XXX Must have at least one equality predicate
-  #  Q 'SELECT categories.id, categories.name FROM categories WHERE ' \
-   #  'categories.dummy = 1 -- 2'
-    Q 'SELECT users.id, users.firstname,users.lastname,users.password FROM users WHERE users.id = ?'
-    Q 'SELECT users.id, users.firstname,users.lastname,users.password,users.email FROM users WHERE users.firstname = ?'
+    Q 'SELECT categories.id, categories.name FROM categories WHERE ' \
+     'categories.dummy = 1 -- 2'
+   # Q 'SELECT users.id, users.firstname,users.lastname,users.password FROM users WHERE users.id = ?'
+  #  Q 'SELECT users.id, users.firstname,users.lastname,users.password,users.email FROM users WHERE users.firstname = ?'
   end
 
-  #Group 'ViewBidHistory', browsing: 2.38,
-  #                        bidding: 1.54,
-  #                        write_medium: 1.54,
-  #                        write_heavy: 1.54 do
- #   Q 'SELECT items.name FROM items WHERE items.id = ? -- 3'
- #   Q 'SELECT items.* FROM items WHERE items.name = ? -- 3'
-#    Q 'SELECT users.id, users.nickname, bids.id, item.id, bids.qty, ' \
-#      'bids.bid, bids.date FROM users.bids.item WHERE item.id = ? ' \
-#      'ORDER BY bids.date -- 4'
-#  end
+  Group 'ViewBidHistory', browsing: 2.38,
+                          bidding: 1.54,
+                          write_medium: 1.54,
+                          write_heavy: 1.54 do
+    Q 'SELECT items.name FROM items WHERE items.id = ? -- 3'
+    Q 'SELECT items.* FROM items WHERE items.name = ? -- 3'
+    Q 'SELECT users.id, users.nickname, bids.id, item.id, bids.qty, ' \
+      'bids.bid, bids.date FROM users.bids.item WHERE item.id = ? ' \
+      'ORDER BY bids.date -- 4'
+  end
 
- # Group 'ViewItem', browsing: 22.95,
- #                   bidding: 14.17,
- #                   write_medium: 14.17,
- #                   write_heavy: 14.17 do
- #   Q 'SELECT items.* FROM items WHERE items.id = ? -- 5'
- #   Q 'SELECT items.* FROM items WHERE items.name = ? -- 5'
- #   Q 'SELECT items.* FROM items WHERE items.quantity = ? -- 5'
- #   Q 'SELECT items.* FROM items WHERE items.max_bid = ? -- 5'
- #   Q 'SELECT items.* FROM items WHERE items.start_date = ? -- 5'
+  Group 'ViewItem', browsing: 22.95,
+                    bidding: 14.17,
+                    write_medium: 14.17,
+                    write_heavy: 14.17 do
+    Q 'SELECT items.* FROM items WHERE items.id = ? -- 5'
+    Q 'SELECT items.* FROM items WHERE items.name = ? -- 5'
+    Q 'SELECT items.* FROM items WHERE items.quantity = ? -- 5'
+    Q 'SELECT items.* FROM items WHERE items.max_bid = ? -- 5'
+    Q 'SELECT items.* FROM items WHERE items.start_date = ? -- 5'
  #   #Q 'SELECT items.* FROM items WHERE items.end_date = ? -- 5' #yusuke このクエリを戻すとエラーが出る。一体なんだ。
- #   Q 'SELECT items.* FROM items WHERE items.initial_price = ? -- 5'
- #   Q 'SELECT bids.* FROM items.bids WHERE items.id = ? -- 6'
- # end
+    Q 'SELECT items.* FROM items WHERE items.initial_price = ? -- 5'
+    Q 'SELECT bids.* FROM items.bids WHERE items.id = ? -- 6'
+  end
 
-#  Group 'SearchItemsByCategory', browsing: 27.77,
-#                                 bidding: 15.94,
-#                                 write_medium: 15.94,
-#                                 write_heavy: 15.94 do
-#    Q 'SELECT items.id, items.name, items.initial_price, items.max_bid, ' \
-#      'items.nb_of_bids, items.end_date FROM items.category WHERE ' \
-#      'category.id = ? AND items.end_date >= ? LIMIT 25 -- 7'
-#  end
+  Group 'SearchItemsByCategory', browsing: 27.77,
+                                 bidding: 15.94,
+                                 write_medium: 15.94,
+                                 write_heavy: 15.94 do
+    Q 'SELECT items.id, items.name, items.initial_price, items.max_bid, ' \
+      'items.nb_of_bids, items.end_date FROM items.category WHERE ' \
+      'category.id = ? AND items.end_date >= ? LIMIT 25 -- 7'
+  end
 
- # Group 'ViewUserInfo', browsing: 4.41,
- #                       bidding: 2.48,
- #                       write_medium: 2.48,
- #                       write_heavy: 2.48 do
+  Group 'ViewUserInfo', browsing: 4.41,
+                        bidding: 2.48,
+                        write_medium: 2.48,
+                        write_heavy: 2.48 do
  #   # XXX Not including region name below
- #   #Q 'SELECT users.* FROM users WHERE users.id = ? -- 8'
- #   Q 'SELECT comments.id, comments.rating, comments.date, comments.comment ' \
- #     'FROM comments.to_user WHERE to_user.id = ? -- 9'
- #   Q 'SELECT comments.id, comments.rating, comments.date, comments.comment ' \
- #     'FROM comments.to_user WHERE to_user.firstname = ? -- 9'
- #   Q 'SELECT comments.id, comments.rating, comments.date, comments.comment ' \
- #     'FROM comments.to_user WHERE to_user.lastname = ? -- 9'
- # end
+    #Q 'SELECT users.* FROM users WHERE users.id = ? -- 8'
+    Q 'SELECT comments.id, comments.rating, comments.date, comments.comment ' \
+      'FROM comments.to_user WHERE to_user.id = ? -- 9'
+    Q 'SELECT comments.id, comments.rating, comments.date, comments.comment ' \
+      'FROM comments.to_user WHERE to_user.firstname = ? -- 9'
+    Q 'SELECT comments.id, comments.rating, comments.date, comments.comment ' \
+      'FROM comments.to_user WHERE to_user.lastname = ? -- 9'
+  end
 
   Group 'RegisterItem', bidding: 0.53,
                         write_medium: 0.53 * 10,
@@ -168,26 +168,26 @@ NoSE::Workload.new do
       'items.end_date>=? -- 34'
   end
 
- # Group 'SearchItemsByRegion', browsing: 8.26,
- #                              bidding: 6.34,
- #                              write_medium: 6.34,
- #                              write_heavy: 6.34 do
- #   Q 'SELECT items.id, items.name, items.initial_price, items.max_bid, ' \
- #     'items.nb_of_bids, items.end_date FROM ' \
- #     'items.seller WHERE seller.region.id = ? AND items.category.id = ? ' \
- #     'AND items.end_date >= ? LIMIT 25 -- 35'
- # end
+  Group 'SearchItemsByRegion', browsing: 8.26,
+                               bidding: 6.34,
+                               write_medium: 6.34,
+                               write_heavy: 6.34 do
+    Q 'SELECT items.id, items.name, items.initial_price, items.max_bid, ' \
+      'items.nb_of_bids, items.end_date FROM ' \
+      'items.seller WHERE seller.region.id = ? AND items.category.id = ? ' \
+      'AND items.end_date >= ? LIMIT 25 -- 35'
+  end
 
- # Group 'BrowseRegions', browsing: 3.21,
- #                        bidding: 5.39,
- #                        write_medium: 5.39,
- #                        write_heavy: 5.39 do
+  Group 'BrowseRegions', browsing: 3.21,
+                         bidding: 5.39,
+                         write_medium: 5.39,
+                         write_heavy: 5.39 do
  #   # XXX Must have at least one equality predicate
- #   Q 'SELECT regions.id, regions.name FROM regions ' \
- #     'WHERE regions.dummy = 1 -- 36'
- #   Q 'SELECT regions.* FROM regions ' \
- #     'WHERE regions.id = 1 -- 36'
- #   Q 'SELECT regions.* FROM regions ' \
- #     'WHERE regions.name = 1 -- 36'
- # end
+    Q 'SELECT regions.id, regions.name FROM regions ' \
+      'WHERE regions.dummy = 1 -- 36'
+    Q 'SELECT regions.* FROM regions ' \
+      'WHERE regions.id = 1 -- 36'
+    Q 'SELECT regions.* FROM regions ' \
+      'WHERE regions.name = 1 -- 36'
+  end
 end

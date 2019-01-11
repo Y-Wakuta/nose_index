@@ -50,7 +50,7 @@ module NoSE
         # Get sample index values to use in queries
         index_values = index_values plans.schema.indexes.values, backend,
                                     options[:num_iterations],
-                                    options[:fail_on_empty]
+                                    options[:fail_on_empty],result.has_index_hash
 
         table = []
         total = 0
@@ -148,13 +148,12 @@ module NoSE
 
       # Get the average execution time for a single query plan
       # @return [Measurements::Measurement]
-      def bench_query(backend, indexes, plan, index_values, iterations, repeat,
-                      weight: 1.0)
+      def bench_query(backend, indexes, plan, index_values, iterations, repeat,has_index_hash ,weight: 1.0)
 
         condition_list = execute_conditions plan.params, indexes, index_values,
                                             iterations
         prepared = backend.prepare_query nil, plan.select_fields, plan.params,
-                                         [plan.steps]
+                                         [plan.steps],has_index_hash
 
         measurement = Measurements::Measurement.new plan, weight: weight
 

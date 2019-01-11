@@ -6,7 +6,8 @@ module NoSE
     class IndexLookupPlanStep < PlanStep
       extend Forwardable
 
-      attr_reader :index, :eq_filter, :range_filter, :limit, :order_by
+      attr_reader :index, :range_filter, :limit, :order_by
+      attr_accessor :eq_filter
       delegate hash: :index
 
       def initialize(index, state = nil, parent = nil)

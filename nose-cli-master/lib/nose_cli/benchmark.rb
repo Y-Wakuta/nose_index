@@ -44,7 +44,7 @@ module NoSE
 
         index_values = index_values result.indexes, backend,
                                     options[:num_iterations],
-                                    options[:fail_on_empty]
+                                    options[:fail_on_empty],result.has_index_hash
 
         group_tables = Hash.new { |h, k| h[k] = [] }
         group_totals = Hash.new { |h, k| h[k] = 0 }
@@ -61,7 +61,7 @@ module NoSE
           end.map(&:index)
 
           measurement = bench_query backend, indexes, plan, index_values,
-                                    options[:num_iterations], options[:repeat],
+                                    options[:num_iterations], options[:repeat],result.has_index_hash,
                                     weight: weight
           next if measurement.empty?
 
@@ -133,9 +133,9 @@ module NoSE
       # yusuke いじるとすれば、queryの発行先のテーブルをsecondary indexを貼ってる先の実テーブルにするか？
       # Get a sample of values from each index used by the queries
       # @return [Hash]
-      def index_values(indexes, backend, iterations, fail_on_empty = true)
+      def index_values(indexes, backend, iterations, fail_on_empty = true,has_index_hash)
         Hash[indexes.map do |index|
-          values = backend.index_sample(index, iterations).to_a
+          values = backend.index_sample(index,has_index_hash, iterations).to_a
           fail "Index #{index.key} is empty and will produce no results" \
             if values.empty? && fail_on_empty
 
