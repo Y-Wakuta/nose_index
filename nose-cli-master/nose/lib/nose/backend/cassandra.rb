@@ -293,10 +293,10 @@ module NoSE
         # rubocop:enable Metrics/ParameterLists
 
         # Perform a column family lookup in Cassandra
-        def process(conditions, results)
+        def process(conditions, results,query_conditions)
           results = initial_results(conditions) if results.nil?
           condition_list = result_conditions conditions, results
-          new_result = fetch_all_queries condition_list, results
+          new_result = fetch_all_queries condition_list, results,query_conditions
 
           # Limit the size of the results in case we fetched multiple keys
           new_result[0..(@step.limit.nil? ? -1 : @step.limit)]
@@ -348,7 +348,7 @@ module NoSE
 
         # Lookup values from an index selecting the given
         # fields and filtering on the given conditions
-        def fetch_all_queries(condition_list, results)
+        def fetch_all_queries(condition_list, results, query_conditions)
           new_result = []
           @logger.debug { "  #{@prepared.cql} * #{condition_list.size}" }
 
@@ -356,7 +356,7 @@ module NoSE
           # Limit the total number of queries as well as the query limit
           condition_list.zip(results).each do |condition_set, result|
             # Loop over all pages to fetch results
-            values = lookup_values condition_set
+            values = lookup_values condition_set, query_conditions
             fetch_query_pages values, new_result, result
 
             # Don't continue with further queries
@@ -386,10 +386,10 @@ module NoSE
         end
 
         # Produce the values used for lookup on a given set of conditions
-        def lookup_values(condition_set)
+        def lookup_values(condition_set,query_conditions)
           condition_set.map do |condition|
             value = condition.value ||
-                    conditions[condition.field.id].value #yusuke ここでconditionsが存在しないと言って蹴られる
+              query_conditions[condition.field.id].value
             fail if value.nil?
 
             if condition.field.is_a?(Fields::IDField)
