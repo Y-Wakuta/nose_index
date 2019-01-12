@@ -73,7 +73,7 @@ module NoSE
     def query(group, values)
       plan = plans.groups[group].first
       prepared = backend.prepare_query nil, plan.select_fields, plan.params,
-                                       [plan.steps]
+                                       [plan.steps],[]
 
       prepared.execute Hash[values.map do |k, v|
         condition = plan.params[k]
