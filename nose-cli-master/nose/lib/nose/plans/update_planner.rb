@@ -210,10 +210,11 @@ module NoSE
       # Find the necessary update plans for a given set of indexes
       # @return [Array<UpdatePlan>]
       def find_plans_for_update(statement, indexes)
+        indexes = indexes.select{|index| !index.is_secondary_index}.to_a #yusuke siをupdateの対象から除外する
         indexes = indexes.map(&:to_id_graph).to_set if @by_id_graph
 
         indexes.map do |index|
-          next unless statement.modifies_index?(index)
+          next unless statement.modifies_index?(index) #yusuke indexに対して変更を加えない場合はnextで次に行く。例えば、どのクエリもSELECTしていないエンティティに単独でINSERTしている場合はそのINSERT句は結果に影響を与えないので、出力されない。
 
           if (@query_plans[statement] &&
               @query_plans[statement][index]).nil?

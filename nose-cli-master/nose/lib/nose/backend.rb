@@ -97,7 +97,7 @@ module NoSE
       def prepare(statement, plans = [])
         if statement.is_a? Query
           prepare_query statement, statement.all_fields,
-                        statement.conditions, plans
+                        statement.conditions, plans, []
         elsif statement.is_a? Delete
           prepare_update statement, plans
         elsif statement.is_a? Disconnect
@@ -362,7 +362,7 @@ module NoSE
         plan.query_plans.map do |query_plan|
           query = query_plan.instance_variable_get(:@query)
           prepare_query query, query_plan.select_fields, query_plan.params,
-                        [query_plan.steps]
+                        [query_plan.steps],[]
         end
       end
     end
@@ -391,7 +391,6 @@ module NoSE
           results = step.process field_conds, results,conditions
 
 
-          p results
           # The query can't return any results at this point, so we're done
           break if results.empty?
         end
