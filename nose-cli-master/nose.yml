@@ -16,7 +16,8 @@ cost_model:
   row_cost: 1.17093638386496e-005
   delete_cost: 0.0013287903
   insert_cost: 0.013329108
-  client_network_cost: 0.03 #yusuke なんとなくで設定した非常にデタラメな数値
+  sole_cf_query_cost: 1.0 #yusuke 単独でCFに対してクエリを行う時のLatency
+  si_2_cf_query_cost: 0.5 #yusuke SIを使用する時のLatency - sole_cf_query_cost
 
 # Loader-specific configuration
 # The mysql loader is recommended, but csv might work as well if
