@@ -190,12 +190,12 @@ module NoSE
     # Precalculate the size of the index
     # @return [void]
     def calculate_size
-      @hash_count = @hash_fields.product_by(&:cardinality)
+      @hash_count = @hash_fields.product_by(&:cardinality) #yusuke hash_fields内の各属性のcardinalityの積を返す。つまりはhash_fieldの種類の数か。
 
       # XXX This only works if foreign keys span all possible keys
       #     Take the maximum possible count at each join and multiply
-      @entries = @graph.entities.map(&:count).max
-      @per_hash_count = (@entries * 1.0 / @hash_count)
+      @entries = @graph.entities.map(&:count).max #yusuke 概算値のようだが、概念データモデル内の各entityのレコード数のよう
+      @per_hash_count = (@entries * 1.0 / @hash_count) #yusuke あくまで予想だが、あるhashの条件でヒットしうるレコードの件数と思われる。
 
       @entry_size = @all_fields.sum_by(&:size)
       @size = @entries * @entry_size
