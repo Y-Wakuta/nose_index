@@ -9,26 +9,26 @@ NoSE::Model.new do
   (Entity 'warehouse' do
     ID     'w_id'
     String 'w_name', 10
-    String 'w_street_1', 20
-    String 'w_street_2', 20
+    String 'w_street_one', 20
+    String 'w_street_two', 20
     String 'w_city', 20
     String 'w_state', 2
     String 'w_zip', 9
     Float  'w_tax'
-    Float  'w_ytx'
+    Float  'w_ytd'
   end) * 50
 
   (Entity 'district' do
     ID      'd_id'
     ID      'd_w_id', count: 1
     String  'd_name', 10
-    String  'd_street_1', 20
-    String  'd_street_2', 20
+    String  'd_street_one', 20
+    String  'd_street_two', 20
     String  'd_city', 20
     String  'd_state', 2
     String  'd_zip', 9
     Integer 'd_tax'
-    Integer 'd_ytx'
+    Integer 'd_ytd'
     Integer 'd_next_o_id'
   end) * 5
 
@@ -39,8 +39,8 @@ NoSE::Model.new do
     String    'c_first', 16
     String    'c_middle', 2
     String    'c_last', 16
-    String    'c_street_1', 20
-    String    'c_street_2', 20
+    String    'c_street_one', 20
+    String    'c_street_two', 20
     String    'c_city', 20
     String    'c_state', 2
     String    'c_zip', 9
@@ -57,13 +57,14 @@ NoSE::Model.new do
   end) * 2_000
 
   (Entity 'history' do
-    Integer    'h_c_id'
+    ID         'h_c_id'
     Integer    'h_c_d_id'
     Integer    'h_c_w_id'
     Integer    'h_d_id'
     Integer    'h_w_id'
     Float      'h_amount'
     String     'h_data',24
+    Date       'h_date'
   end) * 20_000
 
   (Entity 'new_orders' do
@@ -73,7 +74,7 @@ NoSE::Model.new do
   end) * 200_000
 
   (Entity 'orders' do
-    ID         'o_o_id'
+    ID         'o_id'
     ID         'o_d_id'
     ID         'o_w_id'
     Integer    'o_c_id'
@@ -109,50 +110,50 @@ NoSE::Model.new do
     ID         's_i_id'
     ID         's_w_id'
     Integer    's_quantity'
-    String     's_dict_01',24
-    String     's_dict_02',24
-    String     's_dict_03',24
-    String     's_dict_04',24
-    String     's_dict_05',24
-    String     's_dict_06',24
-    String     's_dict_07',24
-    String     's_dict_08',24
-    String     's_dict_09',24
-    String     's_dict_10',24
+    String     's_dist_one',24
+    String     's_dist_two',24
+    String     's_dist_three',24
+    String     's_dist_four',24
+    String     's_dist_five',24
+    String     's_dist_six',24
+    String     's_dist_seven',24
+    String     's_dist_eight',24
+    String     's_dist_nine',24
+    String     's_dist_ten',24
     Float      's_ytd'
     Float      's_order_cnt'
     Float      's_remote_cnt'
     String     's_data',50
   end)
 
-  HasOne 'new_orders',       'orders',
+  HasOne 'new_to_order',       'orders',
          'new_orders'      => 'orders'
 
-  HasOne 'order_line',       'orders',
+  HasOne 'ol_to_order',       'orders',
          'order_line'      => 'orders'
 
-  HasOne 'order_line',     'stock',
+  HasOne 'ol_to_stock',     'stock',
          'order_line'      => 'stock'
 
-  HasOne 'stock',         'warehouse',
+  HasOne 's_to_warehouse',         'warehouse',
          'stock'       => 'warehouse'
 
-  HasOne 'stock',         'item',
+  HasOne 's_to_item',         'item',
          'stock'       => 'item'
 
-  HasOne 'orders',    'customer',
+  HasOne 'o_to_customer',    'customer',
          'orders'   => 'customer'
 
-  HasOne 'district',      'warehouse',
+  HasOne 'd_to_warehouse',      'warehouse',
          'district'   => 'warehouse'
 
-  HasOne 'customer',         'district',
+  HasOne 'c_to_district',         'district',
          'customer'   => 'district'
 
-  HasOne 'history',        'district',
+  HasOne 'h_to_district',        'district',
          'history'     => 'district'
 
-  HasOne 'history',         'customer',
+  HasOne 'h_to_customer',         'customer',
          'history'     => 'customer'
 end
 

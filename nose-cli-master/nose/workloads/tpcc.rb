@@ -1,68 +1,67 @@
 # frozen_string_literal: true
 
 NoSE::Workload.new do
-  Model 'rubis'
+  Model 'tpcc'
 
   # Define queries and their relative weights, weights taken from below
-  # http://rubis.ow2.org/results/SB-BMP/Bidding/JBoss-SB-BMP-Bi-1500/perf.html#run_stat
-  # http://rubis.ow2.org/results/SB-BMP/Browsing/JBoss-SB-BMP-Br-1500/perf.html#run_stat
-  DefaultMix :write_heavy#ここのbrowsingをbiddingとかに書き換えることでより多くのqueryに対してテストできそう
-  #biddingの容量下限は 108000000
-  # browsingは52676935
+  DefaultMix :basic
 
   Group 'NewOrder',
         basic: 10 do
-    Q 'SELECT c_discount, c_last, c_credit, w_tax FROM customer, warehouse WHERE w_id = ? AND c_w_id = w_id AND c_d_id = ? AND c_id = ? -- 0'
-    Q 'SELECT d_next_o_id, d_tax FROM district WHERE d_id = ? AND d_w_id = ? -- 1'
-    Q 'UPDATE district SET d_next_o_id = ? + 1 WHERE d_id = ? AND d_w_id = ? -- 2'
-    Q 'INSERT INTO orders (o_id, o_d_id, o_w_id, o_c_id, o_entry_d, o_ol_cnt, o_all_local) VALUES(?, ?, ?, ?, ?, ?, ?) --3'
-    Q 'INSERT INTO new_orders (no_o_id, no_d_id, no_w_id) VALUES (?,?,?) --4'
-    Q 'SELECT i_price, i_name, i_data FROM item WHERE i_id = ? --5'
-    Q 'SELECT s_quantity, s_data, s_dist_01, s_dist_02, s_dist_03, s_dist_04, s_dist_05, s_dist_06, s_dist_07, s_dist_08, s_dist_09, s_dist_10 FROM stock WHERE s_i_id = ? AND s_w_id = ? --6'
-    Q 'UPDATE stock SET s_quantity = ? WHERE s_i_id = ? AND s_w_id = ? --7'
-    Q 'INSERT INTO order_line (ol_o_id, ol_d_id, ol_w_id, ol_number, ol_i_id, ol_supply_w_id, ol_quantity, ol_amount, ol_dist_info) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?) --8'
+    Q 'SELECT customer.c_discount, customer.c_last, customer.c_credit, d_to_warehouse.w_tax FROM customer.c_to_district.d_to_warehouse WHERE d_to_warehouse.w_id = ? AND customer.c_d_id = ? AND customer.c_id = ? -- 0'
+    Q 'SELECT district.d_next_o_id, district.d_tax FROM district WHERE district.d_id = ? AND district.d_w_id = ? -- 1'
+    Q 'UPDATE district SET d_next_o_id = ? WHERE district.d_id = ? AND district.d_w_id = ? -- 2'
+    Q 'INSERT INTO orders SET o_id=?, o_d_id=?, o_w_id=?, o_c_id=?, o_entry_d=?, o_ol_cnt=?, o_all_local=? AND CONNECT TO o_to_customer(?) -- 3'
+    Q 'INSERT INTO new_orders SET no_o_id = ?, no_d_id = ?, no_w_id = ? '\
+      'AND CONNECT TO new_to_order(?) -- 4'
+    Q 'SELECT item.i_price, item.i_name, item.i_data FROM item WHERE item.i_id = ? -- 5'
+    Q 'SELECT stock.s_quantity, stock.s_data, stock.s_dist_one, stock.s_dist_two, stock.s_dist_three, stock.s_dist_four, stock.s_dist_five, stock.s_dist_six, stock.s_dist_seven, stock.s_dist_eight, stock.s_dist_nine, stock.s_dist_ten FROM stock WHERE stock.s_i_id = ? AND stock.s_w_id = ? -- 6'
+    Q 'UPDATE stock SET s_quantity = ? WHERE stock.s_i_id = ? AND stock.s_w_id = ? -- 7'
+    Q 'INSERT INTO order_line SET ol_o_id = ?, ol_d_id = ?, ol_w_id = ?, ol_number = ?, ol_i_id = ?, ol_supply_w_id = ?, ol_quantity = ?, ol_amount = ?, ol_dist_info = ? AND CONNECT TO ol_to_order(?), ol_to_stock(?) -- 8'
   end
 
   Group 'Payment',
         basic: 10 do
-    Q 'UPDATE warehouse SET w_ytd = w_ytd + ? WHERE w_id = ? --9'
-    Q 'SELECT w_street_1, w_street_2, w_city, w_state, w_zip, w_name FROM warehouse WHERE w_id = ? --10'
-    Q 'UPDATE district SET d_ytd = d_ytd + ? WHERE d_w_id = ? AND d_id = ? --11'
-    Q 'SELECT d_street_1, d_street_2, d_city, d_state, d_zip, d_name FROM district WHERE d_w_id = ? AND d_id = ? --12'
-    Q 'SELECT count(c_id) FROM customer WHERE c_w_id = ? AND c_d_id = ? AND c_last = ? --13'
-    Q 'SELECT c_id FROM customer WHERE c_w_id = ? AND c_d_id = ? AND c_last = ? ORDER BY c_first --14'
-    Q 'SELECT c_first, c_middle, c_last, c_street_1, c_street_2, c_city, c_state, c_zip, c_phone, c_credit, c_credit_lim, c_discount, c_balance, c_since FROM customer WHERE c_w_id = ? AND c_d_id = ? AND c_id = ? --15'
-    Q 'SELECT c_data FROM customer WHERE c_w_id = ? AND c_d_id = ? AND c_id = ? --16'
-    Q 'UPDATE customer SET c_balance = ?, c_data = ? WHERE c_w_id = ? AND c_d_id = ? AND c_id = ? --17'
-    Q 'UPDATE customer SET c_balance = ? WHERE c_w_id = ? AND c_d_id = ? AND c_id = ? --18'
-    Q 'INSERT INTO history(h_c_d_id, h_c_w_id, h_c_id, h_d_id, h_w_id, h_date, h_amount, h_data) VALUES(?, ?, ?, ?, ?, ?, ?, ?) --19'
+    Q 'UPDATE warehouse SET w_ytd = ? WHERE warehouse.w_id = ? -- 9'
+    Q 'SELECT warehouse.w_street_one, warehouse.w_street_two, warehouse.w_city, warehouse.w_state, warehouse.w_zip, warehouse.w_name FROM warehouse WHERE warehouse.w_id = ? -- 10'
+    Q 'UPDATE district SET d_ytd = ? WHERE district.d_w_id = ? AND district.d_id = ? -- 11'
+    Q 'SELECT district.d_street_one, district.d_street_two, district.d_city, district.d_state, district.d_zip, district.d_name FROM district WHERE district.d_w_id = ? AND district.d_id = ? -- 12'
+    Q 'SELECT customer.c_id FROM customer WHERE customer.c_w_id = ? AND customer.c_d_id = ? AND customer.c_last = ? -- 13'
+    Q 'SELECT customer.c_id FROM customer WHERE customer.c_w_id = ? AND customer.c_d_id = ? AND customer.c_last = ? ORDER BY customer.c_first -- 14'
+    Q 'SELECT customer.c_first, customer.c_middle, customer.c_last, customer.c_street_one, customer.c_street_two, customer.c_city, customer.c_state, customer.c_zip, customer.c_phone, customer.c_credit, customer.c_credit_lim, customer.c_discount, customer.c_balance, customer.c_since ' \
+      'FROM customer WHERE customer.c_w_id = ? AND customer.c_d_id = ? AND customer.c_id = ? -- 15'
+    Q 'SELECT customer.c_data FROM customer WHERE customer.c_w_id = ? AND customer.c_d_id = ? AND customer.c_id = ? -- 16'
+    Q 'UPDATE customer SET c_balance = ?, c_data = ? WHERE customer.c_w_id = ? AND customer.c_d_id = ? AND customer.c_id = ? -- 17'
+    Q 'UPDATE customer SET c_balance = ? WHERE customer.c_w_id = ? AND customer.c_d_id = ? AND customer.c_id = ? -- 18'
+    Q 'INSERT INTO history SET h_c_d_id = ?, h_c_w_id = ?, h_c_id = ?, h_d_id = ?, h_w_id = ?, h_date = ?, h_amount = ?, h_data = ? AND CONNECT TO h_to_district(?), h_to_customer(?) -- 19'
   end
 
   Group 'OrderStat',
         basic: 1 do
-    Q 'SELECT count(c_id) FROM customer WHERE c_w_id = ? AND c_d_id = ? AND c_last = ? --20'
-    Q 'SELECT c_balance, c_first, c_middle, c_last FROM customer WHERE c_w_id = ? AND c_d_id = ? AND c_last = ? ORDER BY c_first --21'
-    Q 'SELECT c_balance, c_first, c_middle, c_last FROM customer WHERE c_w_id = ? AND c_d_id = ? AND c_id = ? --22'
-    Q 'SELECT o_id, o_entry_d, COALESCE(o_carrier_id,0) FROM orders WHERE o_w_id = ? AND o_d_id = ? AND o_c_id = ? AND o_id = (SELECT MAX(o_id) FROM orders WHERE o_w_id = ? AND o_d_id = ? AND o_c_id = ?) --23'
-    Q 'SELECT ol_i_id, ol_supply_w_id, ol_quantity, ol_amount, ol_delivery_d FROM order_line WHERE ol_w_id = ? AND ol_d_id = ? AND ol_o_id = ? --24'
+    Q 'SELECT customer.c_id FROM customer WHERE customer.c_w_id = ? AND customer.c_d_id = ? AND customer.c_last = ? -- 20'
+    Q 'SELECT customer.c_balance, customer.c_first, customer.c_middle, customer.c_last FROM customer WHERE customer.c_w_id = ? AND customer.c_d_id = ? AND customer.c_last = ? ORDER BY customer.c_first -- 21'
+    Q 'SELECT customer.c_balance, customer.c_first, customer.c_middle, customer.c_last FROM customer WHERE customer.c_w_id = ? AND customer.c_d_id = ? AND customer.c_id = ? -- 22'
+    Q 'SELECT orders.o_id, orders.o_entry_d, orders.o_carrier_id FROM orders WHERE orders.o_w_id = ? AND orders.o_d_id = ? AND orders.o_c_id = ? AND orders.o_id = ? -- 23'
+    Q 'SELECT orders.o_id FROM orders WHERE orders.o_w_id = ? AND orders.o_d_id = ? AND orders.o_c_id = ? -- 23.5'
+    Q 'SELECT order_line.ol_i_id, order_line.ol_supply_w_id, order_line.ol_quantity, order_line.ol_amount, order_line.ol_delivery_d FROM order_line WHERE order_line.ol_w_id = ? AND order_line.ol_d_id = ? AND order_line.ol_o_id = ? -- 24'
   end
 
   Group 'Delivery',
         basic: 1 do
-    Q 'SELECT COALESCE(MIN(no_o_id),0) FROM new_orders WHERE no_d_id = ? AND no_w_id = ? --25'
-    Q 'DELETE FROM new_orders WHERE no_o_id = ? AND no_d_id = ? AND no_w_id = ? --26'
-    Q 'SELECT o_c_id FROM orders WHERE o_id = ? AND o_d_id = ? AND o_w_id = ? --27'
-    Q 'UPDATE orders SET o_carrier_id = ? WHERE o_id = ? AND o_d_id = ? AND o_w_id = ? --28'
-    Q 'UPDATE order_line SET ol_delivery_d = ? WHERE ol_o_id = ? AND ol_d_id = ? AND ol_w_id = ? --29'
-    Q 'SELECT SUM(ol_amount) FROM order_line WHERE ol_o_id = ? AND ol_d_id = ? AND ol_w_id = ? --30'
-    Q 'UPDATE customer SET c_balance = c_balance + ? , c_delivery_cnt = c_delivery_cnt + 1 WHERE c_id = ? AND c_d_id = ? AND c_w_id = ? --31'
-    Q 'SELECT d_next_o_id FROM district WHERE d_id = ? AND d_w_id = ? --32'
+    Q 'SELECT new_orders.no_o_id FROM new_orders WHERE new_orders.no_d_id = ? AND new_orders.no_w_id = ? -- 25'
+    Q 'DELETE new_orders FROM new_orders WHERE new_orders.no_o_id = ? AND new_orders.no_d_id = ? AND new_orders.no_w_id = ? -- 26'
+    Q 'SELECT orders.o_c_id FROM orders WHERE orders.o_id = ? AND orders.o_d_id = ? AND orders.o_w_id = ? -- 27'
+    Q 'UPDATE orders SET o_carrier_id = ? WHERE orders.o_id = ? AND orders.o_d_id = ? AND orders.o_w_id = ? -- 28'
+    Q 'UPDATE order_line SET ol_delivery_d = ? WHERE order_line.ol_o_id = ? AND order_line.ol_d_id = ? AND order_line.ol_w_id = ? -- 29'
+    Q 'SELECT order_line.ol_amount FROM order_line WHERE order_line.ol_o_id = ? AND order_line.ol_d_id = ? AND order_line.ol_w_id = ? -- 30'
+    Q 'UPDATE customer SET c_balance = ? , c_delivery_cnt = ? WHERE customer.c_id = ? AND customer.c_d_id = ? AND customer.c_w_id = ? -- 31'
+    Q 'SELECT district.d_next_o_id FROM district WHERE district.d_id = ? AND district.d_w_id = ? -- 32'
   end
 
   Group 'Slev',
         basic: 1 do
-    Q 'SELECT d_next_o_id FROM district WHERE d_id = ? AND d_w_id = ? --33'
-    Q 'SELECT DISTINCT ol_i_id FROM order_line WHERE ol_w_id = ? AND ol_d_id = ? AND ol_o_id < ? AND ol_o_id >= (? - 20) --34'
-    Q 'SELECT count(*) FROM stock WHERE s_w_id = ? AND s_i_id = ? AND s_quantity < ? --35'
+    Q 'SELECT district.d_next_o_id FROM district WHERE district.d_id = ? AND district.d_w_id = ? -- 33'
+    Q 'SELECT order_line.ol_i_id FROM order_line WHERE order_line.ol_w_id = ? AND order_line.ol_d_id = ? AND order_line.ol_o_id < ? AND order_line.ol_o_id >= ? -- 34'
+    Q 'SELECT stock.* FROM stock WHERE stock.s_w_id = ? AND stock.s_i_id = ? AND stock.s_quantity < ? -- 35'
   end
 end
