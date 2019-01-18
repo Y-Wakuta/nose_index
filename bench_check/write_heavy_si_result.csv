@@ -1,0 +1,26 @@
+label,group,name,weight,mean,cost
+write_heavy_si,ViewItem,SELECT items.* FROM items WHERE items.id = ? -- 5,14.17,0.0009813864399999999,8.919220552463837
+write_heavy_si,ViewItem,SELECT items.* FROM items WHERE items.name = ? -- 5,14.17,0.0014591053500000002,8.928441104927677
+write_heavy_si,ViewItem,SELECT items.* FROM items WHERE items.quantity = ? -- 5,14.17,10.57397368851,17762.832443062955
+write_heavy_si,ViewItem,SELECT items.* FROM items WHERE items.max_bid = ? -- 5,14.17,0.00167624947,8.928441104927677
+write_heavy_si,ViewItem,SELECT items.* FROM items WHERE items.start_date = ? -- 5,14.17,0.0017527390500000001,8.928441104927677
+write_heavy_si,ViewItem,SELECT items.* FROM items WHERE items.initial_price = ? -- 5,14.17,0.00157330772,8.928441104927677
+write_heavy_si,ViewItem,SELECT bids.* FROM items.bids WHERE items.id = ? -- 6,14.17,0.0014590855599999999,12.039325936738386
+write_heavy_si,BuyNow,SELECT users.nickname FROM users WHERE users.id=? -- 12,1.16,0.00105726473,0.39922055246383864
+write_heavy_si,BuyNow,SELECT items.* FROM items WHERE items.id=? -- 13,1.16,0.00100612326,8.919220552463837
+write_heavy_si,BuyNow,SELECT items.* FROM items WHERE items.name=? -- 13,1.16,0.00139290438,8.928441104927677
+write_heavy_si,StoreBuyNow,"SELECT items.quantity, items.nb_of_bids, items.end_date FROM items WHERE items.id=? -- 14",110.00000000000001,0.00113294933,0.7592205524638386
+write_heavy_si,StoreBuyNow,"UPDATE items SET quantity=?, nb_of_bids=?, end_date=? WHERE items.id=? -- 15 for i1888493477",110.00000000000001,0.0008072512,0.013329108
+write_heavy_si,StoreBuyNow,"UPDATE items SET quantity=?, nb_of_bids=?, end_date=? WHERE items.id=? -- 15 for i1888493477",110.00000000000001,0.00096155007,0.013329108
+write_heavy_si,StoreBid,"SELECT items.nb_of_bids, items.max_bid FROM items WHERE items.id=? -- 21",374.0,0.0010209574200000001,0.5192205524638386
+write_heavy_si,StoreBid,"INSERT INTO bids SET id=?, qty=?, bid=?, date=? AND CONNECT TO item(?), user(?) -- 20 for i3220017915",374.0,0.0009109002200000001,0.013329108
+write_heavy_si,StoreBid,"UPDATE items SET nb_of_bids=?, max_bid=? WHERE items.id=? -- 22 for i1888493477",374.0,0.00088690351,0.013329108
+write_heavy_si,StoreBid,"UPDATE items SET nb_of_bids=?, max_bid=? WHERE items.id=? -- 22 for i1888493477",374.0,0.00098264508,0.013329108
+write_heavy_si,PutComment,"SELECT users.nickname, users.password FROM users WHERE users.id=? -- 23",0.46,0.00098486753,0.8492205524638385
+write_heavy_si,PutComment,SELECT items.* FROM items WHERE items.id=? -- 24,0.46,0.00094079283,8.919220552463837
+write_heavy_si,PutComment,SELECT users.* FROM users WHERE users.id=? -- 25,0.46,0.0009368837400000001,3.1292205524638383
+write_heavy_si,StoreComment,SELECT users.rating FROM users WHERE users.id=? -- 26,45.0,0.00094350424,0.27922055246383864
+write_heavy_si,StoreComment,UPDATE users SET rating=? WHERE users.id=? -- 27 for i2906147889,45.0,0.0009573052599999999,0.013329108
+write_heavy_si,RegisterItem,"INSERT INTO items SET id=?, name=?, description=?, initial_price=?, quantity=?, reserve_price=?, buy_now=?, nb_of_bids=0, max_bid=0, start_date=?, end_date=? AND CONNECT TO category(?), seller(?) -- 10 for i1888493477",53.0,0.00117301437,0.013329108
+write_heavy_si,RegisterItem,"INSERT INTO items SET id=?, name=?, description=?, initial_price=?, quantity=?, reserve_price=?, buy_now=?, nb_of_bids=0, max_bid=0, start_date=?, end_date=? AND CONNECT TO category(?), seller(?) -- 10 for i1888493477",53.0,0.00117163343,0.013329108
+write_heavy_si,RegisterUser,"INSERT INTO users SET id=?, firstname=?, lastname=?, nickname=?, password=?, email=?, rating=0, balance=0, creation_date=? AND CONNECT TO region(?) -- 11 for i2906147889",107.0,0.00097200118,0.013329108
