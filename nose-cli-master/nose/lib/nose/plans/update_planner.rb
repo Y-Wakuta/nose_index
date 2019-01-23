@@ -210,7 +210,6 @@ module NoSE
       # Find the necessary update plans for a given set of indexes
       # @return [Array<UpdatePlan>]
       def find_plans_for_update(statement, indexes)
-        indexes = indexes.select{|index| !index.is_secondary_index}.to_a #yusuke siをupdateの対象から除外する
         indexes = indexes.map(&:to_id_graph).to_set if @by_id_graph
 
         indexes.map do |index|

@@ -308,7 +308,7 @@ module NoSE
         @updates.each do |update|
 
           #yusuke update対象にsiは含まれていないので、cost計算からも除外する。
-          @indexes.select{|index| !index.is_secondary_index}.each do |index|
+          @indexes.each do |index|
             index = index.to_id_graph if data[:by_id_graph]
             next unless update.modifies_index?(index)
 

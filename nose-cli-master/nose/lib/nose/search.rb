@@ -110,7 +110,7 @@ module NoSE
         update_plans.each do |plan|
           plan.select_query_plans(&result.method(:select_plan))
         end
-        result.update_plans = update_plans
+        result.update_plans = update_plans.select{|uplan| !uplan.index.is_secondary_index} #yusuke secondary index に対するupdate planは推薦しない
 
         result.validate
 
