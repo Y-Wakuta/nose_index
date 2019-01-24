@@ -1,0 +1,187 @@
+Indexes
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   i158878505 [district.d_id, district.d_w_id] [] → [district.d_next_o_id, district.d_tax, district.d_street_one, district.d_street_two, district.d_city, district.d_state, district.d_zip, district.d_name] size: $645 Graph(nodes: district, edges: {})
+   i2080889527 [customer.c_d_id] [warehouse.w_id, customer.c_id, district.d_id] → [customer.c_discount, customer.c_last, customer.c_credit, warehouse.w_tax] size: $196000 Graph(nodes: customer, district, warehouse, edges: {customer=>#<Set: {customer.c_to_district}>, district=>#<Set: {district.district, district.d_to_warehouse}>, warehouse=>#<Set: {warehouse.warehouse}>})
+   i2146640679 [orders.o_d_id] [orders.o_w_id, orders.o_id] → [orders.o_c_id, orders.o_entry_d, orders.o_carrier_id] size: $7200000 Graph(nodes: orders, edges: {})
+   i2288189847 [order_line.ol_d_id] [order_line.ol_w_id, order_line.ol_o_id] → [order_line.ol_i_id, order_line.ol_supply_w_id, order_line.ol_quantity, order_line.ol_amount, order_line.ol_delivery_d] size: $3520000 Graph(nodes: order_line, edges: {})
+   i2295458699 [stock.s_i_id] [stock.s_w_id] → [stock.s_quantity, stock.s_dist_one, stock.s_dist_two, stock.s_dist_three, stock.s_dist_four, stock.s_dist_five, stock.s_dist_six, stock.s_dist_seven, stock.s_dist_eight, stock.s_dist_nine, stock.s_dist_ten, stock.s_ytd, stock.s_order_cnt, stock.s_remote_cnt, stock.s_data] size: $354 Graph(nodes: stock, edges: {})
+   i2803780462 [customer.c_w_id] [customer.c_last, customer.c_d_id, customer.c_first, customer.c_id] → [] size: $160000 Graph(nodes: customer, edges: {})
+   i3145555320 [item.i_id] [] → [item.i_price, item.i_name, item.i_data] size: $16800000 Graph(nodes: item, edges: {})
+   i3474093335 [new_orders.no_w_id] [new_orders.no_d_id, new_orders.no_o_id] → [] size: $9600000 Graph(nodes: new_orders, edges: {})
+   i3564641164 [customer.c_id] [customer.c_d_id, customer.c_w_id] → [customer.c_data] size: $116000 Graph(nodes: customer, edges: {})
+   i3850912573 [customer.c_d_id] [customer.c_w_id, customer.c_id] → [customer.c_first, customer.c_middle, customer.c_last, customer.c_street_one, customer.c_street_two, customer.c_city, customer.c_state, customer.c_zip, customer.c_phone, customer.c_credit, customer.c_credit_lim, customer.c_discount, customer.c_balance, customer.c_since] size: $406000 Graph(nodes: customer, edges: {})
+   i824463480 [warehouse.w_id] [] → [warehouse.w_street_one, warehouse.w_street_two, warehouse.w_city, warehouse.w_state, warehouse.w_zip, warehouse.w_name] size: $4850 Graph(nodes: warehouse, edges: {})
+
+  Total size: 38003849
+
+Query plans
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+GROUP NewOrderSelect
+SELECT customer.c_discount, customer.c_last, customer.c_credit, d_to_warehouse.w_tax FROM customer.c_to_district.d_to_warehouse WHERE d_to_warehouse.w_id = ? AND customer.c_d_id = ? AND customer.c_id = ? -- 0 customer, district, warehouse * 10 = 0.09208843217093637
+  Index lookup    i2080889527 [customer.c_d_id] [warehouse.w_id, customer.c_id, district.d_id] → [customer.c_discount, customer.c_last, customer.c_credit, warehouse.w_tax] size: $196000 Graph(nodes: customer, district, warehouse, edges: {customer=>#<Set: {customer.c_to_district}>, district=>#<Set: {district.district, district.d_to_warehouse}>, warehouse=>#<Set: {warehouse.warehouse}>}) * 1.0e-05/1 
+
+GROUP NewOrderSelect
+SELECT district.d_next_o_id, district.d_tax FROM district WHERE district.d_id = ? AND district.d_w_id = ? -- 1 district * 10 = 0.09220552463838648
+  Index lookup    i158878505 [district.d_id, district.d_w_id] [] → [district.d_next_o_id, district.d_tax, district.d_street_one, district.d_street_two, district.d_city, district.d_state, district.d_zip, district.d_name] size: $645 Graph(nodes: district, edges: {}) * 1.0/1 
+
+GROUP NewOrderSelect
+SELECT item.i_price, item.i_name, item.i_data FROM item WHERE item.i_id = ? -- 5 item * 10 = 0.09220552463838648
+  Index lookup    i3145555320 [item.i_id] [] → [item.i_price, item.i_name, item.i_data] size: $16800000 Graph(nodes: item, edges: {}) * 1.0/1 
+
+GROUP NewOrderSelect
+SELECT stock.s_quantity, stock.s_data, stock.s_dist_one, stock.s_dist_two, stock.s_dist_three, stock.s_dist_four, stock.s_dist_five, stock.s_dist_six, stock.s_dist_seven, stock.s_dist_eight, stock.s_dist_nine, stock.s_dist_ten FROM stock WHERE stock.s_i_id = ? AND stock.s_w_id = ? -- 6 stock * 10 = 0.09220552463838648
+  Index lookup    i2295458699 [stock.s_i_id] [stock.s_w_id] → [stock.s_quantity, stock.s_dist_one, stock.s_dist_two, stock.s_dist_three, stock.s_dist_four, stock.s_dist_five, stock.s_dist_six, stock.s_dist_seven, stock.s_dist_eight, stock.s_dist_nine, stock.s_dist_ten, stock.s_ytd, stock.s_order_cnt, stock.s_remote_cnt, stock.s_data] size: $354 Graph(nodes: stock, edges: {}) * 1.0/1 
+
+GROUP PaymentSelect
+SELECT warehouse.w_street_one, warehouse.w_street_two, warehouse.w_city, warehouse.w_state, warehouse.w_zip, warehouse.w_name FROM warehouse WHERE warehouse.w_id = ? -- 10 warehouse * 10 = 0.09220552463838648
+  Index lookup    i824463480 [warehouse.w_id] [] → [warehouse.w_street_one, warehouse.w_street_two, warehouse.w_city, warehouse.w_state, warehouse.w_zip, warehouse.w_name] size: $4850 Graph(nodes: warehouse, edges: {}) * 1.0/1 
+
+GROUP PaymentSelect
+SELECT district.d_street_one, district.d_street_two, district.d_city, district.d_state, district.d_zip, district.d_name FROM district WHERE district.d_w_id = ? AND district.d_id = ? -- 12 district * 10 = 0.09220552463838648
+  Index lookup    i158878505 [district.d_id, district.d_w_id] [] → [district.d_next_o_id, district.d_tax, district.d_street_one, district.d_street_two, district.d_city, district.d_state, district.d_zip, district.d_name] size: $645 Graph(nodes: district, edges: {}) * 1.0/1 
+
+GROUP PaymentSelect
+SELECT customer.c_id FROM customer WHERE customer.c_w_id = ? AND customer.c_d_id = ? AND customer.c_last = ? -- 13 customer * 10 = 0.0920884310292734
+  Index lookup    i2803780462 [customer.c_w_id] [customer.c_last, customer.c_d_id, customer.c_first, customer.c_id] → [] size: $160000 Graph(nodes: customer, edges: {}) * 2.5e-07/1 
+
+GROUP PaymentSelect
+SELECT customer.c_id FROM customer WHERE customer.c_w_id = ? AND customer.c_d_id = ? AND customer.c_last = ? ORDER BY customer.c_first -- 14 customer * 10 = 0.0920884310292734
+  Index lookup    i2803780462 [customer.c_w_id] [customer.c_last, customer.c_d_id, customer.c_first, customer.c_id] → [] size: $160000 Graph(nodes: customer, edges: {}) * 2.5e-07/1 
+
+GROUP PaymentSelect
+SELECT customer.c_first, customer.c_middle, customer.c_last, customer.c_street_one, customer.c_street_two, customer.c_city, customer.c_state, customer.c_zip, customer.c_phone, customer.c_credit, customer.c_credit_lim, customer.c_discount, customer.c_balance, customer.c_since FROM customer WHERE customer.c_w_id = ? AND customer.c_d_id = ? AND customer.c_id = ? -- 15 customer * 10 = 0.0920884310292734
+  Index lookup    i3850912573 [customer.c_d_id] [customer.c_w_id, customer.c_id] → [customer.c_first, customer.c_middle, customer.c_last, customer.c_street_one, customer.c_street_two, customer.c_city, customer.c_state, customer.c_zip, customer.c_phone, customer.c_credit, customer.c_credit_lim, customer.c_discount, customer.c_balance, customer.c_since] size: $406000 Graph(nodes: customer, edges: {}) * 2.5e-07/1 
+
+GROUP PaymentSelect
+SELECT customer.c_data FROM customer WHERE customer.c_w_id = ? AND customer.c_d_id = ? AND customer.c_id = ? -- 16 customer * 10 = 0.0920884310292734
+  Index lookup    i3564641164 [customer.c_id] [customer.c_d_id, customer.c_w_id] → [customer.c_data] size: $116000 Graph(nodes: customer, edges: {}) * 2.5e-07/1 
+
+GROUP OrderStat
+SELECT customer.c_id FROM customer WHERE customer.c_w_id = ? AND customer.c_d_id = ? AND customer.c_last = ? -- 20 customer * 1 = 0.00920884310292734
+  Index lookup    i2803780462 [customer.c_w_id] [customer.c_last, customer.c_d_id, customer.c_first, customer.c_id] → [] size: $160000 Graph(nodes: customer, edges: {}) * 2.5e-07/1 
+
+GROUP OrderStat
+SELECT customer.c_balance, customer.c_first, customer.c_middle, customer.c_last FROM customer WHERE customer.c_w_id = ? AND customer.c_d_id = ? AND customer.c_last = ? ORDER BY customer.c_first -- 21 customer * 1 = 1.009208848954682
+  Index lookup    i3850912573 [customer.c_d_id] [customer.c_w_id, customer.c_id] → [customer.c_first, customer.c_middle, customer.c_last, customer.c_street_one, customer.c_street_two, customer.c_city, customer.c_state, customer.c_zip, customer.c_phone, customer.c_credit, customer.c_credit_lim, customer.c_discount, customer.c_balance, customer.c_since] size: $406000 Graph(nodes: customer, edges: {}) * 0.0005/1 
+  Filter [customer.c_last]  0.0005 -> 2.5e-07
+  Sort [customer.c_first]
+
+GROUP OrderStat
+SELECT customer.c_balance, customer.c_first, customer.c_middle, customer.c_last FROM customer WHERE customer.c_w_id = ? AND customer.c_d_id = ? AND customer.c_id = ? -- 22 customer * 1 = 0.00920884310292734
+  Index lookup    i3850912573 [customer.c_d_id] [customer.c_w_id, customer.c_id] → [customer.c_first, customer.c_middle, customer.c_last, customer.c_street_one, customer.c_street_two, customer.c_city, customer.c_state, customer.c_zip, customer.c_phone, customer.c_credit, customer.c_credit_lim, customer.c_discount, customer.c_balance, customer.c_since] size: $406000 Graph(nodes: customer, edges: {}) * 2.5e-07/1 
+
+GROUP OrderStat
+SELECT orders.o_id, orders.o_entry_d, orders.o_carrier_id FROM orders WHERE orders.o_w_id = ? AND orders.o_d_id = ? AND orders.o_c_id = ? AND orders.o_id = ? -- 23 orders * 1 = 0.00920884310000117
+  Index lookup    i2146640679 [orders.o_d_id] [orders.o_w_id, orders.o_id] → [orders.o_c_id, orders.o_entry_d, orders.o_carrier_id] size: $7200000 Graph(nodes: orders, edges: {}) * 1.0000000000000002e-10/1 
+  Filter [orders.o_c_id]  1.0000000000000002e-10 -> 1.0000000000000003e-11
+
+GROUP OrderStat
+SELECT orders.o_id FROM orders WHERE orders.o_w_id = ? AND orders.o_d_id = ? AND orders.o_c_id = ? -- 23.5 orders * 1 = 0.009208843217093638
+  Index lookup    i2146640679 [orders.o_d_id] [orders.o_w_id, orders.o_id] → [orders.o_c_id, orders.o_entry_d, orders.o_carrier_id] size: $7200000 Graph(nodes: orders, edges: {}) * 1.0e-05/1 
+  Filter [orders.o_c_id]  1.0e-05 -> 1.0000000000000002e-06
+
+GROUP OrderStat
+SELECT order_line.ol_i_id, order_line.ol_supply_w_id, order_line.ol_quantity, order_line.ol_amount, order_line.ol_delivery_d FROM order_line WHERE order_line.ol_w_id = ? AND order_line.ol_d_id = ? AND order_line.ol_o_id = ? -- 24 order_line * 1 = 0.009208843100007318
+  Index lookup    i2288189847 [order_line.ol_d_id] [order_line.ol_w_id, order_line.ol_o_id] → [order_line.ol_i_id, order_line.ol_supply_w_id, order_line.ol_quantity, order_line.ol_amount, order_line.ol_delivery_d] size: $3520000 Graph(nodes: order_line, edges: {}) * 6.25e-10/1 
+
+GROUP DeliverySelect
+SELECT new_orders.no_o_id FROM new_orders WHERE new_orders.no_d_id = ? AND new_orders.no_w_id = ? -- 25 new_orders * 1 = 0.009208843158546818
+  Index lookup    i3474093335 [new_orders.no_w_id] [new_orders.no_d_id, new_orders.no_o_id] → [] size: $9600000 Graph(nodes: new_orders, edges: {}) * 5.0e-06/1 
+
+GROUP DeliverySelect
+SELECT orders.o_c_id FROM orders WHERE orders.o_id = ? AND orders.o_d_id = ? AND orders.o_w_id = ? -- 27 orders * 1 = 0.00920884310000117
+  Index lookup    i2146640679 [orders.o_d_id] [orders.o_w_id, orders.o_id] → [orders.o_c_id, orders.o_entry_d, orders.o_carrier_id] size: $7200000 Graph(nodes: orders, edges: {}) * 1.0000000000000002e-10/1 
+
+GROUP DeliverySelect
+SELECT order_line.ol_amount FROM order_line WHERE order_line.ol_o_id = ? AND order_line.ol_d_id = ? AND order_line.ol_w_id = ? -- 30 order_line * 1 = 0.009208843100007318
+  Index lookup    i2288189847 [order_line.ol_d_id] [order_line.ol_w_id, order_line.ol_o_id] → [order_line.ol_i_id, order_line.ol_supply_w_id, order_line.ol_quantity, order_line.ol_amount, order_line.ol_delivery_d] size: $3520000 Graph(nodes: order_line, edges: {}) * 6.25e-10/1 
+
+GROUP DeliverySelect
+SELECT district.d_next_o_id FROM district WHERE district.d_id = ? AND district.d_w_id = ? -- 32 district * 1 = 0.009220552463838648
+  Index lookup    i158878505 [district.d_id, district.d_w_id] [] → [district.d_next_o_id, district.d_tax, district.d_street_one, district.d_street_two, district.d_city, district.d_state, district.d_zip, district.d_name] size: $645 Graph(nodes: district, edges: {}) * 1.0/1 
+
+GROUP Slev
+SELECT district.d_next_o_id FROM district WHERE district.d_id = ? AND district.d_w_id = ? -- 33 district * 1 = 0.009220552463838648
+  Index lookup    i158878505 [district.d_id, district.d_w_id] [] → [district.d_next_o_id, district.d_tax, district.d_street_one, district.d_street_two, district.d_city, district.d_state, district.d_zip, district.d_name] size: $645 Graph(nodes: district, edges: {}) * 1.0/1 
+
+GROUP Slev
+SELECT order_line.ol_i_id FROM order_line WHERE order_line.ol_w_id = ? AND order_line.ol_d_id = ? AND order_line.ol_o_id < ? AND order_line.ol_o_id >= ? -- 34 order_line * 1 = 0.00920884312927341
+  Index lookup    i2288189847 [order_line.ol_d_id] [order_line.ol_w_id, order_line.ol_o_id] → [order_line.ol_i_id, order_line.ol_supply_w_id, order_line.ol_quantity, order_line.ol_amount, order_line.ol_delivery_d] size: $3520000 Graph(nodes: order_line, edges: {}) * 2.5e-06/1 
+
+GROUP Slev
+SELECT stock.* FROM stock WHERE stock.s_w_id = ? AND stock.s_i_id = ? AND stock.s_quantity < ? -- 35 stock * 1 = 0.009220552463838648
+  Index lookup    i2295458699 [stock.s_i_id] [stock.s_w_id] → [stock.s_quantity, stock.s_dist_one, stock.s_dist_two, stock.s_dist_three, stock.s_dist_four, stock.s_dist_five, stock.s_dist_six, stock.s_dist_seven, stock.s_dist_eight, stock.s_dist_nine, stock.s_dist_ten, stock.s_ytd, stock.s_order_cnt, stock.s_remote_cnt, stock.s_data] size: $354 Graph(nodes: stock, edges: {}) * 1.0/1 
+  Filter [] stock.s_quantity 1.0 -> 0.1
+
+Update plans
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+GROUP NewOrderUpdate
+UPDATE district SET d_next_o_id = ? WHERE district.d_id = ? AND district.d_w_id = ? -- 2 district * 1000 = 13.329108
+ for i158878505 plan.cost: $0.013329108
+  Insert    i158878505 [district.d_id, district.d_w_id] [] → [district.d_next_o_id, district.d_tax, district.d_street_one, district.d_street_two, district.d_city, district.d_state, district.d_zip, district.d_name] size: $645 Graph(nodes: district, edges: {}) * 1.0
+
+
+GROUP NewOrderUpdate
+INSERT INTO orders SET o_id=?, o_d_id=?, o_w_id=?, o_c_id=?, o_entry_d=?, o_ol_cnt=?, o_all_local=? AND CONNECT TO o_to_customer(?) -- 3 orders * 1000 = 13.329108
+ for i2146640679 plan.cost: $0.013329108
+  Insert    i2146640679 [orders.o_d_id] [orders.o_w_id, orders.o_id] → [orders.o_c_id, orders.o_entry_d, orders.o_carrier_id] size: $7200000 Graph(nodes: orders, edges: {}) * 1
+
+
+GROUP NewOrderUpdate
+INSERT INTO new_orders SET no_o_id = ?, no_d_id = ?, no_w_id = ? AND CONNECT TO new_to_order(?) -- 4 new_orders * 1000 = 13.329108
+ for i3474093335 plan.cost: $0.013329108
+  Insert    i3474093335 [new_orders.no_w_id] [new_orders.no_d_id, new_orders.no_o_id] → [] size: $9600000 Graph(nodes: new_orders, edges: {}) * 1
+
+
+GROUP NewOrderUpdate
+UPDATE stock SET s_quantity = ? WHERE stock.s_i_id = ? AND stock.s_w_id = ? -- 7 stock * 1000 = 13.329108
+ for i2295458699 plan.cost: $0.013329108
+  Insert    i2295458699 [stock.s_i_id] [stock.s_w_id] → [stock.s_quantity, stock.s_dist_one, stock.s_dist_two, stock.s_dist_three, stock.s_dist_four, stock.s_dist_five, stock.s_dist_six, stock.s_dist_seven, stock.s_dist_eight, stock.s_dist_nine, stock.s_dist_ten, stock.s_ytd, stock.s_order_cnt, stock.s_remote_cnt, stock.s_data] size: $354 Graph(nodes: stock, edges: {}) * 1.0
+
+
+GROUP NewOrderUpdate
+INSERT INTO order_line SET ol_o_id = ?, ol_d_id = ?, ol_w_id = ?, ol_number = ?, ol_i_id = ?, ol_supply_w_id = ?, ol_quantity = ?, ol_amount = ?, ol_dist_info = ? AND CONNECT TO ol_to_order(?), ol_to_stock(?) -- 8 order_line * 1000 = 13.329108
+ for i2288189847 plan.cost: $0.013329108
+  Insert    i2288189847 [order_line.ol_d_id] [order_line.ol_w_id, order_line.ol_o_id] → [order_line.ol_i_id, order_line.ol_supply_w_id, order_line.ol_quantity, order_line.ol_amount, order_line.ol_delivery_d] size: $3520000 Graph(nodes: order_line, edges: {}) * 1
+
+
+GROUP PaymentUpdate
+UPDATE customer SET c_balance = ?, c_data = ? WHERE customer.c_w_id = ? AND customer.c_d_id = ? AND customer.c_id = ? -- 17 customer * 1000 = 6.6645540000000005e-06
+ for i3850912573 plan.cost: $3.3322770000000003e-09
+  Insert    i3850912573 [customer.c_d_id] [customer.c_w_id, customer.c_id] → [customer.c_first, customer.c_middle, customer.c_last, customer.c_street_one, customer.c_street_two, customer.c_city, customer.c_state, customer.c_zip, customer.c_phone, customer.c_credit, customer.c_credit_lim, customer.c_discount, customer.c_balance, customer.c_since] size: $406000 Graph(nodes: customer, edges: {}) * 2.5000000000000004e-07
+
+ for i3564641164 plan.cost: $3.3322770000000003e-09
+  Insert    i3564641164 [customer.c_id] [customer.c_d_id, customer.c_w_id] → [customer.c_data] size: $116000 Graph(nodes: customer, edges: {}) * 2.5000000000000004e-07
+
+
+GROUP PaymentUpdate
+UPDATE customer SET c_balance = ? WHERE customer.c_w_id = ? AND customer.c_d_id = ? AND customer.c_id = ? -- 18 customer * 1000 = 3.3322770000000003e-06
+ for i3850912573 plan.cost: $3.3322770000000003e-09
+  Insert    i3850912573 [customer.c_d_id] [customer.c_w_id, customer.c_id] → [customer.c_first, customer.c_middle, customer.c_last, customer.c_street_one, customer.c_street_two, customer.c_city, customer.c_state, customer.c_zip, customer.c_phone, customer.c_credit, customer.c_credit_lim, customer.c_discount, customer.c_balance, customer.c_since] size: $406000 Graph(nodes: customer, edges: {}) * 2.5000000000000004e-07
+
+
+GROUP DeliveryUpdate
+DELETE new_orders FROM new_orders WHERE new_orders.no_o_id = ? AND new_orders.no_d_id = ? AND new_orders.no_w_id = ? -- 26 new_orders * 100 = 3.3219757500000003e-12
+ for i3474093335 plan.cost: $3.3219757500000005e-14
+  Delete    i3474093335 [new_orders.no_w_id] [new_orders.no_d_id, new_orders.no_o_id] → [] size: $9600000 Graph(nodes: new_orders, edges: {}) * 2.5000000000000007e-11
+
+
+GROUP DeliveryUpdate
+UPDATE orders SET o_carrier_id = ? WHERE orders.o_id = ? AND orders.o_d_id = ? AND orders.o_w_id = ? -- 28 orders * 100 = 1.3329108000000002e-10
+ for i2146640679 plan.cost: $1.3329108000000003e-12
+  Insert    i2146640679 [orders.o_d_id] [orders.o_w_id, orders.o_id] → [orders.o_c_id, orders.o_entry_d, orders.o_carrier_id] size: $7200000 Graph(nodes: orders, edges: {}) * 1.0000000000000003e-10
+
+
+GROUP DeliveryUpdate
+UPDATE order_line SET ol_delivery_d = ? WHERE order_line.ol_o_id = ? AND order_line.ol_d_id = ? AND order_line.ol_w_id = ? -- 29 order_line * 100 = 8.3306925e-10
+ for i2288189847 plan.cost: $8.3306925e-12
+  Insert    i2288189847 [order_line.ol_d_id] [order_line.ol_w_id, order_line.ol_o_id] → [order_line.ol_i_id, order_line.ol_supply_w_id, order_line.ol_quantity, order_line.ol_amount, order_line.ol_delivery_d] size: $3520000 Graph(nodes: order_line, edges: {}) * 6.25e-10
+
+
+GROUP DeliveryUpdate
+UPDATE customer SET c_balance = ? , c_delivery_cnt = ? WHERE customer.c_id = ? AND customer.c_d_id = ? AND customer.c_w_id = ? -- 31 customer * 100 = 3.3322770000000005e-07
+ for i3850912573 plan.cost: $3.3322770000000003e-09
+  Insert    i3850912573 [customer.c_d_id] [customer.c_w_id, customer.c_id] → [customer.c_first, customer.c_middle, customer.c_last, customer.c_street_one, customer.c_street_two, customer.c_city, customer.c_state, customer.c_zip, customer.c_phone, customer.c_credit, customer.c_credit_lim, customer.c_discount, customer.c_balance, customer.c_since] size: $406000 Graph(nodes: customer, edges: {}) * 2.5000000000000004e-07
+
+
+  Total cost: 2.0412198739369463

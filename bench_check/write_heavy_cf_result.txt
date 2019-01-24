@@ -1,0 +1,32 @@
+LABEL          | GROUP        | NAME                                                                                                 | WEIGHT             | MEAN                  | COST               
+---------------|--------------|------------------------------------------------------------------------------------------------------|--------------------|-----------------------|--------------------
+write_heavy_cf | ViewItem     | SELECT items.* FROM items WHERE items.id = ? -- 5                                                    | 14.17              | 0.0010124876666666666 | 8.919220552463837  
+               |              | SELECT items.* FROM items WHERE items.name = ? -- 5                                                  | 14.17              | 8.37153913            | 10.008441104927677 
+               |              | SELECT items.* FROM items WHERE items.quantity = ? -- 5                                              | 14.17              | 6.222019058666667     | 17760.062627570776 
+               |              | SELECT items.* FROM items WHERE items.max_bid = ? -- 5                                               | 14.17              | 0.016929387           | 9.678441104927677  
+               |              | SELECT items.* FROM items WHERE items.start_date = ? -- 5                                            | 14.17              | 0.002761724           | 9.678441104927677  
+               |              | SELECT items.* FROM items WHERE items.initial_price = ? -- 5                                         | 14.17              | 0.012977406333333332  | 9.678441104927677  
+               |              | SELECT bids.* FROM items.bids WHERE items.id = ? -- 6                                                | 14.17              | 0.001388258           | 12.039325936738386 
+write_heavy_cf | BuyNow       | SELECT users.nickname FROM users WHERE users.id=? -- 12                                              | 1.16               | 0.0011065493333333334 | 0.39922055246383864
+               |              | SELECT items.* FROM items WHERE items.id=? -- 13                                                     | 1.16               | 0.0011480926666666666 | 8.919220552463837  
+               |              | SELECT items.* FROM items WHERE items.name=? -- 13                                                   | 1.16               | 8.454499824666668     | 10.008441104927677 
+write_heavy_cf | StoreBuyNow  | SELECT items.quantity, items.nb_of_bids, items.end_date FROM items WHERE items.id=? -- 14            | 110.00000000000001 | 0.0011152586666666666 | 0.7592205524638386 
+               |              | UPDATE items SET quantity=?, nb_of_bids=?, end_date=? WHERE items.id=? -- 15 for i1888493477         | 110.00000000000001 | 0.0010404706666666667 | 0.013329108        
+               |              | UPDATE items SET quantity=?, nb_of_bids=?, end_date=? WHERE items.id=? -- 15 for i638513312          | 110.00000000000001 | 0.003481937666666667  | 7.7338784507638385 
+write_heavy_cf | StoreBid     | SELECT items.nb_of_bids, items.max_bid FROM items WHERE items.id=? -- 21                             | 374.0              | 0.0012099523333333332 | 0.5192205524638386 
+               |              | INSERT INTO bids SET id=?, qty=?, bid=?, date=? AND CONNECT TO item(?), user(?) -- 20 for i322001... | 374.0              | 0.001261997           | 0.013329108        
+               |              | UPDATE items SET nb_of_bids=?, max_bid=? WHERE items.id=? -- 22 for i1888493477                      | 374.0              | 0.0011342083333333332 | 0.013329108        
+               |              | UPDATE items SET nb_of_bids=?, max_bid=? WHERE items.id=? -- 22 for i638513312                       | 374.0              | 0.002310672           | 0.2925496604638386 
+               |              | UPDATE items SET nb_of_bids=?, max_bid=? WHERE items.id=? -- 22 for i3683605489                      | 374.0              | 0.00103039            | 0.0146578983       
+write_heavy_cf | PutComment   | SELECT users.nickname, users.password FROM users WHERE users.id=? -- 23                              | 0.46               | 0.0013197850000000002 | 0.8492205524638385 
+               |              | SELECT items.* FROM items WHERE items.id=? -- 24                                                     | 0.46               | 0.0013475709999999999 | 8.919220552463837  
+               |              | SELECT users.* FROM users WHERE users.id=? -- 25                                                     | 0.46               | 0.0011281573333333332 | 3.1292205524638383 
+write_heavy_cf | StoreComment | SELECT users.rating FROM users WHERE users.id=? -- 26                                                | 45.0               | 0.0010344983333333334 | 0.27922055246383864
+               |              | UPDATE users SET rating=? WHERE users.id=? -- 27 for i2906147889                                     | 45.0               | 0.0010820253333333333 | 0.013329108        
+write_heavy_cf | RegisterItem | INSERT INTO items SET id=?, name=?, description=?, initial_price=?, quantity=?, reserve_price=?, ... | 53.0               | 0.0013710333333333332 | 0.013329108        
+               |              | INSERT INTO items SET id=?, name=?, description=?, initial_price=?, quantity=?, reserve_price=?, ... | 53.0               | 0.0009610903333333334 | 0.013329108        
+               |              | INSERT INTO items SET id=?, name=?, description=?, initial_price=?, quantity=?, reserve_price=?, ... | 53.0               | 0.0012246036666666666 | 0.013329108        
+               |              | INSERT INTO items SET id=?, name=?, description=?, initial_price=?, quantity=?, reserve_price=?, ... | 53.0               | 0.0009538799999999999 | 0.013329108        
+               |              | INSERT INTO items SET id=?, name=?, description=?, initial_price=?, quantity=?, reserve_price=?, ... | 53.0               | 0.0009472413333333333 | 0.013329108        
+               |              | INSERT INTO items SET id=?, name=?, description=?, initial_price=?, quantity=?, reserve_price=?, ... | 53.0               | 0.0009275473333333334 | 0.013329108        
+write_heavy_cf | RegisterUser | INSERT INTO users SET id=?, firstname=?, lastname=?, nickname=?, password=?, email=?, rating=0, b... | 107.0              | 0.0011143036666666666 | 0.013329108        

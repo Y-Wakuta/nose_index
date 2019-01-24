@@ -1,0 +1,7 @@
+version: '2'
+
+services:
+  nose_index:
+    container_name: nose_index_wakuta
+    build: ./nose-cli-master
+    tty: true
