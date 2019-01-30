@@ -59,12 +59,10 @@ module NoSE
     #yusuke 引数で受け取ったindexを元にSIとSIの属性を抜いたりしたCFを列挙する。
     def get_secondary_indexes_by_indexes(base_cf_candidates,indexes)
       Parallel.map(base_cf_candidates) do |index|
-        other_cf = indexes.select{|ind| ind != index}.to_a
         (index.order_fields.to_set  + index.extra).to_a.map do |ex_field|
           # hashフィールドの中に元テーブルのprimary keyが含まれていないといけないみたい。なぜこの制約があるのかを論文から確認する->nose2016のp185
           index.hash_fields.map do |hf|
             sole_si = generate_index([hf], [], [ex_field], get_si_graph([hf] + [ex_field],index.graph),base_cf_key: index.key) #yusuke CFを複数使う場合のみを考えるならpartition keyに対するSIのみで良いが、単独で応答するSIを考えるのであれば、これも残しておく
-            #additional_cf = generate_index(sole_si.extra , index.order_fields, index.extra + [hf].to_set ,index.graph, base_si_key: sole_si.key, base_cf_key: index.key)
             id_si = nil
             id_si_additional_cf = nil
             ex_id_si = nil
@@ -72,12 +70,12 @@ module NoSE
 
             if hf != ex_field.parent.id_field then
                 id_si = generate_index([hf],[], [ex_field.parent.id_field],get_si_graph([hf] + [ex_field.parent.id_field],index.graph), base_cf_key: index.key) #yusuke entityをまたぐSIを作成
-                id_si_additional_cf = get_additional_cf_by_si(id_si,other_cf).select{|adcf| !adcf.nil? and !indexes.include?(adcf)}.to_a
+                id_si_additional_cf = generate_index(id_si.extra,index.order_fields + index.hash_fields.to_a,index.extra.to_a + id_si.hash_fields.to_a,index.graph)
             end
 
             if hf != hf.parent.id_field then
                 ex_id_si =  generate_index([hf],[], [hf.parent.id_field],get_si_graph([hf] + [hf.parent.id_field],index.graph), base_cf_key: index.key)
-               # ex_id_si_additional_cf = get_additional_cf_by_si(ex_id_si,other_cf).select{|adcf| !adcf.nil? and !indexes.include?(adcf)}.to_a
+                ex_id_si_additional_cf = generate_index(ex_id_si.extra,index.order_fields + index.hash_fields.to_a ,index.extra.to_a + ex_id_si.hash_fields.to_a,index.graph)
             end
 
             [sole_si,id_si,id_si_additional_cf,ex_id_si,ex_id_si_additional_cf].flatten.select{|si| !si.nil? and !si.extra.empty?}
@@ -93,13 +91,9 @@ module NoSE
       queries = @workload.queries
       base_cf_candidates = []
       indexes = queries.map do |query|
-        base_cfs = indexes_for_query(query).to_a
-        if @options[:secondary]
-          base_cfs = base_cfs.sort_by { |index | index.all_fields.length }.reverse.take(400) #yusuke SIを使用する場合は、最終的なindexの数も増えるので、cfは各クエリ400個までで枝刈り
-        end
+        base_cfs = indexes_for_query(query).to_a #yusuke このbase_cfsをfield数とかで部分的にだけ使用すると、
         print(query.text," :-> ",base_cfs.count,"\n")
-        base_cf_candidates += base_cfs.sort_by { |index | index.all_fields.length }.reverse.take(1) #yusuke #46 queryに単独で応答するcfを探したい。今はひとまず一番field数の多いものがそうだろうということで対処
-        #si_additional_cfs += get_secondary_indexes_by_indexes(full_cf).flatten.reject { |index| index.nil? }.uniq
+        base_cf_candidates += base_cfs.sort_by { |index | index.all_fields.length }.reverse.take(3) #yusuke #46 queryに単独で応答するcfを探したい。今はひとまず一番field数の多いものがそうだろうということで対処
         base_cfs
       end.inject(additional_indexes, &:+)
 
