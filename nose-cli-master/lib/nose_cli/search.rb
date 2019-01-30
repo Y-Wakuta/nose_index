@@ -34,6 +34,8 @@ module NoSE
                            desc: 'whether to group generated indexes in' \
                                  'graphs by ID',
                            aliases: '-i'
+      option :secondary, type: :boolean, default: true,
+                         desc: 'does use secondary index'
 
       def search(name)
         # Get the workload from file or name
