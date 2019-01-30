@@ -115,8 +115,9 @@ module NoSE
       def search_result(workload, cost_model, max_space = Float::INFINITY,
                         objective = Search::Objective::COST,
                         by_id_graph = false)
-        enumerated_indexes = IndexEnumerator.new(workload) \
-                                            .indexes_for_workload.to_a
+        enumerator = IndexEnumerator.new(workload)
+        enumerator.set_options(options)
+        enumerated_indexes = enumerator.indexes_for_workload.to_a
         Search::Search.new(workload, cost_model, objective, by_id_graph) \
                       .search_overlap enumerated_indexes, max_space
       end
