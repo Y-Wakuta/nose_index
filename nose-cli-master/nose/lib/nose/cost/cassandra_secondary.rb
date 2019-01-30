@@ -18,6 +18,11 @@ module NoSE
         row_cost = @options[:row_cost]
         joined_cf_cost = @options[:sole_cf_query_cost] * [rows,1].max #yusuke ヒットする件数の期待値が1件以下の時はその分siの時のcostが相対的に増加するのはおかしいので、1以下なら1とする。
 
+        #yusuke SI単独でクエリに応答する場合、応答コストは増加する
+        if step.is_a? Plans::IndexLookupPlanStep and step.index.is_secondary_index and step.state.answered? then
+          return (@options[:index_cost] + parts * partition_cost + rows * row_cost) * (1 + (@options[:si_2_cf_query_cost] / @options[:sole_cf_query_cost]))
+        end
+
         if step.is_a? Plans::IndexLookupPlanStep and step.index.is_secondary_index then
           row_cost *= (@options[:si_2_cf_query_cost] / joined_cf_cost)
         elsif step.parent.is_a? Plans::IndexLookupPlanStep and step.parent.index.is_secondary_index then

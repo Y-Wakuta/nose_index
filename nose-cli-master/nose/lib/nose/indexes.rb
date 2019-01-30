@@ -103,7 +103,7 @@ module NoSE
     # Two indices are equal if they contain the same fields
     # @return [Boolean]
     def ==(other)
-      hash == other.hash
+      hash == other.hash and (@is_secondary_index == other.is_secondary_index)
     end
     alias eql? ==
 
