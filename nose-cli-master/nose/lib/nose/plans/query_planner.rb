@@ -231,6 +231,25 @@ module NoSE
         @cost_model = cost_model
       end
 
+      #yusuke 推薦されないと思われるクエリプランの枝刈りを行う(IndexLookupが3つのものが推薦される場合もあったので、この枝刈りは一旦置いておく)
+      def prune_unrealistic_plan(tree)
+        first_steps = tree.root.children.to_a.select{|step| step.is_a? Plans::IndexLookupPlanStep and !step.index.is_secondary_index}
+        first_steps.each do |child|
+          second_steps = child.children.to_a.select{|step| step.is_a? Plans::IndexLookupPlanStep and !step.index.is_secondary_index}
+          second_steps.each do |grand_son|
+            third_steps = grand_son.children.to_a.select{|step| step.is_a? Plans::IndexLookupPlanStep and !step.index.is_secondary_index}
+            if second_steps.length ==third_steps.length
+              print("back")
+              return
+            end
+            third_steps.each do |prune_target|
+              print("pruning\n")
+              #prune_plan(prune_target)
+            end
+          end
+        end
+      end
+
       # Find a tree of plans for the given query
       #yusuke このmethodが１つのtreeの作成に対応
       # @return [QueryPlanTree]
@@ -251,6 +270,7 @@ module NoSE
 
         @logger.debug { "Plans for #{query.inspect}: #{tree.inspect}" }
 
+        #prune_unrealistic_plan(tree)
         tree
       end
 
