@@ -333,12 +333,12 @@ module NoSE
 
         # Remove fields resolved by this index
         @state.fields -= @index.all_fields
-        @state.fields += @index.hash_fields if @index.is_secondary_index #yusuke SIの時は次のindexにsiのhash_fieldが含まれて居なければならない
         @state.eq -= @eq_filter
 
         indexed_by_id = resolve_order
         strip_graph
         update_cardinality parent, indexed_by_id
+        @state.fields += @index.hash_fields if @index.is_secondary_index and !@state.answered? #yusuke SIの時は次のindexにsiのhash_fieldが含まれて居なければならない。ただし、SI単体で応答が終了する場合は除く。
       end
     end
 

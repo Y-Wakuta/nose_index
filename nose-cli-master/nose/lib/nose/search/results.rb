@@ -130,7 +130,7 @@ module NoSE
             if has_index.nil? #同じquery plan内に対応するcfが存在しない場合
               @plans.select{|plan| plan.any?{|step| step.is_a? Plans::IndexLookupPlanStep}}.map do |plan|
                 plan.steps.select{|step| !step.index.is_secondary_index}.map do |cf_step|
-                  if is_valid_base_cf(si_step.index,cf_step.index) and plan.steps.index(si_step) < plan.steps.index(cf_step)
+                  if is_valid_base_cf(si_step.index,cf_step.index)
                     has_index = HasIndex.new(si_step.index.key, true, cf_step.index.key)
                   end
                 end

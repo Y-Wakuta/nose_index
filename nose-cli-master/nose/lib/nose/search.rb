@@ -232,7 +232,7 @@ module NoSE
       def is_include_secondary_index_step(tree)
         tree.each do |plan|
           plan.each do |step|
-            if step.index.is_secondary_index
+            if step.is_a?Plans::IndexLookupPlanStep and step.index.is_secondary_index
               return true
             end
           end
