@@ -1,7 +1,13 @@
-version: '2'
+version: '3'
 
 services:
   nose_index:
     container_name: nose_index_wakuta
-    build: ./nose-cli-master
+    build: nose-cli-master
+    tty: true
+  nose_index_25:
+    container_name: nose_index_25_wakuta
+    build:
+      context: nose-cli-master
+      dockerfile: DockerfileRuby25
     tty: true
