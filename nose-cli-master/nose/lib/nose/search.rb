@@ -265,7 +265,8 @@ module NoSE
 
             # We must always have the same cost #yusuke NoSEではあるindexが使われる場面によってcostが違うのはバグだと判定しているようだが、SIと組み合わせて通信コストまで考慮するとそうではない。
             #yusuke treeの中にSIを持つplanはどうしてもplanによって各indexのcostが変化してしまう。
-            if (current_cost - cost).abs >= 10E-6 and !is_include_secondary_index_step tree
+            # yusuke planの中にfilterがあるものもcardinalityがfilterによって変化することで、costが変化するので通す
+            if (current_cost - cost).abs >= 10E-6 and !is_include_secondary_index_step tree and !steps.any?{|step| step.is_a? Plans::FilterPlanStep} and !query_costs[index_step.index].first.any?{ |s| s.is_a? Plans::FilterPlanStep }
               index = index_step.index
               p query
               puts "Index #{index.key} does not have equivalent cost"

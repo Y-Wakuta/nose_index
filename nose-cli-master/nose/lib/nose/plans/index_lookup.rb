@@ -92,6 +92,33 @@ module NoSE
       end
       private_class_method :check_forward_lookup
 
+      #yusuke 作成する価値のあるstepである場合はfalseを返す
+      def self.is_useless_parent?(state,index,parent_index)
+
+        #yusuke return true below condition
+        #SELECT * FROM entity WHERE A = ? AND B = ?
+        # parent: [A][B]->[C,D]
+        # index:  [B][A]->[C,D,E]
+        return true if index.extra >= parent_index.extra and \
+                          state.query.eq_fields >= (parent_index.hash_fields + parent_index.order_fields.to_set) and \
+                          parent_index.hash_fields == index.order_fields.to_set and parent_index.order_fields.to_set == index.hash_fields
+
+        #yusuke return true below condition
+        #SELECT * FROM entity WHERE A = ? AND B = ?
+        # parent: [A][B]->[C,D]
+        # index:  [A,B][F]->[C,D,E]
+        return true if index.hash_fields >= state.query.eq_fields and index.all_fields >= parent_index.all_fields
+
+        #yusuke return true below condition
+        #SELECT E FROM entity WHERE A = ? AND B = ?
+        # parent: [A,B][B]->[C,D]
+        # index:  [A][B,F]->[E]
+        return true if state.query.eq_fields >= index.hash_fields and (index.hash_fields + index.order_fields.to_set) >= state.query.eq_fields and (index.extra + index.order_fields.to_set + index.hash_fields) >= state.fields
+
+
+        false
+      end
+
       # Check if this index can be used after the current parent
       # @return [Boolean]
       def self.invalid_parent_index?(state, index, parent_index)
@@ -102,6 +129,12 @@ module NoSE
         # We don't do multiple lookups by ID for the same entity set
         return true if parent_index.identity? &&
                        index.graph == parent_index.graph
+
+        #yusuke indexのみでクエリに応答可能で、parent_indexが必要でない場合のための処理に冗長にparent_indexを使用する場合を蹴るための処理。
+        # CF単独でクエリに応答できるにも関わらず、あるparent_indexの下に入ってしまうと、
+        # cost modelでcardinalityが変化する分、同じindexなのにcostが違うことになってしまいvalidateで蹴られる。この動作は素のNoSEにRUBiSの１つのクエリを発行した場合で発生することを確認済み。
+        # WHERE条件の中にprimary keyとそうでないものがそれぞれ１つずつ以上含まれていると発生する。
+        return true if is_useless_parent?(state, index,parent_index)
 
         # If the last step gave an ID, we must use it
         # XXX This doesn't cover all cases
