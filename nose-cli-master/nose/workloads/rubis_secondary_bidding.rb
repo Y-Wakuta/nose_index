@@ -106,7 +106,6 @@ NoSE::Workload.new do
     Q 'SELECT items.quantity, items.nb_of_bids, items.end_date FROM items WHERE items.id=? -- 14'
     Q 'SELECT items.quantity, items.nb_of_bids, items.end_date FROM items WHERE items.quantity=? -- 14_secondary'
     Q 'UPDATE items SET quantity=?, nb_of_bids=?, end_date=? WHERE items.id=? -- 15'
-    Q 'UPDATE items SET quantity=?, nb_of_bids=?, end_date=? WHERE items.quantity=? -- 15_secondary'
     Q 'INSERT INTO buynow SET id=?, qty=?, date=? ' \
       'AND CONNECT TO item(?), buyer(?) -- 16'
   end
@@ -136,7 +135,6 @@ NoSE::Workload.new do
     Q 'SELECT items.nb_of_bids, items.max_bid FROM items WHERE items.id=? -- 21'
     Q 'SELECT items.nb_of_bids, items.max_bid FROM items WHERE items.quantity=? -- 21_secondary'
     Q 'UPDATE items SET nb_of_bids=?, max_bid=? WHERE items.id=? -- 22'
-    Q 'UPDATE items SET nb_of_bids=?, max_bid=? WHERE items.quantity=? -- 22_secondary'
   end
 
   Group 'PutComment', bidding: 0.46,
@@ -160,7 +158,6 @@ NoSE::Workload.new do
     Q 'SELECT users.rating FROM users WHERE users.id=? -- 26'
     Q 'SELECT users.rating FROM users WHERE users.rating=? -- 26_secondary'
     Q 'UPDATE users SET rating=? WHERE users.id=? -- 27'
-    Q 'UPDATE users SET rating=? WHERE users.rating=? -- 27_secondary'
     Q 'INSERT INTO comments SET id=?, rating=?, date=?, comment=? ' \
       'AND CONNECT TO to_user(?), from_user(?), item(?) -- 28'
   end
@@ -191,7 +188,6 @@ NoSE::Workload.new do
         write_heavy: 6.34,
         write_extreme: 6.34 do
     Q 'SELECT items.id, items.name, items.initial_price, items.max_bid, items.nb_of_bids, items.end_date FROM items.seller WHERE seller.region.id = ? AND items.category.id = ? AND items.end_date >= ? LIMIT 25 -- 35'
-    #Q 'SELECT items.id, items.name, items.initial_price, items.max_bid, items.nb_of_bids, items.end_date FROM items.seller WHERE seller.region.dummy = ? AND items.category.id = ? AND items.end_date >= ? LIMIT 25 -- 35_secondary'
   end
 
   Group 'BrowseRegions', browsing: 3.21,
