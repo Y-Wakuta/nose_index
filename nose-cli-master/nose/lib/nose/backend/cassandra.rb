@@ -148,9 +148,12 @@ module NoSE
           "#{field_names index.all_fields, true}, " \
           "PRIMARY KEY((#{field_names index.hash_fields})"
 
+
         cluster_key = index.order_fields
         ddl += ", #{field_names cluster_key}" unless cluster_key.empty?
-        ddl += '));'
+        ddl += '))'
+
+        ddl += " WITH caching = {'keys' : 'NONE','rows_per_partition' : 'NONE'};"
 
         ddl
       end
