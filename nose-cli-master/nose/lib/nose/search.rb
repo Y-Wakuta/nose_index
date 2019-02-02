@@ -93,6 +93,7 @@ module NoSE
       # @return [Results]
       def search_result(query_weights, indexes, solver_params, trees,
                         update_plans) #yusuke indexesは呼び出し元のenumerated_indexes
+        STDERR.print("start solve\n")
         # Solve the LP using MIPPeR
         result = solve_mipper query_weights.keys, indexes, **solver_params
 
@@ -197,6 +198,7 @@ module NoSE
       def query_costs(query_weights, indexes)
         planner = Plans::QueryPlanner.new @workload, indexes, @cost_model
 
+        STDERR.print("get query plan\n")
         results = Parallel.map(query_weights) do |query, weight|
           query_cost planner, query, weight
         end
