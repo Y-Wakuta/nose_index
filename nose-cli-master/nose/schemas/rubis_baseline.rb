@@ -56,9 +56,21 @@ NoSE::Schema.new do
     Path    items.id, items.bids
   end
 
+  Index 'bids_by_itemquantity' do
+    Hash    items.quantity
+    Ordered bids.id,items.id
+    Path    items.id, items.bids
+  end
+
   Index 'items_by_category' do
     Hash    categories.id
     Ordered items.end_date, items.id
+    Path    categories.id, categories.items
+  end
+
+  Index 'items_by_categorydummy' do
+    Hash    categories.dummy
+    Ordered items.end_date, items.id, categories.id
     Path    categories.id, categories.items
   end
 
@@ -71,6 +83,24 @@ NoSE::Schema.new do
   Index 'comments_by_user' do
     Hash    users.id
     Ordered comments.id
+    Path    users.id, users.comments_received
+  end
+
+  Index 'user_by_comments' do
+    Hash comments.id
+    Ordered users.id
+    Path comments.id, comments.to_user
+  end
+
+  Index 'user_by_commentsrating' do
+    Hash comments.rating
+    Ordered users.id, comments.id
+    Path comments.id, comments.to_user
+  end
+
+  Index 'comments_by_userrating' do
+    Hash    users.rating
+    Ordered comments.id, users.id
     Path    users.id, users.comments_received
   end
 
@@ -90,5 +120,43 @@ NoSE::Schema.new do
     Hash    users.id
     Ordered bids.date, bids.id
     Path    users.id, users.bids
+  end
+
+  #yusuke 以下secondary index用に新規作成
+  #
+  Index 'comments_by_rating' do
+    Hash    comments.rating
+    Ordered comments.id
+    Path    comments.id
+  end
+
+  Index 'bids_by_userrating' do
+    Hash    users.rating
+    Ordered bids.date, bids.id, users.id
+    Path    users.id, users.bids
+  end
+
+  Index 'user_items_soldrating' do
+    Hash    users.rating
+    Ordered items.end_date, items.id, users.id
+    Path    users.id, users.items_sold
+  end
+
+  Index 'buynow_by_userrating' do
+    Hash    users.rating
+    Ordered buynow.date, buynow.id, users.id
+    Path    users.id, users.bought_now
+  end
+
+  Index 'usersid_by_rating' do
+    Hash    users.rating
+    Ordered users.id
+    Path    users.id
+  end
+
+  Index 'itemsid_by_quantity' do
+    Hash    items.quantity
+    Ordered items.id
+    Path    items.id
   end
 end
