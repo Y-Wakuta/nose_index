@@ -210,7 +210,7 @@ module NoSE
             fields = @index.all_fields.select { |field| result.key? field.id }
 
             #yusuke cqlのinsert句で指定している属性順にパラメータをソートしなおす
-            fields.sort_by!{|field| @prepared.params_metadata.map{|param| param[2]}.index(field.id)}
+            fields.sort_by!{|field| @prepared.cql.index(field.id)}
 
             values = fields.map do |field|
               value = result[field.id]
