@@ -18,7 +18,7 @@ module NoSE
 
       shared_option :mix
 
-      option :num_iterations, type: :numeric, default: 100,
+      option :num_iterations, type: :numeric, default: 5,
                               banner: 'ITERATIONS',
                               desc: 'the number of times to execute each ' \
                                     'statement'
