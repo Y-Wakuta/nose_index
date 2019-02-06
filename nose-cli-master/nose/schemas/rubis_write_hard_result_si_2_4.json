@@ -62313,7 +62313,7 @@
     }
   ],
   "cost_model": {
-    "name": "cassandra_secondary",
+    "name": "cassandra",
     "index_cost": 0.0078395645,
     "partition_cost": 0.0013692786,
     "row_cost": 1.17093638386496e-05,
@@ -64324,7 +64324,7 @@
         }
       ],
       "cost_model": {
-        "name": "cassandra_secondary",
+        "name": "cassandra",
         "index_cost": 0.0078395645,
         "partition_cost": 0.0013692786,
         "row_cost": 1.17093638386496e-05,
@@ -64397,7 +64397,7 @@
         }
       ],
       "cost_model": {
-        "name": "cassandra_secondary",
+        "name": "cassandra",
         "index_cost": 0.0078395645,
         "partition_cost": 0.0013692786,
         "row_cost": 1.17093638386496e-05,
@@ -64470,7 +64470,7 @@
         }
       ],
       "cost_model": {
-        "name": "cassandra_secondary",
+        "name": "cassandra",
         "index_cost": 0.0078395645,
         "partition_cost": 0.0013692786,
         "row_cost": 1.17093638386496e-05,
@@ -64522,7 +64522,7 @@
         }
       ],
       "cost_model": {
-        "name": "cassandra_secondary",
+        "name": "cassandra",
         "index_cost": 0.0078395645,
         "partition_cost": 0.0013692786,
         "row_cost": 1.17093638386496e-05,
@@ -64566,7 +64566,7 @@
         }
       ],
       "cost_model": {
-        "name": "cassandra_secondary",
+        "name": "cassandra",
         "index_cost": 0.0078395645,
         "partition_cost": 0.0013692786,
         "row_cost": 1.17093638386496e-05,
@@ -64650,7 +64650,7 @@
         }
       ],
       "cost_model": {
-        "name": "cassandra_secondary",
+        "name": "cassandra",
         "index_cost": 0.0078395645,
         "partition_cost": 0.0013692786,
         "row_cost": 1.17093638386496e-05,
@@ -64747,7 +64747,7 @@
         }
       ],
       "cost_model": {
-        "name": "cassandra_secondary",
+        "name": "cassandra",
         "index_cost": 0.0078395645,
         "partition_cost": 0.0013692786,
         "row_cost": 1.17093638386496e-05,
@@ -64820,7 +64820,7 @@
         }
       ],
       "cost_model": {
-        "name": "cassandra_secondary",
+        "name": "cassandra",
         "index_cost": 0.0078395645,
         "partition_cost": 0.0013692786,
         "row_cost": 1.17093638386496e-05,
@@ -64892,7 +64892,7 @@
         }
       ],
       "cost_model": {
-        "name": "cassandra_secondary",
+        "name": "cassandra",
         "index_cost": 0.0078395645,
         "partition_cost": 0.0013692786,
         "row_cost": 1.17093638386496e-05,
@@ -64940,7 +64940,7 @@
         }
       ],
       "cost_model": {
-        "name": "cassandra_secondary",
+        "name": "cassandra",
         "index_cost": 0.0078395645,
         "partition_cost": 0.0013692786,
         "row_cost": 1.17093638386496e-05,
@@ -64984,7 +64984,7 @@
         }
       ],
       "cost_model": {
-        "name": "cassandra_secondary",
+        "name": "cassandra",
         "index_cost": 0.0078395645,
         "partition_cost": 0.0013692786,
         "row_cost": 1.17093638386496e-05,
@@ -65036,7 +65036,7 @@
         }
       ],
       "cost_model": {
-        "name": "cassandra_secondary",
+        "name": "cassandra",
         "index_cost": 0.0078395645,
         "partition_cost": 0.0013692786,
         "row_cost": 1.17093638386496e-05,
@@ -65120,7 +65120,7 @@
         }
       ],
       "cost_model": {
-        "name": "cassandra_secondary",
+        "name": "cassandra",
         "index_cost": 0.0078395645,
         "partition_cost": 0.0013692786,
         "row_cost": 1.17093638386496e-05,
@@ -65208,7 +65208,7 @@
         }
       ],
       "cost_model": {
-        "name": "cassandra_secondary",
+        "name": "cassandra",
         "index_cost": 0.0078395645,
         "partition_cost": 0.0013692786,
         "row_cost": 1.17093638386496e-05,
@@ -65292,7 +65292,7 @@
         }
       ],
       "cost_model": {
-        "name": "cassandra_secondary",
+        "name": "cassandra",
         "index_cost": 0.0078395645,
         "partition_cost": 0.0013692786,
         "row_cost": 1.17093638386496e-05,
@@ -65381,7 +65381,7 @@
         }
       ],
       "cost_model": {
-        "name": "cassandra_secondary",
+        "name": "cassandra",
         "index_cost": 0.0078395645,
         "partition_cost": 0.0013692786,
         "row_cost": 1.17093638386496e-05,
@@ -65462,7 +65462,7 @@
         }
       ],
       "cost_model": {
-        "name": "cassandra_secondary",
+        "name": "cassandra",
         "index_cost": 0.0078395645,
         "partition_cost": 0.0013692786,
         "row_cost": 1.17093638386496e-05,
@@ -65547,7 +65547,7 @@
         }
       ],
       "cost_model": {
-        "name": "cassandra_secondary",
+        "name": "cassandra",
         "index_cost": 0.0078395645,
         "partition_cost": 0.0013692786,
         "row_cost": 1.17093638386496e-05,
@@ -65658,7 +65658,7 @@
         }
       ],
       "cost_model": {
-        "name": "cassandra_secondary",
+        "name": "cassandra",
         "index_cost": 0.0078395645,
         "partition_cost": 0.0013692786,
         "row_cost": 1.17093638386496e-05,
@@ -65710,7 +65710,7 @@
         }
       ],
       "cost_model": {
-        "name": "cassandra_secondary",
+        "name": "cassandra",
         "index_cost": 0.0078395645,
         "partition_cost": 0.0013692786,
         "row_cost": 1.17093638386496e-05,
@@ -65791,7 +65791,7 @@
         }
       ],
       "cost_model": {
-        "name": "cassandra_secondary",
+        "name": "cassandra",
         "index_cost": 0.0078395645,
         "partition_cost": 0.0013692786,
         "row_cost": 1.17093638386496e-05,
@@ -65847,7 +65847,7 @@
         }
       ],
       "cost_model": {
-        "name": "cassandra_secondary",
+        "name": "cassandra",
         "index_cost": 0.0078395645,
         "partition_cost": 0.0013692786,
         "row_cost": 1.17093638386496e-05,
@@ -65932,7 +65932,7 @@
         }
       ],
       "cost_model": {
-        "name": "cassandra_secondary",
+        "name": "cassandra",
         "index_cost": 0.0078395645,
         "partition_cost": 0.0013692786,
         "row_cost": 1.17093638386496e-05,
@@ -66005,7 +66005,7 @@
         }
       ],
       "cost_model": {
-        "name": "cassandra_secondary",
+        "name": "cassandra",
         "index_cost": 0.0078395645,
         "partition_cost": 0.0013692786,
         "row_cost": 1.17093638386496e-05,
@@ -66090,7 +66090,7 @@
         }
       ],
       "cost_model": {
-        "name": "cassandra_secondary",
+        "name": "cassandra",
         "index_cost": 0.0078395645,
         "partition_cost": 0.0013692786,
         "row_cost": 1.17093638386496e-05,
@@ -66138,7 +66138,7 @@
         }
       ],
       "cost_model": {
-        "name": "cassandra_secondary",
+        "name": "cassandra",
         "index_cost": 0.0078395645,
         "partition_cost": 0.0013692786,
         "row_cost": 1.17093638386496e-05,
@@ -66215,7 +66215,7 @@
         }
       ],
       "cost_model": {
-        "name": "cassandra_secondary",
+        "name": "cassandra",
         "index_cost": 0.0078395645,
         "partition_cost": 0.0013692786,
         "row_cost": 1.17093638386496e-05,
@@ -66300,7 +66300,7 @@
         }
       ],
       "cost_model": {
-        "name": "cassandra_secondary",
+        "name": "cassandra",
         "index_cost": 0.0078395645,
         "partition_cost": 0.0013692786,
         "row_cost": 1.17093638386496e-05,
@@ -66377,7 +66377,7 @@
         }
       ],
       "cost_model": {
-        "name": "cassandra_secondary",
+        "name": "cassandra",
         "index_cost": 0.0078395645,
         "partition_cost": 0.0013692786,
         "row_cost": 1.17093638386496e-05,
@@ -66458,7 +66458,7 @@
         }
       ],
       "cost_model": {
-        "name": "cassandra_secondary",
+        "name": "cassandra",
         "index_cost": 0.0078395645,
         "partition_cost": 0.0013692786,
         "row_cost": 1.17093638386496e-05,
@@ -66569,7 +66569,7 @@
         }
       ],
       "cost_model": {
-        "name": "cassandra_secondary",
+        "name": "cassandra",
         "index_cost": 0.0078395645,
         "partition_cost": 0.0013692786,
         "row_cost": 1.17093638386496e-05,
@@ -66613,7 +66613,7 @@
         }
       ],
       "cost_model": {
-        "name": "cassandra_secondary",
+        "name": "cassandra",
         "index_cost": 0.0078395645,
         "partition_cost": 0.0013692786,
         "row_cost": 1.17093638386496e-05,
@@ -66693,7 +66693,7 @@
         }
       ],
       "cost_model": {
-        "name": "cassandra_secondary",
+        "name": "cassandra",
         "index_cost": 0.0078395645,
         "partition_cost": 0.0013692786,
         "row_cost": 1.17093638386496e-05,
@@ -66749,7 +66749,7 @@
         }
       ],
       "cost_model": {
-        "name": "cassandra_secondary",
+        "name": "cassandra",
         "index_cost": 0.0078395645,
         "partition_cost": 0.0013692786,
         "row_cost": 1.17093638386496e-05,
@@ -66822,7 +66822,7 @@
         }
       ],
       "cost_model": {
-        "name": "cassandra_secondary",
+        "name": "cassandra",
         "index_cost": 0.0078395645,
         "partition_cost": 0.0013692786,
         "row_cost": 1.17093638386496e-05,
