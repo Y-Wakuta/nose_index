@@ -25,14 +25,14 @@
           {
             "name": "items",
             "size": 16,
-            "cardinality": 20000,
+            "cardinality": 1,
             "type": "foreign_key",
             "entity": "items",
             "relationship": "many",
             "reverse": "category"
           }
         ],
-        "count": 50
+        "count": 1
       },
       {
         "name": "regions",
@@ -58,14 +58,14 @@
           {
             "name": "users",
             "size": 16,
-            "cardinality": 2000,
+            "cardinality": 1,
             "type": "foreign_key",
             "entity": "users",
             "relationship": "many",
             "reverse": "region"
           }
         ],
-        "count": 5
+        "count": 1
       },
       {
         "name": "users",
@@ -127,7 +127,7 @@
           {
             "name": "region",
             "size": 16,
-            "cardinality": 5,
+            "cardinality": 1,
             "type": "foreign_key",
             "entity": "regions",
             "relationship": "one",
@@ -136,7 +136,7 @@
           {
             "name": "items_sold",
             "size": 16,
-            "cardinality": 20000,
+            "cardinality": 1,
             "type": "foreign_key",
             "entity": "items",
             "relationship": "many",
@@ -145,7 +145,7 @@
           {
             "name": "bids",
             "size": 16,
-            "cardinality": 200000,
+            "cardinality": 1,
             "type": "foreign_key",
             "entity": "bids",
             "relationship": "many",
@@ -154,7 +154,7 @@
           {
             "name": "comments_sent",
             "size": 16,
-            "cardinality": 100000,
+            "cardinality": 1,
             "type": "foreign_key",
             "entity": "comments",
             "relationship": "many",
@@ -163,7 +163,7 @@
           {
             "name": "comments_received",
             "size": 16,
-            "cardinality": 100000,
+            "cardinality": 1,
             "type": "foreign_key",
             "entity": "comments",
             "relationship": "many",
@@ -172,14 +172,14 @@
           {
             "name": "bought_now",
             "size": 16,
-            "cardinality": 40000,
+            "cardinality": 1,
             "type": "foreign_key",
             "entity": "buynow",
             "relationship": "many",
             "reverse": "buyer"
           }
         ],
-        "count": 2000
+        "count": 1
       },
       {
         "name": "items",
@@ -253,7 +253,7 @@
           {
             "name": "seller",
             "size": 16,
-            "cardinality": 2000,
+            "cardinality": 1,
             "type": "foreign_key",
             "entity": "users",
             "relationship": "one",
@@ -262,7 +262,7 @@
           {
             "name": "category",
             "size": 16,
-            "cardinality": 50,
+            "cardinality": 1,
             "type": "foreign_key",
             "entity": "categories",
             "relationship": "one",
@@ -271,7 +271,7 @@
           {
             "name": "bids",
             "size": 16,
-            "cardinality": 200000,
+            "cardinality": 1,
             "type": "foreign_key",
             "entity": "bids",
             "relationship": "many",
@@ -280,7 +280,7 @@
           {
             "name": "comments",
             "size": 16,
-            "cardinality": 100000,
+            "cardinality": 1,
             "type": "foreign_key",
             "entity": "comments",
             "relationship": "many",
@@ -289,14 +289,14 @@
           {
             "name": "bought_now",
             "size": 16,
-            "cardinality": 40000,
+            "cardinality": 1,
             "type": "foreign_key",
             "entity": "buynow",
             "relationship": "many",
             "reverse": "item"
           }
         ],
-        "count": 20000
+        "count": 1
       },
       {
         "name": "bids",
@@ -328,7 +328,7 @@
           {
             "name": "user",
             "size": 16,
-            "cardinality": 2000,
+            "cardinality": 1,
             "type": "foreign_key",
             "entity": "users",
             "relationship": "one",
@@ -337,14 +337,14 @@
           {
             "name": "item",
             "size": 16,
-            "cardinality": 20000,
+            "cardinality": 1,
             "type": "foreign_key",
             "entity": "items",
             "relationship": "one",
             "reverse": "bids"
           }
         ],
-        "count": 200000
+        "count": 1
       },
       {
         "name": "comments",
@@ -376,7 +376,7 @@
           {
             "name": "from_user",
             "size": 16,
-            "cardinality": 2000,
+            "cardinality": 1,
             "type": "foreign_key",
             "entity": "users",
             "relationship": "one",
@@ -385,7 +385,7 @@
           {
             "name": "to_user",
             "size": 16,
-            "cardinality": 2000,
+            "cardinality": 1,
             "type": "foreign_key",
             "entity": "users",
             "relationship": "one",
@@ -394,14 +394,14 @@
           {
             "name": "item",
             "size": 16,
-            "cardinality": 20000,
+            "cardinality": 1,
             "type": "foreign_key",
             "entity": "items",
             "relationship": "one",
             "reverse": "comments"
           }
         ],
-        "count": 100000
+        "count": 1
       },
       {
         "name": "buynow",
@@ -427,7 +427,7 @@
           {
             "name": "buyer",
             "size": 16,
-            "cardinality": 2000,
+            "cardinality": 1,
             "type": "foreign_key",
             "entity": "users",
             "relationship": "one",
@@ -436,14 +436,14 @@
           {
             "name": "item",
             "size": 16,
-            "cardinality": 20000,
+            "cardinality": 1,
             "type": "foreign_key",
             "entity": "items",
             "relationship": "one",
             "reverse": "bought_now"
           }
         ],
-        "count": 40000
+        "count": 1
       }
     ]
   },
@@ -629,15 +629,15 @@
 
         ]
       },
-      "entries": 20000,
+      "entries": 1,
       "entry_size": 296,
-      "size": 5920000,
+      "size": 296,
       "hash_count": 20000,
-      "per_hash_count": 1.0,
+      "per_hash_count": 5.0e-05,
       "is_secondary_index": false
     },
     {
-      "key": "i3218812164",
+      "key": "i1661317464",
       "hash_fields": [
         {
           "name": "name",
@@ -645,13 +645,13 @@
         }
       ],
       "order_fields": [
-
-      ],
-      "extra": [
         {
           "name": "id",
           "parent": "items"
         }
+      ],
+      "extra": [
+
       ],
       "graph": {
         "nodes": [
@@ -661,16 +661,15 @@
 
         ]
       },
-      "entries": 20000,
+      "entries": 1,
       "entry_size": 35,
-      "size": 700000,
+      "size": 35,
       "hash_count": 20000,
-      "per_hash_count": 1.0,
-      "base_cf_key": "i3574970522",
-      "is_secondary_index": true
+      "per_hash_count": 5.0e-05,
+      "is_secondary_index": false
     },
     {
-      "key": "i2128393614",
+      "key": "i638513312",
       "hash_fields": [
         {
           "name": "quantity",
@@ -678,11 +677,46 @@
         }
       ],
       "order_fields": [
-
+        {
+          "name": "id",
+          "parent": "items"
+        }
       ],
       "extra": [
         {
-          "name": "id",
+          "name": "name",
+          "parent": "items"
+        },
+        {
+          "name": "description",
+          "parent": "items"
+        },
+        {
+          "name": "initial_price",
+          "parent": "items"
+        },
+        {
+          "name": "reserve_price",
+          "parent": "items"
+        },
+        {
+          "name": "buy_now",
+          "parent": "items"
+        },
+        {
+          "name": "nb_of_bids",
+          "parent": "items"
+        },
+        {
+          "name": "max_bid",
+          "parent": "items"
+        },
+        {
+          "name": "start_date",
+          "parent": "items"
+        },
+        {
+          "name": "end_date",
           "parent": "items"
         }
       ],
@@ -694,16 +728,15 @@
 
         ]
       },
-      "entries": 20000,
-      "entry_size": 24,
-      "size": 480000,
+      "entries": 1,
+      "entry_size": 296,
+      "size": 296,
       "hash_count": 10,
-      "per_hash_count": 2000.0,
-      "base_cf_key": "i638513312",
-      "is_secondary_index": true
+      "per_hash_count": 0.1,
+      "is_secondary_index": false
     },
     {
-      "key": "i122800045",
+      "key": "i3683605489",
       "hash_fields": [
         {
           "name": "max_bid",
@@ -711,13 +744,13 @@
         }
       ],
       "order_fields": [
-
-      ],
-      "extra": [
         {
           "name": "id",
           "parent": "items"
         }
+      ],
+      "extra": [
+
       ],
       "graph": {
         "nodes": [
@@ -727,16 +760,15 @@
 
         ]
       },
-      "entries": 20000,
+      "entries": 1,
       "entry_size": 24,
-      "size": 480000,
+      "size": 24,
       "hash_count": 20000,
-      "per_hash_count": 1.0,
-      "base_cf_key": "i1921390833",
-      "is_secondary_index": true
+      "per_hash_count": 5.0e-05,
+      "is_secondary_index": false
     },
     {
-      "key": "i2452637654",
+      "key": "i1324276618",
       "hash_fields": [
         {
           "name": "start_date",
@@ -744,13 +776,13 @@
         }
       ],
       "order_fields": [
-
-      ],
-      "extra": [
         {
           "name": "id",
           "parent": "items"
         }
+      ],
+      "extra": [
+
       ],
       "graph": {
         "nodes": [
@@ -760,16 +792,15 @@
 
         ]
       },
-      "entries": 20000,
+      "entries": 1,
       "entry_size": 24,
-      "size": 480000,
+      "size": 24,
       "hash_count": 20000,
-      "per_hash_count": 1.0,
-      "base_cf_key": "i1201078151",
-      "is_secondary_index": true
+      "per_hash_count": 5.0e-05,
+      "is_secondary_index": false
     },
     {
-      "key": "i1498978294",
+      "key": "i2240154538",
       "hash_fields": [
         {
           "name": "initial_price",
@@ -777,13 +808,13 @@
         }
       ],
       "order_fields": [
-
-      ],
-      "extra": [
         {
           "name": "id",
           "parent": "items"
         }
+      ],
+      "extra": [
+
       ],
       "graph": {
         "nodes": [
@@ -793,13 +824,12 @@
 
         ]
       },
-      "entries": 20000,
+      "entries": 1,
       "entry_size": 24,
-      "size": 480000,
+      "size": 24,
       "hash_count": 20000,
-      "per_hash_count": 1.0,
-      "base_cf_key": "i1324919334",
-      "is_secondary_index": true
+      "per_hash_count": 5.0e-05,
+      "is_secondary_index": false
     },
     {
       "key": "i3220017915",
@@ -841,11 +871,11 @@
           }
         ]
       },
-      "entries": 200000,
+      "entries": 1,
       "entry_size": 56,
-      "size": 11200000,
+      "size": 56,
       "hash_count": 20000,
-      "per_hash_count": 10.0,
+      "per_hash_count": 5.0e-05,
       "is_secondary_index": false
     },
     {
@@ -901,11 +931,11 @@
 
         ]
       },
-      "entries": 2000,
+      "entries": 1,
       "entry_size": 103,
-      "size": 206000,
+      "size": 103,
       "hash_count": 2000,
-      "per_hash_count": 1.0,
+      "per_hash_count": 0.0005,
       "is_secondary_index": false
     }
   ],
@@ -963,11 +993,11 @@
 
         ]
       },
-      "entries": 20000,
+      "entries": 1,
       "entry_size": 280,
-      "size": 5600000,
+      "size": 280,
       "hash_count": 20000,
-      "per_hash_count": 1.0,
+      "per_hash_count": 5.0e-05,
       "is_secondary_index": false
     },
     {
@@ -1027,11 +1057,11 @@
 
         ]
       },
-      "entries": 20000,
+      "entries": 1,
       "entry_size": 288,
-      "size": 5760000,
+      "size": 288,
       "hash_count": 20000,
-      "per_hash_count": 1.0,
+      "per_hash_count": 5.0e-05,
       "is_secondary_index": false
     },
     {
@@ -1091,11 +1121,11 @@
 
         ]
       },
-      "entries": 20000,
+      "entries": 1,
       "entry_size": 288,
-      "size": 5760000,
+      "size": 288,
       "hash_count": 20000,
-      "per_hash_count": 1.0,
+      "per_hash_count": 5.0e-05,
       "is_secondary_index": false
     },
     {
@@ -1151,11 +1181,11 @@
 
         ]
       },
-      "entries": 20000,
+      "entries": 1,
       "entry_size": 280,
-      "size": 5600000,
+      "size": 280,
       "hash_count": 20000,
-      "per_hash_count": 1.0,
+      "per_hash_count": 5.0e-05,
       "is_secondary_index": false
     },
     {
@@ -1191,11 +1221,11 @@
 
         ]
       },
-      "entries": 20000,
+      "entries": 1,
       "entry_size": 51,
-      "size": 1020000,
+      "size": 51,
       "hash_count": 20000,
-      "per_hash_count": 1.0,
+      "per_hash_count": 5.0e-05,
       "is_secondary_index": false
     },
     {
@@ -1235,11 +1265,11 @@
 
         ]
       },
-      "entries": 20000,
+      "entries": 1,
       "entry_size": 59,
-      "size": 1180000,
+      "size": 59,
       "hash_count": 20000,
-      "per_hash_count": 1.0,
+      "per_hash_count": 5.0e-05,
       "is_secondary_index": false
     },
     {
@@ -1271,11 +1301,11 @@
 
         ]
       },
-      "entries": 20000,
+      "entries": 1,
       "entry_size": 43,
-      "size": 860000,
+      "size": 43,
       "hash_count": 20000,
-      "per_hash_count": 1.0,
+      "per_hash_count": 5.0e-05,
       "is_secondary_index": false
     },
     {
@@ -1307,11 +1337,11 @@
 
         ]
       },
-      "entries": 20000,
+      "entries": 1,
       "entry_size": 43,
-      "size": 860000,
+      "size": 43,
       "hash_count": 20000,
-      "per_hash_count": 1.0,
+      "per_hash_count": 5.0e-05,
       "is_secondary_index": false
     },
     {
@@ -1343,11 +1373,11 @@
 
         ]
       },
-      "entries": 20000,
+      "entries": 1,
       "entry_size": 43,
-      "size": 860000,
+      "size": 43,
       "hash_count": 20000,
-      "per_hash_count": 1.0,
+      "per_hash_count": 5.0e-05,
       "is_secondary_index": false
     },
     {
@@ -1379,11 +1409,11 @@
 
         ]
       },
-      "entries": 20000,
+      "entries": 1,
       "entry_size": 43,
-      "size": 860000,
+      "size": 43,
       "hash_count": 20000,
-      "per_hash_count": 1.0,
+      "per_hash_count": 5.0e-05,
       "is_secondary_index": false
     },
     {
@@ -1439,11 +1469,11 @@
 
         ]
       },
-      "entries": 20000,
+      "entries": 1,
       "entry_size": 280,
-      "size": 5600000,
+      "size": 280,
       "hash_count": 20000,
-      "per_hash_count": 1.0,
+      "per_hash_count": 5.0e-05,
       "is_secondary_index": false
     },
     {
@@ -1495,11 +1525,11 @@
 
         ]
       },
-      "entries": 20000,
+      "entries": 1,
       "entry_size": 272,
-      "size": 5440000,
+      "size": 272,
       "hash_count": 20000,
-      "per_hash_count": 1.0,
+      "per_hash_count": 5.0e-05,
       "is_secondary_index": false
     },
     {
@@ -1562,11 +1592,11 @@
 
         ]
       },
-      "entries": 20000,
+      "entries": 1,
       "entry_size": 296,
-      "size": 5920000,
+      "size": 296,
       "hash_count": 20000,
-      "per_hash_count": 1.0,
+      "per_hash_count": 5.0e-05,
       "is_secondary_index": false
     },
     {
@@ -1629,11 +1659,11 @@
 
         ]
       },
-      "entries": 20000,
+      "entries": 1,
       "entry_size": 296,
-      "size": 5920000,
+      "size": 296,
       "hash_count": 20000,
-      "per_hash_count": 1.0,
+      "per_hash_count": 5.0e-05,
       "is_secondary_index": false
     },
     {
@@ -1696,11 +1726,11 @@
 
         ]
       },
-      "entries": 20000,
+      "entries": 1,
       "entry_size": 296,
-      "size": 5920000,
+      "size": 296,
       "hash_count": 20000,
-      "per_hash_count": 1.0,
+      "per_hash_count": 5.0e-05,
       "is_secondary_index": false
     },
     {
@@ -1763,11 +1793,11 @@
 
         ]
       },
-      "entries": 20000,
+      "entries": 1,
       "entry_size": 296,
-      "size": 5920000,
+      "size": 296,
       "hash_count": 20000,
-      "per_hash_count": 1.0,
+      "per_hash_count": 5.0e-05,
       "is_secondary_index": false
     },
     {
@@ -1830,11 +1860,11 @@
 
         ]
       },
-      "entries": 20000,
+      "entries": 1,
       "entry_size": 296,
-      "size": 5920000,
+      "size": 296,
       "hash_count": 20000,
-      "per_hash_count": 1.0,
+      "per_hash_count": 5.0e-05,
       "is_secondary_index": false
     },
     {
@@ -1862,11 +1892,11 @@
 
         ]
       },
-      "entries": 20000,
+      "entries": 1,
       "entry_size": 35,
-      "size": 700000,
+      "size": 35,
       "hash_count": 20000,
-      "per_hash_count": 1.0,
+      "per_hash_count": 5.0e-05,
       "is_secondary_index": false
     },
     {
@@ -1894,11 +1924,11 @@
 
         ]
       },
-      "entries": 20000,
+      "entries": 1,
       "entry_size": 35,
-      "size": 700000,
+      "size": 35,
       "hash_count": 20000,
-      "per_hash_count": 1.0,
+      "per_hash_count": 5.0e-05,
       "is_secondary_index": false
     },
     {
@@ -1962,11 +1992,11 @@
 
         ]
       },
-      "entries": 20000,
+      "entries": 1,
       "entry_size": 296,
-      "size": 5920000,
+      "size": 296,
       "hash_count": 20000,
-      "per_hash_count": 1.0,
+      "per_hash_count": 5.0e-05,
       "is_secondary_index": false
     },
     {
@@ -2002,11 +2032,11 @@
 
         ]
       },
-      "entries": 20000,
+      "entries": 1,
       "entry_size": 40,
-      "size": 800000,
+      "size": 40,
       "hash_count": 20000,
-      "per_hash_count": 1.0,
+      "per_hash_count": 5.0e-05,
       "is_secondary_index": false
     },
     {
@@ -2042,11 +2072,11 @@
 
         ]
       },
-      "entries": 20000,
+      "entries": 1,
       "entry_size": 40,
-      "size": 800000,
+      "size": 40,
       "hash_count": 20000,
-      "per_hash_count": 1.0,
+      "per_hash_count": 5.0e-05,
       "is_secondary_index": false
     },
     {
@@ -2086,11 +2116,11 @@
 
         ]
       },
-      "entries": 20000,
+      "entries": 1,
       "entry_size": 48,
-      "size": 960000,
+      "size": 48,
       "hash_count": 20000,
-      "per_hash_count": 1.0,
+      "per_hash_count": 5.0e-05,
       "is_secondary_index": false
     },
     {
@@ -2122,11 +2152,11 @@
 
         ]
       },
-      "entries": 20000,
+      "entries": 1,
       "entry_size": 32,
-      "size": 640000,
+      "size": 32,
       "hash_count": 20000,
-      "per_hash_count": 1.0,
+      "per_hash_count": 5.0e-05,
       "is_secondary_index": false
     },
     {
@@ -2158,11 +2188,11 @@
 
         ]
       },
-      "entries": 20000,
+      "entries": 1,
       "entry_size": 32,
-      "size": 640000,
+      "size": 32,
       "hash_count": 20000,
-      "per_hash_count": 1.0,
+      "per_hash_count": 5.0e-05,
       "is_secondary_index": false
     },
     {
@@ -2198,11 +2228,11 @@
 
         ]
       },
-      "entries": 20000,
+      "entries": 1,
       "entry_size": 40,
-      "size": 800000,
+      "size": 40,
       "hash_count": 20000,
-      "per_hash_count": 1.0,
+      "per_hash_count": 5.0e-05,
       "is_secondary_index": false
     },
     {
@@ -2234,11 +2264,11 @@
 
         ]
       },
-      "entries": 20000,
+      "entries": 1,
       "entry_size": 32,
-      "size": 640000,
+      "size": 32,
       "hash_count": 20000,
-      "per_hash_count": 1.0,
+      "per_hash_count": 5.0e-05,
       "is_secondary_index": false
     },
     {
@@ -2270,11 +2300,11 @@
 
         ]
       },
-      "entries": 20000,
+      "entries": 1,
       "entry_size": 32,
-      "size": 640000,
+      "size": 32,
       "hash_count": 20000,
-      "per_hash_count": 1.0,
+      "per_hash_count": 5.0e-05,
       "is_secondary_index": false
     },
     {
@@ -2302,11 +2332,11 @@
 
         ]
       },
-      "entries": 20000,
+      "entries": 1,
       "entry_size": 24,
-      "size": 480000,
+      "size": 24,
       "hash_count": 20000,
-      "per_hash_count": 1.0,
+      "per_hash_count": 5.0e-05,
       "is_secondary_index": false
     },
     {
@@ -2334,11 +2364,11 @@
 
         ]
       },
-      "entries": 20000,
+      "entries": 1,
       "entry_size": 24,
-      "size": 480000,
+      "size": 24,
       "hash_count": 20000,
-      "per_hash_count": 1.0,
+      "per_hash_count": 5.0e-05,
       "is_secondary_index": false
     },
     {
@@ -2378,11 +2408,11 @@
 
         ]
       },
-      "entries": 20000,
+      "entries": 1,
       "entry_size": 48,
-      "size": 960000,
+      "size": 48,
       "hash_count": 20000,
-      "per_hash_count": 1.0,
+      "per_hash_count": 5.0e-05,
       "is_secondary_index": false
     },
     {
@@ -2414,11 +2444,11 @@
 
         ]
       },
-      "entries": 20000,
+      "entries": 1,
       "entry_size": 32,
-      "size": 640000,
+      "size": 32,
       "hash_count": 20000,
-      "per_hash_count": 1.0,
+      "per_hash_count": 5.0e-05,
       "is_secondary_index": false
     },
     {
@@ -2450,11 +2480,11 @@
 
         ]
       },
-      "entries": 20000,
+      "entries": 1,
       "entry_size": 32,
-      "size": 640000,
+      "size": 32,
       "hash_count": 20000,
-      "per_hash_count": 1.0,
+      "per_hash_count": 5.0e-05,
       "is_secondary_index": false
     },
     {
@@ -2482,11 +2512,11 @@
 
         ]
       },
-      "entries": 20000,
+      "entries": 1,
       "entry_size": 24,
-      "size": 480000,
+      "size": 24,
       "hash_count": 20000,
-      "per_hash_count": 1.0,
+      "per_hash_count": 5.0e-05,
       "is_secondary_index": false
     },
     {
@@ -2514,11 +2544,11 @@
 
         ]
       },
-      "entries": 20000,
+      "entries": 1,
       "entry_size": 24,
-      "size": 480000,
+      "size": 24,
       "hash_count": 20000,
-      "per_hash_count": 1.0,
+      "per_hash_count": 5.0e-05,
       "is_secondary_index": false
     },
     {
@@ -2558,11 +2588,11 @@
 
         ]
       },
-      "entries": 20000,
+      "entries": 1,
       "entry_size": 48,
-      "size": 960000,
+      "size": 48,
       "hash_count": 20000,
-      "per_hash_count": 1.0,
+      "per_hash_count": 5.0e-05,
       "is_secondary_index": false
     },
     {
@@ -2594,11 +2624,11 @@
 
         ]
       },
-      "entries": 20000,
+      "entries": 1,
       "entry_size": 32,
-      "size": 640000,
+      "size": 32,
       "hash_count": 20000,
-      "per_hash_count": 1.0,
+      "per_hash_count": 5.0e-05,
       "is_secondary_index": false
     },
     {
@@ -2626,11 +2656,11 @@
 
         ]
       },
-      "entries": 20000,
+      "entries": 1,
       "entry_size": 24,
-      "size": 480000,
+      "size": 24,
       "hash_count": 20000,
-      "per_hash_count": 1.0,
+      "per_hash_count": 5.0e-05,
       "is_secondary_index": false
     },
     {
@@ -2658,11 +2688,11 @@
 
         ]
       },
-      "entries": 20000,
+      "entries": 1,
       "entry_size": 24,
-      "size": 480000,
+      "size": 24,
       "hash_count": 20000,
-      "per_hash_count": 1.0,
+      "per_hash_count": 5.0e-05,
       "is_secondary_index": false
     },
     {
@@ -2698,11 +2728,11 @@
 
         ]
       },
-      "entries": 20000,
+      "entries": 1,
       "entry_size": 40,
-      "size": 800000,
+      "size": 40,
       "hash_count": 20000,
-      "per_hash_count": 1.0,
+      "per_hash_count": 5.0e-05,
       "is_secondary_index": false
     },
     {
@@ -2730,11 +2760,11 @@
 
         ]
       },
-      "entries": 20000,
+      "entries": 1,
       "entry_size": 24,
-      "size": 480000,
+      "size": 24,
       "hash_count": 20000,
-      "per_hash_count": 1.0,
+      "per_hash_count": 5.0e-05,
       "is_secondary_index": false
     },
     {
@@ -2762,45 +2792,12 @@
 
         ]
       },
-      "entries": 20000,
+      "entries": 1,
       "entry_size": 24,
-      "size": 480000,
+      "size": 24,
       "hash_count": 20000,
-      "per_hash_count": 1.0,
+      "per_hash_count": 5.0e-05,
       "is_secondary_index": false
-    },
-    {
-      "key": "i3218812164",
-      "hash_fields": [
-        {
-          "name": "name",
-          "parent": "items"
-        }
-      ],
-      "order_fields": [
-
-      ],
-      "extra": [
-        {
-          "name": "id",
-          "parent": "items"
-        }
-      ],
-      "graph": {
-        "nodes": [
-          "items"
-        ],
-        "edges": [
-
-        ]
-      },
-      "entries": 20000,
-      "entry_size": 35,
-      "size": 700000,
-      "hash_count": 20000,
-      "per_hash_count": 1.0,
-      "base_cf_key": "i3574970522",
-      "is_secondary_index": true
     },
     {
       "key": "i3574970522",
@@ -2862,11 +2859,11 @@
 
         ]
       },
-      "entries": 20000,
+      "entries": 1,
       "entry_size": 296,
-      "size": 5920000,
+      "size": 296,
       "hash_count": 20000,
-      "per_hash_count": 1.0,
+      "per_hash_count": 5.0e-05,
       "is_secondary_index": false
     },
     {
@@ -2894,45 +2891,12 @@
 
         ]
       },
-      "entries": 20000,
+      "entries": 1,
       "entry_size": 35,
-      "size": 700000,
+      "size": 35,
       "hash_count": 20000,
-      "per_hash_count": 1.0,
+      "per_hash_count": 5.0e-05,
       "is_secondary_index": false
-    },
-    {
-      "key": "i2128393614",
-      "hash_fields": [
-        {
-          "name": "quantity",
-          "parent": "items"
-        }
-      ],
-      "order_fields": [
-
-      ],
-      "extra": [
-        {
-          "name": "id",
-          "parent": "items"
-        }
-      ],
-      "graph": {
-        "nodes": [
-          "items"
-        ],
-        "edges": [
-
-        ]
-      },
-      "entries": 20000,
-      "entry_size": 24,
-      "size": 480000,
-      "hash_count": 10,
-      "per_hash_count": 2000.0,
-      "base_cf_key": "i638513312",
-      "is_secondary_index": true
     },
     {
       "key": "i638513312",
@@ -2994,11 +2958,11 @@
 
         ]
       },
-      "entries": 20000,
+      "entries": 1,
       "entry_size": 296,
-      "size": 5920000,
+      "size": 296,
       "hash_count": 10,
-      "per_hash_count": 2000.0,
+      "per_hash_count": 0.1,
       "is_secondary_index": false
     },
     {
@@ -3026,45 +2990,12 @@
 
         ]
       },
-      "entries": 20000,
+      "entries": 1,
       "entry_size": 24,
-      "size": 480000,
+      "size": 24,
       "hash_count": 10,
-      "per_hash_count": 2000.0,
+      "per_hash_count": 0.1,
       "is_secondary_index": false
-    },
-    {
-      "key": "i122800045",
-      "hash_fields": [
-        {
-          "name": "max_bid",
-          "parent": "items"
-        }
-      ],
-      "order_fields": [
-
-      ],
-      "extra": [
-        {
-          "name": "id",
-          "parent": "items"
-        }
-      ],
-      "graph": {
-        "nodes": [
-          "items"
-        ],
-        "edges": [
-
-        ]
-      },
-      "entries": 20000,
-      "entry_size": 24,
-      "size": 480000,
-      "hash_count": 20000,
-      "per_hash_count": 1.0,
-      "base_cf_key": "i1921390833",
-      "is_secondary_index": true
     },
     {
       "key": "i1921390833",
@@ -3126,11 +3057,11 @@
 
         ]
       },
-      "entries": 20000,
+      "entries": 1,
       "entry_size": 296,
-      "size": 5920000,
+      "size": 296,
       "hash_count": 20000,
-      "per_hash_count": 1.0,
+      "per_hash_count": 5.0e-05,
       "is_secondary_index": false
     },
     {
@@ -3158,45 +3089,12 @@
 
         ]
       },
-      "entries": 20000,
+      "entries": 1,
       "entry_size": 24,
-      "size": 480000,
+      "size": 24,
       "hash_count": 20000,
-      "per_hash_count": 1.0,
+      "per_hash_count": 5.0e-05,
       "is_secondary_index": false
-    },
-    {
-      "key": "i2452637654",
-      "hash_fields": [
-        {
-          "name": "start_date",
-          "parent": "items"
-        }
-      ],
-      "order_fields": [
-
-      ],
-      "extra": [
-        {
-          "name": "id",
-          "parent": "items"
-        }
-      ],
-      "graph": {
-        "nodes": [
-          "items"
-        ],
-        "edges": [
-
-        ]
-      },
-      "entries": 20000,
-      "entry_size": 24,
-      "size": 480000,
-      "hash_count": 20000,
-      "per_hash_count": 1.0,
-      "base_cf_key": "i1201078151",
-      "is_secondary_index": true
     },
     {
       "key": "i1201078151",
@@ -3258,11 +3156,11 @@
 
         ]
       },
-      "entries": 20000,
+      "entries": 1,
       "entry_size": 296,
-      "size": 5920000,
+      "size": 296,
       "hash_count": 20000,
-      "per_hash_count": 1.0,
+      "per_hash_count": 5.0e-05,
       "is_secondary_index": false
     },
     {
@@ -3290,45 +3188,12 @@
 
         ]
       },
-      "entries": 20000,
+      "entries": 1,
       "entry_size": 24,
-      "size": 480000,
+      "size": 24,
       "hash_count": 20000,
-      "per_hash_count": 1.0,
+      "per_hash_count": 5.0e-05,
       "is_secondary_index": false
-    },
-    {
-      "key": "i1498978294",
-      "hash_fields": [
-        {
-          "name": "initial_price",
-          "parent": "items"
-        }
-      ],
-      "order_fields": [
-
-      ],
-      "extra": [
-        {
-          "name": "id",
-          "parent": "items"
-        }
-      ],
-      "graph": {
-        "nodes": [
-          "items"
-        ],
-        "edges": [
-
-        ]
-      },
-      "entries": 20000,
-      "entry_size": 24,
-      "size": 480000,
-      "hash_count": 20000,
-      "per_hash_count": 1.0,
-      "base_cf_key": "i1324919334",
-      "is_secondary_index": true
     },
     {
       "key": "i1324919334",
@@ -3390,11 +3255,11 @@
 
         ]
       },
-      "entries": 20000,
+      "entries": 1,
       "entry_size": 296,
-      "size": 5920000,
+      "size": 296,
       "hash_count": 20000,
-      "per_hash_count": 1.0,
+      "per_hash_count": 5.0e-05,
       "is_secondary_index": false
     },
     {
@@ -3422,11 +3287,11 @@
 
         ]
       },
-      "entries": 20000,
+      "entries": 1,
       "entry_size": 24,
-      "size": 480000,
+      "size": 24,
       "hash_count": 20000,
-      "per_hash_count": 1.0,
+      "per_hash_count": 5.0e-05,
       "is_secondary_index": false
     },
     {
@@ -3469,11 +3334,11 @@
           }
         ]
       },
-      "entries": 200000,
+      "entries": 1,
       "entry_size": 56,
-      "size": 11200000,
+      "size": 56,
       "hash_count": 20000,
-      "per_hash_count": 10.0,
+      "per_hash_count": 5.0e-05,
       "is_secondary_index": false
     },
     {
@@ -3505,11 +3370,11 @@
           }
         ]
       },
-      "entries": 200000,
+      "entries": 1,
       "entry_size": 32,
-      "size": 6400000,
+      "size": 32,
       "hash_count": 20000,
-      "per_hash_count": 10.0,
+      "per_hash_count": 5.0e-05,
       "is_secondary_index": false
     },
     {
@@ -3545,11 +3410,11 @@
 
         ]
       },
-      "entries": 200000,
+      "entries": 1,
       "entry_size": 40,
-      "size": 8000000,
+      "size": 40,
       "hash_count": 200000,
-      "per_hash_count": 1.0,
+      "per_hash_count": 5.0e-06,
       "is_secondary_index": false
     },
     {
@@ -3585,11 +3450,11 @@
 
         ]
       },
-      "entries": 2000,
+      "entries": 1,
       "entry_size": 51,
-      "size": 102000,
+      "size": 51,
       "hash_count": 2000,
-      "per_hash_count": 1.0,
+      "per_hash_count": 0.0005,
       "is_secondary_index": false
     },
     {
@@ -3621,11 +3486,11 @@
 
         ]
       },
-      "entries": 2000,
+      "entries": 1,
       "entry_size": 36,
-      "size": 72000,
+      "size": 36,
       "hash_count": 2000,
-      "per_hash_count": 1.0,
+      "per_hash_count": 0.0005,
       "is_secondary_index": false
     },
     {
@@ -3681,11 +3546,11 @@
 
         ]
       },
-      "entries": 2000,
+      "entries": 1,
       "entry_size": 103,
-      "size": 206000,
+      "size": 103,
       "hash_count": 2000,
-      "per_hash_count": 1.0,
+      "per_hash_count": 0.0005,
       "is_secondary_index": false
     },
     {
@@ -3717,11 +3582,11 @@
 
         ]
       },
-      "entries": 2000,
+      "entries": 1,
       "entry_size": 43,
-      "size": 86000,
+      "size": 43,
       "hash_count": 2000,
-      "per_hash_count": 1.0,
+      "per_hash_count": 0.0005,
       "is_secondary_index": false
     },
     {
@@ -3749,11 +3614,11 @@
 
         ]
       },
-      "entries": 2000,
+      "entries": 1,
       "entry_size": 28,
-      "size": 56000,
+      "size": 28,
       "hash_count": 2000,
-      "per_hash_count": 1.0,
+      "per_hash_count": 0.0005,
       "is_secondary_index": false
     },
     {
@@ -3781,45 +3646,16 @@
 
         ]
       },
-      "entries": 2000,
+      "entries": 1,
       "entry_size": 24,
-      "size": 48000,
+      "size": 24,
       "hash_count": 2000,
-      "per_hash_count": 1.0,
+      "per_hash_count": 0.0005,
       "is_secondary_index": false
     }
   ],
   "has_index_hash": [
-    {
-      "index_key": "i3218812164",
-      "index_value": true,
-      "parent_table_id": "i1888493477"
-    },
-    {
-      "index_key": "i2128393614",
-      "index_value": true,
-      "parent_table_id": "i1888493477"
-    },
-    {
-      "index_key": "i122800045",
-      "index_value": true,
-      "parent_table_id": "i1888493477"
-    },
-    {
-      "index_key": "i2452637654",
-      "index_value": true,
-      "parent_table_id": "i1888493477"
-    },
-    {
-      "index_key": "i1498978294",
-      "index_value": true,
-      "parent_table_id": "i1888493477"
-    },
-    {
-      "index_key": "i3218812164",
-      "index_value": true,
-      "parent_table_id": "i1888493477"
-    }
+
   ],
   "cost_model": {
     "name": "cassandra",
@@ -3836,7 +3672,7 @@
       "name": "SELECT items.* FROM items WHERE items.id = ? -- 5",
       "query": "SELECT items.* FROM items WHERE items.id = ? -- 5",
       "cost": 8.919220552463837,
-      "weight": 14.17,
+      "weight": 1,
       "steps": [
         {
           "type": "index_lookup",
@@ -3862,16 +3698,16 @@
       "group": "ViewItem",
       "name": "SELECT items.* FROM items WHERE items.name = ? -- 5",
       "query": "SELECT items.* FROM items WHERE items.name = ? -- 5",
-      "cost": 8.928441104927677,
-      "weight": 14.17,
+      "cost": 10.008441104927677,
+      "weight": 1,
       "steps": [
         {
           "type": "index_lookup",
-          "cost": 0.03922055246383865,
+          "cost": 1.0892205524638388,
           "cardinality": 1.0,
           "hash_cardinality": 1,
           "index": {
-            "key": "i3218812164"
+            "key": "i1661317464"
           },
           "eq_filter": [
             {
@@ -3885,7 +3721,7 @@
         },
         {
           "type": "index_lookup",
-          "cost": 8.889220552463838,
+          "cost": 8.919220552463837,
           "cardinality": 1.0,
           "hash_cardinality": 1.0,
           "index": {
@@ -3907,38 +3743,20 @@
       "group": "ViewItem",
       "name": "SELECT items.* FROM items WHERE items.quantity = ? -- 5",
       "query": "SELECT items.* FROM items WHERE items.quantity = ? -- 5",
-      "cost": 17762.832443062955,
-      "weight": 14.17,
+      "cost": 17760.062627570776,
+      "weight": 1,
       "steps": [
         {
           "type": "index_lookup",
-          "cost": 0.06262757077729919,
+          "cost": 17760.062627570776,
           "cardinality": 2000.0,
           "hash_cardinality": 1,
           "index": {
-            "key": "i2128393614"
+            "key": "i638513312"
           },
           "eq_filter": [
             {
               "name": "quantity",
-              "parent": "items"
-            }
-          ],
-          "order_by": [
-
-          ]
-        },
-        {
-          "type": "index_lookup",
-          "cost": 17762.769815492178,
-          "cardinality": 2000.0,
-          "hash_cardinality": 2000.0,
-          "index": {
-            "key": "i1888493477"
-          },
-          "eq_filter": [
-            {
-              "name": "id",
               "parent": "items"
             }
           ],
@@ -3952,16 +3770,16 @@
       "group": "ViewItem",
       "name": "SELECT items.* FROM items WHERE items.max_bid = ? -- 5",
       "query": "SELECT items.* FROM items WHERE items.max_bid = ? -- 5",
-      "cost": 8.928441104927677,
-      "weight": 14.17,
+      "cost": 9.678441104927677,
+      "weight": 1,
       "steps": [
         {
           "type": "index_lookup",
-          "cost": 0.03922055246383865,
+          "cost": 0.7592205524638386,
           "cardinality": 1.0,
           "hash_cardinality": 1,
           "index": {
-            "key": "i122800045"
+            "key": "i3683605489"
           },
           "eq_filter": [
             {
@@ -3975,7 +3793,7 @@
         },
         {
           "type": "index_lookup",
-          "cost": 8.889220552463838,
+          "cost": 8.919220552463837,
           "cardinality": 1.0,
           "hash_cardinality": 1.0,
           "index": {
@@ -3997,16 +3815,16 @@
       "group": "ViewItem",
       "name": "SELECT items.* FROM items WHERE items.start_date = ? -- 5",
       "query": "SELECT items.* FROM items WHERE items.start_date = ? -- 5",
-      "cost": 8.928441104927677,
-      "weight": 14.17,
+      "cost": 9.678441104927677,
+      "weight": 1,
       "steps": [
         {
           "type": "index_lookup",
-          "cost": 0.03922055246383865,
+          "cost": 0.7592205524638386,
           "cardinality": 1.0,
           "hash_cardinality": 1,
           "index": {
-            "key": "i2452637654"
+            "key": "i1324276618"
           },
           "eq_filter": [
             {
@@ -4020,7 +3838,7 @@
         },
         {
           "type": "index_lookup",
-          "cost": 8.889220552463838,
+          "cost": 8.919220552463837,
           "cardinality": 1.0,
           "hash_cardinality": 1.0,
           "index": {
@@ -4042,16 +3860,16 @@
       "group": "ViewItem",
       "name": "SELECT items.* FROM items WHERE items.initial_price = ? -- 5",
       "query": "SELECT items.* FROM items WHERE items.initial_price = ? -- 5",
-      "cost": 8.928441104927677,
-      "weight": 14.17,
+      "cost": 9.678441104927677,
+      "weight": 1,
       "steps": [
         {
           "type": "index_lookup",
-          "cost": 0.03922055246383865,
+          "cost": 0.7592205524638386,
           "cardinality": 1.0,
           "hash_cardinality": 1,
           "index": {
-            "key": "i1498978294"
+            "key": "i2240154538"
           },
           "eq_filter": [
             {
@@ -4065,7 +3883,7 @@
         },
         {
           "type": "index_lookup",
-          "cost": 8.889220552463838,
+          "cost": 8.919220552463837,
           "cardinality": 1.0,
           "hash_cardinality": 1.0,
           "index": {
@@ -4088,7 +3906,7 @@
       "name": "SELECT bids.* FROM items.bids WHERE items.id = ? -- 6",
       "query": "SELECT bids.* FROM items.bids WHERE items.id = ? -- 6",
       "cost": 12.039325936738386,
-      "weight": 14.17,
+      "weight": 1,
       "steps": [
         {
           "type": "index_lookup",
@@ -4115,7 +3933,7 @@
       "name": "SELECT users.nickname FROM users WHERE users.id=? -- 12",
       "query": "SELECT users.nickname FROM users WHERE users.id=? -- 12",
       "cost": 0.39922055246383864,
-      "weight": 1.16,
+      "weight": 1,
       "steps": [
         {
           "type": "index_lookup",
@@ -4142,7 +3960,7 @@
       "name": "SELECT items.* FROM items WHERE items.id=? -- 13",
       "query": "SELECT items.* FROM items WHERE items.id=? -- 13",
       "cost": 8.919220552463837,
-      "weight": 1.16,
+      "weight": 1,
       "steps": [
         {
           "type": "index_lookup",
@@ -4168,16 +3986,16 @@
       "group": "BuyNow",
       "name": "SELECT items.* FROM items WHERE items.name=? -- 13",
       "query": "SELECT items.* FROM items WHERE items.name=? -- 13",
-      "cost": 8.928441104927677,
-      "weight": 1.16,
+      "cost": 10.008441104927677,
+      "weight": 1,
       "steps": [
         {
           "type": "index_lookup",
-          "cost": 0.03922055246383865,
+          "cost": 1.0892205524638388,
           "cardinality": 1.0,
           "hash_cardinality": 1,
           "index": {
-            "key": "i3218812164"
+            "key": "i1661317464"
           },
           "eq_filter": [
             {
@@ -4191,7 +4009,7 @@
         },
         {
           "type": "index_lookup",
-          "cost": 8.889220552463838,
+          "cost": 8.919220552463837,
           "cardinality": 1.0,
           "hash_cardinality": 1.0,
           "index": {
@@ -4214,7 +4032,7 @@
       "name": "SELECT items.quantity, items.nb_of_bids, items.end_date FROM items WHERE items.id=? -- 14",
       "query": "SELECT items.quantity, items.nb_of_bids, items.end_date FROM items WHERE items.id=? -- 14",
       "cost": 0.7592205524638386,
-      "weight": 110.00000000000001,
+      "weight": 1,
       "steps": [
         {
           "type": "index_lookup",
@@ -4241,7 +4059,7 @@
       "name": "SELECT items.nb_of_bids, items.max_bid FROM items WHERE items.id=? -- 21",
       "query": "SELECT items.nb_of_bids, items.max_bid FROM items WHERE items.id=? -- 21",
       "cost": 0.5192205524638386,
-      "weight": 374.0,
+      "weight": 1,
       "steps": [
         {
           "type": "index_lookup",
@@ -4268,7 +4086,7 @@
       "name": "SELECT users.nickname, users.password FROM users WHERE users.id=? -- 23",
       "query": "SELECT users.nickname, users.password FROM users WHERE users.id=? -- 23",
       "cost": 0.8492205524638385,
-      "weight": 0.46,
+      "weight": 1,
       "steps": [
         {
           "type": "index_lookup",
@@ -4295,7 +4113,7 @@
       "name": "SELECT items.* FROM items WHERE items.id=? -- 24",
       "query": "SELECT items.* FROM items WHERE items.id=? -- 24",
       "cost": 8.919220552463837,
-      "weight": 0.46,
+      "weight": 1,
       "steps": [
         {
           "type": "index_lookup",
@@ -4322,7 +4140,7 @@
       "name": "SELECT users.* FROM users WHERE users.id=? -- 25",
       "query": "SELECT users.* FROM users WHERE users.id=? -- 25",
       "cost": 3.1292205524638383,
-      "weight": 0.46,
+      "weight": 1,
       "steps": [
         {
           "type": "index_lookup",
@@ -4349,7 +4167,7 @@
       "name": "SELECT users.rating FROM users WHERE users.id=? -- 26",
       "query": "SELECT users.rating FROM users WHERE users.id=? -- 26",
       "cost": 0.27922055246383864,
-      "weight": 45.0,
+      "weight": 1,
       "steps": [
         {
           "type": "index_lookup",
@@ -4378,7 +4196,7 @@
       "name": "INSERT INTO items SET id=?, name=?, description=?, initial_price=?, quantity=?, reserve_price=?, buy_now=?, nb_of_bids=0, max_bid=0, start_date=?, end_date=? AND CONNECT TO category(?), seller(?) -- 10 for i1888493477",
       "cost": 0.013329108,
       "update_cost": 0.013329108,
-      "weight": 53.0,
+      "weight": 1,
       "statement": "INSERT INTO items SET id=?, name=?, description=?, initial_price=?, quantity=?, reserve_price=?, buy_now=?, nb_of_bids=0, max_bid=0, start_date=?, end_date=? AND CONNECT TO category(?), seller(?) -- 10",
       "index": {
         "key": "i1888493477"
@@ -4443,7 +4261,7 @@
         }
       ],
       "cost_model": {
-        "name": "cassandra_secondary",
+        "name": "cassandra",
         "index_cost": 0.0078395645,
         "partition_cost": 0.0013692786,
         "row_cost": 1.17093638386496e-05,
@@ -4454,13 +4272,13 @@
     },
     {
       "group": "RegisterItem",
-      "name": "INSERT INTO items SET id=?, name=?, description=?, initial_price=?, quantity=?, reserve_price=?, buy_now=?, nb_of_bids=0, max_bid=0, start_date=?, end_date=? AND CONNECT TO category(?), seller(?) -- 10 for i1888493477",
+      "name": "INSERT INTO items SET id=?, name=?, description=?, initial_price=?, quantity=?, reserve_price=?, buy_now=?, nb_of_bids=0, max_bid=0, start_date=?, end_date=? AND CONNECT TO category(?), seller(?) -- 10 for i1661317464",
       "cost": 0.013329108,
       "update_cost": 0.013329108,
-      "weight": 53.0,
+      "weight": 1,
       "statement": "INSERT INTO items SET id=?, name=?, description=?, initial_price=?, quantity=?, reserve_price=?, buy_now=?, nb_of_bids=0, max_bid=0, start_date=?, end_date=? AND CONNECT TO category(?), seller(?) -- 10",
       "index": {
-        "key": "i1888493477"
+        "key": "i1661317464"
       },
       "query_plans": [
 
@@ -4471,11 +4289,62 @@
           "cost": 0.013329108,
           "cardinality": 1,
           "index": {
-            "key": "i1888493477"
+            "key": "i1661317464"
           },
           "fields": [
             {
+              "name": "name",
+              "parent": "items"
+            },
+            {
               "name": "id",
+              "parent": "items"
+            }
+          ]
+        }
+      ],
+      "cost_model": {
+        "name": "cassandra",
+        "index_cost": 0.0078395645,
+        "partition_cost": 0.0013692786,
+        "row_cost": 1.17093638386496e-05,
+        "delete_cost": 0.0013287903,
+        "insert_cost": 0.013329108,
+        "client_network_cost": 0.03
+      }
+    },
+    {
+      "group": "RegisterItem",
+      "name": "INSERT INTO items SET id=?, name=?, description=?, initial_price=?, quantity=?, reserve_price=?, buy_now=?, nb_of_bids=0, max_bid=0, start_date=?, end_date=? AND CONNECT TO category(?), seller(?) -- 10 for i638513312",
+      "cost": 0.013329108,
+      "update_cost": 0.013329108,
+      "weight": 1,
+      "statement": "INSERT INTO items SET id=?, name=?, description=?, initial_price=?, quantity=?, reserve_price=?, buy_now=?, nb_of_bids=0, max_bid=0, start_date=?, end_date=? AND CONNECT TO category(?), seller(?) -- 10",
+      "index": {
+        "key": "i638513312"
+      },
+      "query_plans": [
+
+      ],
+      "update_steps": [
+        {
+          "type": "insert",
+          "cost": 0.013329108,
+          "cardinality": 1,
+          "index": {
+            "key": "i638513312"
+          },
+          "fields": [
+            {
+              "name": "quantity",
+              "parent": "items"
+            },
+            {
+              "name": "id",
+              "parent": "items"
+            },
+            {
+              "name": "name",
               "parent": "items"
             },
             {
@@ -4484,10 +4353,6 @@
             },
             {
               "name": "initial_price",
-              "parent": "items"
-            },
-            {
-              "name": "quantity",
               "parent": "items"
             },
             {
@@ -4513,16 +4378,141 @@
             {
               "name": "end_date",
               "parent": "items"
+            }
+          ]
+        }
+      ],
+      "cost_model": {
+        "name": "cassandra",
+        "index_cost": 0.0078395645,
+        "partition_cost": 0.0013692786,
+        "row_cost": 1.17093638386496e-05,
+        "delete_cost": 0.0013287903,
+        "insert_cost": 0.013329108,
+        "client_network_cost": 0.03
+      }
+    },
+    {
+      "group": "RegisterItem",
+      "name": "INSERT INTO items SET id=?, name=?, description=?, initial_price=?, quantity=?, reserve_price=?, buy_now=?, nb_of_bids=0, max_bid=0, start_date=?, end_date=? AND CONNECT TO category(?), seller(?) -- 10 for i3683605489",
+      "cost": 0.013329108,
+      "update_cost": 0.013329108,
+      "weight": 1,
+      "statement": "INSERT INTO items SET id=?, name=?, description=?, initial_price=?, quantity=?, reserve_price=?, buy_now=?, nb_of_bids=0, max_bid=0, start_date=?, end_date=? AND CONNECT TO category(?), seller(?) -- 10",
+      "index": {
+        "key": "i3683605489"
+      },
+      "query_plans": [
+
+      ],
+      "update_steps": [
+        {
+          "type": "insert",
+          "cost": 0.013329108,
+          "cardinality": 1,
+          "index": {
+            "key": "i3683605489"
+          },
+          "fields": [
+            {
+              "name": "max_bid",
+              "parent": "items"
             },
             {
-              "name": "name",
+              "name": "id",
               "parent": "items"
             }
           ]
         }
       ],
       "cost_model": {
-        "name": "cassandra_secondary",
+        "name": "cassandra",
+        "index_cost": 0.0078395645,
+        "partition_cost": 0.0013692786,
+        "row_cost": 1.17093638386496e-05,
+        "delete_cost": 0.0013287903,
+        "insert_cost": 0.013329108,
+        "client_network_cost": 0.03
+      }
+    },
+    {
+      "group": "RegisterItem",
+      "name": "INSERT INTO items SET id=?, name=?, description=?, initial_price=?, quantity=?, reserve_price=?, buy_now=?, nb_of_bids=0, max_bid=0, start_date=?, end_date=? AND CONNECT TO category(?), seller(?) -- 10 for i1324276618",
+      "cost": 0.013329108,
+      "update_cost": 0.013329108,
+      "weight": 1,
+      "statement": "INSERT INTO items SET id=?, name=?, description=?, initial_price=?, quantity=?, reserve_price=?, buy_now=?, nb_of_bids=0, max_bid=0, start_date=?, end_date=? AND CONNECT TO category(?), seller(?) -- 10",
+      "index": {
+        "key": "i1324276618"
+      },
+      "query_plans": [
+
+      ],
+      "update_steps": [
+        {
+          "type": "insert",
+          "cost": 0.013329108,
+          "cardinality": 1,
+          "index": {
+            "key": "i1324276618"
+          },
+          "fields": [
+            {
+              "name": "start_date",
+              "parent": "items"
+            },
+            {
+              "name": "id",
+              "parent": "items"
+            }
+          ]
+        }
+      ],
+      "cost_model": {
+        "name": "cassandra",
+        "index_cost": 0.0078395645,
+        "partition_cost": 0.0013692786,
+        "row_cost": 1.17093638386496e-05,
+        "delete_cost": 0.0013287903,
+        "insert_cost": 0.013329108,
+        "client_network_cost": 0.03
+      }
+    },
+    {
+      "group": "RegisterItem",
+      "name": "INSERT INTO items SET id=?, name=?, description=?, initial_price=?, quantity=?, reserve_price=?, buy_now=?, nb_of_bids=0, max_bid=0, start_date=?, end_date=? AND CONNECT TO category(?), seller(?) -- 10 for i2240154538",
+      "cost": 0.013329108,
+      "update_cost": 0.013329108,
+      "weight": 1,
+      "statement": "INSERT INTO items SET id=?, name=?, description=?, initial_price=?, quantity=?, reserve_price=?, buy_now=?, nb_of_bids=0, max_bid=0, start_date=?, end_date=? AND CONNECT TO category(?), seller(?) -- 10",
+      "index": {
+        "key": "i2240154538"
+      },
+      "query_plans": [
+
+      ],
+      "update_steps": [
+        {
+          "type": "insert",
+          "cost": 0.013329108,
+          "cardinality": 1,
+          "index": {
+            "key": "i2240154538"
+          },
+          "fields": [
+            {
+              "name": "initial_price",
+              "parent": "items"
+            },
+            {
+              "name": "id",
+              "parent": "items"
+            }
+          ]
+        }
+      ],
+      "cost_model": {
+        "name": "cassandra",
         "index_cost": 0.0078395645,
         "partition_cost": 0.0013692786,
         "row_cost": 1.17093638386496e-05,
@@ -4536,7 +4526,7 @@
       "name": "INSERT INTO users SET id=?, firstname=?, lastname=?, nickname=?, password=?, email=?, rating=0, balance=0, creation_date=? AND CONNECT TO region(?) -- 11 for i2906147889",
       "cost": 0.013329108,
       "update_cost": 0.013329108,
-      "weight": 107.0,
+      "weight": 1,
       "statement": "INSERT INTO users SET id=?, firstname=?, lastname=?, nickname=?, password=?, email=?, rating=0, balance=0, creation_date=? AND CONNECT TO region(?) -- 11",
       "index": {
         "key": "i2906147889"
@@ -4593,7 +4583,7 @@
         }
       ],
       "cost_model": {
-        "name": "cassandra_secondary",
+        "name": "cassandra",
         "index_cost": 0.0078395645,
         "partition_cost": 0.0013692786,
         "row_cost": 1.17093638386496e-05,
@@ -4607,7 +4597,7 @@
       "name": "UPDATE items SET quantity=?, nb_of_bids=?, end_date=? WHERE items.id=? -- 15 for i1888493477",
       "cost": 0.013329108,
       "update_cost": 0.013329108,
-      "weight": 110.00000000000001,
+      "weight": 1,
       "statement": "UPDATE items SET quantity=?, nb_of_bids=?, end_date=? WHERE items.id=? -- 15",
       "index": {
         "key": "i1888493477"
@@ -4644,7 +4634,7 @@
         }
       ],
       "cost_model": {
-        "name": "cassandra_secondary",
+        "name": "cassandra",
         "index_cost": 0.0078395645,
         "partition_cost": 0.0013692786,
         "row_cost": 1.17093638386496e-05,
@@ -4655,24 +4645,61 @@
     },
     {
       "group": "StoreBuyNow",
-      "name": "UPDATE items SET quantity=?, nb_of_bids=?, end_date=? WHERE items.id=? -- 15 for i1888493477",
-      "cost": 0.013329108,
-      "update_cost": 0.013329108,
-      "weight": 110.00000000000001,
+      "name": "UPDATE items SET quantity=?, nb_of_bids=?, end_date=? WHERE items.id=? -- 15 for i638513312",
+      "cost": 7.7338784507638385,
+      "update_cost": 0.0146578983,
+      "weight": 1,
       "statement": "UPDATE items SET quantity=?, nb_of_bids=?, end_date=? WHERE items.id=? -- 15",
       "index": {
-        "key": "i1888493477"
+        "key": "i638513312"
       },
       "query_plans": [
+        {
+          "group": "StoreBuyNow",
+          "name": "SELECT items.name, items.description, items.initial_price, items.reserve_price, items.buy_now, items.max_bid, items.start_date FROM items WHERE items.id = ? -- -2134052723965848470",
+          "query": "SELECT items.name, items.description, items.initial_price, items.reserve_price, items.buy_now, items.max_bid, items.start_date FROM items WHERE items.id = ? -- -2134052723965848470",
+          "cost": 7.719220552463838,
+          "weight": 1,
+          "steps": [
+            {
+              "type": "index_lookup",
+              "cost": 7.719220552463838,
+              "cardinality": 1.0,
+              "hash_cardinality": 1,
+              "index": {
+                "key": "i1888493477"
+              },
+              "eq_filter": [
+                {
+                  "name": "id",
+                  "parent": "items"
+                }
+              ],
+              "order_by": [
 
+              ]
+            }
+          ]
+        }
       ],
       "update_steps": [
+        {
+          "type": "delete",
+          "cost": 0.0013287903,
+          "cardinality": 1.0,
+          "index": {
+            "key": "i638513312"
+          },
+          "fields": [
+
+          ]
+        },
         {
           "type": "insert",
           "cost": 0.013329108,
           "cardinality": 1.0,
           "index": {
-            "key": "i1888493477"
+            "key": "i638513312"
           },
           "fields": [
             {
@@ -4695,7 +4722,7 @@
         }
       ],
       "cost_model": {
-        "name": "cassandra_secondary",
+        "name": "cassandra",
         "index_cost": 0.0078395645,
         "partition_cost": 0.0013692786,
         "row_cost": 1.17093638386496e-05,
@@ -4709,7 +4736,7 @@
       "name": "INSERT INTO bids SET id=?, qty=?, bid=?, date=? AND CONNECT TO item(?), user(?) -- 20 for i3220017915",
       "cost": 0.013329108,
       "update_cost": 0.013329108,
-      "weight": 374.0,
+      "weight": 1,
       "statement": "INSERT INTO bids SET id=?, qty=?, bid=?, date=? AND CONNECT TO item(?), user(?) -- 20",
       "index": {
         "key": "i3220017915"
@@ -4750,7 +4777,7 @@
         }
       ],
       "cost_model": {
-        "name": "cassandra_secondary",
+        "name": "cassandra",
         "index_cost": 0.0078395645,
         "partition_cost": 0.0013692786,
         "row_cost": 1.17093638386496e-05,
@@ -4764,7 +4791,7 @@
       "name": "UPDATE items SET nb_of_bids=?, max_bid=? WHERE items.id=? -- 22 for i1888493477",
       "cost": 0.013329108,
       "update_cost": 0.013329108,
-      "weight": 374.0,
+      "weight": 1,
       "statement": "UPDATE items SET nb_of_bids=?, max_bid=? WHERE items.id=? -- 22",
       "index": {
         "key": "i1888493477"
@@ -4797,7 +4824,7 @@
         }
       ],
       "cost_model": {
-        "name": "cassandra_secondary",
+        "name": "cassandra",
         "index_cost": 0.0078395645,
         "partition_cost": 0.0013692786,
         "row_cost": 1.17093638386496e-05,
@@ -4808,16 +4835,42 @@
     },
     {
       "group": "StoreBid",
-      "name": "UPDATE items SET nb_of_bids=?, max_bid=? WHERE items.id=? -- 22 for i1888493477",
-      "cost": 0.013329108,
+      "name": "UPDATE items SET nb_of_bids=?, max_bid=? WHERE items.id=? -- 22 for i638513312",
+      "cost": 0.2925496604638386,
       "update_cost": 0.013329108,
-      "weight": 374.0,
+      "weight": 1,
       "statement": "UPDATE items SET nb_of_bids=?, max_bid=? WHERE items.id=? -- 22",
       "index": {
-        "key": "i1888493477"
+        "key": "i638513312"
       },
       "query_plans": [
+        {
+          "group": "StoreBid",
+          "name": "SELECT items.quantity FROM items WHERE items.id = ? -- 772898640959284552",
+          "query": "SELECT items.quantity FROM items WHERE items.id = ? -- 772898640959284552",
+          "cost": 0.27922055246383864,
+          "weight": 1,
+          "steps": [
+            {
+              "type": "index_lookup",
+              "cost": 0.27922055246383864,
+              "cardinality": 1.0,
+              "hash_cardinality": 1,
+              "index": {
+                "key": "i1888493477"
+              },
+              "eq_filter": [
+                {
+                  "name": "id",
+                  "parent": "items"
+                }
+              ],
+              "order_by": [
 
+              ]
+            }
+          ]
+        }
       ],
       "update_steps": [
         {
@@ -4825,13 +4878,71 @@
           "cost": 0.013329108,
           "cardinality": 1.0,
           "index": {
-            "key": "i1888493477"
+            "key": "i638513312"
           },
           "fields": [
             {
               "name": "nb_of_bids",
               "parent": "items"
             },
+            {
+              "name": "max_bid",
+              "parent": "items"
+            },
+            {
+              "name": "quantity",
+              "parent": "items"
+            },
+            {
+              "name": "id",
+              "parent": "items"
+            }
+          ]
+        }
+      ],
+      "cost_model": {
+        "name": "cassandra",
+        "index_cost": 0.0078395645,
+        "partition_cost": 0.0013692786,
+        "row_cost": 1.17093638386496e-05,
+        "delete_cost": 0.0013287903,
+        "insert_cost": 0.013329108,
+        "client_network_cost": 0.03
+      }
+    },
+    {
+      "group": "StoreBid",
+      "name": "UPDATE items SET nb_of_bids=?, max_bid=? WHERE items.id=? -- 22 for i3683605489",
+      "cost": 0.0146578983,
+      "update_cost": 0.0146578983,
+      "weight": 1,
+      "statement": "UPDATE items SET nb_of_bids=?, max_bid=? WHERE items.id=? -- 22",
+      "index": {
+        "key": "i3683605489"
+      },
+      "query_plans": [
+
+      ],
+      "update_steps": [
+        {
+          "type": "delete",
+          "cost": 0.0013287903,
+          "cardinality": 1.0,
+          "index": {
+            "key": "i3683605489"
+          },
+          "fields": [
+
+          ]
+        },
+        {
+          "type": "insert",
+          "cost": 0.013329108,
+          "cardinality": 1.0,
+          "index": {
+            "key": "i3683605489"
+          },
+          "fields": [
             {
               "name": "max_bid",
               "parent": "items"
@@ -4844,7 +4955,7 @@
         }
       ],
       "cost_model": {
-        "name": "cassandra_secondary",
+        "name": "cassandra",
         "index_cost": 0.0078395645,
         "partition_cost": 0.0013692786,
         "row_cost": 1.17093638386496e-05,
@@ -4858,7 +4969,7 @@
       "name": "UPDATE users SET rating=? WHERE users.id=? -- 27 for i2906147889",
       "cost": 0.013329108,
       "update_cost": 0.013329108,
-      "weight": 45.0,
+      "weight": 1,
       "statement": "UPDATE users SET rating=? WHERE users.id=? -- 27",
       "index": {
         "key": "i2906147889"
@@ -4897,9 +5008,9 @@
       }
     }
   ],
-  "total_size": 19946000,
-  "total_cost": 252819.74934376057,
-  "revision": "37e289e570c8f4c4d3686941a6cac07b993b782a",
-  "time": "Fri, 11 Jan 2019 15:41:29 +0900",
-  "command": "/home/yusuke/Dropbox/NoSEIndex/nose-cli-master/bin/nose search rubis --output write_heavy_si.json --format json"
+  "total_size": 25386000,
+  "total_cost": 252828.9399582364,
+  "revision": "858519ba4cdc80786067e7669a0f5b4d199aa039",
+  "time": "Tue, 05 Feb 2019 22:51:45 +0900",
+  "command": "/home/yusuke/Dropbox/NoSEIndex/nose-cli-master/bin/nose benchmark schemas/write_heavy_cf.json --num_iterations 1"
 }

@@ -19,7 +19,7 @@ NoSE::Workload.new do
     Q 'SELECT users.nickname, users.password FROM users WHERE users.rating = ? -- 1_secondary'
     # XXX Must have at least one equality predicate
     Q 'SELECT categories.id, categories.name FROM categories WHERE categories.dummy = 1 -- 2'
-    Q 'SELECT categories.id, categories.name FROM categories WHERE categories.id= 1 -- 2_secondary'
+    #Q 'SELECT categories.id, categories.name FROM categories WHERE categories.id= 1 -- 2_secondary'
   end
 
   Group 'ViewBidHistory', browsing: 2.38,
@@ -202,6 +202,6 @@ NoSE::Workload.new do
         write_extreme: 5.39 do
     # XXX Must have at least one equality predicate
     Q 'SELECT regions.id, regions.name FROM regions WHERE regions.dummy = 1 -- 36'
-    Q 'SELECT regions.id, regions.name FROM regions WHERE regions.name = 1 -- 36_secondary'
+    #Q 'SELECT regions.id, regions.name FROM regions WHERE regions.name = 1 -- 36_secondary'
   end
 end

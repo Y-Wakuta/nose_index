@@ -449,127 +449,67 @@
   },
   "workload": {
     "statements": [
-      "SELECT users.id, users.firstname,users.lastname,users.password FROM users WHERE users.id = ?",
-      "SELECT users.id, users.firstname,users.lastname,users.password,users.email FROM users WHERE users.firstname = ?"
+      "SELECT users.* FROM users WHERE users.rating = ? -- 1",
+      "SELECT users.* FROM users WHERE users.id = ? -- 1"
     ],
     "mix": "browsing",
     "weights": {
       "default": {
       },
       "browsing": {
-        "SELECT users.id, users.firstname,users.lastname,users.password FROM users WHERE users.id = ?": 4.44,
-        "SELECT users.id, users.firstname,users.lastname,users.password,users.email FROM users WHERE users.firstname = ?": 4.44
+        "SELECT users.* FROM users WHERE users.rating = ? -- 1": 4.44,
+        "SELECT users.* FROM users WHERE users.id = ? -- 1": 4.44
       },
       "bidding": {
-        "SELECT users.id, users.firstname,users.lastname,users.password FROM users WHERE users.id = ?": 7.65,
-        "SELECT users.id, users.firstname,users.lastname,users.password,users.email FROM users WHERE users.firstname = ?": 7.65,
-        "INSERT INTO items SET id=?, name=?, description=?, initial_price=?, quantity=?, reserve_price=?, buy_now=?, nb_of_bids=0, max_bid=0, start_date=?, end_date=? AND CONNECT TO category(?), seller(?) -- 10": 0.53,
-        "INSERT INTO users SET id=?, firstname=?, lastname=?, nickname=?, password=?, email=?, rating=0, balance=0, creation_date=? AND CONNECT TO region(?) -- 11": 1.07,
-        "SELECT users.nickname FROM users WHERE users.id=? -- 12": 1.16,
-        "SELECT items.* FROM items WHERE items.id=? -- 13": 1.16,
-        "SELECT items.* FROM items WHERE items.name=? -- 13": 1.16,
-        "SELECT items.quantity, items.nb_of_bids, items.end_date FROM items WHERE items.id=? -- 14": 1.1,
-        "UPDATE items SET quantity=?, nb_of_bids=?, end_date=? WHERE items.id=? -- 15": 1.1,
-        "INSERT INTO buynow SET id=?, qty=?, date=? AND CONNECT TO item(?), buyer(?) -- 16": 1.1,
-        "SELECT users.nickname, users.password FROM users WHERE users.id=? -- 17": 5.4,
-        "SELECT items.* FROM items WHERE items.id=? -- 18": 5.4,
-        "SELECT bids.qty, bids.date FROM bids.item WHERE item.id=? ORDER BY bids.bid LIMIT 2 -- 19": 5.4,
-        "SELECT bids.* FROM bids.item WHERE bids.id=? ORDER BY bids.bid LIMIT 2 -- 19": 5.4,
-        "SELECT bids.* FROM bids.item WHERE item.id=? ORDER BY bids.bid LIMIT 2 -- 19": 5.4,
-        "SELECT bids.* FROM bids.item WHERE item.initial_price=? ORDER BY bids.bid LIMIT 2 -- 19": 5.4,
-        "SELECT bids.* FROM bids.item WHERE item.max_bid=? ORDER BY bids.bid LIMIT 2 -- 19": 5.4,
-        "SELECT bids.* FROM bids.item WHERE item.start_date=? ORDER BY bids.bid LIMIT 2 -- 19": 5.4,
-        "INSERT INTO bids SET id=?, qty=?, bid=?, date=? AND CONNECT TO item(?), user(?) -- 20": 3.74,
-        "SELECT items.nb_of_bids, items.max_bid FROM items WHERE items.id=? -- 21": 3.74,
-        "UPDATE items SET nb_of_bids=?, max_bid=? WHERE items.id=? -- 22": 3.74,
-        "SELECT users.nickname, users.password FROM users WHERE users.id=? -- 23": 0.46,
-        "SELECT items.* FROM items WHERE items.id=? -- 24": 0.46,
-        "SELECT users.* FROM users WHERE users.id=? -- 25": 0.46,
-        "SELECT users.rating FROM users WHERE users.id=? -- 26": 0.45,
-        "UPDATE users SET rating=? WHERE users.id=? -- 27": 0.45,
-        "INSERT INTO comments SET id=?, rating=?, date=?, comment=? AND CONNECT TO to_user(?), from_user(?), item(?) -- 28": 0.45,
-        "SELECT users.* FROM users WHERE users.id=? -- 29": 1.71,
-        "SELECT comments_received.* FROM users.comments_received WHERE users.id = ? -- 30": 1.71,
-        "SELECT from_user.nickname FROM comments.from_user WHERE comments.id = ? -- 31": 1.71,
-        "SELECT bought_now.*, items.* FROM items.bought_now.buyer WHERE buyer.id = ? AND bought_now.date>=? -- 32": 1.71,
-        "SELECT items.* FROM items.seller WHERE seller.id=? AND items.end_date >=? -- 33": 1.71,
-        "SELECT items.* FROM items.bids.user WHERE user.id=? AND items.end_date>=? -- 34": 1.71
+        "SELECT users.* FROM users WHERE users.rating = ? -- 1": 7.65,
+        "SELECT users.* FROM users WHERE users.id = ? -- 1": 7.65
       },
       "write_medium": {
-        "SELECT users.id, users.firstname,users.lastname,users.password FROM users WHERE users.id = ?": 7.65,
-        "SELECT users.id, users.firstname,users.lastname,users.password,users.email FROM users WHERE users.firstname = ?": 7.65,
-        "INSERT INTO items SET id=?, name=?, description=?, initial_price=?, quantity=?, reserve_price=?, buy_now=?, nb_of_bids=0, max_bid=0, start_date=?, end_date=? AND CONNECT TO category(?), seller(?) -- 10": 5.300000000000001,
-        "INSERT INTO users SET id=?, firstname=?, lastname=?, nickname=?, password=?, email=?, rating=0, balance=0, creation_date=? AND CONNECT TO region(?) -- 11": 10.700000000000001,
-        "SELECT users.nickname FROM users WHERE users.id=? -- 12": 1.16,
-        "SELECT items.* FROM items WHERE items.id=? -- 13": 1.16,
-        "SELECT items.* FROM items WHERE items.name=? -- 13": 1.16,
-        "SELECT items.quantity, items.nb_of_bids, items.end_date FROM items WHERE items.id=? -- 14": 11.0,
-        "UPDATE items SET quantity=?, nb_of_bids=?, end_date=? WHERE items.id=? -- 15": 11.0,
-        "INSERT INTO buynow SET id=?, qty=?, date=? AND CONNECT TO item(?), buyer(?) -- 16": 11.0,
-        "SELECT users.nickname, users.password FROM users WHERE users.id=? -- 17": 5.4,
-        "SELECT items.* FROM items WHERE items.id=? -- 18": 5.4,
-        "SELECT bids.qty, bids.date FROM bids.item WHERE item.id=? ORDER BY bids.bid LIMIT 2 -- 19": 5.4,
-        "SELECT bids.* FROM bids.item WHERE bids.id=? ORDER BY bids.bid LIMIT 2 -- 19": 5.4,
-        "SELECT bids.* FROM bids.item WHERE item.id=? ORDER BY bids.bid LIMIT 2 -- 19": 5.4,
-        "SELECT bids.* FROM bids.item WHERE item.initial_price=? ORDER BY bids.bid LIMIT 2 -- 19": 5.4,
-        "SELECT bids.* FROM bids.item WHERE item.max_bid=? ORDER BY bids.bid LIMIT 2 -- 19": 5.4,
-        "SELECT bids.* FROM bids.item WHERE item.start_date=? ORDER BY bids.bid LIMIT 2 -- 19": 5.4,
-        "INSERT INTO bids SET id=?, qty=?, bid=?, date=? AND CONNECT TO item(?), user(?) -- 20": 37.400000000000006,
-        "SELECT items.nb_of_bids, items.max_bid FROM items WHERE items.id=? -- 21": 37.400000000000006,
-        "UPDATE items SET nb_of_bids=?, max_bid=? WHERE items.id=? -- 22": 37.400000000000006,
-        "SELECT users.nickname, users.password FROM users WHERE users.id=? -- 23": 0.46,
-        "SELECT items.* FROM items WHERE items.id=? -- 24": 0.46,
-        "SELECT users.* FROM users WHERE users.id=? -- 25": 0.46,
-        "SELECT users.rating FROM users WHERE users.id=? -- 26": 4.5,
-        "UPDATE users SET rating=? WHERE users.id=? -- 27": 4.5,
-        "INSERT INTO comments SET id=?, rating=?, date=?, comment=? AND CONNECT TO to_user(?), from_user(?), item(?) -- 28": 4.5,
-        "SELECT users.* FROM users WHERE users.id=? -- 29": 1.71,
-        "SELECT comments_received.* FROM users.comments_received WHERE users.id = ? -- 30": 1.71,
-        "SELECT from_user.nickname FROM comments.from_user WHERE comments.id = ? -- 31": 1.71,
-        "SELECT bought_now.*, items.* FROM items.bought_now.buyer WHERE buyer.id = ? AND bought_now.date>=? -- 32": 1.71,
-        "SELECT items.* FROM items.seller WHERE seller.id=? AND items.end_date >=? -- 33": 1.71,
-        "SELECT items.* FROM items.bids.user WHERE user.id=? AND items.end_date>=? -- 34": 1.71
+        "SELECT users.* FROM users WHERE users.rating = ? -- 1": 7.65,
+        "SELECT users.* FROM users WHERE users.id = ? -- 1": 7.65
       },
       "write_heavy": {
-        "SELECT users.id, users.firstname,users.lastname,users.password FROM users WHERE users.id = ?": 7.65,
-        "SELECT users.id, users.firstname,users.lastname,users.password,users.email FROM users WHERE users.firstname = ?": 7.65,
-        "INSERT INTO items SET id=?, name=?, description=?, initial_price=?, quantity=?, reserve_price=?, buy_now=?, nb_of_bids=0, max_bid=0, start_date=?, end_date=? AND CONNECT TO category(?), seller(?) -- 10": 53.0,
-        "INSERT INTO users SET id=?, firstname=?, lastname=?, nickname=?, password=?, email=?, rating=0, balance=0, creation_date=? AND CONNECT TO region(?) -- 11": 107.0,
-        "SELECT users.nickname FROM users WHERE users.id=? -- 12": 1.16,
-        "SELECT items.* FROM items WHERE items.id=? -- 13": 1.16,
-        "SELECT items.* FROM items WHERE items.name=? -- 13": 1.16,
-        "SELECT items.quantity, items.nb_of_bids, items.end_date FROM items WHERE items.id=? -- 14": 110.00000000000001,
-        "UPDATE items SET quantity=?, nb_of_bids=?, end_date=? WHERE items.id=? -- 15": 110.00000000000001,
-        "INSERT INTO buynow SET id=?, qty=?, date=? AND CONNECT TO item(?), buyer(?) -- 16": 110.00000000000001,
-        "SELECT users.nickname, users.password FROM users WHERE users.id=? -- 17": 5.4,
-        "SELECT items.* FROM items WHERE items.id=? -- 18": 5.4,
-        "SELECT bids.qty, bids.date FROM bids.item WHERE item.id=? ORDER BY bids.bid LIMIT 2 -- 19": 5.4,
-        "SELECT bids.* FROM bids.item WHERE bids.id=? ORDER BY bids.bid LIMIT 2 -- 19": 5.4,
-        "SELECT bids.* FROM bids.item WHERE item.id=? ORDER BY bids.bid LIMIT 2 -- 19": 5.4,
-        "SELECT bids.* FROM bids.item WHERE item.initial_price=? ORDER BY bids.bid LIMIT 2 -- 19": 5.4,
-        "SELECT bids.* FROM bids.item WHERE item.max_bid=? ORDER BY bids.bid LIMIT 2 -- 19": 5.4,
-        "SELECT bids.* FROM bids.item WHERE item.start_date=? ORDER BY bids.bid LIMIT 2 -- 19": 5.4,
-        "INSERT INTO bids SET id=?, qty=?, bid=?, date=? AND CONNECT TO item(?), user(?) -- 20": 374.0,
-        "SELECT items.nb_of_bids, items.max_bid FROM items WHERE items.id=? -- 21": 374.0,
-        "UPDATE items SET nb_of_bids=?, max_bid=? WHERE items.id=? -- 22": 374.0,
-        "SELECT users.nickname, users.password FROM users WHERE users.id=? -- 23": 0.46,
-        "SELECT items.* FROM items WHERE items.id=? -- 24": 0.46,
-        "SELECT users.* FROM users WHERE users.id=? -- 25": 0.46,
-        "SELECT users.rating FROM users WHERE users.id=? -- 26": 45.0,
-        "UPDATE users SET rating=? WHERE users.id=? -- 27": 45.0,
-        "INSERT INTO comments SET id=?, rating=?, date=?, comment=? AND CONNECT TO to_user(?), from_user(?), item(?) -- 28": 45.0,
-        "SELECT users.* FROM users WHERE users.id=? -- 29": 1.71,
-        "SELECT comments_received.* FROM users.comments_received WHERE users.id = ? -- 30": 1.71,
-        "SELECT from_user.nickname FROM comments.from_user WHERE comments.id = ? -- 31": 1.71,
-        "SELECT bought_now.*, items.* FROM items.bought_now.buyer WHERE buyer.id = ? AND bought_now.date>=? -- 32": 1.71,
-        "SELECT items.* FROM items.seller WHERE seller.id=? AND items.end_date >=? -- 33": 1.71,
-        "SELECT items.* FROM items.bids.user WHERE user.id=? AND items.end_date>=? -- 34": 1.71
+        "SELECT users.* FROM users WHERE users.rating = ? -- 1": 7.65,
+        "SELECT users.* FROM users WHERE users.id = ? -- 1": 7.65
       }
     }
   },
   "indexes": [
     {
-      "key": "i1030898479",
+      "key": "i3475685839",
+      "hash_fields": [
+        {
+          "name": "rating",
+          "parent": "users"
+        }
+      ],
+      "order_fields": [
+
+      ],
+      "extra": [
+        {
+          "name": "id",
+          "parent": "users"
+        }
+      ],
+      "graph": {
+        "nodes": [
+          "users"
+        ],
+        "edges": [
+
+        ]
+      },
+      "entries": 2000,
+      "entry_size": 24,
+      "size": 48000,
+      "hash_count": 10,
+      "per_hash_count": 200.0,
+      "base_cf_key": "i2160236821",
+      "is_secondary_index": true
+    },
+    {
+      "key": "i2906147889",
       "hash_fields": [
         {
           "name": "id",
@@ -577,14 +517,19 @@
         }
       ],
       "order_fields": [
-        {
-          "name": "firstname",
-          "parent": "users"
-        }
+
       ],
       "extra": [
         {
+          "name": "firstname",
+          "parent": "users"
+        },
+        {
           "name": "lastname",
+          "parent": "users"
+        },
+        {
+          "name": "nickname",
           "parent": "users"
         },
         {
@@ -594,6 +539,18 @@
         {
           "name": "email",
           "parent": "users"
+        },
+        {
+          "name": "rating",
+          "parent": "users"
+        },
+        {
+          "name": "balance",
+          "parent": "users"
+        },
+        {
+          "name": "creation_date",
+          "parent": "users"
         }
       ],
       "graph": {
@@ -605,40 +562,8 @@
         ]
       },
       "entries": 2000,
-      "entry_size": 67,
-      "size": 134000,
-      "hash_count": 2000,
-      "per_hash_count": 1.0,
-      "is_secondary_index": false
-    },
-    {
-      "key": "i624721818",
-      "hash_fields": [
-        {
-          "name": "firstname",
-          "parent": "users"
-        }
-      ],
-      "order_fields": [
-        {
-          "name": "id",
-          "parent": "users"
-        }
-      ],
-      "extra": [
-
-      ],
-      "graph": {
-        "nodes": [
-          "users"
-        ],
-        "edges": [
-
-        ]
-      },
-      "entries": 2000,
-      "entry_size": 22,
-      "size": 44000,
+      "entry_size": 103,
+      "size": 206000,
       "hash_count": 2000,
       "per_hash_count": 1.0,
       "is_secondary_index": false
@@ -646,7 +571,40 @@
   ],
   "enumerated_indexes": [
     {
-      "key": "i1030898479",
+      "key": "i3475685839",
+      "hash_fields": [
+        {
+          "name": "rating",
+          "parent": "users"
+        }
+      ],
+      "order_fields": [
+
+      ],
+      "extra": [
+        {
+          "name": "id",
+          "parent": "users"
+        }
+      ],
+      "graph": {
+        "nodes": [
+          "users"
+        ],
+        "edges": [
+
+        ]
+      },
+      "entries": 2000,
+      "entry_size": 24,
+      "size": 48000,
+      "hash_count": 10,
+      "per_hash_count": 200.0,
+      "base_cf_key": "i2160236821",
+      "is_secondary_index": true
+    },
+    {
+      "key": "i4122985887",
       "hash_fields": [
         {
           "name": "id",
@@ -655,13 +613,21 @@
       ],
       "order_fields": [
         {
-          "name": "firstname",
+          "name": "rating",
           "parent": "users"
         }
       ],
       "extra": [
         {
+          "name": "firstname",
+          "parent": "users"
+        },
+        {
           "name": "lastname",
+          "parent": "users"
+        },
+        {
+          "name": "nickname",
           "parent": "users"
         },
         {
@@ -671,6 +637,14 @@
         {
           "name": "email",
           "parent": "users"
+        },
+        {
+          "name": "balance",
+          "parent": "users"
+        },
+        {
+          "name": "creation_date",
+          "parent": "users"
         }
       ],
       "graph": {
@@ -682,14 +656,14 @@
         ]
       },
       "entries": 2000,
-      "entry_size": 67,
-      "size": 134000,
+      "entry_size": 103,
+      "size": 206000,
       "hash_count": 2000,
       "per_hash_count": 1.0,
       "is_secondary_index": false
     },
     {
-      "key": "i3419786034",
+      "key": "i2906147889",
       "hash_fields": [
         {
           "name": "id",
@@ -706,6 +680,10 @@
         },
         {
           "name": "lastname",
+          "parent": "users"
+        },
+        {
+          "name": "nickname",
           "parent": "users"
         },
         {
@@ -715,45 +693,17 @@
         {
           "name": "email",
           "parent": "users"
-        }
-      ],
-      "graph": {
-        "nodes": [
-          "users"
-        ],
-        "edges": [
-
-        ]
-      },
-      "entries": 2000,
-      "entry_size": 67,
-      "size": 134000,
-      "hash_count": 2000,
-      "per_hash_count": 1.0,
-      "is_secondary_index": false
-    },
-    {
-      "key": "i2105478006",
-      "hash_fields": [
+        },
         {
-          "name": "id",
-          "parent": "users"
-        }
-      ],
-      "order_fields": [
-
-      ],
-      "extra": [
-        {
-          "name": "firstname",
+          "name": "rating",
           "parent": "users"
         },
         {
-          "name": "lastname",
+          "name": "balance",
           "parent": "users"
         },
         {
-          "name": "password",
+          "name": "creation_date",
           "parent": "users"
         }
       ],
@@ -766,17 +716,17 @@
         ]
       },
       "entries": 2000,
-      "entry_size": 44,
-      "size": 88000,
+      "entry_size": 103,
+      "size": 206000,
       "hash_count": 2000,
       "per_hash_count": 1.0,
       "is_secondary_index": false
     },
     {
-      "key": "i1202641795",
+      "key": "i2160236821",
       "hash_fields": [
         {
-          "name": "firstname",
+          "name": "rating",
           "parent": "users"
         }
       ],
@@ -788,7 +738,15 @@
       ],
       "extra": [
         {
+          "name": "firstname",
+          "parent": "users"
+        },
+        {
           "name": "lastname",
+          "parent": "users"
+        },
+        {
+          "name": "nickname",
           "parent": "users"
         },
         {
@@ -798,6 +756,14 @@
         {
           "name": "email",
           "parent": "users"
+        },
+        {
+          "name": "balance",
+          "parent": "users"
+        },
+        {
+          "name": "creation_date",
+          "parent": "users"
         }
       ],
       "graph": {
@@ -809,17 +775,17 @@
         ]
       },
       "entries": 2000,
-      "entry_size": 67,
-      "size": 134000,
-      "hash_count": 2000,
-      "per_hash_count": 1.0,
+      "entry_size": 103,
+      "size": 206000,
+      "hash_count": 10,
+      "per_hash_count": 200.0,
       "is_secondary_index": false
     },
     {
-      "key": "i624721818",
+      "key": "i1934281688",
       "hash_fields": [
         {
-          "name": "firstname",
+          "name": "rating",
           "parent": "users"
         }
       ],
@@ -841,15 +807,19 @@
         ]
       },
       "entries": 2000,
-      "entry_size": 22,
-      "size": 44000,
-      "hash_count": 2000,
-      "per_hash_count": 1.0,
+      "entry_size": 24,
+      "size": 48000,
+      "hash_count": 10,
+      "per_hash_count": 200.0,
       "is_secondary_index": false
     }
   ],
   "has_index_hash": [
-
+    {
+      "index_key": "i3475685839",
+      "index_value": true,
+      "parent_table_id": "i2906147889"
+    }
   ],
   "cost_model": {
     "name": "cassandra",
@@ -858,23 +828,42 @@
     "row_cost": 1.17093638386496e-05,
     "delete_cost": 0.0013287903,
     "insert_cost": 0.013329108,
-    "client_network_cost": 0.03
+    "sole_cf_query_cost": 1.0,
+    "si_2_cf_query_cost": 0.5
   },
   "plans": [
     {
       "group": "BrowseCategories",
-      "name": "SELECT users.id, users.firstname,users.lastname,users.password FROM users WHERE users.id = ?",
-      "query": "SELECT users.id, users.firstname,users.lastname,users.password FROM users WHERE users.id = ?",
-      "cost": 1.3592205524638385,
+      "name": "SELECT users.* FROM users WHERE users.rating = ? -- 1",
+      "query": "SELECT users.* FROM users WHERE users.rating = ? -- 1",
+      "cost": 0.020080774349649243,
       "weight": 4.44,
       "steps": [
         {
           "type": "index_lookup",
-          "cost": 1.3592205524638385,
-          "cardinality": 1.0,
+          "cost": 0.009214697781919324,
+          "cardinality": 200.0,
           "hash_cardinality": 1,
           "index": {
-            "key": "i1030898479"
+            "key": "i3475685839"
+          },
+          "eq_filter": [
+            {
+              "name": "rating",
+              "parent": "users"
+            }
+          ],
+          "order_by": [
+
+          ]
+        },
+        {
+          "type": "index_lookup",
+          "cost": 0.01086607656772992,
+          "cardinality": 200.0,
+          "hash_cardinality": 200.0,
+          "index": {
+            "key": "i2906147889"
           },
           "eq_filter": [
             {
@@ -890,36 +879,18 @@
     },
     {
       "group": "BrowseCategories",
-      "name": "SELECT users.id, users.firstname,users.lastname,users.password,users.email FROM users WHERE users.firstname = ?",
-      "query": "SELECT users.id, users.firstname,users.lastname,users.password,users.email FROM users WHERE users.firstname = ?",
-      "cost": 2.748441104927677,
+      "name": "SELECT users.* FROM users WHERE users.id = ? -- 1",
+      "query": "SELECT users.* FROM users WHERE users.id = ? -- 1",
+      "cost": 0.009220552463838648,
       "weight": 4.44,
       "steps": [
         {
           "type": "index_lookup",
-          "cost": 0.6992205524638385,
+          "cost": 0.009220552463838648,
           "cardinality": 1.0,
           "hash_cardinality": 1,
           "index": {
-            "key": "i624721818"
-          },
-          "eq_filter": [
-            {
-              "name": "firstname",
-              "parent": "users"
-            }
-          ],
-          "order_by": [
-
-          ]
-        },
-        {
-          "type": "index_lookup",
-          "cost": 2.0492205524638383,
-          "cardinality": 1.0,
-          "hash_cardinality": 1.0,
-          "index": {
-            "key": "i1030898479"
+            "key": "i2906147889"
           },
           "eq_filter": [
             {
@@ -937,9 +908,9 @@
   "update_plans": [
 
   ],
-  "total_size": 178000,
-  "total_cost": 18.23801775881833,
-  "revision": "07d077f4b0ea588dfd020b8f0c85460bf2a01caa",
-  "time": "Fri, 04 Jan 2019 23:45:25 +0900",
-  "command": "/home/yusuke/Dropbox/NoSEIndex/nose-cli-master/bin/nose search rubis --max_space 192000 --format json --output minimal_cf"
+  "total_size": 254000,
+  "total_cost": 0.13009789105188624,
+  "revision": "617d022052bbe1a703180287fec019c821d9c480",
+  "time": "Sat, 02 Feb 2019 19:48:28 +0900",
+  "command": "/home/yusuke/Dropbox/NoSEIndex/nose-cli-master/bin/nose search minimam --max_space 411000 --format json --output manimam_si.json"
 }
