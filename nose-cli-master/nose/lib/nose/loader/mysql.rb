@@ -74,15 +74,17 @@ module NoSE
       def load_index(index,has_index_hash, config, show_progress, limit, skip_existing)
         client = new_client config
 
-        # yusuke indexをsecondary indexとして宣言しているか取得します
-        has_index = has_index_hash.select{|has_in| has_in.index_key == index.key and has_in.index_value}
 
+        if !has_index_hash.nil?
+         # yusuke indexをsecondary indexとして宣言しているか取得します
+         has_index = has_index_hash.select{|has_in| has_in.index_key == index.key and has_in.index_value}
 
-        # yusuke secondary indexを持っている場合もskipします
-        # yusuke ただし、ここでskipするのではなく、whereのorを取る形でレコードを入れる必要があるはず。
-        if !has_index.empty? then
-          @logger.info "Since it's secondary index,Skipping index #{index.inspect}" if show_progress
-          return
+         # yusuke secondary indexを持っている場合もskipします
+         # yusuke ただし、ここでskipするのではなく、whereのorを取る形でレコードを入れる必要があるはず。
+         if !has_index.empty? then
+           @logger.info "Since it's secondary index,Skipping index #{index.inspect}" if show_progress
+           return
+        end
         end
 
         # Skip this index if it's not empty
