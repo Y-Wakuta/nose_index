@@ -85,8 +85,16 @@ module NoSE
       # @return [Backend::Backend]
       def get_backend(config, result)
         be_class = get_class 'backend', config
+        begin
         be_class.new result.workload.model, result.indexes,
                      result.plans, result.update_plans, config[:backend]
+        rescue => e
+          be_class.new result.workload.schema.model,
+                       result.indexes,
+                       result.plans,
+                       result.update_plans,
+                       config[:backend]
+        end
       end
 
       # Get a class of a particular name from the configuration
@@ -124,7 +132,7 @@ module NoSE
 
       # Load results of a previous search operation
       # @return [Search::Results]
-      def load_results(plan_file, mix = 'default')
+      def load_results(plan_file, mix = 'default',is_create_or_load: false)
         representer = Serialize::SearchResultRepresenter.represent \
           Search::Results.new
         file = File.read(plan_file)
@@ -136,6 +144,13 @@ module NoSE
           result = Search::Results.new
           workload = binding.eval file, plan_file
           result.instance_variable_set :@workload, workload
+          if is_create_or_load
+          result.instance_variable_set :@indexes, workload.indexes.values
+          elsif #こっちはbenchmark用
+            result.instance_variable_set :@indexes, workload.schema.indexes.values
+            result.instance_variable_set :@plans, result.workload.groups.values.map{|value| value.select{|v| v.update_steps.empty?}}.select{|value| !value.empty?}.reduce{|base,ne| base + ne}
+            result.instance_variable_set :@update_plans, result.workload.groups.values.map{|value| value.select{|v| !v.update_steps.empty?}}.select{|value| !value.empty?}.reduce{|base,ne| base + ne}
+            end
         end
 
         result.workload.mix = mix.to_sym unless \
@@ -146,10 +161,10 @@ module NoSE
 
       # Load plans either from an explicit file or the name
       # of something in the plans/ directory
-      def load_plans(plan_file, options)
+      def load_plans(plan_file, options,is_create_or_load: false)
         plan_file = './nose/schemas/' + plan_file #yusuke こここんなに泥臭いことしなくてもいいと思いたい
         if File.exist? plan_file
-          result = load_results(plan_file, options[:mix])
+          result = load_results(plan_file, options[:mix],is_create_or_load: is_create_or_load)
         else
           schema = Schema.load plan_file
           result = OpenStruct.new

@@ -32,7 +32,7 @@ module NoSE
       # Load data from a single plan file
       # @return [void]
       def load_plan(plan_file, options)
-        result, backend = load_plans plan_file, options
+        result, backend = load_plans plan_file, options,is_create_or_load: true
 
         # Create a new instance of the loader class and execute
         loader = get_class('loader', options).new result.workload, backend
