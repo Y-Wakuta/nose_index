@@ -138,10 +138,12 @@ module NoSE
       # Produce the CQL to create the definition for a given index
       # @return [String]
       def index_cql(index,has_index_hash) #yusuke ここでplan_fileの内容からCQLを生成している
-        has_index = has_index_hash.select{|has_index| has_index.index_key ==  index.key && has_index.index_value}.first
-        if !has_index.nil?
-          ddl = "CREATE CUSTOM INDEX IF NOT EXISTS #{index.key} ON #{has_index.parent_table_id}(#{(field_names index.hash_fields).split(',').first}) USING 'org.apache.cassandra.index.sasi.SASIIndex';"
-          return ddl
+        if !has_index_hash.nil?
+          has_index = has_index_hash.select{|has_index| has_index.index_key ==  index.key && has_index.index_value}.first
+          if !has_index.nil?
+            ddl = "CREATE CUSTOM INDEX IF NOT EXISTS #{index.key} ON #{has_index.parent_table_id}(#{(field_names index.hash_fields).split(',').first}) USING 'org.apache.cassandra.index.sasi.SASIIndex';"
+            return ddl
+          end
         end
 
         ddl = "CREATE COLUMNFAMILY IF NOT EXISTS \"#{index.key}\" (" \
