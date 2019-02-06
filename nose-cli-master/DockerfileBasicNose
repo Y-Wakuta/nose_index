@@ -1,5 +1,4 @@
 FROM ubuntu:16.04
-MAINTAINER Yusuke Wakuta
 
 # Install packages for building ruby
 RUN apt-get update
@@ -25,25 +24,24 @@ RUN xargs -L 1 rbenv install 2.6.0
 ENV PATH /root/.rbenv/shims:$PATH
 
 RUN apt-get update -qq && \
-apt-get install -qq \
-build-essential \
-coinor-libcbc3 \
-coinor-libcbc-dev \
-coinor-libcgl-dev \
-coinor-libclp-dev \
-coinor-libcoinutils-dev \
-coinor-libosi-dev \
-git \
-vim \
-graphviz \
-libmagickwand-dev \
-libmysqlclient-dev \
-libpq-dev \
+    apt-get install -qq \
+      build-essential \
+      coinor-libcbc3 \
+      coinor-libcbc-dev \
+      coinor-libcgl-dev \
+      coinor-libclp-dev \
+      coinor-libcoinutils-dev \
+      coinor-libosi-dev \
+      graphviz \
+      libmagickwand-dev \
+      libmysqlclient-dev \
+      libpq-dev \
 && apt-get clean
-
-ADD . /nose
-
-WORKDIR /nose
+RUN git clone https://github.com/michaelmior/nose-cli.git
+WORKDIR nose-cli
 RUN rbenv global 2.6.0
-RUN bundle install
+RUN bundle install --without=development mysql
 
+ADD ./nose/workloads /root/.rbenv/versions/2.6.0/lib/ruby/gems/2.6.0/gems/nose-0.1.1/workloads
+ADD ./run_rubis_basic_nose.sh .
+ADD ./run_rubis_si.sh .
