@@ -54,7 +54,7 @@ NoSE::Workload.new do
         write_heavy: 15.94,
         write_extreme: 15.94 do
     Q 'SELECT items.id, items.name, items.initial_price, items.max_bid, items.nb_of_bids, items.end_date FROM items.category WHERE category.id = ? AND items.end_date >= ? LIMIT 25 -- 7'
-    Q 'SELECT items.id, items.name, items.initial_price, items.max_bid, items.nb_of_bids, items.end_date FROM items.category WHERE category.dummy = ? AND items.end_date >= ? LIMIT 25 -- 7_secondary'
+    Q 'SELECT items.id, items.name, items.initial_price, items.max_bid, items.nb_of_bids, items.end_date FROM items.category WHERE category.dummy = ? -- 7_secondary'
   end
 
   Group 'ViewUserInfo', browsing: 4.41,
@@ -124,8 +124,7 @@ NoSE::Workload.new do
       'ORDER BY bids.bid LIMIT 2 -- 19'
     #Q 'SELECT bids.qty, bids.date FROM bids.item WHERE item.quantity=? ' \
     #  'ORDER BY bids.bid LIMIT 2 -- 19_secondary'
-    Q 'SELECT bids.qty, bids.date FROM bids.item WHERE item.quantity=? ' \
-      ' LIMIT 2 -- 19_secondary'
+    Q 'SELECT bids.qty, bids.date FROM bids.item WHERE item.quantity=? -- 19_secondary'
   end
 
   Group 'StoreBid', bidding: 3.74,
@@ -177,11 +176,11 @@ NoSE::Workload.new do
     Q 'SELECT from_user.nickname FROM comments.from_user WHERE comments.id = ? -- 31'
     Q 'SELECT from_user.nickname FROM comments.from_user WHERE comments.rating = ? -- 31_secondary'
     Q 'SELECT bought_now.*, items.* FROM items.bought_now.buyer WHERE buyer.id = ? AND bought_now.date>=? -- 32'
-    Q 'SELECT bought_now.*, items.* FROM items.bought_now.buyer WHERE buyer.rating = ? AND bought_now.date>=? -- 32_secondary'
+    Q 'SELECT bought_now.*, items.* FROM items.bought_now.buyer WHERE buyer.rating = ? -- 32_secondary'
     Q 'SELECT items.* FROM items.seller WHERE seller.id=? AND items.end_date >=? -- 33'
-    Q 'SELECT items.* FROM items.seller WHERE seller.rating =? AND items.end_date >=? -- 33_secondary'
+    Q 'SELECT items.* FROM items.seller WHERE seller.rating =? -- 33_secondary'
     Q 'SELECT items.* FROM items.bids.user WHERE user.id=? AND items.end_date>=? -- 34'
-    Q 'SELECT items.* FROM items.bids.user WHERE user.rating =? AND items.end_date>=? -- 34_secondary'
+    Q 'SELECT items.* FROM items.bids.user WHERE user.rating =? -- 34_secondary'
   end
 
   Group 'SearchItemsByRegion', browsing: 8.26,

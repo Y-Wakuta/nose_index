@@ -5,9 +5,19 @@ services:
     container_name: nose_index_wakuta
     build: nose-cli-master
     tty: true
-  nose_index_25:
-    container_name: nose_index_25_wakuta
-    build:
-      context: nose-cli-master
-      dockerfile: DockerfileRuby25
-    tty: true
+    #nose_basic:
+    #nocontainer_name: nose_basic
+    #nobuild:
+    #no  context: nose-cli-master
+    #no  dockerfile: DockerfileBasicNose
+    #notty: true
+  mysql:
+    container_name: mysql_nose
+    build: ./mysql
+    volumes:
+      - ./db/mysql_data:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+    ports:
+      - "3306:3306"
+    command: --max_allowed_packet=32505856 
