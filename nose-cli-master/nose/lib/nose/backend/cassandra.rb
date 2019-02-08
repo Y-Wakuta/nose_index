@@ -25,11 +25,11 @@ module NoSE
 
       # Produce the DDL necessary for column families for the given indexes
       # and optionally execute them against the server
-      def indexes_ddl(has_index_hash,execute = false, skip_existing = false,
+      def indexes_ddl(execute = false, skip_existing = false,
                       drop_existing = false)
         Enumerator.new do |enum|
-          @indexes.sort_by{|index| index.is_secondary_index ? 1 : 0}.map do |index| #yusuke cfから先に生成するようにする
-            ddl = index_cql index,has_index_hash
+          @indexes.select{|index| !index.is_secondary_index}.map do |index| #yusuke cfから先に生成するようにする
+            ddl = index_cql index
             enum.yield ddl
 
             begin
@@ -42,6 +42,23 @@ module NoSE
               new_exc.set_backtrace exc.backtrace
               raise new_exc
             end
+          end
+        end
+      end
+
+      def secondary_index_ddl(has_index_hash)
+        Enumerator.new do |enum|
+          has_index_hash.map do |has_index|
+              ddl = secondary_index_cql has_index,@indexes
+              enum.yield ddl
+
+              begin
+                client.execute(ddl)
+              rescue Cassandra::Errors::AlreadyExistsError => exc
+                new_exc = IndexAlreadyExists.new exc.message
+                new_exc.set_backtrace exc.backtrace
+                raise new_exc
+              end
           end
         end
       end
@@ -137,15 +154,7 @@ module NoSE
       #yusuke このfunctionにhas_indexのハッシュも渡す？
       # Produce the CQL to create the definition for a given index
       # @return [String]
-      def index_cql(index,has_index_hash) #yusuke ここでplan_fileの内容からCQLを生成している
-        if !has_index_hash.nil?
-          has_index = has_index_hash.select{|has_index| has_index.index_key ==  index.key && has_index.index_value}.first
-          if !has_index.nil?
-            ddl = "CREATE CUSTOM INDEX IF NOT EXISTS #{index.key} ON #{has_index.parent_table_id}(#{(field_names index.hash_fields).split(',').first}) USING 'org.apache.cassandra.index.sasi.SASIIndex';"
-            return ddl
-          end
-        end
-
+      def index_cql(index) #yusuke ここでplan_fileの内容からCQLを生成している
         ddl = "CREATE COLUMNFAMILY IF NOT EXISTS \"#{index.key}\" (" \
           "#{field_names index.all_fields, true}, " \
           "PRIMARY KEY((#{field_names index.hash_fields})"
@@ -158,6 +167,12 @@ module NoSE
         ddl += " WITH caching = {'keys' : 'NONE','rows_per_partition' : 'NONE'};"
 
         ddl
+      end
+
+      def secondary_index_cql(has_index,indexes)
+        return if has_index.nil?
+        index = indexes.select{|index| index.key == has_index.index_key}.first
+        return "CREATE CUSTOM INDEX IF NOT EXISTS #{has_index.index_key} ON #{has_index.parent_table_id}(#{(field_names index.hash_fields).split(',').first}) USING 'org.apache.cassandra.index.sasi.SASIIndex';"
       end
 
       # Get a comma-separated list of field names with optional types
@@ -198,6 +213,8 @@ module NoSE
 
       # Insert data into an index on the backend
       class InsertStatementStep < Backend::InsertStatementStep
+
+        attr_reader :fields
         def initialize(client, index, fields)
           super
 
