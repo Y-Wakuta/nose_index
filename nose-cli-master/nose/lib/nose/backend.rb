@@ -75,9 +75,10 @@ module NoSE
       #yusuke SI を持つstepsが来た場合に適切にクエリが発行できるように
       def update_steps_for_secondary_index(steps,has_index_hash)
         si_step = steps.select{|step| step.is_a? Plans::IndexLookupPlanStep and step.index.is_secondary_index}[0]
+        si_indexof = steps.index(si_step)
         base_cf_key = has_index_hash.select{|has_in| has_in.index_key == si_step.index.key and has_in.index_value}.map{|has_in| has_in.parent_table_id}[0]
+        steps[si_indexof + 1].eq_filter = si_step.eq_filter
         steps = steps.select{|step| step != si_step}.to_a
-        steps.select{|step| step.is_a? Plans::IndexLookupPlanStep and step.index.key == base_cf_key}[0].eq_filter = si_step.eq_filter
         steps
       end
 
@@ -89,7 +90,7 @@ module NoSE
         state = Plans::QueryState.new(query, @model) unless query.nil?
         first_step = Plans::RootPlanStep.new state
         steps = [first_step] + plan.to_a + [nil]
-        steps = update_steps_for_secondary_index(steps,has_index_hash) if steps.any?{|step| step.is_a? Plans::IndexLookupPlanStep and step.index.is_secondary_index}
+        steps = update_steps_for_secondary_index(steps,has_index_hash) if  steps.any?{|step| step.is_a? Plans::IndexLookupPlanStep and step.index.is_secondary_index}
         PreparedQuery.new query, prepare_query_steps(steps, fields, conditions)
       end
 
