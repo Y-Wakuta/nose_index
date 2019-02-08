@@ -28,7 +28,9 @@ module NoSE
           backend.indexes_ddl(!options[:dry_run], options[:skip_existing],
                               options[:drop_existing]) \
                  .each { |ddl| puts ddl }
-          backend.secondary_index_ddl(result.has_index_hash.uniq).each{|ddl| puts ddl}
+          if !result.has_index_hash.nil?
+            backend.secondary_index_ddl(result.has_index_hash.uniq).each{|ddl| puts ddl}
+          end
         end
       end
     end

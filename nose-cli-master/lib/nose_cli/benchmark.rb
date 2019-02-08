@@ -31,14 +31,15 @@ module NoSE
                              desc: 'abort if a column family is empty'
       option :totals, type: :boolean, default: false, aliases: '-t',
                       desc: 'whether to include group totals in the output'
-      option :format, type: :string, default: 'txt',
+      option :format, type: :string, default: 'csv',
                       enum: %w(txt csv), aliases: '-f',
                       desc: 'the format of the output data'
 
       def benchmark(plan_file)
-        plan_file = './nose/schemas/' + plan_file + ".json" #yusuke tmpこれも必要じゃなさそうな気がする変更
+        plan_file = './nose/' + plan_file #yusuke tmpこれも必要じゃなさそうな気がする変更
         label = File.basename plan_file, '.*'
         result = load_results plan_file, options[:mix]
+        is_rb_file =File.extname(plan_file) == ".rb"
 
         backend = get_backend(options, result)
 
@@ -49,20 +50,28 @@ module NoSE
         group_tables = Hash.new { |h, k| h[k] = [] }
         group_totals = Hash.new { |h, k| h[k] = 0 }
         result.plans.each do |plan|
-          query = plan.query
-          weight = result.workload.statement_weights[query]
-          next if query.is_a?(SupportQuery) || !weight
-          @logger.debug { "Executing #{query.text}" }
+          if is_rb_file
+            weight = 0
+          else
+            query = plan.query
+            weight = result.workload.statement_weights[query]
+            next if query.is_a?(SupportQuery) || !weight
+            @logger.debug { "Executing #{query.text}" }
+          end
 
           next unless options[:group].nil? || plan.group == options[:group]
-
-          indexes = plan.select do |step|
-            step.is_a? Plans::IndexLookupPlanStep
-          end.map(&:index)
-
+          if is_rb_file
+            indexes = plan.steps.select do |step|
+              step.is_a? Plans::IndexLookupPlanStep
+            end.map(&:index)
+          else
+            indexes = plan.select do |step|
+              step.is_a? Plans::IndexLookupPlanStep
+            end.map(&:index)
+          end
           measurement = bench_query backend, indexes, plan, index_values,
                                     options[:num_iterations], options[:repeat],result.has_index_hash,
-                                    weight: weight
+                                    weight: weight #yusuke 各クエリに対して正しいplan を渡しているか確認できれば妥当性検証は十分だろう
           next if measurement.empty?
 
           measurement.estimate = plan.cost
@@ -70,6 +79,24 @@ module NoSE
           group_tables[plan.group] << measurement
         end
 
+        if is_rb_file
+          result.update_plans.each do |plan|
+              next unless options[:group].nil? || plan.group == options[:group]
+
+              # Get all indexes used by support queries
+              #indexes = plan.query_plans.flat_map(&:indexes) << plan.index
+              indexes = plan.query_plans.map{|qp| qp.steps.map{|step| step.index}} << plan.update_steps.map{|us| us.index}
+
+              measurement = bench_update backend, indexes, plan, index_values,
+                                         options[:num_iterations],
+                                         options[:repeat], weight: 0
+              next if measurement.empty?
+
+              measurement.estimate = plan.cost
+              group_totals[plan.group] += measurement.mean
+              group_tables[plan.group] << measurement
+          end
+        else
         result.workload.updates.each do |update|
           weight = result.workload.statement_weights[update]
           next unless weight
@@ -95,6 +122,7 @@ module NoSE
             measurement.estimate = plan.cost
             group_totals[plan.group] += measurement.mean
             group_tables[plan.group] << measurement
+          end
           end
         end
 
