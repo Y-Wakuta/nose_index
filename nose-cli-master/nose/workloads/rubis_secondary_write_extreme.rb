@@ -31,7 +31,8 @@ NoSE::Workload.new do
     Q 'SELECT items.name FROM items WHERE items.id = ? -- 3'
     Q 'SELECT items.name FROM items WHERE items.quantity = ? -- 3_secondary'
     Q 'SELECT users.id, users.nickname, bids.id, item.id, bids.qty, bids.bid, bids.date FROM users.bids.item WHERE item.id = ? ORDER BY bids.date -- 4'
-    Q 'SELECT users.id, users.nickname, bids.id, item.id, bids.qty, bids.bid, bids.date FROM users.bids.item WHERE item.quantity = ? ORDER BY bids.date -- 4_secondary'
+    #Q 'SELECT users.id, users.nickname, bids.id, item.id, bids.qty, bids.bid, bids.date FROM users.bids.item WHERE item.quantity = ? ORDER BY bids.date -- 4_secondary'
+    Q 'SELECT users.id, users.nickname, bids.id, item.id, bids.qty, bids.bid, bids.date FROM users.bids.item WHERE item.quantity = ? -- 4_secondary'
   end
 
   Group 'ViewItem', browsing: 22.95,
@@ -121,8 +122,10 @@ NoSE::Workload.new do
     Q 'SELECT items.* FROM items WHERE items.quantity=? -- 18_secondary'
     Q 'SELECT bids.qty, bids.date FROM bids.item WHERE item.id=? ' \
       'ORDER BY bids.bid LIMIT 2 -- 19'
+    #Q 'SELECT bids.qty, bids.date FROM bids.item WHERE item.quantity=? ' \
+    #  'ORDER BY bids.bid LIMIT 2 -- 19_secondary'
     Q 'SELECT bids.qty, bids.date FROM bids.item WHERE item.quantity=? ' \
-      'ORDER BY bids.bid LIMIT 2 -- 19_secondary'
+      ' LIMIT 2 -- 19_secondary'
   end
 
   Group 'StoreBid', bidding: 3.74,
