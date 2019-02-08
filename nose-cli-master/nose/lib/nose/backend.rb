@@ -296,7 +296,7 @@ module NoSE
 
         # Remove results past the limit
         # @return [Array<Hash>]
-        def process(_conditions, results)
+        def process(_conditions, results, conditions)
           results[0..@limit - 1]
         end
       end
@@ -463,7 +463,7 @@ module NoSE
         return if support.empty?
 
         #yusuke 挿入に使用するパラメータに対して十分な属性を提供できていない場合、nilを入れることになるので、ここで弾く
-        return if @insert_step.fields.to_set.superset? support[0].keys.to_set
+        return if !(@insert_step.fields.to_set - support[0].keys.to_set).empty?
 
         @insert_step.process support
       end

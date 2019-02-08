@@ -172,7 +172,7 @@ module NoSE
       def secondary_index_cql(has_index,indexes)
         return if has_index.nil?
         index = indexes.select{|index| index.key == has_index.index_key}.first
-        return "CREATE CUSTOM INDEX IF NOT EXISTS #{has_index.index_key} ON #{has_index.parent_table_id}(#{(field_names index.hash_fields).split(',').first}) USING 'org.apache.cassandra.index.sasi.SASIIndex';"
+        return "CREATE CUSTOM INDEX IF NOT EXISTS #{has_index.index_key + has_index.parent_table_id} ON #{has_index.parent_table_id}(#{(field_names index.hash_fields).split(',').first}) USING 'org.apache.cassandra.index.sasi.SASIIndex';"
       end
 
       # Get a comma-separated list of field names with optional types
