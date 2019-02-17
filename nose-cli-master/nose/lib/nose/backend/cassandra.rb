@@ -155,7 +155,7 @@ module NoSE
       # Produce the CQL to create the definition for a given index
       # @return [String]
       def index_cql(index) #yusuke ここでplan_fileの内容からCQLを生成している
-        ddl = "CREATE COLUMNFAMILY IF NOT EXISTS \"#{index.key}\" (" \
+        ddl = "CREATE COLUMNFAMILY \"#{index.key}\" (" \
           "#{field_names index.all_fields, true}, " \
           "PRIMARY KEY((#{field_names index.hash_fields})"
 
@@ -172,7 +172,7 @@ module NoSE
       def secondary_index_cql(has_index,indexes)
         return if has_index.nil?
         index = indexes.select{|index| index.key == has_index.index_key}.first
-        return "CREATE CUSTOM INDEX IF NOT EXISTS #{has_index.index_key + has_index.parent_table_id} ON #{has_index.parent_table_id}(#{(field_names index.hash_fields).split(',').first}) USING 'org.apache.cassandra.index.sasi.SASIIndex';"
+        return "CREATE CUSTOM INDEX #{has_index.index_key + has_index.parent_table_id} ON #{has_index.parent_table_id}(#{(field_names index.hash_fields).split(',').first}) USING 'org.apache.cassandra.index.sasi.SASIIndex';"
       end
 
       # Get a comma-separated list of field names with optional types
