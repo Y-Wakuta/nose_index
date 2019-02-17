@@ -23,12 +23,14 @@ def plot_transaction(x,y,z,alpha,y_title,z_title,alpha_title,title)
       plot.yrange "[0:]"
       plot.size "0.80,1.0"
       #plot.style "data lines"
-      plot.set 'terminal postscript color eps enhanced font "Helvetica,13" size 15cm,7cm'
+      #plot.set 'terminal postscript color eps enhanced font "Helvetica,13" size 15cm,7cm' #resume
+      #plot.set 'terminal postscript color eps enhanced font "Helvetica,13" size 13cm,7cm' #卒論
+      plot.set 'terminal postscript color eps enhanced font "Helvetica,13" size 12cm,5cm' #卒論スライド
 #      plot.set 'terminal postscript color eps enhanced font "Meiryo,18"'  #Ryumin-Light-EUC-H,7"'#size 16cm,8cm'
 #      plot.set 'terminal pdf'
       plot.set 'boxwidth 0.8'
       plot.set "output 'output_#{title}.eps'"
-      plot.set 'xtics rotate by -40 font "Arial,7.5"'
+      plot.set 'xtics rotate by -20 font "Arial,5.5"'
       plot.set "style histogram clustered"
       plot.set "logscale y"
       #plot.set "autoscale fixmin"
@@ -60,8 +62,7 @@ def get_averages(csv,x_groups = nil)
   groups = csv.group_by{|row| row["group"]}
 
   group_mean =  groups.map do |g|
-    #response_times = g[1].map{|s| s["mean"].to_f * 1000.0} #yusuke msに変更
-    response_times = g[1].map{|s| s["mean"].to_f} #yusuke msに変更
+    response_times = g[1].map{|s| s["mean"].to_f * 1000.0} #yusuke msに変更
     {g[0] => response_times.mean}
   end.inject(:merge)
 
@@ -84,13 +85,13 @@ end
 def plot_mean(names,values,y_title,title)
    Gnuplot.open() do |gp|
     Gnuplot::Plot.new( gp ) do |plot|
-      plot.ylabel "Query Latency [ms]"
+      plot.ylabel "Query Latency [s]"
       plot.xrange "[:]"
       plot.yrange "[0:]"
       #plot.size "1.0,1.0"
-      plot.size "1,0.68"
+      plot.size "1,0.71"
       #plot.style "data lines"
-      plot.set 'terminal postscript color eps enhanced font "Helvetica,13" size 6cm,6cm'
+      plot.set 'terminal postscript color eps enhanced font "Helvetica,13" size 7cm,7cm'
 #      plot.set 'terminal postscript color eps enhanced font "Meiryo,18"'  #Ryumin-Light-EUC-H,7"'#size 16cm,8cm'
       #plot.set 'terminal pdf mono'
       plot.set 'boxwidth 0.5'
@@ -111,13 +112,14 @@ def plot_mean(names,values,y_title,title)
 end
 
 def get_mean(csv,group_weight_hash)
-  weight_sum = 0
-  mean_by_freq = csv.map do |row|
-    weight = group_weight_hash[row["group"]].to_f
-    weight_sum += weight
-    row["mean"].to_f * weight 
-  end.sum
-  return mean_by_freq / weight_sum
+ # weight_sum = 0
+ # mean_by_freq = csv.map do |row|
+ #   weight = group_weight_hash[row["group"]].to_f
+ #   weight_sum += weight
+ #   row["mean"].to_f * weight
+ # end.sum
+ # return mean_by_freq / weight_sum
+  return csv.map{|row| row["mean"].to_f}.mean
 end
 
 def get_group_weight_hash(csv)
@@ -166,3 +168,5 @@ get_transaction_latency(nose_csv, nose_index_csv, baseline_csv)
 plot_whole_latency(nose_csv, nose_index_csv, baseline_csv)
 
 get_sum_statics(nose_csv,nose_index_csv,baseline_csv)
+
+plot_query_update_latency(half_nose_csv, half_nose_index_csv, normal_nose_csv, normal_nose_index_csv,one_half_nose_csv, one_half_nose_index_csv)

@@ -1,28 +1,26 @@
 var Table = require('mysql-faker').Table,
     insert = require('mysql-faker').insert;
 
-var scale_factor = 0.75
-
-var categories = (new Table('categories', 500 * scale_factor));
+var categories = (new Table('categories', 200));
 categories.lorem_words('name', 2)
-          .random_number('dummy',{min: 0,max: 100}); //yusuke dummyが空だとcassandraへのload時にコケるので乱数を入れる
+          .random_number('dummy',{min: 0,max: 10}); //yusuke dummyが空だとcassandraへのload時にコケるので乱数を入れる
 
-var regions = (new Table('regions', 50 * scale_factor));
+var regions = (new Table('regions', 50));
 regions.lorem_words('name', 2)
-       .random_number('dummy',{min:0,max:100});//yusuke dummyが空だとcassandraへのload時にコケるので乱数を入れる
+       .random_number('dummy',{min:0,max:10});//yusuke dummyが空だとcassandraへのload時にコケるので乱数を入れる
 
-var users = (new Table('users', 200000 * scale_factor));
+var users = (new Table('users', 2000));
 users.name_firstName('firstname')
      .name_lastName('lastname')
      .random_uuid('nickname')
      .internet_password('password')
      .internet_email('email')
-     .random_number('rating', {min: -50, max: 200})
+     .random_number('rating', {min: -50, max: 20})
      .finance_amount('balance')
      .date_past('creation_date')
      .random_number('region', {min: 1, max: regions.count});
 
-var items = (new Table('items', 2000000 * scale_factor));
+var items = (new Table('items', 2000));
 items.lorem_words('name')
      .lorem_paragraph('description')
      .finance_amount('initial_price')
@@ -36,7 +34,7 @@ items.lorem_words('name')
      .random_number('seller', {min: 1, max: users.count})
      .random_number('category', {min: 1, max: categories.count});
 
-var bids = (new Table('bids', 20000000 * scale_factor));
+var bids = (new Table('bids', 200000));
 bids.random_number('qty', {min: 1, max: 5})
     .finance_amount('bid')
     .finance_amount('max_bid')
@@ -44,7 +42,7 @@ bids.random_number('qty', {min: 1, max: 5})
     .random_number('user', {min: 1, max: users.count})
     .random_number('item', {min: 1, max: items.count});
 
-var comments = (new Table('comments', 10000000 * scale_factor));
+var comments = (new Table('comments', 100000));
 comments.random_number('rating', {min: -5, max: 5})
         .date_past('date')
         .lorem_sentences('comment')
@@ -52,7 +50,7 @@ comments.random_number('rating', {min: -5, max: 5})
         .random_number('to_user', {min: 1, max: users.count})
         .random_number('item', {min: 1, max: items.count});
 
-var buy_now = (new Table('buynow', 2000000 * scale_factor));
+var buy_now = (new Table('buynow', 20000));
 buy_now.random_number('qty', {min: 1, max: 3})
        .date_past('date')
        .random_number('buyer', {min: 1, max: users.count})
@@ -70,5 +68,5 @@ insert([
   host: '127.0.0.1',
   user: 'root',
   password: 'root',
-  database: 'three_quaters'
+  database: 'minimam'
 }, true);

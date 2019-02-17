@@ -1,0 +1,93 @@
+label,group,name,weight,mean,cost
+rubis_secondary_bidding_161000000_no_si,BrowseCategories,"SELECT users.nickname, users.password FROM users WHERE users.id = ? -- 1",7.65,0.0016475285999999999,0.009220552463838648
+rubis_secondary_bidding_161000000_no_si,BrowseCategories,"SELECT users.nickname, users.password FROM users WHERE users.rating = ? -- 1_secondary",7.65,0.0123764134,0.011550715867729919
+rubis_secondary_bidding_161000000_no_si,BrowseCategories,"SELECT categories.id, categories.name FROM categories WHERE categories.dummy = 1 -- 2",7.65,0.0014474586,0.009267389919193247
+rubis_secondary_bidding_161000000_no_si,ViewBidHistory,SELECT items.name FROM items WHERE items.id = ? -- 3,1.54,0.0013384762,0.009220552463838648
+rubis_secondary_bidding_161000000_no_si,ViewBidHistory,SELECT items.name FROM items WHERE items.quantity = ? -- 3_secondary,1.54,2.2614547942,0.0326275707772992
+rubis_secondary_bidding_161000000_no_si,ViewBidHistory,"SELECT users.id, users.nickname, bids.id, item.id, bids.qty, bids.bid, bids.date FROM users.bids.item WHERE item.id = ? ORDER BY bids.date -- 4",1.54,0.0015304192,0.009325936738386496
+rubis_secondary_bidding_161000000_no_si,ViewBidHistory,"SELECT users.id, users.nickname, bids.id, item.id, bids.qty, bids.bid, bids.date FROM users.bids.item WHERE item.quantity = ? -- 4_secondary",1.54,648.8963668916,3.0132116120502914
+rubis_secondary_bidding_161000000_no_si,ViewItem,SELECT items.* FROM items WHERE items.id = ? -- 5,14.17,0.0014254536,0.009220552463838648
+rubis_secondary_bidding_161000000_no_si,ViewItem,SELECT items.* FROM items WHERE items.quantity = ? -- 5_secondary,14.17,16.228202222,0.0326275707772992
+rubis_secondary_bidding_161000000_no_si,ViewItem,SELECT bids.* FROM items.bids WHERE items.id = ? -- 6,14.17,0.0013933936,0.009325936738386496
+rubis_secondary_bidding_161000000_no_si,ViewItem,SELECT bids.* FROM items.bids WHERE items.quantity = ? -- 6_secondary,14.17,545.8479102248,3.0132116120502914
+rubis_secondary_bidding_161000000_no_si,SearchItemsByCategory,"SELECT items.id, items.name, items.initial_price, items.max_bid, items.nb_of_bids, items.end_date FROM items.category WHERE category.id = ? AND items.end_date >= ? LIMIT 25 -- 7",15.94,0.0022314354,0.009501577195966239
+rubis_secondary_bidding_161000000_no_si,SearchItemsByCategory,"SELECT items.id, items.name, items.initial_price, items.max_bid, items.nb_of_bids, items.end_date FROM items.category WHERE category.dummy = ? -- 7_secondary",15.94,0.8378981306,0.04737207509649245
+rubis_secondary_bidding_161000000_no_si,ViewUserInfo,SELECT users.* FROM users WHERE users.id = ? -- 8,2.48,0.0012485292,0.009220552463838648
+rubis_secondary_bidding_161000000_no_si,ViewUserInfo,SELECT users.* FROM users WHERE users.rating = ? -- 8_secondary,2.48,0.0327425996,0.011550715867729919
+rubis_secondary_bidding_161000000_no_si,ViewUserInfo,"SELECT comments.id, comments.rating, comments.date, comments.comment FROM comments.to_user WHERE to_user.id = ? -- 9",2.48,0.002469851,0.00979431129193248
+rubis_secondary_bidding_161000000_no_si,ViewUserInfo,"SELECT comments.id, comments.rating, comments.date, comments.comment FROM comments.to_user WHERE to_user.rating = ? -- 9_secondary",2.48,4.968084467,0.41033963875422597
+rubis_secondary_bidding_161000000_no_si,BuyNow,SELECT users.nickname FROM users WHERE users.id=? -- 12,1.16,0.0013681416,0.009220552463838648
+rubis_secondary_bidding_161000000_no_si,BuyNow,SELECT users.nickname FROM users WHERE users.rating=? -- 12_secondary,1.16,0.008026899,0.011550715867729919
+rubis_secondary_bidding_161000000_no_si,BuyNow,SELECT items.* FROM items WHERE items.id=? -- 13,1.16,0.0016457104,0.009220552463838648
+rubis_secondary_bidding_161000000_no_si,BuyNow,SELECT items.* FROM items WHERE items.quantity=? -- 13_secondary,1.16,14.522285442200001,0.0326275707772992
+rubis_secondary_bidding_161000000_no_si,StoreBuyNow,"SELECT items.quantity, items.nb_of_bids, items.end_date FROM items WHERE items.id=? -- 14",1.1,0.001223676,0.009220552463838648
+rubis_secondary_bidding_161000000_no_si,StoreBuyNow,"SELECT items.quantity, items.nb_of_bids, items.end_date FROM items WHERE items.quantity=? -- 14_secondary",1.1,3.3612104186000002,0.0326275707772992
+rubis_secondary_bidding_161000000_no_si,StoreBuyNow,"UPDATE items SET quantity=?, nb_of_bids=?, end_date=? WHERE items.id=? -- 15 for i1888493477",1.1,0.0012185742,0.013329108
+rubis_secondary_bidding_161000000_no_si,StoreBuyNow,"UPDATE items SET quantity=?, nb_of_bids=?, end_date=? WHERE items.id=? -- 15 for i638513312",1.1,0.0037639944000000002,0.023878450763838648
+rubis_secondary_bidding_161000000_no_si,StoreBuyNow,"UPDATE items SET quantity=?, nb_of_bids=?, end_date=? WHERE items.id=? -- 15 for i3392968797",1.1,0.0052982168,0.033099003227677296
+rubis_secondary_bidding_161000000_no_si,StoreBuyNow,"UPDATE items SET quantity=?, nb_of_bids=?, end_date=? WHERE items.id=? -- 15 for i936463631",1.1,0.0033072263999999996,0.023878450763838648
+rubis_secondary_bidding_161000000_no_si,StoreBuyNow,"UPDATE items SET quantity=?, nb_of_bids=?, end_date=? WHERE items.id=? -- 15 for i2653317939",1.1,0.0113874852,0.0358904778276773
+rubis_secondary_bidding_161000000_no_si,StoreBuyNow,"UPDATE items SET quantity=?, nb_of_bids=?, end_date=? WHERE items.id=? -- 15 for i2337785568",1.1,0.0027042602,0.022549660463838647
+rubis_secondary_bidding_161000000_no_si,StoreBuyNow,"UPDATE items SET quantity=?, nb_of_bids=?, end_date=? WHERE items.id=? -- 15 for i3405877728",1.1,0.0108505732,0.1426170167383865
+rubis_secondary_bidding_161000000_no_si,StoreBuyNow,"UPDATE items SET quantity=?, nb_of_bids=?, end_date=? WHERE items.id=? -- 15 for i4022021473",1.1,0.0035681624000000003,0.031770212927677295
+rubis_secondary_bidding_161000000_no_si,StoreBuyNow,"INSERT INTO buynow SET id=?, qty=?, date=? AND CONNECT TO item(?), buyer(?) -- 16 for i1750146415",1.1,0.0013900976,0.013329108
+rubis_secondary_bidding_161000000_no_si,StoreBuyNow,"INSERT INTO buynow SET id=?, qty=?, date=? AND CONNECT TO item(?), buyer(?) -- 16 for i2653317939",1.1,0.002946513,0.022549660463838647
+rubis_secondary_bidding_161000000_no_si,PutBid,"SELECT users.nickname, users.password FROM users WHERE users.id=? -- 17",5.4,0.0010805198000000001,0.009220552463838648
+rubis_secondary_bidding_161000000_no_si,PutBid,"SELECT users.nickname, users.password FROM users WHERE users.rating=? -- 17_secondary",5.4,0.010978507,0.011550715867729919
+rubis_secondary_bidding_161000000_no_si,PutBid,SELECT items.* FROM items WHERE items.id=? -- 18,5.4,0.0012536574,0.009220552463838648
+rubis_secondary_bidding_161000000_no_si,PutBid,SELECT items.* FROM items WHERE items.quantity=? -- 18_secondary,5.4,14.6801309086,0.0326275707772992
+rubis_secondary_bidding_161000000_no_si,PutBid,"SELECT bids.qty, bids.date FROM bids.item WHERE item.id=? ORDER BY bids.bid LIMIT 2 -- 19",5.4,0.0012730686,0.009232261827677299
+rubis_secondary_bidding_161000000_no_si,PutBid,"SELECT bids.qty, bids.date FROM bids.item WHERE item.quantity=? -- 19_secondary",5.4,484.69351462000003,3.0132116120502914
+rubis_secondary_bidding_161000000_no_si,StoreBid,"SELECT items.nb_of_bids, items.max_bid FROM items WHERE items.id=? -- 21",3.74,0.0014105866,0.009220552463838648
+rubis_secondary_bidding_161000000_no_si,StoreBid,"SELECT items.nb_of_bids, items.max_bid FROM items WHERE items.quantity=? -- 21_secondary",3.74,2.8122664712,0.0326275707772992
+rubis_secondary_bidding_161000000_no_si,StoreBid,"INSERT INTO bids SET id=?, qty=?, bid=?, date=? AND CONNECT TO item(?), user(?) -- 20 for i193173044",3.74,0.0027476724,0.022549660463838647
+rubis_secondary_bidding_161000000_no_si,StoreBid,"INSERT INTO bids SET id=?, qty=?, bid=?, date=? AND CONNECT TO item(?), user(?) -- 20 for i3563903410",3.74,0.0015065578,0.013329108
+rubis_secondary_bidding_161000000_no_si,StoreBid,"INSERT INTO bids SET id=?, qty=?, bid=?, date=? AND CONNECT TO item(?), user(?) -- 20 for i3405877728",3.74,0.0026326550000000002,0.022549660463838647
+rubis_secondary_bidding_161000000_no_si,StoreBid,"UPDATE items SET nb_of_bids=?, max_bid=? WHERE items.id=? -- 22 for i1888493477",3.74,0.0011923125999999998,0.013329108
+rubis_secondary_bidding_161000000_no_si,StoreBid,"UPDATE items SET nb_of_bids=?, max_bid=? WHERE items.id=? -- 22 for i638513312",3.74,0.0025688394,0.022549660463838647
+rubis_secondary_bidding_161000000_no_si,StoreBid,"UPDATE items SET nb_of_bids=?, max_bid=? WHERE items.id=? -- 22 for i3392968797",3.74,0.0039338922,0.031770212927677295
+rubis_secondary_bidding_161000000_no_si,StoreBid,"UPDATE items SET nb_of_bids=?, max_bid=? WHERE items.id=? -- 22 for i936463631",3.74,0.0024525948,0.022549660463838647
+rubis_secondary_bidding_161000000_no_si,StoreBid,"UPDATE items SET nb_of_bids=?, max_bid=? WHERE items.id=? -- 22 for i2653317939",3.74,0.0112990528,0.0358904778276773
+rubis_secondary_bidding_161000000_no_si,StoreBid,"UPDATE items SET nb_of_bids=?, max_bid=? WHERE items.id=? -- 22 for i2337785568",3.74,0.0023522998,0.022549660463838647
+rubis_secondary_bidding_161000000_no_si,StoreBid,"UPDATE items SET nb_of_bids=?, max_bid=? WHERE items.id=? -- 22 for i3405877728",3.74,0.016292267,0.1426170167383865
+rubis_secondary_bidding_161000000_no_si,StoreBid,"UPDATE items SET nb_of_bids=?, max_bid=? WHERE items.id=? -- 22 for i4022021473",3.74,0.0035136437999999997,0.031770212927677295
+rubis_secondary_bidding_161000000_no_si,PutComment,"SELECT users.nickname, users.password FROM users WHERE users.id=? -- 23",0.46,0.0013232158,0.009220552463838648
+rubis_secondary_bidding_161000000_no_si,PutComment,"SELECT users.nickname, users.password FROM users WHERE users.rating=? -- 23_secondary",0.46,0.012112605799999999,0.011550715867729919
+rubis_secondary_bidding_161000000_no_si,PutComment,SELECT items.* FROM items WHERE items.id=? -- 24,0.46,0.0012866992000000002,0.009220552463838648
+rubis_secondary_bidding_161000000_no_si,PutComment,SELECT items.* FROM items WHERE items.quantity=? -- 24_secondary,0.46,14.474376114200002,0.0326275707772992
+rubis_secondary_bidding_161000000_no_si,PutComment,SELECT users.* FROM users WHERE users.id=? -- 25,0.46,0.0012013556,0.009220552463838648
+rubis_secondary_bidding_161000000_no_si,PutComment,SELECT users.* FROM users WHERE users.rating=? -- 25_secondary,0.46,0.1948549424,0.011550715867729919
+rubis_secondary_bidding_161000000_no_si,StoreComment,SELECT users.rating FROM users WHERE users.id=? -- 26,0.45,0.0010548436,0.009220552463838648
+rubis_secondary_bidding_161000000_no_si,StoreComment,SELECT users.rating FROM users WHERE users.rating=? -- 26_secondary,0.45,0.0059006416,0.011550715867729919
+rubis_secondary_bidding_161000000_no_si,StoreComment,UPDATE users SET rating=? WHERE users.id=? -- 27 for i2906147889,0.45,0.001273985,0.013329108
+rubis_secondary_bidding_161000000_no_si,StoreComment,UPDATE users SET rating=? WHERE users.id=? -- 27 for i2160236821,0.45,0.0038509851999999995,0.023878450763838648
+rubis_secondary_bidding_161000000_no_si,StoreComment,UPDATE users SET rating=? WHERE users.id=? -- 27 for i4128009194,0.45,0.0032025194,0.023878450763838648
+rubis_secondary_bidding_161000000_no_si,StoreComment,"INSERT INTO comments SET id=?, rating=?, date=?, comment=? AND CONNECT TO to_user(?), from_user(?), item(?) -- 28 for i3157175159",0.45,0.0014481512,0.013329108
+rubis_secondary_bidding_161000000_no_si,StoreComment,"INSERT INTO comments SET id=?, rating=?, date=?, comment=? AND CONNECT TO to_user(?), from_user(?), item(?) -- 28 for i1483377618",0.45,0.0026048422,0.022549660463838647
+rubis_secondary_bidding_161000000_no_si,StoreComment,"INSERT INTO comments SET id=?, rating=?, date=?, comment=? AND CONNECT TO to_user(?), from_user(?), item(?) -- 28 for i2831842188",0.45,0.001453752,0.013329108
+rubis_secondary_bidding_161000000_no_si,AboutMe,SELECT users.* FROM users WHERE users.id=? -- 29,1.71,0.0013658956,0.009220552463838648
+rubis_secondary_bidding_161000000_no_si,AboutMe,SELECT users.* FROM users WHERE users.rating=? -- 29_secondary,1.71,0.031276007,0.011550715867729919
+rubis_secondary_bidding_161000000_no_si,AboutMe,SELECT comments_received.* FROM users.comments_received WHERE users.id = ? -- 30,1.71,0.0021716784,0.00979431129193248
+rubis_secondary_bidding_161000000_no_si,AboutMe,SELECT comments_received.* FROM users.comments_received WHERE users.rating = ? -- 30_secondary,1.71,3.440000115,0.41033963875422597
+rubis_secondary_bidding_161000000_no_si,AboutMe,SELECT from_user.nickname FROM comments.from_user WHERE comments.id = ? -- 31,1.71,0.0028556011999999998,0.018441104927677296
+rubis_secondary_bidding_161000000_no_si,AboutMe,SELECT from_user.nickname FROM comments.from_user WHERE comments.rating = ? -- 31_secondary,1.71,9.7773096076,0.126302481486496
+rubis_secondary_bidding_161000000_no_si,AboutMe,"SELECT bought_now.*, items.* FROM items.bought_now.buyer WHERE buyer.id = ? AND bought_now.date>=? -- 32",1.71,0.0019943314,0.009232261827677299
+rubis_secondary_bidding_161000000_no_si,AboutMe,"SELECT bought_now.*, items.* FROM items.bought_now.buyer WHERE buyer.rating = ? -- 32_secondary",1.71,2.9616084188,0.34008345572232834
+rubis_secondary_bidding_161000000_no_si,AboutMe,SELECT items.* FROM items.seller WHERE seller.id=? AND items.end_date >=? -- 33,1.71,0.0022140125999999998,0.009325936738386496
+rubis_secondary_bidding_161000000_no_si,AboutMe,SELECT items.* FROM items.seller WHERE seller.rating =? -- 33_secondary,1.71,2.5107168135999998,0.31666472804502915
+rubis_secondary_bidding_161000000_no_si,AboutMe,SELECT items.* FROM items.bids.user WHERE user.id=? AND items.end_date>=? -- 34,1.71,0.0058904564,0.010379779483864959
+rubis_secondary_bidding_161000000_no_si,AboutMe,SELECT items.* FROM items.bids.user WHERE user.rating =? -- 34_secondary,1.71,9.1385677302,0.527433277140722
+rubis_secondary_bidding_161000000_no_si,SearchItemsByRegion,"SELECT items.id, items.name, items.initial_price, items.max_bid, items.nb_of_bids, items.end_date FROM items.seller WHERE seller.region.id = ? AND items.category.id = ? AND items.end_date >= ? LIMIT 25 -- 35",6.34,4.7940332439999995,0.5703803422425519
+rubis_secondary_bidding_161000000_no_si,BrowseRegions,"SELECT regions.id, regions.name FROM regions WHERE regions.dummy = 1 -- 36",5.39,0.0013412378000000002,0.009214697781919324
+rubis_secondary_bidding_161000000_no_si,RegisterItem,"INSERT INTO items SET id=?, name=?, description=?, initial_price=?, quantity=?, reserve_price=?, buy_now=?, nb_of_bids=0, max_bid=0, start_date=?, end_date=? AND CONNECT TO category(?), seller(?) -- 10 for i1888493477",0.53,0.0017129157999999998,0.013329108
+rubis_secondary_bidding_161000000_no_si,RegisterItem,"INSERT INTO items SET id=?, name=?, description=?, initial_price=?, quantity=?, reserve_price=?, buy_now=?, nb_of_bids=0, max_bid=0, start_date=?, end_date=? AND CONNECT TO category(?), seller(?) -- 10 for i638513312",0.53,0.0015027972,0.013329108
+rubis_secondary_bidding_161000000_no_si,RegisterItem,"INSERT INTO items SET id=?, name=?, description=?, initial_price=?, quantity=?, reserve_price=?, buy_now=?, nb_of_bids=0, max_bid=0, start_date=?, end_date=? AND CONNECT TO category(?), seller(?) -- 10 for i3264766123",0.53,0.0013937038,0.013329108
+rubis_secondary_bidding_161000000_no_si,RegisterItem,"INSERT INTO items SET id=?, name=?, description=?, initial_price=?, quantity=?, reserve_price=?, buy_now=?, nb_of_bids=0, max_bid=0, start_date=?, end_date=? AND CONNECT TO category(?), seller(?) -- 10 for i3392968797",0.53,0.0016073858,0.013329108
+rubis_secondary_bidding_161000000_no_si,RegisterItem,"INSERT INTO items SET id=?, name=?, description=?, initial_price=?, quantity=?, reserve_price=?, buy_now=?, nb_of_bids=0, max_bid=0, start_date=?, end_date=? AND CONNECT TO category(?), seller(?) -- 10 for i936463631",0.53,0.0014037068,0.013329108
+rubis_secondary_bidding_161000000_no_si,RegisterItem,"INSERT INTO items SET id=?, name=?, description=?, initial_price=?, quantity=?, reserve_price=?, buy_now=?, nb_of_bids=0, max_bid=0, start_date=?, end_date=? AND CONNECT TO category(?), seller(?) -- 10 for i578710568",0.53,0.0013760757999999999,0.013329108
+rubis_secondary_bidding_161000000_no_si,RegisterItem,"INSERT INTO items SET id=?, name=?, description=?, initial_price=?, quantity=?, reserve_price=?, buy_now=?, nb_of_bids=0, max_bid=0, start_date=?, end_date=? AND CONNECT TO category(?), seller(?) -- 10 for i2337785568",0.53,0.0015671224000000001,0.013329108
+rubis_secondary_bidding_161000000_no_si,RegisterItem,"INSERT INTO items SET id=?, name=?, description=?, initial_price=?, quantity=?, reserve_price=?, buy_now=?, nb_of_bids=0, max_bid=0, start_date=?, end_date=? AND CONNECT TO category(?), seller(?) -- 10 for i4022021473",0.53,0.0014218196000000002,0.013329108
+rubis_secondary_bidding_161000000_no_si,RegisterUser,"INSERT INTO users SET id=?, firstname=?, lastname=?, nickname=?, password=?, email=?, rating=0, balance=0, creation_date=? AND CONNECT TO region(?) -- 11 for i2906147889",1.07,0.001427168,0.013329108
+rubis_secondary_bidding_161000000_no_si,RegisterUser,"INSERT INTO users SET id=?, firstname=?, lastname=?, nickname=?, password=?, email=?, rating=0, balance=0, creation_date=? AND CONNECT TO region(?) -- 11 for i2160236821",1.07,0.0014531942000000002,0.013329108
+rubis_secondary_bidding_161000000_no_si,RegisterUser,"INSERT INTO users SET id=?, firstname=?, lastname=?, nickname=?, password=?, email=?, rating=0, balance=0, creation_date=? AND CONNECT TO region(?) -- 11 for i4128009194",1.07,0.0015288498,0.013329108
+rubis_secondary_bidding_161000000_no_si,RegisterUser,"INSERT INTO users SET id=?, firstname=?, lastname=?, nickname=?, password=?, email=?, rating=0, balance=0, creation_date=? AND CONNECT TO region(?) -- 11 for i302325151",1.07,0.0014264885999999998,0.013329108

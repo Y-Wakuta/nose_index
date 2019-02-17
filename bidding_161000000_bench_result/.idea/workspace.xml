@@ -2,9 +2,16 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="bc81dad5-2d73-4ff0-8325-5436c4fa3cea" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/../nose-cli-master/experiments/rubis/fake_rubis.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../nose-cli-master/experiments/rubis/fake_scale.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../backend/get_cardinality.rb" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/get_cardinality.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/output_Response Time (copy).eps" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/output_Response Time.eps" beforeDir="false" afterPath="$PROJECT_DIR$/output_Response Time.eps" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/output_latency.eps" beforeDir="false" afterPath="$PROJECT_DIR$/output_latency.eps" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/output_scalability.eps" beforeDir="false" afterPath="$PROJECT_DIR$/output_scalability.eps" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scalability.rb" beforeDir="false" afterPath="$PROJECT_DIR$/scalability.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/script.rb" beforeDir="false" afterPath="$PROJECT_DIR$/script.rb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/../docker-compose.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nose-cli-master/experiments/rubis/fake_scale.js" beforeDir="false" afterPath="$PROJECT_DIR$/../nose-cli-master/experiments/rubis/fake_scale.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../nose-cli-master/internal_si.json" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../nose-cli-master/lib/nose_cli/execute.rb" beforeDir="false" afterPath="$PROJECT_DIR$/../nose-cli-master/lib/nose_cli/execute.rb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../nose-cli-master/nose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/../nose-cli-master/nose.yml" afterDir="false" />
@@ -36,20 +43,76 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="CoverageDataManager">
-    <SUITE FILE_PATH="coverage/bidding_161000000_bench_result@script.rcov" NAME="script Coverage Results" MODIFIED="1549869878135" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="bidding_161000000_bench_result" />
+    <SUITE FILE_PATH="coverage/bidding_161000000_bench_result@script.rcov" NAME="script Coverage Results" MODIFIED="1550143974818" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="bidding_161000000_bench_result" />
     <SUITE FILE_PATH="coverage/bidding_161000000_bench_result@scalability.rcov" NAME="scalability Coverage Results" MODIFIED="1549871991475" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" MODULE_NAME="bidding_161000000_bench_result" />
+    <SUITE FILE_PATH="coverage/bidding_161000000_bench_result@record_num.rcov" NAME="record_num Coverage Results" MODIFIED="1550156529184" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" MODULE_NAME="bidding_161000000_bench_result" />
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/script.rb">
-          <provider selected="true" editor-type-id="text-editor" />
+        <entry file="file://$PROJECT_DIR$/record_impac.rb">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="803">
+              <caret line="89" selection-start-line="89" selection-end-line="89" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/bidding_161_5iter_one_node/baseline_bench_result.csv">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-450" />
+          </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/bidding_161_5iter_one_node/bidding_161_no_si.csv">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1159">
+              <caret line="88" column="57" lean-forward="true" selection-start-line="88" selection-start-column="57" selection-end-line="88" selection-end-column="57" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/bidding_161_5iter_one_node/bidding_161_si.csv">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="782">
+              <caret line="94" column="55" selection-start-line="94" selection-start-column="55" selection-end-line="94" selection-end-column="55" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/bidding_161_5iter_one_node/output_latency.eps">
+          <provider selected="true" editor-type-id="text-editor" />
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/script.rb">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="803">
+              <caret line="170" selection-start-line="170" selection-end-line="170" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/output_record_impac.eps">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-2976" />
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/get_latency.sh">
+          <provider selected="true" editor-type-id="text-editor" />
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/scalability.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="720">
+            <state relative-caret-position="323">
               <caret line="63" column="2" selection-start-line="63" selection-start-column="2" selection-end-line="63" selection-end-column="2" />
             </state>
           </provider>
@@ -70,16 +133,17 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/script.rb" />
         <option value="$PROJECT_DIR$/scalability.rb" />
+        <option value="$PROJECT_DIR$/record_impac.rb" />
+        <option value="$PROJECT_DIR$/script.rb" />
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="4">
-    <option name="x" value="1080" />
-    <option name="y" value="192" />
-    <option name="width" value="1720" />
-    <option name="height" value="1440" />
+  <component name="ProjectFrameBounds">
+    <option name="x" value="788" />
+    <option name="y" value="391" />
+    <option name="width" value="3307" />
+    <option name="height" value="1080" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -87,7 +151,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -95,10 +158,16 @@
               <item name="bidding_161000000_bench_result" type="b2602c69:ProjectViewProjectNode" />
               <item name="bidding_161000000_bench_result" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="bidding_161000000_bench_result" type="b2602c69:ProjectViewProjectNode" />
+              <item name="bidding_161000000_bench_result" type="462c0819:PsiDirectoryNode" />
+              <item name="bidding_161_5iter_one_node" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -119,8 +188,8 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Ruby.script">
-    <configuration name="Unnamed" type="RubyRunConfigurationType" factoryName="Ruby" nameIsGenerated="true">
+  <component name="RunManager" selected="Ruby.record_num">
+    <configuration name="record_num" type="RubyRunConfigurationType" factoryName="Ruby">
       <module name="bidding_161000000_bench_result" />
       <RUBY_RUN_CONFIG NAME="RUBY_ARGS" VALUE="" />
       <RUBY_RUN_CONFIG NAME="WORK DIR" VALUE="" />
@@ -134,8 +203,8 @@
           <PATTERN REGEXPS="/.rvm/" INCLUDED="false" />
         </COVERAGE_PATTERN>
       </EXTENSION>
-      <RUBY_RUN_CONFIG NAME="SCRIPT_PATH" VALUE="" />
-      <RUBY_RUN_CONFIG NAME="SCRIPT_ARGS" VALUE="" />
+      <RUBY_RUN_CONFIG NAME="SCRIPT_PATH" VALUE="$MODULE_DIR$/record_impac.rb" />
+      <RUBY_RUN_CONFIG NAME="SCRIPT_ARGS" VALUE="./record_num_impac/bidding_161_no_si_half.csv ./record_num_impac/bidding_161_si_half.csv ./record_num_impac/bidding_161_no_si_normal.csv ./record_num_impac/bidding_161_si_normal.csv ./record_num_impac/bidding_161_no_si_one_half.csv ./record_num_impac/bidding_161_si_one_half.csv" />
       <method v="2" />
     </configuration>
     <configuration name="scalability" type="RubyRunConfigurationType" factoryName="Ruby">
@@ -170,12 +239,12 @@
           <PATTERN REGEXPS="/.rvm/" INCLUDED="false" />
         </COVERAGE_PATTERN>
       </EXTENSION>
-      <RUBY_RUN_CONFIG NAME="SCRIPT_PATH" VALUE="$MODULE_DIR$/scalability.rb" />
-      <RUBY_RUN_CONFIG NAME="SCRIPT_ARGS" VALUE="./bidding_161_5iter_one_node/bidding_161_no_si.csv ./bidding_161_5iter_one_node/bidding_161_si.csv  ./bidding_161_10/bidding_161_no_si.csv ./bidding_161_10/bidding_161_si.csv ./bidding_161_20/bidding_161_no_si.csv ./bidding_161_20/bidding_161_si.csv" />
+      <RUBY_RUN_CONFIG NAME="SCRIPT_PATH" VALUE="$MODULE_DIR$/script.rb" />
+      <RUBY_RUN_CONFIG NAME="SCRIPT_ARGS" VALUE="./bidding_161_5iter_one_node/bidding_161_si.csv ./bidding_161_5iter_one_node/bidding_161_no_si.csv  ./bidding_161_5iter_one_node/baseline_bench_result.csv" />
       <method v="2" />
     </configuration>
     <list>
-      <item itemvalue="Ruby.Unnamed" />
+      <item itemvalue="Ruby.record_num" />
       <item itemvalue="Ruby.script" />
       <item itemvalue="Ruby.scalability" />
     </list>
@@ -197,24 +266,51 @@
       <workItem from="1549868968376" duration="3288000" />
       <workItem from="1550001274520" duration="4000" />
       <workItem from="1550001292199" duration="111000" />
-      <workItem from="1550123015938" duration="685000" />
+      <workItem from="1550123015938" duration="3945000" />
+      <workItem from="1550151691345" duration="903000" />
+      <workItem from="1550154991474" duration="8000" />
+      <workItem from="1550155380678" duration="664000" />
+      <workItem from="1550156526569" duration="196000" />
+      <workItem from="1550395429860" duration="12000" />
+      <workItem from="1550395459569" duration="1364000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="5824000" />
+    <option name="totallyTimeSpent" value="12231000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="1080" y="192" width="1720" height="1440" extended-state="4" />
+    <frame x="788" y="391" width="3307" height="1080" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.12425329" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.26709598" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.45087585" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.3998477" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.45011425" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.6203996" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="bottom" id="Docker" order="7" />
+      <window_info anchor="bottom" id="Database Changes" order="8" />
+      <window_info anchor="bottom" id="Version Control" order="9" />
+      <window_info anchor="bottom" id="Terminal" order="10" visible="true" weight="0.32912722" />
+      <window_info anchor="bottom" id="Event Log" order="11" side_tool="true" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="right" id="Database" order="3" />
+    </layout>
+    <layout-to-restore>
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.26723096" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info id="Favorites" order="2" side_tool="true" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Find" order="1" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.45011425" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.6203996" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
@@ -227,7 +323,7 @@
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="right" id="Database" order="3" />
-    </layout>
+    </layout-to-restore>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
@@ -237,22 +333,22 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="ruby-line">
           <url>file://$PROJECT_DIR$/script.rb</url>
-          <line>97</line>
+          <line>96</line>
           <option name="timeStamp" value="1" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="ruby-line">
           <url>file://$PROJECT_DIR$/script.rb</url>
-          <line>103</line>
+          <line>102</line>
           <option name="timeStamp" value="2" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="ruby-line">
           <url>file://$PROJECT_DIR$/scalability.rb</url>
-          <line>79</line>
+          <line>80</line>
           <option name="timeStamp" value="3" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="ruby-line">
           <url>file://$PROJECT_DIR$/scalability.rb</url>
-          <line>90</line>
+          <line>91</line>
           <option name="timeStamp" value="4" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="ruby-line">
@@ -260,17 +356,129 @@
           <line>56</line>
           <option name="timeStamp" value="5" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" type="ruby-line">
+          <url>file://$PROJECT_DIR$/script.rb</url>
+          <line>165</line>
+          <option name="timeStamp" value="6" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="ruby-line">
+          <url>file://$PROJECT_DIR$/script.rb</url>
+          <line>129</line>
+          <option name="timeStamp" value="7" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="ruby-line">
+          <url>file://$PROJECT_DIR$/script.rb</url>
+          <line>131</line>
+          <option name="timeStamp" value="8" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="ruby-line">
+          <url>file://$PROJECT_DIR$/script.rb</url>
+          <line>130</line>
+          <option name="timeStamp" value="9" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="ruby-line">
+          <url>file://$PROJECT_DIR$/record_impac.rb</url>
+          <line>62</line>
+          <option name="timeStamp" value="10" />
+        </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
+    <watches-manager>
+      <configuration name="RubyRunConfigurationType">
+        <watch expression="half_nose_csv[&quot;mean&quot;].zip(half_nose_index_csv[&quot;mean&quot;]).select{|tup| tup[0] &gt; }" language="ruby" />
+        <watch expression="one_half_nose / half_nose" language="ruby" />
+        <watch expression="one_half_nose_index / half_nose_index" language="ruby" />
+      </configuration>
+    </watches-manager>
+  </component>
+  <component name="debuggerHistoryManager">
+    <expressions id="watch">
+      <expression>
+        <expression-string>one_half_nose_index / half_nose_index</expression-string>
+        <language-id>ruby</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>one_half_nose / half_nose</expression-string>
+        <language-id>ruby</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>normal_nose_index / half_nose_index</expression-string>
+        <language-id>ruby</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>normal_nose / half_nose</expression-string>
+        <language-id>ruby</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>half_nose_csv[&quot;mean&quot;].zip(half_nose_index_csv[&quot;mean&quot;]).select{|tup| tup[0] &gt; }</expression-string>
+        <language-id>ruby</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>half_nose_csv[&quot;mean&quot;].zip(half_nose_index_csv[&quot;mean&quot;].ma)</expression-string>
+        <language-id>ruby</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>half_nose_csv[&quot;mean&quot;].zip(half_nose_index_csv[&quot;mean&quot;])</expression-string>
+        <language-id>ruby</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+    </expressions>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/script.rb">
+    <entry file="file://$PROJECT_DIR$/bidding_161_5iter_one_node/output_latency.eps">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/bidding_161_5iter_one_node/bidding_161_si.csv">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="782">
+          <caret line="94" column="55" selection-start-line="94" selection-start-column="55" selection-end-line="94" selection-end-column="55" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/bidding_161_5iter_one_node/baseline_bench_result.csv">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-450" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/output_record_impac.eps">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-2976" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/get_latency.sh">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/scalability.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="720">
+        <state relative-caret-position="323">
           <caret line="63" column="2" selection-start-line="63" selection-start-column="2" selection-end-line="63" selection-end-column="2" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/record_impac.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="803">
+          <caret line="89" selection-start-line="89" selection-end-line="89" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/script.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="803">
+          <caret line="170" selection-start-line="170" selection-end-line="170" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/bidding_161_5iter_one_node/bidding_161_no_si.csv">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1159">
+          <caret line="88" column="57" lean-forward="true" selection-start-line="88" selection-start-column="57" selection-end-line="88" selection-end-column="57" />
         </state>
       </provider>
     </entry>

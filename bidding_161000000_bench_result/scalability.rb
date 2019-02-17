@@ -26,7 +26,7 @@ def plot_scalability(x,y,z)
       #plot.style "data lines"
       #plot.set 'terminal postscript color eps enhanced "GothicBBB-Medium-EUC-H" 20 size 10cm,5cm'
 #      plot.set 'terminal postscript eps enhanced color font "VL PGothic,20" enhanced '
-      plot.set 'terminal postscript color eps enhanced font "Helvetica,13" size 8cm,4cm'
+      plot.set 'terminal postscript color eps enhanced font "Helvetica,13" size 12cm,6cm'
       #      plot.set 'terminal pdf'
       plot.set 'boxwidth 0.8'
       plot.set "output 'output_scalability.eps'"
@@ -54,13 +54,14 @@ end
 
 
 def get_mean(csv,group_weight_hash)
-  weight_sum = 0
-  mean_by_freq = csv.map do |row|
-    weight = group_weight_hash[row["group"]].to_f
-    weight_sum += weight
-    row["mean"].to_f * weight 
-  end.sum
-  return mean_by_freq / weight_sum
+  #weight_sum = 0
+  #mean_by_freq = csv.map do |row|
+  #  weight = group_weight_hash[row["group"]].to_f
+  #  weight_sum += weight
+  #  row["mean"].to_f * weight
+  #end.sum
+  #return mean_by_freq / weight_sum
+   return csv.map{|row| row["mean"].to_f}.mean
 end
 
 def get_group_weight_hash(csv)

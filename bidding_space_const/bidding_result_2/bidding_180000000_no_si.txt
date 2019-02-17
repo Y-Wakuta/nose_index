@@ -1,0 +1,604 @@
+Indexes
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   i101364659 [items.id] [regions.id, users.id] → [] size: $960000 Graph(nodes: items, users, regions, edges: {items=>#<Set: {items.seller}>, users=>#<Set: {users.items_sold, users.region}>, regions=>#<Set: {regions.users}>})
+   i1683742356 [users.id] [regions.id] → [] size: $64000 Graph(nodes: users, regions, edges: {users=>#<Set: {users.region}>, regions=>#<Set: {regions.users}>})
+   i1888493477 [items.id] [] → [items.name, items.description, items.initial_price, items.quantity, items.reserve_price, items.buy_now, items.nb_of_bids, items.max_bid, items.start_date, items.end_date] size: $5920000 Graph(nodes: items, edges: {})
+   i193173044 [items.id] [bids.date, bids.id, users.id] → [users.nickname, bids.qty, bids.bid] size: $16800000 Graph(nodes: users, bids, items, edges: {users=>#<Set: {users.bids}>, bids=>#<Set: {bids.user, bids.item}>, items=>#<Set: {items.bids}>})
+   i1979490368 [categories.id] [regions.id, items.id, users.id] → [items.name, items.initial_price, items.max_bid, items.nb_of_bids, items.end_date] size: $2300000 Graph(nodes: items, users, regions, categories, edges: {items=>#<Set: {items.seller, items.category}>, users=>#<Set: {users.items_sold, users.region}>, regions=>#<Set: {regions.users}>, categories=>#<Set: {categories.items}>})
+   i2160236821 [users.rating] [users.id] → [users.firstname, users.lastname, users.nickname, users.password, users.email, users.balance, users.creation_date] size: $206000 Graph(nodes: users, edges: {})
+   i2444392361 [items.quantity] [bids.id, items.id] → [bids.qty, bids.bid, bids.date] size: $12800000 Graph(nodes: items, bids, edges: {items=>#<Set: {items.bids}>, bids=>#<Set: {bids.item}>})
+   i2578518014 [items.id] [buynow.id, buynow.date, users.id] → [] size: $2240000 Graph(nodes: items, buynow, users, edges: {items=>#<Set: {items.bought_now}>, buynow=>#<Set: {buynow.item, buynow.buyer}>, users=>#<Set: {users.bought_now}>})
+   i2653317939 [users.id] [buynow.date, buynow.id, items.id] → [buynow.qty, items.name, items.description, items.initial_price, items.quantity, items.reserve_price, items.buy_now, items.nb_of_bids, items.max_bid, items.start_date, items.end_date] size: $13760000 Graph(nodes: items, buynow, users, edges: {items=>#<Set: {items.bought_now}>, buynow=>#<Set: {buynow.item, buynow.buyer}>, users=>#<Set: {users.bought_now}>})
+   i2679423497 [items.id] [users.id] → [users.rating] size: $800000 Graph(nodes: items, users, edges: {items=>#<Set: {items.seller}>, users=>#<Set: {users.items_sold}>})
+   i2906147889 [users.id] [] → [users.firstname, users.lastname, users.nickname, users.password, users.email, users.rating, users.balance, users.creation_date] size: $206000 Graph(nodes: users, edges: {})
+   i3109601800 [categories.id] [] → [categories.dummy] size: $1200 Graph(nodes: categories, edges: {})
+   i3154184080 [categories.dummy] [categories.id, items.id] → [items.name, items.initial_price, items.max_bid, items.nb_of_bids, items.end_date] size: $1820000 Graph(nodes: items, categories, edges: {items=>#<Set: {items.category}>, categories=>#<Set: {categories.items}>})
+   i3157175159 [users.id] [comments.id] → [comments.rating, comments.date, comments.comment] size: $17800000 Graph(nodes: comments, users, edges: {comments=>#<Set: {comments.to_user}>, users=>#<Set: {users.comments_received}>})
+   i3392968797 [categories.id] [items.end_date, items.id] → [items.name, items.initial_price, items.max_bid, items.nb_of_bids] size: $1660000 Graph(nodes: items, categories, edges: {items=>#<Set: {items.category}>, categories=>#<Set: {categories.items}>})
+   i3405877728 [users.id] [items.id, bids.id] → [items.name, items.description, items.initial_price, items.quantity, items.reserve_price, items.buy_now, items.nb_of_bids, items.max_bid, items.start_date, items.end_date] size: $65600000 Graph(nodes: items, bids, users, edges: {items=>#<Set: {items.bids}>, bids=>#<Set: {bids.item, bids.user}>, users=>#<Set: {users.bids}>})
+   i3563903410 [items.id] [bids.bid, bids.id] → [bids.qty, bids.date] size: $11200000 Graph(nodes: bids, items, edges: {bids=>#<Set: {bids.item}>, items=>#<Set: {items.bids}>})
+   i3576367474 [users.id] [items.end_date, items.id] → [items.name, items.initial_price, items.max_bid, items.nb_of_bids] size: $1660000 Graph(nodes: users, items, edges: {items=>#<Set: {items.seller}>, users=>#<Set: {users.items_sold}>})
+   i3722443462 [categories.dummy] [categories.id] → [categories.name] size: $2200 Graph(nodes: categories, edges: {})
+   i409313968 [users.rating] [users.id, items.id] → [items.name, items.description, items.initial_price, items.quantity, items.reserve_price, items.buy_now, items.nb_of_bids, items.max_bid, items.start_date, items.end_date] size: $6400000 Graph(nodes: items, users, edges: {items=>#<Set: {items.seller}>, users=>#<Set: {users.items_sold}>})
+   i4128009194 [users.rating] [users.id] → [users.nickname] size: $72000 Graph(nodes: users, edges: {})
+   i4284180272 [comments.rating] [comments.id, users.id] → [users.nickname] size: $5200000 Graph(nodes: comments, users, edges: {comments=>#<Set: {comments.from_user}>, users=>#<Set: {users.comments_sent}>})
+   i47652126 [items.id] [categories.id] → [categories.dummy] size: $800000 Graph(nodes: items, categories, edges: {items=>#<Set: {items.category}>, categories=>#<Set: {categories.items}>})
+   i590232953 [regions.dummy] [regions.id] → [regions.name] size: $245 Graph(nodes: regions, edges: {})
+   i638513312 [items.quantity] [items.id] → [items.name, items.description, items.initial_price, items.reserve_price, items.buy_now, items.nb_of_bids, items.max_bid, items.start_date, items.end_date] size: $5920000 Graph(nodes: items, edges: {})
+   i915430138 [comments.id] [users.id] → [users.nickname] size: $4400000 Graph(nodes: comments, users, edges: {comments=>#<Set: {comments.from_user}>, users=>#<Set: {users.comments_sent}>})
+   i936463631 [items.quantity] [items.id] → [items.nb_of_bids, items.max_bid] size: $800000 Graph(nodes: items, edges: {})
+
+  Total size: 179391645
+
+Query plans
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+GROUP BrowseCategories
+SELECT users.nickname, users.password FROM users WHERE users.id = ? -- 1 users * 7.65 = 0.07053722634836566
+  Index lookup    i2906147889 [users.id] [] → [users.firstname, users.lastname, users.nickname, users.password, users.email, users.rating, users.balance, users.creation_date] size: $206000 Graph(nodes: users, edges: {}) * 1.0/1 
+
+GROUP BrowseCategories
+SELECT users.nickname, users.password FROM users WHERE users.rating = ? -- 1_secondary users * 7.65 = 0.08836297638813388
+  Index lookup    i2160236821 [users.rating] [users.id] → [users.firstname, users.lastname, users.nickname, users.password, users.email, users.balance, users.creation_date] size: $206000 Graph(nodes: users, edges: {}) * 200.0/1 
+
+GROUP BrowseCategories
+SELECT categories.id, categories.name FROM categories WHERE categories.dummy = 1 -- 2 categories * 7.65 = 0.07089553288182834
+  Index lookup    i3722443462 [categories.dummy] [categories.id] → [categories.name] size: $2200 Graph(nodes: categories, edges: {}) * 5.0/1 
+
+GROUP ViewBidHistory
+SELECT items.name FROM items WHERE items.id = ? -- 3 items * 1.54 = 0.014199650794311519
+  Index lookup    i1888493477 [items.id] [] → [items.name, items.description, items.initial_price, items.quantity, items.reserve_price, items.buy_now, items.nb_of_bids, items.max_bid, items.start_date, items.end_date] size: $5920000 Graph(nodes: items, edges: {}) * 1.0/1 
+
+GROUP ViewBidHistory
+SELECT items.name FROM items WHERE items.quantity = ? -- 3_secondary items * 1.54 = 0.05024645899704077
+  Index lookup    i638513312 [items.quantity] [items.id] → [items.name, items.description, items.initial_price, items.reserve_price, items.buy_now, items.nb_of_bids, items.max_bid, items.start_date, items.end_date] size: $5920000 Graph(nodes: items, edges: {}) * 2000.0/1 
+
+GROUP ViewBidHistory
+SELECT users.id, users.nickname, bids.id, item.id, bids.qty, bids.bid, bids.date FROM users.bids.item WHERE item.id = ? ORDER BY bids.date -- 4 users, bids, items * 1.54 = 0.014361942577115204
+  Index lookup    i193173044 [items.id] [bids.date, bids.id, users.id] → [users.nickname, bids.qty, bids.bid] size: $16800000 Graph(nodes: users, bids, items, edges: {users=>#<Set: {users.bids}>, bids=>#<Set: {bids.user, bids.item}>, items=>#<Set: {items.bids}>}) * 10.0/1 
+
+GROUP ViewBidHistory
+SELECT users.id, users.nickname, bids.id, item.id, bids.qty, bids.bid, bids.date FROM users.bids.item WHERE item.quantity = ? -- 4_secondary users, bids, items * 1.54 = 4.640345882557449
+  Index lookup    i936463631 [items.quantity] [items.id] → [items.nb_of_bids, items.max_bid] size: $800000 Graph(nodes: items, edges: {}) * 2000.0/1 
+  Index lookup    i193173044 [items.id] [bids.date, bids.id, users.id] → [users.nickname, bids.qty, bids.bid] size: $16800000 Graph(nodes: users, bids, items, edges: {users=>#<Set: {users.bids}>, bids=>#<Set: {bids.user, bids.item}>, items=>#<Set: {items.bids}>}) * 20000.0/2000.0 
+
+GROUP ViewItem
+SELECT items.* FROM items WHERE items.id = ? -- 5 items * 14.17 = 0.13065522841259364
+  Index lookup    i1888493477 [items.id] [] → [items.name, items.description, items.initial_price, items.quantity, items.reserve_price, items.buy_now, items.nb_of_bids, items.max_bid, items.start_date, items.end_date] size: $5920000 Graph(nodes: items, edges: {}) * 1.0/1 
+
+GROUP ViewItem
+SELECT items.* FROM items WHERE items.quantity = ? -- 5_secondary items * 14.17 = 0.46233267791432964
+  Index lookup    i638513312 [items.quantity] [items.id] → [items.name, items.description, items.initial_price, items.reserve_price, items.buy_now, items.nb_of_bids, items.max_bid, items.start_date, items.end_date] size: $5920000 Graph(nodes: items, edges: {}) * 2000.0/1 
+
+GROUP ViewItem
+SELECT bids.* FROM items.bids WHERE items.id = ? -- 6 items, bids * 14.17 = 0.13214852358293666
+  Index lookup    i3563903410 [items.id] [bids.bid, bids.id] → [bids.qty, bids.date] size: $11200000 Graph(nodes: bids, items, edges: {bids=>#<Set: {bids.item}>, items=>#<Set: {items.bids}>}) * 10.0/1 
+
+GROUP ViewItem
+SELECT bids.* FROM items.bids WHERE items.quantity = ? -- 6_secondary items, bids * 14.17 = 3.4489230186002966
+  Index lookup    i2444392361 [items.quantity] [bids.id, items.id] → [bids.qty, bids.bid, bids.date] size: $12800000 Graph(nodes: items, bids, edges: {items=>#<Set: {items.bids}>, bids=>#<Set: {bids.item}>}) * 20000.0/1 
+
+GROUP SearchItemsByCategory
+SELECT items.id, items.name, items.initial_price, items.max_bid, items.nb_of_bids, items.end_date FROM items.category WHERE category.id = ? AND items.end_date >= ? LIMIT 25 -- 7 items, categories * 15.94 = 0.15145514050370185
+  Index lookup    i3392968797 [categories.id] [items.end_date, items.id] → [items.name, items.initial_price, items.max_bid, items.nb_of_bids] size: $1660000 Graph(nodes: items, categories, edges: {items=>#<Set: {items.category}>, categories=>#<Set: {categories.items}>}) * 25/1 
+
+GROUP SearchItemsByCategory
+SELECT items.id, items.name, items.initial_price, items.max_bid, items.nb_of_bids, items.end_date FROM items.category WHERE category.dummy = ? -- 7_secondary items, categories * 15.94 = 0.5200834781901492
+  Index lookup    i3154184080 [categories.dummy] [categories.id, items.id] → [items.name, items.initial_price, items.max_bid, items.nb_of_bids, items.end_date] size: $1820000 Graph(nodes: items, categories, edges: {items=>#<Set: {items.category}>, categories=>#<Set: {categories.items}>}) * 2000.0/1 
+
+GROUP ViewUserInfo
+SELECT users.* FROM users WHERE users.id = ? -- 8 users * 2.48 = 0.022866970110319847
+  Index lookup    i2906147889 [users.id] [] → [users.firstname, users.lastname, users.nickname, users.password, users.email, users.rating, users.balance, users.creation_date] size: $206000 Graph(nodes: users, edges: {}) * 1.0/1 
+
+GROUP ViewUserInfo
+SELECT users.* FROM users WHERE users.rating = ? -- 8_secondary users * 2.48 = 0.028645775351970198
+  Index lookup    i2160236821 [users.rating] [users.id] → [users.firstname, users.lastname, users.nickname, users.password, users.email, users.balance, users.creation_date] size: $206000 Graph(nodes: users, edges: {}) * 200.0/1 
+
+GROUP ViewUserInfo
+SELECT comments.id, comments.rating, comments.date, comments.comment FROM comments.to_user WHERE to_user.id = ? -- 9 comments, users * 2.48 = 0.02428989200399255
+  Index lookup    i3157175159 [users.id] [comments.id] → [comments.rating, comments.date, comments.comment] size: $17800000 Graph(nodes: comments, users, edges: {comments=>#<Set: {comments.to_user}>, users=>#<Set: {users.comments_received}>}) * 50.0/1 
+
+GROUP ViewUserInfo
+SELECT comments.id, comments.rating, comments.date, comments.comment FROM comments.to_user WHERE to_user.rating = ? -- 9_secondary comments, users * 2.48 = 1.0176423041104803
+  Index lookup    i4128009194 [users.rating] [users.id] → [users.nickname] size: $72000 Graph(nodes: users, edges: {}) * 200.0/1 
+  Index lookup    i3157175159 [users.id] [comments.id] → [comments.rating, comments.date, comments.comment] size: $17800000 Graph(nodes: comments, users, edges: {comments=>#<Set: {comments.to_user}>, users=>#<Set: {users.comments_received}>}) * 10000.0/200.0 
+
+GROUP BuyNow
+SELECT users.nickname FROM users WHERE users.id=? -- 12 users * 1.16 = 0.01069584085805283
+  Index lookup    i2906147889 [users.id] [] → [users.firstname, users.lastname, users.nickname, users.password, users.email, users.rating, users.balance, users.creation_date] size: $206000 Graph(nodes: users, edges: {}) * 1.0/1 
+
+GROUP BuyNow
+SELECT users.nickname FROM users WHERE users.rating=? -- 12_secondary users * 1.16 = 0.013398830406566704
+  Index lookup    i2160236821 [users.rating] [users.id] → [users.firstname, users.lastname, users.nickname, users.password, users.email, users.balance, users.creation_date] size: $206000 Graph(nodes: users, edges: {}) * 200.0/1 
+
+GROUP BuyNow
+SELECT items.* FROM items WHERE items.id=? -- 13 items * 1.16 = 0.01069584085805283
+  Index lookup    i1888493477 [items.id] [] → [items.name, items.description, items.initial_price, items.quantity, items.reserve_price, items.buy_now, items.nb_of_bids, items.max_bid, items.start_date, items.end_date] size: $5920000 Graph(nodes: items, edges: {}) * 1.0/1 
+
+GROUP BuyNow
+SELECT items.* FROM items WHERE items.quantity=? -- 13_secondary items * 1.16 = 0.037847982101667066
+  Index lookup    i638513312 [items.quantity] [items.id] → [items.name, items.description, items.initial_price, items.reserve_price, items.buy_now, items.nb_of_bids, items.max_bid, items.start_date, items.end_date] size: $5920000 Graph(nodes: items, edges: {}) * 2000.0/1 
+
+GROUP StoreBuyNow
+SELECT items.quantity, items.nb_of_bids, items.end_date FROM items WHERE items.id=? -- 14 items * 1.1 = 0.010142607710222514
+  Index lookup    i1888493477 [items.id] [] → [items.name, items.description, items.initial_price, items.quantity, items.reserve_price, items.buy_now, items.nb_of_bids, items.max_bid, items.start_date, items.end_date] size: $5920000 Graph(nodes: items, edges: {}) * 1.0/1 
+
+GROUP StoreBuyNow
+SELECT items.quantity, items.nb_of_bids, items.end_date FROM items WHERE items.quantity=? -- 14_secondary items * 1.1 = 0.035890327855029124
+  Index lookup    i638513312 [items.quantity] [items.id] → [items.name, items.description, items.initial_price, items.reserve_price, items.buy_now, items.nb_of_bids, items.max_bid, items.start_date, items.end_date] size: $5920000 Graph(nodes: items, edges: {}) * 2000.0/1 
+
+GROUP PutBid
+SELECT users.nickname, users.password FROM users WHERE users.id=? -- 17 users * 5.4 = 0.049790983304728705
+  Index lookup    i2906147889 [users.id] [] → [users.firstname, users.lastname, users.nickname, users.password, users.email, users.rating, users.balance, users.creation_date] size: $206000 Graph(nodes: users, edges: {}) * 1.0/1 
+
+GROUP PutBid
+SELECT users.nickname, users.password FROM users WHERE users.rating=? -- 17_secondary users * 5.4 = 0.06237386568574157
+  Index lookup    i2160236821 [users.rating] [users.id] → [users.firstname, users.lastname, users.nickname, users.password, users.email, users.balance, users.creation_date] size: $206000 Graph(nodes: users, edges: {}) * 200.0/1 
+
+GROUP PutBid
+SELECT items.* FROM items WHERE items.id=? -- 18 items * 5.4 = 0.049790983304728705
+  Index lookup    i1888493477 [items.id] [] → [items.name, items.description, items.initial_price, items.quantity, items.reserve_price, items.buy_now, items.nb_of_bids, items.max_bid, items.start_date, items.end_date] size: $5920000 Graph(nodes: items, edges: {}) * 1.0/1 
+
+GROUP PutBid
+SELECT items.* FROM items WHERE items.quantity=? -- 18_secondary items * 5.4 = 0.17618888219741569
+  Index lookup    i638513312 [items.quantity] [items.id] → [items.name, items.description, items.initial_price, items.reserve_price, items.buy_now, items.nb_of_bids, items.max_bid, items.start_date, items.end_date] size: $5920000 Graph(nodes: items, edges: {}) * 2000.0/1 
+
+GROUP PutBid
+SELECT bids.qty, bids.date FROM bids.item WHERE item.id=? ORDER BY bids.bid LIMIT 2 -- 19 bids, items * 5.4 = 0.04985421386945742
+  Index lookup    i3563903410 [items.id] [bids.bid, bids.id] → [bids.qty, bids.date] size: $11200000 Graph(nodes: bids, items, edges: {bids=>#<Set: {bids.item}>, items=>#<Set: {items.bids}>}) * 2/1 
+
+GROUP PutBid
+SELECT bids.qty, bids.date FROM bids.item WHERE item.quantity=? -- 19_secondary bids, items * 5.4 = 1.314339047314157
+  Index lookup    i2444392361 [items.quantity] [bids.id, items.id] → [bids.qty, bids.bid, bids.date] size: $12800000 Graph(nodes: items, bids, edges: {items=>#<Set: {items.bids}>, bids=>#<Set: {bids.item}>}) * 20000.0/1 
+
+GROUP StoreBid
+SELECT items.nb_of_bids, items.max_bid FROM items WHERE items.id=? -- 21 items * 3.74 = 0.03448486621475655
+  Index lookup    i1888493477 [items.id] [] → [items.name, items.description, items.initial_price, items.quantity, items.reserve_price, items.buy_now, items.nb_of_bids, items.max_bid, items.start_date, items.end_date] size: $5920000 Graph(nodes: items, edges: {}) * 1.0/1 
+
+GROUP StoreBid
+SELECT items.nb_of_bids, items.max_bid FROM items WHERE items.quantity=? -- 21_secondary items * 3.74 = 0.12202711470709901
+  Index lookup    i638513312 [items.quantity] [items.id] → [items.name, items.description, items.initial_price, items.reserve_price, items.buy_now, items.nb_of_bids, items.max_bid, items.start_date, items.end_date] size: $5920000 Graph(nodes: items, edges: {}) * 2000.0/1 
+
+GROUP PutComment
+SELECT users.nickname, users.password FROM users WHERE users.id=? -- 23 users * 0.46 = 0.004241454133365778
+  Index lookup    i2906147889 [users.id] [] → [users.firstname, users.lastname, users.nickname, users.password, users.email, users.rating, users.balance, users.creation_date] size: $206000 Graph(nodes: users, edges: {}) * 1.0/1 
+
+GROUP PutComment
+SELECT users.nickname, users.password FROM users WHERE users.rating=? -- 23_secondary users * 0.46 = 0.005313329299155763
+  Index lookup    i2160236821 [users.rating] [users.id] → [users.firstname, users.lastname, users.nickname, users.password, users.email, users.balance, users.creation_date] size: $206000 Graph(nodes: users, edges: {}) * 200.0/1 
+
+GROUP PutComment
+SELECT items.* FROM items WHERE items.id=? -- 24 items * 0.46 = 0.004241454133365778
+  Index lookup    i1888493477 [items.id] [] → [items.name, items.description, items.initial_price, items.quantity, items.reserve_price, items.buy_now, items.nb_of_bids, items.max_bid, items.start_date, items.end_date] size: $5920000 Graph(nodes: items, edges: {}) * 1.0/1 
+
+GROUP PutComment
+SELECT items.* FROM items WHERE items.quantity=? -- 24_secondary items * 0.46 = 0.015008682557557633
+  Index lookup    i638513312 [items.quantity] [items.id] → [items.name, items.description, items.initial_price, items.reserve_price, items.buy_now, items.nb_of_bids, items.max_bid, items.start_date, items.end_date] size: $5920000 Graph(nodes: items, edges: {}) * 2000.0/1 
+
+GROUP PutComment
+SELECT users.* FROM users WHERE users.id=? -- 25 users * 0.46 = 0.004241454133365778
+  Index lookup    i2906147889 [users.id] [] → [users.firstname, users.lastname, users.nickname, users.password, users.email, users.rating, users.balance, users.creation_date] size: $206000 Graph(nodes: users, edges: {}) * 1.0/1 
+
+GROUP PutComment
+SELECT users.* FROM users WHERE users.rating=? -- 25_secondary users * 0.46 = 0.005313329299155763
+  Index lookup    i2160236821 [users.rating] [users.id] → [users.firstname, users.lastname, users.nickname, users.password, users.email, users.balance, users.creation_date] size: $206000 Graph(nodes: users, edges: {}) * 200.0/1 
+
+GROUP StoreComment
+SELECT users.rating FROM users WHERE users.id=? -- 26 users * 0.45 = 0.004149248608727392
+  Index lookup    i2906147889 [users.id] [] → [users.firstname, users.lastname, users.nickname, users.password, users.email, users.rating, users.balance, users.creation_date] size: $206000 Graph(nodes: users, edges: {}) * 1.0/1 
+
+GROUP StoreComment
+SELECT users.rating FROM users WHERE users.rating=? -- 26_secondary users * 0.45 = 0.0051978221404784634
+  Index lookup    i2160236821 [users.rating] [users.id] → [users.firstname, users.lastname, users.nickname, users.password, users.email, users.balance, users.creation_date] size: $206000 Graph(nodes: users, edges: {}) * 200.0/1 
+
+GROUP AboutMe
+SELECT users.* FROM users WHERE users.id=? -- 29 users * 1.71 = 0.015767144713164087
+  Index lookup    i2906147889 [users.id] [] → [users.firstname, users.lastname, users.nickname, users.password, users.email, users.rating, users.balance, users.creation_date] size: $206000 Graph(nodes: users, edges: {}) * 1.0/1 
+
+GROUP AboutMe
+SELECT users.* FROM users WHERE users.rating=? -- 29_secondary users * 1.71 = 0.01975172413381816
+  Index lookup    i2160236821 [users.rating] [users.id] → [users.firstname, users.lastname, users.nickname, users.password, users.email, users.balance, users.creation_date] size: $206000 Graph(nodes: users, edges: {}) * 200.0/1 
+
+GROUP AboutMe
+SELECT comments_received.* FROM users.comments_received WHERE users.id = ? -- 30 users, comments * 1.71 = 0.016748272309204542
+  Index lookup    i3157175159 [users.id] [comments.id] → [comments.rating, comments.date, comments.comment] size: $17800000 Graph(nodes: comments, users, edges: {comments=>#<Set: {comments.to_user}>, users=>#<Set: {users.comments_received}>}) * 50.0/1 
+
+GROUP AboutMe
+SELECT comments_received.* FROM users.comments_received WHERE users.rating = ? -- 30_secondary users, comments * 1.71 = 0.7016807822697264
+  Index lookup    i4128009194 [users.rating] [users.id] → [users.nickname] size: $72000 Graph(nodes: users, edges: {}) * 200.0/1 
+  Index lookup    i3157175159 [users.id] [comments.id] → [comments.rating, comments.date, comments.comment] size: $17800000 Graph(nodes: comments, users, edges: {comments=>#<Set: {comments.to_user}>, users=>#<Set: {users.comments_received}>}) * 10000.0/200.0 
+
+GROUP AboutMe
+SELECT from_user.nickname FROM comments.from_user WHERE comments.id = ? -- 31 comments, users * 1.71 = 0.015767144713164087
+  Index lookup    i915430138 [comments.id] [users.id] → [users.nickname] size: $4400000 Graph(nodes: comments, users, edges: {comments=>#<Set: {comments.from_user}>, users=>#<Set: {users.comments_sent}>}) * 1.0/1 
+
+GROUP AboutMe
+SELECT from_user.nickname FROM comments.from_user WHERE comments.rating = ? -- 31_secondary comments, users * 1.71 = 0.21597724334190815
+  Index lookup    i4284180272 [comments.rating] [comments.id, users.id] → [users.nickname] size: $5200000 Graph(nodes: comments, users, edges: {comments=>#<Set: {comments.from_user}>, users=>#<Set: {users.comments_sent}>}) * 10000.0/1 
+
+GROUP AboutMe
+SELECT bought_now.*, items.* FROM items.bought_now.buyer WHERE buyer.id = ? AND bought_now.date>=? -- 32 items, buynow, users * 1.71 = 0.01578716772532818
+  Index lookup    i2653317939 [users.id] [buynow.date, buynow.id, items.id] → [buynow.qty, items.name, items.description, items.initial_price, items.quantity, items.reserve_price, items.buy_now, items.nb_of_bids, items.max_bid, items.start_date, items.end_date] size: $13760000 Graph(nodes: items, buynow, users, edges: {items=>#<Set: {items.bought_now}>, buynow=>#<Set: {buynow.item, buynow.buyer}>, users=>#<Set: {users.bought_now}>}) * 2.0/1 
+
+GROUP AboutMe
+SELECT bought_now.*, items.* FROM items.bought_now.buyer WHERE buyer.rating = ? -- 32_secondary items, buynow, users * 1.71 = 0.5815427092851815
+  Index lookup    i4128009194 [users.rating] [users.id] → [users.nickname] size: $72000 Graph(nodes: users, edges: {}) * 200.0/1 
+  Index lookup    i2653317939 [users.id] [buynow.date, buynow.id, items.id] → [buynow.qty, items.name, items.description, items.initial_price, items.quantity, items.reserve_price, items.buy_now, items.nb_of_bids, items.max_bid, items.start_date, items.end_date] size: $13760000 Graph(nodes: items, buynow, users, edges: {items=>#<Set: {items.bought_now}>, buynow=>#<Set: {buynow.item, buynow.buyer}>, users=>#<Set: {users.bought_now}>}) * 4000.0/200.0 
+
+GROUP AboutMe
+SELECT items.* FROM items.seller WHERE seller.id=? AND items.end_date >=? -- 33 items, users * 1.71 = 0.031534289426328174
+  Index lookup    i3576367474 [users.id] [items.end_date, items.id] → [items.name, items.initial_price, items.max_bid, items.nb_of_bids] size: $1660000 Graph(nodes: users, items, edges: {items=>#<Set: {items.seller}>, users=>#<Set: {users.items_sold}>}) * 1.0/1 
+  Index lookup    i1888493477 [items.id] [] → [items.name, items.description, items.initial_price, items.quantity, items.reserve_price, items.buy_now, items.nb_of_bids, items.max_bid, items.start_date, items.end_date] size: $5920000 Graph(nodes: items, edges: {}) * 1.0/1.0 
+
+GROUP AboutMe
+SELECT items.* FROM items.seller WHERE seller.rating =? -- 33_secondary items, users * 1.71 = 0.05579314602918163
+  Index lookup    i409313968 [users.rating] [users.id, items.id] → [items.name, items.description, items.initial_price, items.quantity, items.reserve_price, items.buy_now, items.nb_of_bids, items.max_bid, items.start_date, items.end_date] size: $6400000 Graph(nodes: items, users, edges: {items=>#<Set: {items.seller}>, users=>#<Set: {users.items_sold}>}) * 2000.0/1 
+
+GROUP AboutMe
+SELECT items.* FROM items.bids.user WHERE user.id=? AND items.end_date>=? -- 34 items, bids, users * 1.71 = 0.01774942291740908
+  Index lookup    i3405877728 [users.id] [items.id, bids.id] → [items.name, items.description, items.initial_price, items.quantity, items.reserve_price, items.buy_now, items.nb_of_bids, items.max_bid, items.start_date, items.end_date] size: $65600000 Graph(nodes: items, bids, users, edges: {items=>#<Set: {items.bids}>, bids=>#<Set: {bids.item, bids.user}>, users=>#<Set: {users.bids}>}) * 100.0/1 
+  Filter [] items.end_date 100.0 -> 10.0
+
+GROUP AboutMe
+SELECT items.* FROM items.bids.user WHERE user.rating =? -- 34_secondary items, bids, users * 1.71 = 0.9019109039106346
+  Index lookup    i4128009194 [users.rating] [users.id] → [users.nickname] size: $72000 Graph(nodes: users, edges: {}) * 200.0/1 
+  Index lookup    i3405877728 [users.id] [items.id, bids.id] → [items.name, items.description, items.initial_price, items.quantity, items.reserve_price, items.buy_now, items.nb_of_bids, items.max_bid, items.start_date, items.end_date] size: $65600000 Graph(nodes: items, bids, users, edges: {items=>#<Set: {items.bids}>, bids=>#<Set: {bids.item, bids.user}>, users=>#<Set: {users.bids}>}) * 20000.0/200.0 
+
+GROUP SearchItemsByRegion
+SELECT items.id, items.name, items.initial_price, items.max_bid, items.nb_of_bids, items.end_date FROM items.seller WHERE seller.region.id = ? AND items.category.id = ? AND items.end_date >= ? LIMIT 25 -- 35 items, users * 6.34 = 0.06432305459296307
+  Index lookup    i1979490368 [categories.id] [regions.id, items.id, users.id] → [items.name, items.initial_price, items.max_bid, items.nb_of_bids, items.end_date] size: $2300000 Graph(nodes: items, users, regions, categories, edges: {items=>#<Set: {items.seller, items.category}>, users=>#<Set: {users.items_sold, users.region}>, regions=>#<Set: {regions.users}>, categories=>#<Set: {categories.items}>}) * 80.0/1 
+  Filter [] items.end_date 80.0 -> 8.0
+
+GROUP BrowseRegions
+SELECT regions.id, regions.name FROM regions WHERE regions.dummy = 1 -- 36 regions * 5.39 = 0.04966722104454515
+  Index lookup    i590232953 [regions.dummy] [regions.id] → [regions.name] size: $245 Graph(nodes: regions, edges: {}) * 0.5/1 
+
+Update plans
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+GROUP RegisterItem
+INSERT INTO items SET id=?, name=?, description=?, initial_price=?, quantity=?, reserve_price=?, buy_now=?, nb_of_bids=0, max_bid=0, start_date=?, end_date=? AND CONNECT TO category(?), seller(?) -- 10 items * 0.53 = 0.10703005647500691
+ for i1888493477 plan.cost: $0.013329108
+  Insert    i1888493477 [items.id] [] → [items.name, items.description, items.initial_price, items.quantity, items.reserve_price, items.buy_now, items.nb_of_bids, items.max_bid, items.start_date, items.end_date] size: $5920000 Graph(nodes: items, edges: {}) * 1
+
+ for i638513312 plan.cost: $0.013329108
+  Insert    i638513312 [items.quantity] [items.id] → [items.name, items.description, items.initial_price, items.reserve_price, items.buy_now, items.nb_of_bids, items.max_bid, items.start_date, items.end_date] size: $5920000 Graph(nodes: items, edges: {}) * 1
+
+ for i3392968797 plan.cost: $0.013329108
+  Insert    i3392968797 [categories.id] [items.end_date, items.id] → [items.name, items.initial_price, items.max_bid, items.nb_of_bids] size: $1660000 Graph(nodes: items, categories, edges: {items=>#<Set: {items.category}>, categories=>#<Set: {categories.items}>}) * 1
+
+ for i47652126 plan.cost: $0.022549660463838647
+GROUP RegisterItem
+  SELECT categories.dummy FROM categories WHERE categories.id = ? -- -2094488922055970195 categories for i47652126 * 0.53 = 0.004886892805834484
+    Index lookup    i3109601800 [categories.id] [] → [categories.dummy] size: $1200 Graph(nodes: categories, edges: {}) * 1.0/1 
+
+  Insert    i47652126 [items.id] [categories.id] → [categories.dummy] size: $800000 Graph(nodes: items, categories, edges: {items=>#<Set: {items.category}>, categories=>#<Set: {categories.items}>}) * 1.0
+
+ for i3154184080 plan.cost: $0.022549660463838647
+GROUP RegisterItem
+  SELECT categories.dummy FROM categories WHERE categories.id = ? -- -2094488920157132573 categories for i3154184080 * 0.53 = 0.004886892805834484
+    Index lookup    i3109601800 [categories.id] [] → [categories.dummy] size: $1200 Graph(nodes: categories, edges: {}) * 1.0/1 
+
+  Insert    i3154184080 [categories.dummy] [categories.id, items.id] → [items.name, items.initial_price, items.max_bid, items.nb_of_bids, items.end_date] size: $1820000 Graph(nodes: items, categories, edges: {items=>#<Set: {items.category}>, categories=>#<Set: {categories.items}>}) * 1.0
+
+ for i936463631 plan.cost: $0.013329108
+  Insert    i936463631 [items.quantity] [items.id] → [items.nb_of_bids, items.max_bid] size: $800000 Graph(nodes: items, edges: {}) * 1
+
+ for i2679423497 plan.cost: $0.022549660463838647
+GROUP RegisterItem
+  SELECT users.rating FROM users WHERE users.id = ? -- -2094488919558115974 users for i2679423497 * 0.53 = 0.004886892805834484
+    Index lookup    i2906147889 [users.id] [] → [users.firstname, users.lastname, users.nickname, users.password, users.email, users.rating, users.balance, users.creation_date] size: $206000 Graph(nodes: users, edges: {}) * 1.0/1 
+
+  Insert    i2679423497 [items.id] [users.id] → [users.rating] size: $800000 Graph(nodes: items, users, edges: {items=>#<Set: {items.seller}>, users=>#<Set: {users.items_sold}>}) * 1.0
+
+ for i409313968 plan.cost: $0.022549660463838647
+GROUP RegisterItem
+  SELECT users.rating FROM users WHERE users.id = ? -- -2094488921694122557 users for i409313968 * 0.53 = 0.004886892805834484
+    Index lookup    i2906147889 [users.id] [] → [users.firstname, users.lastname, users.nickname, users.password, users.email, users.rating, users.balance, users.creation_date] size: $206000 Graph(nodes: users, edges: {}) * 1.0/1 
+
+  Insert    i409313968 [users.rating] [users.id, items.id] → [items.name, items.description, items.initial_price, items.quantity, items.reserve_price, items.buy_now, items.nb_of_bids, items.max_bid, items.start_date, items.end_date] size: $6400000 Graph(nodes: items, users, edges: {items=>#<Set: {items.seller}>, users=>#<Set: {users.items_sold}>}) * 1.0
+
+ for i1979490368 plan.cost: $0.022549660463838647
+GROUP RegisterItem
+  SELECT region.id FROM users.region WHERE users.id = ? -- -2094488921332822221 users, regions for i1979490368 * 0.53 = 0.004886892805834484
+    Index lookup    i1683742356 [users.id] [regions.id] → [] size: $64000 Graph(nodes: users, regions, edges: {users=>#<Set: {users.region}>, regions=>#<Set: {regions.users}>}) * 1.0/1 
+
+  Insert    i1979490368 [categories.id] [regions.id, items.id, users.id] → [items.name, items.initial_price, items.max_bid, items.nb_of_bids, items.end_date] size: $2300000 Graph(nodes: items, users, regions, categories, edges: {items=>#<Set: {items.seller, items.category}>, users=>#<Set: {users.items_sold, users.region}>, regions=>#<Set: {regions.users}>, categories=>#<Set: {categories.items}>}) * 1.0
+
+ for i101364659 plan.cost: $0.022549660463838647
+GROUP RegisterItem
+  SELECT region.id FROM users.region WHERE users.id = ? -- -2094488922137469760 users, regions for i101364659 * 0.53 = 0.004886892805834484
+    Index lookup    i1683742356 [users.id] [regions.id] → [] size: $64000 Graph(nodes: users, regions, edges: {users=>#<Set: {users.region}>, regions=>#<Set: {regions.users}>}) * 1.0/1 
+
+  Insert    i101364659 [items.id] [regions.id, users.id] → [] size: $960000 Graph(nodes: items, users, regions, edges: {items=>#<Set: {items.seller}>, users=>#<Set: {users.items_sold, users.region}>, regions=>#<Set: {regions.users}>}) * 1.0
+
+ for i3576367474 plan.cost: $0.013329108
+  Insert    i3576367474 [users.id] [items.end_date, items.id] → [items.name, items.initial_price, items.max_bid, items.nb_of_bids] size: $1660000 Graph(nodes: users, items, edges: {items=>#<Set: {items.seller}>, users=>#<Set: {users.items_sold}>}) * 1
+
+
+GROUP RegisterUser
+INSERT INTO users SET id=?, firstname=?, lastname=?, nickname=?, password=?, email=?, rating=0, balance=0, creation_date=? AND CONNECT TO region(?) -- 11 users * 1.07 = 0.05704858224
+ for i2906147889 plan.cost: $0.013329108
+  Insert    i2906147889 [users.id] [] → [users.firstname, users.lastname, users.nickname, users.password, users.email, users.rating, users.balance, users.creation_date] size: $206000 Graph(nodes: users, edges: {}) * 1
+
+ for i2160236821 plan.cost: $0.013329108
+  Insert    i2160236821 [users.rating] [users.id] → [users.firstname, users.lastname, users.nickname, users.password, users.email, users.balance, users.creation_date] size: $206000 Graph(nodes: users, edges: {}) * 1
+
+ for i4128009194 plan.cost: $0.013329108
+  Insert    i4128009194 [users.rating] [users.id] → [users.nickname] size: $72000 Graph(nodes: users, edges: {}) * 1
+
+ for i1683742356 plan.cost: $0.013329108
+  Insert    i1683742356 [users.id] [regions.id] → [] size: $64000 Graph(nodes: users, regions, edges: {users=>#<Set: {users.region}>, regions=>#<Set: {regions.users}>}) * 1
+
+
+GROUP StoreBuyNow
+UPDATE items SET quantity=?, nb_of_bids=?, end_date=? WHERE items.id=? -- 15 items * 1.1 = 0.5924225605571206
+ for i1888493477 plan.cost: $0.013329108
+  Insert    i1888493477 [items.id] [] → [items.name, items.description, items.initial_price, items.quantity, items.reserve_price, items.buy_now, items.nb_of_bids, items.max_bid, items.start_date, items.end_date] size: $5920000 Graph(nodes: items, edges: {}) * 1.0
+
+ for i638513312 plan.cost: $0.023878450763838648
+GROUP StoreBuyNow
+  SELECT items.name, items.description, items.initial_price, items.reserve_price, items.buy_now, items.max_bid, items.start_date FROM items WHERE items.id = ? -- -797651722322013009 items for i638513312 * 1.1 = 0.010142607710222514
+    Index lookup    i1888493477 [items.id] [] → [items.name, items.description, items.initial_price, items.quantity, items.reserve_price, items.buy_now, items.nb_of_bids, items.max_bid, items.start_date, items.end_date] size: $5920000 Graph(nodes: items, edges: {}) * 1.0/1 
+
+  Delete    i638513312 [items.quantity] [items.id] → [items.name, items.description, items.initial_price, items.reserve_price, items.buy_now, items.nb_of_bids, items.max_bid, items.start_date, items.end_date] size: $5920000 Graph(nodes: items, edges: {}) * 1.0
+  Insert    i638513312 [items.quantity] [items.id] → [items.name, items.description, items.initial_price, items.reserve_price, items.buy_now, items.nb_of_bids, items.max_bid, items.start_date, items.end_date] size: $5920000 Graph(nodes: items, edges: {}) * 1.0
+
+ for i2444392361 plan.cost: $0.1559049197383865
+GROUP StoreBuyNow
+  SELECT bids.id, bids.qty, bids.bid, bids.date FROM items.bids WHERE items.id = ? -- -797651719927884890 items, bids for i2444392361 * 1.1 = 0.010258530412225146
+    Index lookup    i3563903410 [items.id] [bids.bid, bids.id] → [bids.qty, bids.date] size: $11200000 Graph(nodes: bids, items, edges: {bids=>#<Set: {bids.item}>, items=>#<Set: {items.bids}>}) * 10.0/1 
+
+  Delete    i2444392361 [items.quantity] [bids.id, items.id] → [bids.qty, bids.bid, bids.date] size: $12800000 Graph(nodes: items, bids, edges: {items=>#<Set: {items.bids}>, bids=>#<Set: {bids.item}>}) * 10.0
+  Insert    i2444392361 [items.quantity] [bids.id, items.id] → [bids.qty, bids.bid, bids.date] size: $12800000 Graph(nodes: items, bids, edges: {items=>#<Set: {items.bids}>, bids=>#<Set: {bids.item}>}) * 10.0
+
+ for i3392968797 plan.cost: $0.033099003227677296
+GROUP StoreBuyNow
+  SELECT items.name, items.initial_price, items.max_bid FROM items WHERE items.id = ? -- -797651718493504430 items for i3392968797 * 1.1 = 0.010142607710222514
+    Index lookup    i1888493477 [items.id] [] → [items.name, items.description, items.initial_price, items.quantity, items.reserve_price, items.buy_now, items.nb_of_bids, items.max_bid, items.start_date, items.end_date] size: $5920000 Graph(nodes: items, edges: {}) * 1.0/1 
+
+GROUP StoreBuyNow
+  SELECT category.id FROM items.category WHERE items.id = ? -- -797651718493504430 items, categories for i3392968797 * 1.1 = 0.010142607710222514
+    Index lookup    i47652126 [items.id] [categories.id] → [categories.dummy] size: $800000 Graph(nodes: items, categories, edges: {items=>#<Set: {items.category}>, categories=>#<Set: {categories.items}>}) * 1.0/1 
+
+  Delete    i3392968797 [categories.id] [items.end_date, items.id] → [items.name, items.initial_price, items.max_bid, items.nb_of_bids] size: $1660000 Graph(nodes: items, categories, edges: {items=>#<Set: {items.category}>, categories=>#<Set: {categories.items}>}) * 1.0
+  Insert    i3392968797 [categories.id] [items.end_date, items.id] → [items.name, items.initial_price, items.max_bid, items.nb_of_bids] size: $1660000 Graph(nodes: items, categories, edges: {items=>#<Set: {items.category}>, categories=>#<Set: {categories.items}>}) * 1.0
+
+ for i3154184080 plan.cost: $0.022549660463838647
+GROUP StoreBuyNow
+  SELECT category.dummy, category.id FROM items.category WHERE items.id = ? -- -797651720274746465 items, categories for i3154184080 * 1.1 = 0.010142607710222514
+    Index lookup    i47652126 [items.id] [categories.id] → [categories.dummy] size: $800000 Graph(nodes: items, categories, edges: {items=>#<Set: {items.category}>, categories=>#<Set: {categories.items}>}) * 1.0/1 
+
+  Insert    i3154184080 [categories.dummy] [categories.id, items.id] → [items.name, items.initial_price, items.max_bid, items.nb_of_bids, items.end_date] size: $1820000 Graph(nodes: items, categories, edges: {items=>#<Set: {items.category}>, categories=>#<Set: {categories.items}>}) * 1.0
+
+ for i936463631 plan.cost: $0.023878450763838648
+GROUP StoreBuyNow
+  SELECT items.max_bid FROM items WHERE items.id = ? -- -797651722576385792 items for i936463631 * 1.1 = 0.010142607710222514
+    Index lookup    i1888493477 [items.id] [] → [items.name, items.description, items.initial_price, items.quantity, items.reserve_price, items.buy_now, items.nb_of_bids, items.max_bid, items.start_date, items.end_date] size: $5920000 Graph(nodes: items, edges: {}) * 1.0/1 
+
+  Delete    i936463631 [items.quantity] [items.id] → [items.nb_of_bids, items.max_bid] size: $800000 Graph(nodes: items, edges: {}) * 1.0
+  Insert    i936463631 [items.quantity] [items.id] → [items.nb_of_bids, items.max_bid] size: $800000 Graph(nodes: items, edges: {}) * 1.0
+
+ for i2653317939 plan.cost: $0.0358904778276773
+GROUP StoreBuyNow
+  SELECT buyer.id, bought_now.date, bought_now.id FROM items.bought_now.buyer WHERE items.id = ? -- -797651719769288900 items, buynow, users for i2653317939 * 1.1 = 0.01015548801044503
+    Index lookup    i2578518014 [items.id] [buynow.id, buynow.date, users.id] → [] size: $2240000 Graph(nodes: items, buynow, users, edges: {items=>#<Set: {items.bought_now}>, buynow=>#<Set: {buynow.item, buynow.buyer}>, users=>#<Set: {users.bought_now}>}) * 2.0/1 
+
+  Insert    i2653317939 [users.id] [buynow.date, buynow.id, items.id] → [buynow.qty, items.name, items.description, items.initial_price, items.quantity, items.reserve_price, items.buy_now, items.nb_of_bids, items.max_bid, items.start_date, items.end_date] size: $13760000 Graph(nodes: items, buynow, users, edges: {items=>#<Set: {items.bought_now}>, buynow=>#<Set: {buynow.item, buynow.buyer}>, users=>#<Set: {users.bought_now}>}) * 2.0
+
+ for i409313968 plan.cost: $0.022549660463838647
+GROUP StoreBuyNow
+  SELECT seller.rating, seller.id FROM items.seller WHERE items.id = ? -- -797651721945889089 items, users for i409313968 * 1.1 = 0.010142607710222514
+    Index lookup    i2679423497 [items.id] [users.id] → [users.rating] size: $800000 Graph(nodes: items, users, edges: {items=>#<Set: {items.seller}>, users=>#<Set: {users.items_sold}>}) * 1.0/1 
+
+  Insert    i409313968 [users.rating] [users.id, items.id] → [items.name, items.description, items.initial_price, items.quantity, items.reserve_price, items.buy_now, items.nb_of_bids, items.max_bid, items.start_date, items.end_date] size: $6400000 Graph(nodes: items, users, edges: {items=>#<Set: {items.seller}>, users=>#<Set: {users.items_sold}>}) * 1.0
+
+ for i3405877728 plan.cost: $0.1426170167383865
+GROUP StoreBuyNow
+  SELECT user.id, bids.id FROM items.bids.user WHERE items.id = ? -- -797651718479546897 items, bids, users for i3405877728 * 1.1 = 0.010258530412225146
+    Index lookup    i193173044 [items.id] [bids.date, bids.id, users.id] → [users.nickname, bids.qty, bids.bid] size: $16800000 Graph(nodes: users, bids, items, edges: {users=>#<Set: {users.bids}>, bids=>#<Set: {bids.user, bids.item}>, items=>#<Set: {items.bids}>}) * 10.0/1 
+
+  Insert    i3405877728 [users.id] [items.id, bids.id] → [items.name, items.description, items.initial_price, items.quantity, items.reserve_price, items.buy_now, items.nb_of_bids, items.max_bid, items.start_date, items.end_date] size: $65600000 Graph(nodes: items, bids, users, edges: {items=>#<Set: {items.bids}>, bids=>#<Set: {bids.item, bids.user}>, users=>#<Set: {users.bids}>}) * 10.0
+
+ for i1979490368 plan.cost: $0.031770212927677295
+GROUP StoreBuyNow
+  SELECT region.id, seller.id FROM items.seller.region WHERE items.id = ? -- -797651721467280305 items, users, regions for i1979490368 * 1.1 = 0.010142607710222514
+    Index lookup    i101364659 [items.id] [regions.id, users.id] → [] size: $960000 Graph(nodes: items, users, regions, edges: {items=>#<Set: {items.seller}>, users=>#<Set: {users.items_sold, users.region}>, regions=>#<Set: {regions.users}>}) * 1.0/1 
+
+GROUP StoreBuyNow
+  SELECT category.id FROM items.category WHERE items.id = ? -- -797651721467280305 items, categories for i1979490368 * 1.1 = 0.010142607710222514
+    Index lookup    i47652126 [items.id] [categories.id] → [categories.dummy] size: $800000 Graph(nodes: items, categories, edges: {items=>#<Set: {items.category}>, categories=>#<Set: {categories.items}>}) * 1.0/1 
+
+  Insert    i1979490368 [categories.id] [regions.id, items.id, users.id] → [items.name, items.initial_price, items.max_bid, items.nb_of_bids, items.end_date] size: $2300000 Graph(nodes: items, users, regions, categories, edges: {items=>#<Set: {items.seller, items.category}>, users=>#<Set: {users.items_sold, users.region}>, regions=>#<Set: {regions.users}>, categories=>#<Set: {categories.items}>}) * 1.0
+
+ for i3576367474 plan.cost: $0.033099003227677296
+GROUP StoreBuyNow
+  SELECT items.name, items.initial_price, items.max_bid FROM items WHERE items.id = ? -- -797651718780129923 items for i3576367474 * 1.1 = 0.010142607710222514
+    Index lookup    i1888493477 [items.id] [] → [items.name, items.description, items.initial_price, items.quantity, items.reserve_price, items.buy_now, items.nb_of_bids, items.max_bid, items.start_date, items.end_date] size: $5920000 Graph(nodes: items, edges: {}) * 1.0/1 
+
+GROUP StoreBuyNow
+  SELECT users.id FROM users.items_sold WHERE items_sold.id = ? -- -797651718780129923 users, items for i3576367474 * 1.1 = 0.010142607710222514
+    Index lookup    i2679423497 [items.id] [users.id] → [users.rating] size: $800000 Graph(nodes: items, users, edges: {items=>#<Set: {items.seller}>, users=>#<Set: {users.items_sold}>}) * 1.0/1 
+
+  Delete    i3576367474 [users.id] [items.end_date, items.id] → [items.name, items.initial_price, items.max_bid, items.nb_of_bids] size: $1660000 Graph(nodes: users, items, edges: {items=>#<Set: {items.seller}>, users=>#<Set: {users.items_sold}>}) * 1.0
+  Insert    i3576367474 [users.id] [items.end_date, items.id] → [items.name, items.initial_price, items.max_bid, items.nb_of_bids] size: $1660000 Graph(nodes: users, items, edges: {items=>#<Set: {items.seller}>, users=>#<Set: {users.items_sold}>}) * 1.0
+
+
+GROUP StoreBuyNow
+INSERT INTO buynow SET id=?, qty=?, date=? AND CONNECT TO item(?), buyer(?) -- 16 buynow * 1.1 = 0.039466645310222516
+ for i2578518014 plan.cost: $0.013329108
+  Insert    i2578518014 [items.id] [buynow.id, buynow.date, users.id] → [] size: $2240000 Graph(nodes: items, buynow, users, edges: {items=>#<Set: {items.bought_now}>, buynow=>#<Set: {buynow.item, buynow.buyer}>, users=>#<Set: {users.bought_now}>}) * 1
+
+ for i2653317939 plan.cost: $0.022549660463838647
+GROUP StoreBuyNow
+  SELECT items.name, items.description, items.initial_price, items.quantity, items.reserve_price, items.buy_now, items.nb_of_bids, items.max_bid, items.start_date, items.end_date FROM items WHERE items.id = ? -- 153738775592484432 items for i2653317939 * 1.1 = 0.010142607710222514
+    Index lookup    i1888493477 [items.id] [] → [items.name, items.description, items.initial_price, items.quantity, items.reserve_price, items.buy_now, items.nb_of_bids, items.max_bid, items.start_date, items.end_date] size: $5920000 Graph(nodes: items, edges: {}) * 1.0/1 
+
+  Insert    i2653317939 [users.id] [buynow.date, buynow.id, items.id] → [buynow.qty, items.name, items.description, items.initial_price, items.quantity, items.reserve_price, items.buy_now, items.nb_of_bids, items.max_bid, items.start_date, items.end_date] size: $13760000 Graph(nodes: items, buynow, users, edges: {items=>#<Set: {items.bought_now}>, buynow=>#<Set: {buynow.item, buynow.buyer}>, users=>#<Set: {users.bought_now}>}) * 1.0
+
+
+GROUP StoreBid
+INSERT INTO bids SET id=?, qty=?, bid=?, date=? AND CONNECT TO item(?), user(?) -- 20 bids * 3.74 = 0.3028580543242696
+ for i193173044 plan.cost: $0.022549660463838647
+GROUP StoreBid
+  SELECT users.nickname FROM users WHERE users.id = ? -- -3165033978536448000 users for i193173044 * 3.74 = 0.03448486621475655
+    Index lookup    i2906147889 [users.id] [] → [users.firstname, users.lastname, users.nickname, users.password, users.email, users.rating, users.balance, users.creation_date] size: $206000 Graph(nodes: users, edges: {}) * 1.0/1 
+
+  Insert    i193173044 [items.id] [bids.date, bids.id, users.id] → [users.nickname, bids.qty, bids.bid] size: $16800000 Graph(nodes: users, bids, items, edges: {users=>#<Set: {users.bids}>, bids=>#<Set: {bids.user, bids.item}>, items=>#<Set: {items.bids}>}) * 1.0
+
+ for i2444392361 plan.cost: $0.022549660463838647
+GROUP StoreBid
+  SELECT items.quantity FROM items WHERE items.id = ? -- -3165033980848582243 items for i2444392361 * 3.74 = 0.03448486621475655
+    Index lookup    i1888493477 [items.id] [] → [items.name, items.description, items.initial_price, items.quantity, items.reserve_price, items.buy_now, items.nb_of_bids, items.max_bid, items.start_date, items.end_date] size: $5920000 Graph(nodes: items, edges: {}) * 1.0/1 
+
+  Insert    i2444392361 [items.quantity] [bids.id, items.id] → [bids.qty, bids.bid, bids.date] size: $12800000 Graph(nodes: items, bids, edges: {items=>#<Set: {items.bids}>, bids=>#<Set: {bids.item}>}) * 1.0
+
+ for i3563903410 plan.cost: $0.013329108
+  Insert    i3563903410 [items.id] [bids.bid, bids.id] → [bids.qty, bids.date] size: $11200000 Graph(nodes: bids, items, edges: {bids=>#<Set: {bids.item}>, items=>#<Set: {items.bids}>}) * 1
+
+ for i3405877728 plan.cost: $0.022549660463838647
+GROUP StoreBid
+  SELECT items.name, items.description, items.initial_price, items.quantity, items.reserve_price, items.buy_now, items.nb_of_bids, items.max_bid, items.start_date, items.end_date FROM items WHERE items.id = ? -- -3165033979601930284 items for i3405877728 * 3.74 = 0.03448486621475655
+    Index lookup    i1888493477 [items.id] [] → [items.name, items.description, items.initial_price, items.quantity, items.reserve_price, items.buy_now, items.nb_of_bids, items.max_bid, items.start_date, items.end_date] size: $5920000 Graph(nodes: items, edges: {}) * 1.0/1 
+
+  Insert    i3405877728 [users.id] [items.id, bids.id] → [items.name, items.description, items.initial_price, items.quantity, items.reserve_price, items.buy_now, items.nb_of_bids, items.max_bid, items.start_date, items.end_date] size: $65600000 Graph(nodes: items, bids, users, edges: {items=>#<Set: {items.bids}>, bids=>#<Set: {bids.item, bids.user}>, users=>#<Set: {users.bids}>}) * 1.0
+
+
+GROUP StoreBid
+UPDATE items SET nb_of_bids=?, max_bid=? WHERE items.id=? -- 22 items * 3.74 = 1.4112736031846442
+ for i1888493477 plan.cost: $0.013329108
+  Insert    i1888493477 [items.id] [] → [items.name, items.description, items.initial_price, items.quantity, items.reserve_price, items.buy_now, items.nb_of_bids, items.max_bid, items.start_date, items.end_date] size: $5920000 Graph(nodes: items, edges: {}) * 1.0
+
+ for i638513312 plan.cost: $0.022549660463838647
+GROUP StoreBid
+  SELECT items.quantity FROM items WHERE items.id = ? -- 3477767020568270716 items for i638513312 * 3.74 = 0.03448486621475655
+    Index lookup    i1888493477 [items.id] [] → [items.name, items.description, items.initial_price, items.quantity, items.reserve_price, items.buy_now, items.nb_of_bids, items.max_bid, items.start_date, items.end_date] size: $5920000 Graph(nodes: items, edges: {}) * 1.0/1 
+
+  Insert    i638513312 [items.quantity] [items.id] → [items.name, items.description, items.initial_price, items.reserve_price, items.buy_now, items.nb_of_bids, items.max_bid, items.start_date, items.end_date] size: $5920000 Graph(nodes: items, edges: {}) * 1.0
+
+ for i3392968797 plan.cost: $0.031770212927677295
+GROUP StoreBid
+  SELECT items.end_date FROM items WHERE items.id = ? -- 3477767017014509441 items for i3392968797 * 3.74 = 0.03448486621475655
+    Index lookup    i1888493477 [items.id] [] → [items.name, items.description, items.initial_price, items.quantity, items.reserve_price, items.buy_now, items.nb_of_bids, items.max_bid, items.start_date, items.end_date] size: $5920000 Graph(nodes: items, edges: {}) * 1.0/1 
+
+GROUP StoreBid
+  SELECT category.id FROM items.category WHERE items.id = ? -- 3477767017014509441 items, categories for i3392968797 * 3.74 = 0.03448486621475655
+    Index lookup    i47652126 [items.id] [categories.id] → [categories.dummy] size: $800000 Graph(nodes: items, categories, edges: {items=>#<Set: {items.category}>, categories=>#<Set: {categories.items}>}) * 1.0/1 
+
+  Insert    i3392968797 [categories.id] [items.end_date, items.id] → [items.name, items.initial_price, items.max_bid, items.nb_of_bids] size: $1660000 Graph(nodes: items, categories, edges: {items=>#<Set: {items.category}>, categories=>#<Set: {categories.items}>}) * 1.0
+
+ for i3154184080 plan.cost: $0.022549660463838647
+GROUP StoreBid
+  SELECT category.dummy, category.id FROM items.category WHERE items.id = ? -- 3477767018856685644 items, categories for i3154184080 * 3.74 = 0.03448486621475655
+    Index lookup    i47652126 [items.id] [categories.id] → [categories.dummy] size: $800000 Graph(nodes: items, categories, edges: {items=>#<Set: {items.category}>, categories=>#<Set: {categories.items}>}) * 1.0/1 
+
+  Insert    i3154184080 [categories.dummy] [categories.id, items.id] → [items.name, items.initial_price, items.max_bid, items.nb_of_bids, items.end_date] size: $1820000 Graph(nodes: items, categories, edges: {items=>#<Set: {items.category}>, categories=>#<Set: {categories.items}>}) * 1.0
+
+ for i936463631 plan.cost: $0.022549660463838647
+GROUP StoreBid
+  SELECT items.quantity FROM items WHERE items.id = ? -- 3477767020850047699 items for i936463631 * 3.74 = 0.03448486621475655
+    Index lookup    i1888493477 [items.id] [] → [items.name, items.description, items.initial_price, items.quantity, items.reserve_price, items.buy_now, items.nb_of_bids, items.max_bid, items.start_date, items.end_date] size: $5920000 Graph(nodes: items, edges: {}) * 1.0/1 
+
+  Insert    i936463631 [items.quantity] [items.id] → [items.nb_of_bids, items.max_bid] size: $800000 Graph(nodes: items, edges: {}) * 1.0
+
+ for i2653317939 plan.cost: $0.0358904778276773
+GROUP StoreBid
+  SELECT buyer.id, bought_now.date, bought_now.id FROM items.bought_now.buyer WHERE items.id = ? -- 3477767018288172271 items, buynow, users for i2653317939 * 3.74 = 0.0345286592355131
+    Index lookup    i2578518014 [items.id] [buynow.id, buynow.date, users.id] → [] size: $2240000 Graph(nodes: items, buynow, users, edges: {items=>#<Set: {items.bought_now}>, buynow=>#<Set: {buynow.item, buynow.buyer}>, users=>#<Set: {users.bought_now}>}) * 2.0/1 
+
+  Insert    i2653317939 [users.id] [buynow.date, buynow.id, items.id] → [buynow.qty, items.name, items.description, items.initial_price, items.quantity, items.reserve_price, items.buy_now, items.nb_of_bids, items.max_bid, items.start_date, items.end_date] size: $13760000 Graph(nodes: items, buynow, users, edges: {items=>#<Set: {items.bought_now}>, buynow=>#<Set: {buynow.item, buynow.buyer}>, users=>#<Set: {users.bought_now}>}) * 2.0
+
+ for i409313968 plan.cost: $0.022549660463838647
+GROUP StoreBid
+  SELECT seller.rating, seller.id FROM items.seller WHERE items.id = ? -- 3477767020540396908 items, users for i409313968 * 3.74 = 0.03448486621475655
+    Index lookup    i2679423497 [items.id] [users.id] → [users.rating] size: $800000 Graph(nodes: items, users, edges: {items=>#<Set: {items.seller}>, users=>#<Set: {users.items_sold}>}) * 1.0/1 
+
+  Insert    i409313968 [users.rating] [users.id, items.id] → [items.name, items.description, items.initial_price, items.quantity, items.reserve_price, items.buy_now, items.nb_of_bids, items.max_bid, items.start_date, items.end_date] size: $6400000 Graph(nodes: items, users, edges: {items=>#<Set: {items.seller}>, users=>#<Set: {users.items_sold}>}) * 1.0
+
+ for i3405877728 plan.cost: $0.1426170167383865
+GROUP StoreBid
+  SELECT user.id, bids.id FROM items.bids.user WHERE items.id = ? -- 3477767017027941948 items, bids, users for i3405877728 * 3.74 = 0.034879003401565495
+    Index lookup    i193173044 [items.id] [bids.date, bids.id, users.id] → [users.nickname, bids.qty, bids.bid] size: $16800000 Graph(nodes: users, bids, items, edges: {users=>#<Set: {users.bids}>, bids=>#<Set: {bids.user, bids.item}>, items=>#<Set: {items.bids}>}) * 10.0/1 
+
+  Insert    i3405877728 [users.id] [items.id, bids.id] → [items.name, items.description, items.initial_price, items.quantity, items.reserve_price, items.buy_now, items.nb_of_bids, items.max_bid, items.start_date, items.end_date] size: $65600000 Graph(nodes: items, bids, users, edges: {items=>#<Set: {items.bids}>, bids=>#<Set: {bids.item, bids.user}>, users=>#<Set: {users.bids}>}) * 10.0
+
+ for i1979490368 plan.cost: $0.031770212927677295
+GROUP StoreBid
+  SELECT region.id, seller.id FROM items.seller.region WHERE items.id = ? -- 3477767019812095900 items, users, regions for i1979490368 * 3.74 = 0.03448486621475655
+    Index lookup    i101364659 [items.id] [regions.id, users.id] → [] size: $960000 Graph(nodes: items, users, regions, edges: {items=>#<Set: {items.seller}>, users=>#<Set: {users.items_sold, users.region}>, regions=>#<Set: {regions.users}>}) * 1.0/1 
+
+GROUP StoreBid
+  SELECT category.id FROM items.category WHERE items.id = ? -- 3477767019812095900 items, categories for i1979490368 * 3.74 = 0.03448486621475655
+    Index lookup    i47652126 [items.id] [categories.id] → [categories.dummy] size: $800000 Graph(nodes: items, categories, edges: {items=>#<Set: {items.category}>, categories=>#<Set: {categories.items}>}) * 1.0/1 
+
+  Insert    i1979490368 [categories.id] [regions.id, items.id, users.id] → [items.name, items.initial_price, items.max_bid, items.nb_of_bids, items.end_date] size: $2300000 Graph(nodes: items, users, regions, categories, edges: {items=>#<Set: {items.seller, items.category}>, users=>#<Set: {users.items_sold, users.region}>, regions=>#<Set: {regions.users}>, categories=>#<Set: {categories.items}>}) * 1.0
+
+ for i3576367474 plan.cost: $0.031770212927677295
+GROUP StoreBid
+  SELECT items.end_date FROM items WHERE items.id = ? -- 3477767017131388590 items for i3576367474 * 3.74 = 0.03448486621475655
+    Index lookup    i1888493477 [items.id] [] → [items.name, items.description, items.initial_price, items.quantity, items.reserve_price, items.buy_now, items.nb_of_bids, items.max_bid, items.start_date, items.end_date] size: $5920000 Graph(nodes: items, edges: {}) * 1.0/1 
+
+GROUP StoreBid
+  SELECT users.id FROM users.items_sold WHERE items_sold.id = ? -- 3477767017131388590 users, items for i3576367474 * 3.74 = 0.03448486621475655
+    Index lookup    i2679423497 [items.id] [users.id] → [users.rating] size: $800000 Graph(nodes: items, users, edges: {items=>#<Set: {items.seller}>, users=>#<Set: {users.items_sold}>}) * 1.0/1 
+
+  Insert    i3576367474 [users.id] [items.end_date, items.id] → [items.name, items.initial_price, items.max_bid, items.nb_of_bids] size: $1660000 Graph(nodes: users, items, edges: {items=>#<Set: {items.seller}>, users=>#<Set: {users.items_sold}>}) * 1.0
+
+
+GROUP StoreComment
+UPDATE users SET rating=? WHERE users.id=? -- 27 users * 0.45 = 0.17156582556427655
+ for i2906147889 plan.cost: $0.013329108
+  Insert    i2906147889 [users.id] [] → [users.firstname, users.lastname, users.nickname, users.password, users.email, users.rating, users.balance, users.creation_date] size: $206000 Graph(nodes: users, edges: {}) * 1.0
+
+ for i2160236821 plan.cost: $0.023878450763838648
+GROUP StoreComment
+  SELECT users.firstname, users.lastname, users.nickname, users.password, users.email, users.balance, users.creation_date FROM users WHERE users.id = ? -- 3661608880434165433 users for i2160236821 * 0.45 = 0.004149248608727392
+    Index lookup    i2906147889 [users.id] [] → [users.firstname, users.lastname, users.nickname, users.password, users.email, users.rating, users.balance, users.creation_date] size: $206000 Graph(nodes: users, edges: {}) * 1.0/1 
+
+  Delete    i2160236821 [users.rating] [users.id] → [users.firstname, users.lastname, users.nickname, users.password, users.email, users.balance, users.creation_date] size: $206000 Graph(nodes: users, edges: {}) * 1.0
+  Insert    i2160236821 [users.rating] [users.id] → [users.firstname, users.lastname, users.nickname, users.password, users.email, users.balance, users.creation_date] size: $206000 Graph(nodes: users, edges: {}) * 1.0
+
+ for i4128009194 plan.cost: $0.023878450763838648
+GROUP StoreComment
+  SELECT users.nickname FROM users WHERE users.id = ? -- 3661608878652474438 users for i4128009194 * 0.45 = 0.004149248608727392
+    Index lookup    i2906147889 [users.id] [] → [users.firstname, users.lastname, users.nickname, users.password, users.email, users.rating, users.balance, users.creation_date] size: $206000 Graph(nodes: users, edges: {}) * 1.0/1 
+
+  Delete    i4128009194 [users.rating] [users.id] → [users.nickname] size: $72000 Graph(nodes: users, edges: {}) * 1.0
+  Insert    i4128009194 [users.rating] [users.id] → [users.nickname] size: $72000 Graph(nodes: users, edges: {}) * 1.0
+
+ for i2679423497 plan.cost: $0.1426170167383865
+GROUP StoreComment
+  SELECT items.id FROM items.seller WHERE seller.id = ? -- 3661608880418844069 items, users for i2679423497 * 0.45 = 0.004196671532273924
+    Index lookup    i3576367474 [users.id] [items.end_date, items.id] → [items.name, items.initial_price, items.max_bid, items.nb_of_bids] size: $1660000 Graph(nodes: users, items, edges: {items=>#<Set: {items.seller}>, users=>#<Set: {users.items_sold}>}) * 10.0/1 
+
+  Insert    i2679423497 [items.id] [users.id] → [users.rating] size: $800000 Graph(nodes: items, users, edges: {items=>#<Set: {items.seller}>, users=>#<Set: {users.items_sold}>}) * 10.0
+
+ for i409313968 plan.cost: $0.17755436387677298
+GROUP StoreComment
+  SELECT items.id, items.name, items.description, items.initial_price, items.quantity, items.reserve_price, items.buy_now, items.nb_of_bids, items.max_bid, items.start_date, items.end_date FROM items.seller WHERE seller.id = ? -- 3661608882437262620 items, users for i409313968 * 0.45 = 0.013938921394547846
+    Index lookup    i3576367474 [users.id] [items.end_date, items.id] → [items.name, items.initial_price, items.max_bid, items.nb_of_bids] size: $1660000 Graph(nodes: users, items, edges: {items=>#<Set: {items.seller}>, users=>#<Set: {users.items_sold}>}) * 10.0/1 
+    Index lookup    i1888493477 [items.id] [] → [items.name, items.description, items.initial_price, items.quantity, items.reserve_price, items.buy_now, items.nb_of_bids, items.max_bid, items.start_date, items.end_date] size: $5920000 Graph(nodes: items, edges: {}) * 10.0/10.0 
+
+  Delete    i409313968 [users.rating] [users.id, items.id] → [items.name, items.description, items.initial_price, items.quantity, items.reserve_price, items.buy_now, items.nb_of_bids, items.max_bid, items.start_date, items.end_date] size: $6400000 Graph(nodes: items, users, edges: {items=>#<Set: {items.seller}>, users=>#<Set: {users.items_sold}>}) * 10.0
+  Insert    i409313968 [users.rating] [users.id, items.id] → [items.name, items.description, items.initial_price, items.quantity, items.reserve_price, items.buy_now, items.nb_of_bids, items.max_bid, items.start_date, items.end_date] size: $6400000 Graph(nodes: items, users, edges: {items=>#<Set: {items.seller}>, users=>#<Set: {users.items_sold}>}) * 10.0
+
+
+GROUP StoreComment
+INSERT INTO comments SET id=?, rating=?, date=?, comment=? AND CONNECT TO to_user(?), from_user(?), item(?) -- 28 comments * 0.45 = 0.026292793017454782
+ for i3157175159 plan.cost: $0.013329108
+  Insert    i3157175159 [users.id] [comments.id] → [comments.rating, comments.date, comments.comment] size: $17800000 Graph(nodes: comments, users, edges: {comments=>#<Set: {comments.to_user}>, users=>#<Set: {users.comments_received}>}) * 1
+
+ for i915430138 plan.cost: $0.022549660463838647
+GROUP StoreComment
+  SELECT users.nickname FROM users WHERE users.id = ? -- -1416683500292732353 users for i915430138 * 0.45 = 0.004149248608727392
+    Index lookup    i2906147889 [users.id] [] → [users.firstname, users.lastname, users.nickname, users.password, users.email, users.rating, users.balance, users.creation_date] size: $206000 Graph(nodes: users, edges: {}) * 1.0/1 
+
+  Insert    i915430138 [comments.id] [users.id] → [users.nickname] size: $4400000 Graph(nodes: comments, users, edges: {comments=>#<Set: {comments.from_user}>, users=>#<Set: {users.comments_sent}>}) * 1.0
+
+ for i4284180272 plan.cost: $0.022549660463838647
+GROUP StoreComment
+  SELECT users.nickname FROM users WHERE users.id = ? -- -1416683503408498699 users for i4284180272 * 0.45 = 0.004149248608727392
+    Index lookup    i2906147889 [users.id] [] → [users.firstname, users.lastname, users.nickname, users.password, users.email, users.rating, users.balance, users.creation_date] size: $206000 Graph(nodes: users, edges: {}) * 1.0/1 
+
+  Insert    i4284180272 [comments.rating] [comments.id, users.id] → [users.nickname] size: $5200000 Graph(nodes: comments, users, edges: {comments=>#<Set: {comments.from_user}>, users=>#<Set: {users.comments_sent}>}) * 1.0
+
+
+  Total cost: 15.617221066430417
