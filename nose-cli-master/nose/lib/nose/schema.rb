@@ -49,7 +49,7 @@ module NoSE
       dsl.instance_eval(&block) if block_given?
       index = Index.new dsl.hash_fields, dsl.order_fields, dsl.extra,
                         QueryGraph::Graph.from_path(dsl.path_keys),
-                        saved_key: key
+                        key
       @indexes[index.key] = index
     end
 

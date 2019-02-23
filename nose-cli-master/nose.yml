@@ -4,7 +4,7 @@ backend:
   hosts:
     - 10.0.16.7
   port: 9042
-  keyspace: nose
+  keyspace: rubis_secondary_bidding_161000000_si
 
 # Cost model name and parameters
 cost_model:
@@ -24,7 +24,7 @@ cost_model:
 # your generated indexes all have path length one
 loader:
   name: mysql
-  host: 127.0.0.1
+  host: 10.0.16.7
   database: rubis
   username: root
   password: root

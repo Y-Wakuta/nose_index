@@ -17,8 +17,8 @@ end
 def plot_scalability(x,y,z)
   Gnuplot.open() do |gp|
     Gnuplot::Plot.new( gp ) do |plot|
-      plot.ylabel "Query Latency [s]"
-      plot.xlabel "Cassandra nodes"
+      plot.ylabel "平均応答時間 [s]"
+      plot.xlabel "Cassandra ノード数"
       #      plot.set "terminal 'aqua'"
       plot.xrange "[:]"
       plot.yrange "[0:]"
@@ -26,7 +26,8 @@ def plot_scalability(x,y,z)
       #plot.style "data lines"
       #plot.set 'terminal postscript color eps enhanced "GothicBBB-Medium-EUC-H" 20 size 10cm,5cm'
 #      plot.set 'terminal postscript eps enhanced color font "VL PGothic,20" enhanced '
-      plot.set 'terminal postscript color eps enhanced font "Helvetica,13" size 12cm,6cm'
+      plot.set 'term postscript color eps enhanced font "GothicBBB-Medium-UniJIS-UTF8-H,12" size 12cm,6cm'
+      #plot.set 'terminal postscript color eps enhanced font "Helvetica,13" size 12cm,6cm'
       #      plot.set 'terminal pdf'
       plot.set 'boxwidth 0.8'
       plot.set "output 'output_scalability.eps'"
@@ -38,13 +39,14 @@ def plot_scalability(x,y,z)
       plot.set "style fill solid border lc rgb"
       plot.data << Gnuplot::DataSet.new( [x, y] ) do |ds|
         ds.with = 'histogram'
-        ds.linecolor = "30"
-        ds.title = "Prop."
+        ds.linecolor = "20"
+        ds.title = "提案手法"
         ds.using = "2:xtic(1)"
       end
       plot.data << Gnuplot::DataSet.new( [x, z] ) do |ds|
         ds.with = 'histogram'
         #ds.linecolor = "black"
+        ds.linecolor = "30"
         ds.title = "NoSE"
         ds.using = "2:xtic(1)"
       end

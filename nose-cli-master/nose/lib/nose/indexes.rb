@@ -212,7 +212,7 @@ module NoSE
     # @return [Index]
     def simple_index
       Index.new [id_field], [], fields.values - [id_field],
-                QueryGraph::Graph.from_path([id_field]), saved_key: name
+                QueryGraph::Graph.from_path([id_field]), name
     end
   end
 

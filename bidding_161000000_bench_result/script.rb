@@ -17,40 +17,44 @@ end
 def plot_transaction(x,y,z,alpha,y_title,z_title,alpha_title,title)
   Gnuplot.open() do |gp|
     Gnuplot::Plot.new( gp ) do |plot|
-      plot.ylabel "Query Latency [ms]"
 #      plot.set "terminal 'aqua'"
       plot.xrange "[:]"
       plot.yrange "[0:]"
-      plot.size "0.80,1.0"
+      plot.size "1.0,0.75"
       #plot.style "data lines"
       #plot.set 'terminal postscript color eps enhanced font "Helvetica,13" size 15cm,7cm' #resume
+      #plot.set 'terminal postscript color eps enhanced font "Helvetica,13" size 20cm,9cm' #xsig
+      plot.set 'term postscript color eps enhanced font "GothicBBB-Medium-UniJIS-UTF8-H,12" size 20cm,9cm'
       #plot.set 'terminal postscript color eps enhanced font "Helvetica,13" size 13cm,7cm' #卒論
-      plot.set 'terminal postscript color eps enhanced font "Helvetica,13" size 12cm,5cm' #卒論スライド
+ #     plot.set 'terminal postscript color eps enhanced font "Helvetica,13" size 12cm,5cm' #卒論スライド
 #      plot.set 'terminal postscript color eps enhanced font "Meiryo,18"'  #Ryumin-Light-EUC-H,7"'#size 16cm,8cm'
 #      plot.set 'terminal pdf'
+      #plot.ylabel "Query Latency [ms]"
+      plot.ylabel "平均応答時間 [ms]"
       plot.set 'boxwidth 0.8'
       plot.set "output 'output_#{title}.eps'"
-      plot.set 'xtics rotate by -20 font "Arial,5.5"'
+      plot.set 'xtics rotate by -40 font "Arial"'
       plot.set "style histogram clustered"
       plot.set "logscale y"
       #plot.set "autoscale fixmin"
       plot.set "grid ytics"
+#      plot.set "style fill solid border lc rgb"
       plot.set "style fill solid border lc rgb"
       plot.data << Gnuplot::DataSet.new( [x, y] ) do |ds|
         ds.with = 'histogram'
-        ds.linecolor = "30"
+        ds.linecolor = "20"
         ds.title = y_title
         ds.using = "2:xtic(1)"
       end
        plot.data << Gnuplot::DataSet.new( [x, z] ) do |ds|
         ds.with = 'histogram'
-        #ds.linecolor = "black"
+        ds.linecolor = "30"
         ds.title = z_title
         ds.using = "2:xtic(1)"
        end
       plot.data << Gnuplot::DataSet.new( [x, alpha] ) do |ds|
         ds.with = 'histogram'
-        #ds.linecolor = "black"
+        ds.linecolor = "50"
         ds.title = alpha_title
         ds.using = "2:xtic(1)"
       end
@@ -79,19 +83,20 @@ def get_transaction_latency(nose_csv,nose_index_csv,baseline_csv)
   nose = get_averages nose_csv
   nose_index = get_averages nose_index_csv,nose[0]
   baseline  = get_averages baseline_csv,nose[0]
-  plot_transaction(nose_index[0],nose_index[1],nose[1],baseline[1],"Prop.","NoSE","Baseline","Response Time")
+  plot_transaction(nose_index[0],nose_index[1],nose[1],baseline[1],"提案手法","NoSE","ベースライン","Response Time")
 end
 
 def plot_mean(names,values,y_title,title)
    Gnuplot.open() do |gp|
     Gnuplot::Plot.new( gp ) do |plot|
-      plot.ylabel "Query Latency [s]"
+      plot.ylabel "平均応答時間 [s]"
       plot.xrange "[:]"
-      plot.yrange "[0:]"
+      plot.yrange "[0:210]"
       #plot.size "1.0,1.0"
       plot.size "1,0.71"
       #plot.style "data lines"
-      plot.set 'terminal postscript color eps enhanced font "Helvetica,13" size 7cm,7cm'
+      #plot.set 'terminal postscript color eps enhanced font "Helvetica,13" size 7cm,7cm'
+      plot.set 'term postscript color eps enhanced font "GothicBBB-Medium-UniJIS-UTF8-H,12"size 7cm,7cm'
 #      plot.set 'terminal postscript color eps enhanced font "Meiryo,18"'  #Ryumin-Light-EUC-H,7"'#size 16cm,8cm'
       #plot.set 'terminal pdf mono'
       plot.set 'boxwidth 0.5'
@@ -133,7 +138,7 @@ def plot_whole_latency(nose_csv,nose_index_csv, baseline_csv)
   nose = get_mean(nose_csv,group_weight_hash)
   nose_index = get_mean(nose_index_csv,group_weight_hash)
   baseline = get_mean(baseline_csv,group_weight_hash)
-  plot_mean(["Prop.","NoSE","Baseline"],[nose_index,nose,baseline],"latency","latency")
+  plot_mean(["提案手法","NoSE","ベースライン"],[nose_index,nose,baseline],"latency","latency")
 end
 
 def get_sum_statics(nose_csv,nose_index_csv,baseline_csv)
@@ -169,4 +174,4 @@ plot_whole_latency(nose_csv, nose_index_csv, baseline_csv)
 
 get_sum_statics(nose_csv,nose_index_csv,baseline_csv)
 
-plot_query_update_latency(half_nose_csv, half_nose_index_csv, normal_nose_csv, normal_nose_index_csv,one_half_nose_csv, one_half_nose_index_csv)
+#plot_query_update_latency(half_nose_csv, half_nose_index_csv, normal_nose_csv, normal_nose_index_csv,one_half_nose_csv, one_half_nose_index_csv)

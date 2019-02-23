@@ -25,7 +25,8 @@ module NoSE
         indexes.map!(&:to_id_graph).uniq! if @backend.by_id_graph #yusuke このid_graph周りがわかってない
 
         # XXX Assuming backend is thread-safe
-        Parallel.each(indexes) do |index|
+        # yusuke ここで一気にprocessesでCFを作ろうとすると create column family が干渉してエラーが出る
+        Parallel.each(indexes, :in_processes => 13) do |index|
           load_index index, has_index_hash,config, show_progress, limit, skip_existing
         end
       end

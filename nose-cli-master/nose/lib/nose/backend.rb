@@ -391,7 +391,6 @@ module NoSE
           end
           results = step.process field_conds, results,conditions
 
-
           # The query can't return any results at this point, so we're done
           break if results.empty?
         end

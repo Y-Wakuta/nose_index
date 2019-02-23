@@ -7,7 +7,7 @@ NoSE::Workload.new do
   # Define queries and their relative weights, weights taken from below
   # http://rubis.ow2.org/results/SB-BMP/Bidding/JBoss-SB-BMP-Bi-1500/perf.html#run_stat
   # http://rubis.ow2.org/results/SB-BMP/Browsing/JBoss-SB-BMP-Br-1500/perf.html#run_stat
-  DefaultMix :write_heavy
+  DefaultMix :browsing
 
   Group 'BrowseCategories', browsing: 4.44,
         bidding: 7.65,
@@ -136,7 +136,6 @@ NoSE::Workload.new do
     Q 'SELECT items.nb_of_bids, items.max_bid FROM items WHERE items.id=? -- 21'
     Q 'SELECT items.nb_of_bids, items.max_bid FROM items WHERE items.quantity=? -- 21_secondary'
     Q 'UPDATE items SET nb_of_bids=?, max_bid=? WHERE items.id=? -- 22'
-    Q 'UPDATE items SET nb_of_bids=?, max_bid=? WHERE items.quantity=? -- 22_secondary'
   end
 
   Group 'PutComment', bidding: 0.46,
@@ -160,7 +159,6 @@ NoSE::Workload.new do
     Q 'SELECT users.rating FROM users WHERE users.id=? -- 26'
     Q 'SELECT users.rating FROM users WHERE users.rating=? -- 26_secondary'
     Q 'UPDATE users SET rating=? WHERE users.id=? -- 27'
-    Q 'UPDATE users SET rating=? WHERE users.rating=? -- 27_secondary'
     Q 'INSERT INTO comments SET id=?, rating=?, date=?, comment=? ' \
       'AND CONNECT TO to_user(?), from_user(?), item(?) -- 28'
   end
