@@ -58,6 +58,7 @@ module NoSE
 
     #yusuke 引数で受け取ったindexを元にSIとSIの属性を抜いたりしたCFを列挙する。
     def get_secondary_indexes_by_indexes(base_cf_candidates,indexes)
+      STDERR.print("enumerate si\n")
       Parallel.map(base_cf_candidates) do |index|
         (index.order_fields.to_set  + index.extra).to_a.map do |ex_field|
           # hashフィールドの中に元テーブルのprimary keyが含まれていないといけないみたい。なぜこの制約があるのかを論文から確認する->nose2016のp185
@@ -92,7 +93,6 @@ module NoSE
       base_cf_candidates = []
       indexes = queries.map do |query|
         base_cfs = indexes_for_query(query).to_a #yusuke このbase_cfsをfield数とかで部分的にだけ使用すると、
-        print(query.text," :-> ",base_cfs.count,"\n")
         base_cf_candidates += base_cfs.sort_by { |index | index.all_fields.length }.reverse.take(3) #yusuke #46 queryに単独で応答するcfを探したい。今はひとまず一番field数の多いものがそうだろうということで対処
         base_cfs
       end.inject(additional_indexes, &:+)

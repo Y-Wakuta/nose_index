@@ -12,13 +12,13 @@ module NoSE
       # step.is_a? Plans::IndexLookupPlanStep == trueは常に成立する
       def index_lookup_cost(step)
         return nil if step.state.nil?
-        rows = step.state.cardinality #yusuke RequestCountCostの実装から考えるとこれが論文のn
-        parts = step.state.hash_cardinality #yusuke これは他のcost modelでは参照されていないが、step.state.cardinalityがnであることを考えるとこれがwか？
+        rows = step.state.cardinality #yusuke RequestCountCostの実装から考えるとこれが論文のw
+        parts = step.state.hash_cardinality #yusuke これは他のcost modelでは参照されていないが、n
         partition_cost = @options[:partition_cost]
         row_cost = @options[:row_cost]
         joined_cf_cost = @options[:sole_cf_query_cost] * [rows,1].max #yusuke ヒットする件数の期待値が1件以下の時はその分siの時のcostが相対的に増加するのはおかしいので、1以下なら1とする。
-
         #yusuke SI単独でクエリに応答する場合、応答コストは増加する
+
         if step.is_a? Plans::IndexLookupPlanStep and step.index.is_secondary_index and step.state.answered? then
           return (@options[:index_cost] + parts * partition_cost + rows * row_cost) * (1 + (@options[:si_2_cf_query_cost] / @options[:sole_cf_query_cost]))
         end
@@ -26,7 +26,7 @@ module NoSE
         if step.is_a? Plans::IndexLookupPlanStep and step.index.is_secondary_index then
           row_cost *= (@options[:si_2_cf_query_cost] / joined_cf_cost)
         elsif step.parent.is_a? Plans::IndexLookupPlanStep and step.parent.index.is_secondary_index then
-          partition_cost *= (@options[:si_2_cf_query_cost] / joined_cf_cost)
+          partition_cost *= (@options[:si_2_cf_query_cost] / joined_cf_cost) #このステップからレコードを再送するコストはCF+CFの時と変わらないから、SI+CFの時のCF側だけ現象させるのではなく、この「自分がSIの時」と「自分の親がSIの時」の両方の場合について
         end
 
         @options[:index_cost] + parts * partition_cost + rows * row_cost

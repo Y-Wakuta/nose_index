@@ -4,7 +4,7 @@ module NoSE
   module Search
     # A container for results from a schema search
     class Results
-      attr_reader :cost_model
+      attr_reader :cost_model,:model
       attr_accessor :enumerated_indexes, :indexes, :total_size, :total_cost,
                     :workload, :update_plans, :plans,
                     :revision, :time, :command, :by_id_graph,:has_index_hash

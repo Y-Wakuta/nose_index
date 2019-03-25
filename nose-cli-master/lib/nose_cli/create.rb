@@ -22,12 +22,15 @@ module NoSE
 
       def create(*plan_files)
         plan_files.each do |plan_file|
-          result, backend = load_plans plan_file, options
+          result, backend = load_plans plan_file, options,is_create_or_load: true
 
           # Produce the DDL and execute unless the dry run option was given
-          backend.indexes_ddl(result.has_index_hash,!options[:dry_run], options[:skip_existing],
+          backend.indexes_ddl(!options[:dry_run], options[:skip_existing],
                               options[:drop_existing]) \
                  .each { |ddl| puts ddl }
+          if !result.has_index_hash.nil?
+            backend.secondary_index_ddl(result.has_index_hash.uniq).each{|ddl| puts ddl}
+          end
         end
       end
     end

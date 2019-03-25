@@ -178,6 +178,7 @@ module NoSE
         costs = @steps.map(&:cost) + @update_steps.map(&:cost)
         costs += @query_plans.map(&:steps).flatten.map(&:cost)
 
+        return 0 if costs.all?{|cost| cost.nil?}
         costs.inject(0, &:+)
       end
 

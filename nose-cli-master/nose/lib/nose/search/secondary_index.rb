@@ -54,4 +54,20 @@ class HasIndex
     @index_value = value
     @parent_table_id = parent_table_id
   end
+
+  def add_parent_table(additional_base_cf)
+    @parent_table_id += ("," + additional_base_cf)
+  end
+
+  def hash
+    (@index_key.to_s + @parent_table_id.to_s).hash
+  end
+
+  def ==(other)
+    return true if @index_key == other.index_key and @parent_table_id == other.parent_table_id
+  end
+
+  def eql?(other)
+    self == other
+  end
 end

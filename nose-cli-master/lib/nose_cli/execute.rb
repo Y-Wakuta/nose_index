@@ -205,7 +205,7 @@ module NoSE
           # Execute each plan and measure the time
           start_time = Time.now.utc
           setting_list.zip(condition_list).each do |settings, conditions|
-            prepared.each { |p| p.execute settings, conditions }
+            prepared.each { |p| p.execute settings, conditions }#ここでupdateを実行する時にnum_iterations > 1でも問題が無いか確認する.benchmark の結果が一旦出たら、クエリプランとの妥当性がなんとなくあるか確認する
           end
           elapsed = Time.now.utc - start_time
 
@@ -221,6 +221,7 @@ module NoSE
         1.upto(iterations).map do |i|
           Hash[params.map do |field_id, condition|
             value = nil
+            #indexes.flatten.each do |index|
             indexes.each do |index|
               values = index_values[index]
               next if values.empty?

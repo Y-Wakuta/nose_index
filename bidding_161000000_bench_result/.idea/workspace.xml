@@ -1,0 +1,469 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="bc81dad5-2d73-4ff0-8325-5436c4fa3cea" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/../backend/get_cardinality.rb" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/get_cardinality.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/output_Response Time.eps" beforeDir="false" afterPath="$PROJECT_DIR$/output_Response Time.eps" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/output_latency.eps" beforeDir="false" afterPath="$PROJECT_DIR$/output_latency.eps" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/output_record_impac.eps" beforeDir="false" afterPath="$PROJECT_DIR$/output_record_impac.eps" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/output_scalability.eps" beforeDir="false" afterPath="$PROJECT_DIR$/output_scalability.eps" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scalability.rb" beforeDir="false" afterPath="$PROJECT_DIR$/scalability.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/script.rb" beforeDir="false" afterPath="$PROJECT_DIR$/script.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/../docker-compose.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nose-cli-master/lib/nose_cli/execute.rb" beforeDir="false" afterPath="$PROJECT_DIR$/../nose-cli-master/lib/nose_cli/execute.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nose-cli-master/nose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/../nose-cli-master/nose.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nose-cli-master/nose/lib/nose/backend.rb" beforeDir="false" afterPath="$PROJECT_DIR$/../nose-cli-master/nose/lib/nose/backend.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nose-cli-master/nose/lib/nose/indexes.rb" beforeDir="false" afterPath="$PROJECT_DIR$/../nose-cli-master/nose/lib/nose/indexes.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nose-cli-master/nose/lib/nose/loader/mysql.rb" beforeDir="false" afterPath="$PROJECT_DIR$/../nose-cli-master/nose/lib/nose/loader/mysql.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nose-cli-master/nose/lib/nose/schema.rb" beforeDir="false" afterPath="$PROJECT_DIR$/../nose-cli-master/nose/lib/nose/schema.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nose-cli-master/nose/lib/nose/search/results.rb" beforeDir="false" afterPath="$PROJECT_DIR$/../nose-cli-master/nose/lib/nose/search/results.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nose-cli-master/nose/plans/rubis_baseline.rb" beforeDir="false" afterPath="$PROJECT_DIR$/../nose-cli-master/nose/plans/rubis_baseline.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nose-cli-master/nose/workloads/rubis_secondary.rb" beforeDir="false" afterPath="$PROJECT_DIR$/../nose-cli-master/nose/workloads/rubis_secondary.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../size_constraint_bench/README.md" beforeDir="false" />
+    </list>
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="CoverageDataManager">
+    <SUITE FILE_PATH="coverage/bidding_161000000_bench_result@script.rcov" NAME="script Coverage Results" MODIFIED="1550741111462" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="bidding_161000000_bench_result" />
+    <SUITE FILE_PATH="coverage/bidding_161000000_bench_result@scalability.rcov" NAME="scalability Coverage Results" MODIFIED="1550741293688" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" MODULE_NAME="bidding_161000000_bench_result" />
+    <SUITE FILE_PATH="coverage/bidding_161000000_bench_result@record_num.rcov" NAME="record_num Coverage Results" MODIFIED="1550658198284" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" MODULE_NAME="bidding_161000000_bench_result" />
+  </component>
+  <component name="FileEditorManager">
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/record_impac.rb">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1424">
+              <caret line="89" selection-start-line="89" selection-end-line="89" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/bidding_161_5iter_one_node/baseline_bench_result.csv">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="48">
+              <caret line="3" column="59" selection-start-line="3" selection-start-column="59" selection-end-line="3" selection-end-column="59" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/bidding_161_5iter_one_node/bidding_161_si.csv">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1504">
+              <caret line="94" column="55" selection-start-line="94" selection-start-column="55" selection-end-line="94" selection-end-column="55" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/bidding_161_5iter_one_node/output_latency.eps">
+          <provider selected="true" editor-type-id="text-editor" />
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/script.rb">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1360">
+              <caret line="85" column="87" selection-start-line="85" selection-start-column="87" selection-end-line="85" selection-end-column="87" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/output_record_impac.eps">
+          <provider selected="true" editor-type-id="text-editor" />
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/get_latency.sh">
+          <provider selected="true" editor-type-id="text-editor" />
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/scalability.rb">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="398">
+              <caret line="47" column="28" selection-start-line="47" selection-start-column="28" selection-end-line="47" selection-end-column="28" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Ruby Class Template" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/record_impac.rb" />
+        <option value="$PROJECT_DIR$/script.rb" />
+        <option value="$PROJECT_DIR$/scalability.rb" />
+      </list>
+    </option>
+  </component>
+  <component name="ProjectFrameBounds" extendedState="4">
+    <option name="x" value="2800" />
+    <option name="y" value="190" />
+    <option name="width" value="1720" />
+    <option name="height" value="1442" />
+  </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectView">
+    <navigator proportions="" version="1">
+      <foldersAlwaysOnTop value="true" />
+    </navigator>
+    <panes>
+      <pane id="Scope" />
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="bidding_161000000_bench_result" type="b2602c69:ProjectViewProjectNode" />
+              <item name="bidding_161000000_bench_result" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="bidding_161000000_bench_result" type="b2602c69:ProjectViewProjectNode" />
+              <item name="bidding_161000000_bench_result" type="462c0819:PsiDirectoryNode" />
+              <item name="bidding_161_5iter_one_node" type="462c0819:PsiDirectoryNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+    </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
+    <property name="nodejs_npm_path_reset_for_default_project" value="true" />
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="RunManager" selected="Ruby.scalability">
+    <configuration name="record_num" type="RubyRunConfigurationType" factoryName="Ruby">
+      <module name="bidding_161000000_bench_result" />
+      <RUBY_RUN_CONFIG NAME="RUBY_ARGS" VALUE="" />
+      <RUBY_RUN_CONFIG NAME="WORK DIR" VALUE="" />
+      <RUBY_RUN_CONFIG NAME="SHOULD_USE_SDK" VALUE="false" />
+      <RUBY_RUN_CONFIG NAME="ALTERN_SDK_NAME" VALUE="" />
+      <RUBY_RUN_CONFIG NAME="myPassParentEnvs" VALUE="true" />
+      <EXTENSION ID="BundlerRunConfigurationExtension" bundleExecEnabled="false" />
+      <EXTENSION ID="JRubyRunConfigurationExtension" NailgunExecEnabled="false" />
+      <EXTENSION ID="RubyCoverageRunConfigurationExtension" track_test_folders="true" runner="rcov">
+        <COVERAGE_PATTERN ENABLED="true">
+          <PATTERN REGEXPS="/.rvm/" INCLUDED="false" />
+        </COVERAGE_PATTERN>
+      </EXTENSION>
+      <RUBY_RUN_CONFIG NAME="SCRIPT_PATH" VALUE="$MODULE_DIR$/record_impac.rb" />
+      <RUBY_RUN_CONFIG NAME="SCRIPT_ARGS" VALUE="./record_num_impac/bidding_161_no_si_half.csv ./record_num_impac/bidding_161_si_half.csv ./record_num_impac/bidding_161_no_si_normal.csv ./record_num_impac/bidding_161_si_normal.csv ./record_num_impac/bidding_161_no_si_one_half.csv ./record_num_impac/bidding_161_si_one_half.csv" />
+      <method v="2" />
+    </configuration>
+    <configuration name="scalability" type="RubyRunConfigurationType" factoryName="Ruby">
+      <module name="bidding_161000000_bench_result" />
+      <RUBY_RUN_CONFIG NAME="RUBY_ARGS" VALUE="" />
+      <RUBY_RUN_CONFIG NAME="WORK DIR" VALUE="" />
+      <RUBY_RUN_CONFIG NAME="SHOULD_USE_SDK" VALUE="false" />
+      <RUBY_RUN_CONFIG NAME="ALTERN_SDK_NAME" VALUE="" />
+      <RUBY_RUN_CONFIG NAME="myPassParentEnvs" VALUE="true" />
+      <EXTENSION ID="BundlerRunConfigurationExtension" bundleExecEnabled="false" />
+      <EXTENSION ID="JRubyRunConfigurationExtension" NailgunExecEnabled="false" />
+      <EXTENSION ID="RubyCoverageRunConfigurationExtension" track_test_folders="true" runner="rcov">
+        <COVERAGE_PATTERN ENABLED="true">
+          <PATTERN REGEXPS="/.rvm/" INCLUDED="false" />
+        </COVERAGE_PATTERN>
+      </EXTENSION>
+      <RUBY_RUN_CONFIG NAME="SCRIPT_PATH" VALUE="$MODULE_DIR$/scalability.rb" />
+      <RUBY_RUN_CONFIG NAME="SCRIPT_ARGS" VALUE="./bidding_161_5iter_one_node/bidding_161_no_si.csv ./bidding_161_5iter_one_node/bidding_161_si.csv  ./bidding_161_10/bidding_161_no_si.csv ./bidding_161_10/bidding_161_si.csv ./bidding_161_20/bidding_161_no_si.csv ./bidding_161_20/bidding_161_si.csv" />
+      <method v="2" />
+    </configuration>
+    <configuration name="script" type="RubyRunConfigurationType" factoryName="Ruby">
+      <module name="bidding_161000000_bench_result" />
+      <RUBY_RUN_CONFIG NAME="RUBY_ARGS" VALUE="" />
+      <RUBY_RUN_CONFIG NAME="WORK DIR" VALUE="$MODULE_DIR$" />
+      <RUBY_RUN_CONFIG NAME="SHOULD_USE_SDK" VALUE="false" />
+      <RUBY_RUN_CONFIG NAME="ALTERN_SDK_NAME" VALUE="" />
+      <RUBY_RUN_CONFIG NAME="myPassParentEnvs" VALUE="true" />
+      <EXTENSION ID="BundlerRunConfigurationExtension" bundleExecEnabled="true" />
+      <EXTENSION ID="JRubyRunConfigurationExtension" NailgunExecEnabled="false" />
+      <EXTENSION ID="RubyCoverageRunConfigurationExtension" track_test_folders="true" runner="rcov">
+        <COVERAGE_PATTERN ENABLED="true">
+          <PATTERN REGEXPS="/.rvm/" INCLUDED="false" />
+        </COVERAGE_PATTERN>
+      </EXTENSION>
+      <RUBY_RUN_CONFIG NAME="SCRIPT_PATH" VALUE="$MODULE_DIR$/script.rb" />
+      <RUBY_RUN_CONFIG NAME="SCRIPT_ARGS" VALUE="./bidding_161_5iter_one_node/bidding_161_si.csv ./bidding_161_5iter_one_node/bidding_161_no_si.csv  ./bidding_161_5iter_one_node/baseline_bench_result.csv" />
+      <method v="2" />
+    </configuration>
+    <list>
+      <item itemvalue="Ruby.record_num" />
+      <item itemvalue="Ruby.script" />
+      <item itemvalue="Ruby.scalability" />
+    </list>
+  </component>
+  <component name="SpringUtil" SPRING_PRE_LOADER_OPTION="true" />
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="bc81dad5-2d73-4ff0-8325-5436c4fa3cea" name="Default Changelist" comment="" />
+      <created>1549845461732</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1549845461732</updated>
+      <workItem from="1549845462961" duration="680000" />
+      <workItem from="1549847660556" duration="962000" />
+      <workItem from="1549849384439" duration="94000" />
+      <workItem from="1549868968376" duration="3288000" />
+      <workItem from="1550001274520" duration="4000" />
+      <workItem from="1550001292199" duration="111000" />
+      <workItem from="1550123015938" duration="3945000" />
+      <workItem from="1550151691345" duration="903000" />
+      <workItem from="1550154991474" duration="8000" />
+      <workItem from="1550155380678" duration="664000" />
+      <workItem from="1550156526569" duration="196000" />
+      <workItem from="1550395429860" duration="12000" />
+      <workItem from="1550395459569" duration="1364000" />
+      <workItem from="1550471642636" duration="19000" />
+      <workItem from="1550471662911" duration="605000" />
+      <workItem from="1550655324792" duration="3252000" />
+      <workItem from="1550669439433" duration="17000" />
+      <workItem from="1550733276584" duration="5143000" />
+      <workItem from="1550764307826" duration="34000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TimeTrackingManager">
+    <option name="totallyTimeSpent" value="21301000" />
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="2800" y="190" width="1720" height="1442" extended-state="4" />
+    <editor active="true" />
+    <layout>
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.21744324" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info id="Favorites" order="2" side_tool="true" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Find" order="1" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.9375" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.6199543" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="bottom" id="Docker" order="7" />
+      <window_info anchor="bottom" id="Database Changes" order="8" />
+      <window_info anchor="bottom" id="Version Control" order="9" />
+      <window_info anchor="bottom" id="Terminal" order="10" weight="0.23838538" />
+      <window_info anchor="bottom" id="Event Log" order="11" side_tool="true" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="right" id="Database" order="3" />
+    </layout>
+    <layout-to-restore>
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.26723096" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info id="Favorites" order="2" side_tool="true" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Find" order="1" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.45011425" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.6203996" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="bottom" id="Docker" order="7" />
+      <window_info anchor="bottom" id="Database Changes" order="8" />
+      <window_info anchor="bottom" id="Version Control" order="9" />
+      <window_info anchor="bottom" id="Terminal" order="10" />
+      <window_info anchor="bottom" id="Event Log" order="11" side_tool="true" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="right" id="Database" order="3" />
+    </layout-to-restore>
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="ruby-line">
+          <url>file://$PROJECT_DIR$/script.rb</url>
+          <line>101</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="ruby-line">
+          <url>file://$PROJECT_DIR$/script.rb</url>
+          <line>107</line>
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="ruby-line">
+          <url>file://$PROJECT_DIR$/scalability.rb</url>
+          <line>82</line>
+          <option name="timeStamp" value="3" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="ruby-line">
+          <url>file://$PROJECT_DIR$/scalability.rb</url>
+          <line>93</line>
+          <option name="timeStamp" value="4" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="ruby-line">
+          <url>file://$PROJECT_DIR$/scalability.rb</url>
+          <line>58</line>
+          <option name="timeStamp" value="5" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="ruby-line">
+          <url>file://$PROJECT_DIR$/script.rb</url>
+          <line>170</line>
+          <option name="timeStamp" value="6" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="ruby-line">
+          <url>file://$PROJECT_DIR$/script.rb</url>
+          <line>134</line>
+          <option name="timeStamp" value="7" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="ruby-line">
+          <url>file://$PROJECT_DIR$/script.rb</url>
+          <line>136</line>
+          <option name="timeStamp" value="8" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="ruby-line">
+          <url>file://$PROJECT_DIR$/script.rb</url>
+          <line>135</line>
+          <option name="timeStamp" value="9" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="ruby-line">
+          <url>file://$PROJECT_DIR$/record_impac.rb</url>
+          <line>62</line>
+          <option name="timeStamp" value="10" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+    <watches-manager>
+      <configuration name="RubyRunConfigurationType">
+        <watch expression="half_nose_csv[&quot;mean&quot;].zip(half_nose_index_csv[&quot;mean&quot;]).select{|tup| tup[0] &gt; }" language="ruby" />
+        <watch expression="one_half_nose / half_nose" language="ruby" />
+        <watch expression="one_half_nose_index / half_nose_index" language="ruby" />
+      </configuration>
+    </watches-manager>
+  </component>
+  <component name="debuggerHistoryManager">
+    <expressions id="watch">
+      <expression>
+        <expression-string>one_half_nose_index / half_nose_index</expression-string>
+        <language-id>ruby</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>one_half_nose / half_nose</expression-string>
+        <language-id>ruby</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>normal_nose_index / half_nose_index</expression-string>
+        <language-id>ruby</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>normal_nose / half_nose</expression-string>
+        <language-id>ruby</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>half_nose_csv[&quot;mean&quot;].zip(half_nose_index_csv[&quot;mean&quot;]).select{|tup| tup[0] &gt; }</expression-string>
+        <language-id>ruby</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>half_nose_csv[&quot;mean&quot;].zip(half_nose_index_csv[&quot;mean&quot;].ma)</expression-string>
+        <language-id>ruby</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>half_nose_csv[&quot;mean&quot;].zip(half_nose_index_csv[&quot;mean&quot;])</expression-string>
+        <language-id>ruby</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+    </expressions>
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/bidding_161_5iter_one_node/bidding_161_no_si.csv">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="247">
+          <caret line="69" column="34" lean-forward="true" selection-start-line="69" selection-start-column="34" selection-end-line="69" selection-end-column="34" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/record_impac.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1424">
+          <caret line="89" selection-start-line="89" selection-end-line="89" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/bidding_161_5iter_one_node/baseline_bench_result.csv">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="48">
+          <caret line="3" column="59" selection-start-line="3" selection-start-column="59" selection-end-line="3" selection-end-column="59" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/bidding_161_5iter_one_node/bidding_161_si.csv">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1504">
+          <caret line="94" column="55" selection-start-line="94" selection-start-column="55" selection-end-line="94" selection-end-column="55" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/bidding_161_5iter_one_node/output_latency.eps">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/script.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1360">
+          <caret line="85" column="87" selection-start-line="85" selection-start-column="87" selection-end-line="85" selection-end-column="87" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/output_record_impac.eps">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/get_latency.sh">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scalability.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="398">
+          <caret line="47" column="28" selection-start-line="47" selection-start-column="28" selection-end-line="47" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
+  </component>
+</project>
