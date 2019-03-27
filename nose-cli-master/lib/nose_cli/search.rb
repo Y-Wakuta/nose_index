@@ -36,6 +36,8 @@ module NoSE
                            aliases: '-i'
       option :secondary, type: :boolean, default: true,
                          desc: 'does use secondary index'
+      option :prune_rate, type: :numeric, default: 100,
+             desc: 'column family pruning rate for faster solving. min: 0, max: 100'
 
       def search(name)
         # Get the workload from file or name

@@ -170,6 +170,14 @@ module NoSE
       end
     end
 
+    #yusuke 探索時間を低減するために CF の削減を行う。
+    def prune_cfs(entity_choices)
+      entity_choices.group_by{|ec| ec.length}.map do |ecg|
+        #yusuke cardinality の大きい属性をもつものから並べて、一定の個数のみを取得する
+        ecg[1] = ecg[1].sort{|attrs| attrs.first.cardinality}.reverse.take([4,ecg[1].length * (@options[:prune_rate] * 0.01)].max) # 4という数字はてきとう
+      end.flatten(1)
+    end
+
     # Get all possible choices of fields to use for equality
     # @return [Array<Array>]
     def eq_choices(graph, eq)
@@ -181,6 +189,9 @@ module NoSE
           entity_fields.permutation(n).to_a
         end
       end
+
+      #yusuke cf を削減
+      entity_choices = prune_cfs(entity_choices)
 
       2.upto(graph.entities.length).flat_map do |n|
         entity_choices.permutation(n).map(&:flatten).to_a
