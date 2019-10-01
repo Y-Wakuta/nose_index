@@ -198,7 +198,7 @@ module NoSE
       def query_costs(query_weights, indexes)
         planner = Plans::QueryPlanner.new @workload, indexes, @cost_model
 
-        STDERR.print("get query plan\n")
+        STDERR.print("enumerate query plan\n")
         results = Parallel.map(query_weights) do |query, weight|
           query_cost planner, query, weight
         end
