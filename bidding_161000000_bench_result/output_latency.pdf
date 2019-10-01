@@ -1,7 +1,7 @@
 %!PS-Adobe-2.0 EPSF-2.0
-%%Title: output_latency.eps
+%%Title: output_latency.pdf
 %%Creator: gnuplot 5.2 patchlevel 2
-%%CreationDate: Thu Feb 21 18:25:11 2019
+%%CreationDate: Mon Sep  9 20:52:19 2019
 %%DocumentFonts: (atend)
 %%BoundingBox: 50 50 248 190
 %%EndComments
@@ -476,12 +476,12 @@ systemdict /pdfmark known not {
   userdict /pdfmark systemdict /cleartomark get put
 } if
 SDict begin [
-  /Title (output_latency.eps)
+  /Title (output_latency.pdf)
   /Subject (gnuplot plot)
   /Creator (gnuplot 5.2 patchlevel 2)
 %  /Producer (gnuplot)
 %  /Keywords ()
-  /CreationDate (Thu Feb 21 18:25:11 2019)
+  /CreationDate (Mon Sep  9 20:52:19 2019)
   /DOCINFO pdfmark
 end
 } ifelse
@@ -549,18 +549,18 @@ LCb setrgbcolor
 0.500 UL
 LTa
 LCa setrgbcolor
-588 825 M
+588 601 M
 3163 0 V
 stroke
 1.000 UL
 LTb
 LCb setrgbcolor
-588 825 M
+588 601 M
 63 0 V
 3100 0 R
 -63 0 V
 stroke
-516 825 M
+516 601 M
 [ [(GothicBBB-Medium-UniJIS-UTF8-H) 120.0 0.0 true true 0 ( 50)]
 ] -40.0 MRshow
 1.000 UL
@@ -569,18 +569,18 @@ LCb setrgbcolor
 0.500 UL
 LTa
 LCa setrgbcolor
-588 1410 M
+588 963 M
 3163 0 V
 stroke
 1.000 UL
 LTb
 LCb setrgbcolor
-588 1410 M
+588 963 M
 63 0 V
 3100 0 R
 -63 0 V
 stroke
-516 1410 M
+516 963 M
 [ [(GothicBBB-Medium-UniJIS-UTF8-H) 120.0 0.0 true true 0 ( 100)]
 ] -40.0 MRshow
 1.000 UL
@@ -589,18 +589,18 @@ LCb setrgbcolor
 0.500 UL
 LTa
 LCa setrgbcolor
-588 1995 M
+588 1324 M
 3163 0 V
 stroke
 1.000 UL
 LTb
 LCb setrgbcolor
-588 1995 M
+588 1324 M
 63 0 V
 3100 0 R
 -63 0 V
 stroke
-516 1995 M
+516 1324 M
 [ [(GothicBBB-Medium-UniJIS-UTF8-H) 120.0 0.0 true true 0 ( 150)]
 ] -40.0 MRshow
 1.000 UL
@@ -609,19 +609,59 @@ LCb setrgbcolor
 0.500 UL
 LTa
 LCa setrgbcolor
-588 2580 M
+588 1685 M
 3163 0 V
 stroke
 1.000 UL
 LTb
 LCb setrgbcolor
-588 2580 M
+588 1685 M
 63 0 V
 3100 0 R
 -63 0 V
 stroke
-516 2580 M
+516 1685 M
 [ [(GothicBBB-Medium-UniJIS-UTF8-H) 120.0 0.0 true true 0 ( 200)]
+] -40.0 MRshow
+1.000 UL
+LTb
+LCb setrgbcolor
+0.500 UL
+LTa
+LCa setrgbcolor
+588 2047 M
+3163 0 V
+stroke
+1.000 UL
+LTb
+LCb setrgbcolor
+588 2047 M
+63 0 V
+3100 0 R
+-63 0 V
+stroke
+516 2047 M
+[ [(GothicBBB-Medium-UniJIS-UTF8-H) 120.0 0.0 true true 0 ( 250)]
+] -40.0 MRshow
+1.000 UL
+LTb
+LCb setrgbcolor
+0.500 UL
+LTa
+LCa setrgbcolor
+588 2408 M
+3163 0 V
+stroke
+1.000 UL
+LTb
+LCb setrgbcolor
+588 2408 M
+63 0 V
+3100 0 R
+-63 0 V
+stroke
+516 2408 M
+[ [(GothicBBB-Medium-UniJIS-UTF8-H) 120.0 0.0 true true 0 ( 300)]
 ] -40.0 MRshow
 1.000 UL
 LTb
@@ -675,36 +715,36 @@ LCb setrgbcolor
 LCb setrgbcolor
 108 1468 M
 currentpoint gsave translate -270 rotate 0 0 moveto
-[ [(GothicBBB-Medium-UniJIS-UTF8-H) 120.0 0.0 true true 0 (平均応答時間 [s])]
+[ [(GothicBBB-Medium-UniJIS-UTF8-H) 120.0 0.0 true true 0 (頻度による重み付き平均応答時間 [s])]
 ] -40.0 MCshow
 grestore
 LTb
 % Begin plot #1
 1.000 UL
 LTb
-0.00 0.45 0.70 C 1.000 852 240 528 47 BoxColFill
+0.00 0.45 0.70 C 1.000 852 240 528 54 BoxColFill
 0.00 0.00 0.00 C 852 240 N
-0 46 V
+0 53 V
 527 0 V
-0 -46 V
+0 -53 V
 -527 0 V
 Z stroke
 1.000 UL
 LTb
-0.00 0.45 0.70 C 1.000 1906 240 528 174 BoxColFill
+0.00 0.45 0.70 C 1.000 1906 240 528 243 BoxColFill
 0.00 0.00 0.00 C 1906 240 N
-0 173 V
+0 242 V
 527 0 V
-0 -173 V
+0 -242 V
 -527 0 V
 Z stroke
 1.000 UL
 LTb
-0.00 0.45 0.70 C 1.000 2960 240 528 2369 BoxColFill
+0.00 0.45 0.70 C 1.000 2960 240 528 2333 BoxColFill
 0.00 0.00 0.00 C 2960 240 N
-0 2368 V
+0 2332 V
 527 0 V
-0 -2368 V
+0 -2332 V
 -527 0 V
 Z stroke
 1.000 UL

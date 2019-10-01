@@ -20,11 +20,12 @@ def plot_transaction(x,y,z,alpha,y_title,z_title,alpha_title,title)
 #      plot.set "terminal 'aqua'"
       plot.xrange "[:]"
       plot.yrange "[0:]"
-      plot.size "1.0,0.75"
+      plot.size "0.8,0.75"
       #plot.style "data lines"
       #plot.set 'terminal postscript color eps enhanced font "Helvetica,13" size 15cm,7cm' #resume
       #plot.set 'terminal postscript color eps enhanced font "Helvetica,13" size 20cm,9cm' #xsig
-      plot.set 'term postscript color eps enhanced font "GothicBBB-Medium-UniJIS-UTF8-H,12" size 20cm,9cm'
+      #plot.set 'term postscript color eps enhanced font "GothicBBB-Medium-UniJIS-UTF8-H,12" size 20cm,9cm'
+      plot.set 'term postscript color eps enhanced font "GothicBBB-Medium-UniJIS-UTF8-H,12" size 15cm,9cm' #DEIM スライド
       #plot.set 'terminal postscript color eps enhanced font "Helvetica,13" size 13cm,7cm' #卒論
  #     plot.set 'terminal postscript color eps enhanced font "Helvetica,13" size 12cm,5cm' #卒論スライド
 #      plot.set 'terminal postscript color eps enhanced font "Meiryo,18"'  #Ryumin-Light-EUC-H,7"'#size 16cm,8cm'
@@ -33,7 +34,7 @@ def plot_transaction(x,y,z,alpha,y_title,z_title,alpha_title,title)
       plot.ylabel "平均応答時間 [ms]"
       plot.set 'boxwidth 0.8'
       plot.set "output 'output_#{title}.eps'"
-      plot.set 'xtics rotate by -40 font "Arial"'
+      plot.set 'xtics rotate by -50 font "Arial,7"'
       plot.set "style histogram clustered"
       plot.set "logscale y"
       #plot.set "autoscale fixmin"
@@ -89,18 +90,18 @@ end
 def plot_mean(names,values,y_title,title)
    Gnuplot.open() do |gp|
     Gnuplot::Plot.new( gp ) do |plot|
-      plot.ylabel "平均応答時間 [s]"
+      plot.ylabel "頻度による重み付き平均応答時間 [s]"
       plot.xrange "[:]"
-      plot.yrange "[0:210]"
+      plot.yrange "[0:340]"
       #plot.size "1.0,1.0"
       plot.size "1,0.71"
       #plot.style "data lines"
       #plot.set 'terminal postscript color eps enhanced font "Helvetica,13" size 7cm,7cm'
       plot.set 'term postscript color eps enhanced font "GothicBBB-Medium-UniJIS-UTF8-H,12"size 7cm,7cm'
-#      plot.set 'terminal postscript color eps enhanced font "Meiryo,18"'  #Ryumin-Light-EUC-H,7"'#size 16cm,8cm'
+      #plot.set 'terminal postscript color eps enhanced font "Meiryo,18" size 7cm, 7cm'  #Ryumin-Light-EUC-H,7"'#size 16cm,8cm'
       #plot.set 'terminal pdf mono'
       plot.set 'boxwidth 0.5'
-      plot.set "output 'output_#{title}.eps'"
+      plot.set "output 'output_#{title}.pdf'"
       #plot.set "style histogram clustered"
       plot.set "grid ytics"
       plot.set "nokey"
@@ -117,14 +118,14 @@ def plot_mean(names,values,y_title,title)
 end
 
 def get_mean(csv,group_weight_hash)
- # weight_sum = 0
- # mean_by_freq = csv.map do |row|
- #   weight = group_weight_hash[row["group"]].to_f
- #   weight_sum += weight
- #   row["mean"].to_f * weight
- # end.sum
- # return mean_by_freq / weight_sum
-  return csv.map{|row| row["mean"].to_f}.mean
+   weight_sum = 0
+  mean_by_freq = csv.map do |row|
+    weight = group_weight_hash[row["group"]].to_f
+    weight_sum += weight
+    row["mean"].to_f * weight
+  end.sum
+  return mean_by_freq / weight_sum
+ # return csv.map{|row| row["mean"].to_f}.mean
 end
 
 def get_group_weight_hash(csv)

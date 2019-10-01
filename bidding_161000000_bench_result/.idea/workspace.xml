@@ -2,25 +2,138 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="bc81dad5-2d73-4ff0-8325-5436c4fa3cea" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/../backend/get_cardinality.rb" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/get_cardinality.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../backend/cassandra/cassandra_memo.md" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/cassandra/cassandra_memo.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../backend/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/docker-compose.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../backend/install_docker.sh" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../bench_result_2_8/single_node/bench_result_rubis_secondary_browsing_result_no_si_2_8.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../bench_result_2_8/ten_node/bench_result_rubis_secondary_write_heavy_result_no_si_2_8.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../bench_result_2_8/twenty_node/bench_result_rubis_secondary_write_heavy_result_no_si_2_8_20node.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/bidding_161000000_bench_result.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/bidding_161000000_bench_result.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/get_scalability.sh" beforeDir="false" afterPath="$PROJECT_DIR$/get_scalability.sh" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/output_Response Time.eps" beforeDir="false" afterPath="$PROJECT_DIR$/output_Response Time.eps" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/output_latency.eps" beforeDir="false" afterPath="$PROJECT_DIR$/output_latency.eps" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/output_record_impac.eps" beforeDir="false" afterPath="$PROJECT_DIR$/output_record_impac.eps" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/output_scalability.eps" beforeDir="false" afterPath="$PROJECT_DIR$/output_scalability.eps" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/output_latency.eps" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/output_scalability.eps" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/scalability.rb" beforeDir="false" afterPath="$PROJECT_DIR$/scalability.rb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/script.rb" beforeDir="false" afterPath="$PROJECT_DIR$/script.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../bidding_space_const/bidding_result/bidding_100000000.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../bidding_space_const/bidding_result/bidding_105000000.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../bidding_space_const/bidding_result/bidding_110000000.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../bidding_space_const/bidding_result/bidding_115000000.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../bidding_space_const/bidding_result/bidding_120000000.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../bidding_space_const/bidding_result/bidding_140000000.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../bidding_space_const/bidding_result/bidding_160000000.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../bidding_space_const/bidding_result/bidding_161000000.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../bidding_space_const/bidding_result/bidding_165000000.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../bidding_space_const/bidding_result/bidding_170000000.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../bidding_space_const/bidding_result/bidding_171000000.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../bidding_space_const/bidding_result/bidding_175000000.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../bidding_space_const/bidding_result/bidding_177000000.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../bidding_space_const/bidding_result/bidding_180000000.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../bidding_space_const/bidding_result/bidding_180000000.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../bidding_space_const/bidding_result/bidding_185000000.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../bidding_space_const/bidding_result/bidding_187000000.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../bidding_space_const/bidding_result/bidding_190000000.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../bidding_space_const/bidding_result/bidding_190000000.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../bidding_space_const/bidding_result/bidding_205000000.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../bidding_space_const/bidding_result/bidding_json.sh" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../bidding_space_const/bidding_result/bidding_no_si_161000000.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../bidding_space_const/bidding_result/bidding_no_si_171000000.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../bidding_space_const/bidding_result/bidding_no_si_177000000.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../bidding_space_const/bidding_result/bidding_no_si_180000000.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../bidding_space_const/bidding_result/bidding_no_si_185000000.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../bidding_space_const/bidding_result/bidding_no_si_187000000.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../bidding_space_const/bidding_result/bidding_no_si_190000000.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../bidding_space_const/bidding_result_2/bidding_150000000_no_si.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../bidding_space_const/bidding_result_2/bidding_155000000_no_si.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../bidding_space_const/bidding_result_2/bidding_160000000_no_si.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../bidding_space_const/bidding_result_2/bidding_165000000_no_si.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../bidding_space_const/bidding_result_2/bidding_170000000_no_si.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../bidding_space_const/bidding_result_2/bidding_175000000_no_si.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../bidding_space_const/bidding_result_2/bidding_180000000_no_si.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../bidding_space_const/bidding_result_2/bidding_185000000_no_si.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../bidding_space_const/bidding_result_2/bidding_190000000_no_si.txt" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/../docker-compose.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../nose-cli-master/lib/nose_cli/execute.rb" beforeDir="false" afterPath="$PROJECT_DIR$/../nose-cli-master/lib/nose_cli/execute.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../load_all_dbs.sh" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../mysql/Dockerfile" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../mysql/my.conf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nose-cli-master/.idea/nose-cli-master.iml" beforeDir="false" afterPath="$PROJECT_DIR$/../nose-cli-master/.idea/nose-cli-master.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nose-cli-master/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/../nose-cli-master/Dockerfile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nose-cli-master/Gemfile.lock" beforeDir="false" afterPath="$PROJECT_DIR$/../nose-cli-master/Gemfile.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nose-cli-master/bench_result_rubis_secondary_bidding_160000000.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nose-cli-master/create_mysql_scale_dbs.sh" beforeDir="false" afterPath="$PROJECT_DIR$/../nose-cli-master/create_mysql_scale_dbs.sh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nose-cli-master/experiments/rubis/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../nose-cli-master/experiments/rubis/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../nose-cli-master/nose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/../nose-cli-master/nose.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../nose-cli-master/nose/lib/nose/backend.rb" beforeDir="false" afterPath="$PROJECT_DIR$/../nose-cli-master/nose/lib/nose/backend.rb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../nose-cli-master/nose/lib/nose/indexes.rb" beforeDir="false" afterPath="$PROJECT_DIR$/../nose-cli-master/nose/lib/nose/indexes.rb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../nose-cli-master/nose/lib/nose/loader/mysql.rb" beforeDir="false" afterPath="$PROJECT_DIR$/../nose-cli-master/nose/lib/nose/loader/mysql.rb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../nose-cli-master/nose/lib/nose/schema.rb" beforeDir="false" afterPath="$PROJECT_DIR$/../nose-cli-master/nose/lib/nose/schema.rb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../nose-cli-master/nose/lib/nose/search/results.rb" beforeDir="false" afterPath="$PROJECT_DIR$/../nose-cli-master/nose/lib/nose/search/results.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nose-cli-master/nose/lib/nose/backend/cassandra.rb" beforeDir="false" afterPath="$PROJECT_DIR$/../nose-cli-master/nose/lib/nose/backend/cassandra.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nose-cli-master/nose/lib/nose/search.rb" beforeDir="false" afterPath="$PROJECT_DIR$/../nose-cli-master/nose/lib/nose/search.rb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../nose-cli-master/nose/plans/rubis_baseline.rb" beforeDir="false" afterPath="$PROJECT_DIR$/../nose-cli-master/nose/plans/rubis_baseline.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nose-cli-master/nose/schemas/2_4_schemas/rubis_bidding_result_no_si_2_4.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nose-cli-master/nose/schemas/2_4_schemas/rubis_bidding_result_si_2_4.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nose-cli-master/nose/schemas/2_4_schemas/rubis_browsing_result_no_si_2_4.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nose-cli-master/nose/schemas/2_4_schemas/rubis_browsing_result_si_2_4.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nose-cli-master/nose/schemas/2_4_schemas/rubis_write_extreme_result_no_si_2_4.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nose-cli-master/nose/schemas/2_4_schemas/rubis_write_extreme_result_si_2_4.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nose-cli-master/nose/schemas/2_4_schemas/rubis_write_hard_result_no_si_2_4.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nose-cli-master/nose/schemas/2_4_schemas/rubis_write_hard_result_si_2_4.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nose-cli-master/nose/schemas/2_4_schemas/rubis_write_heavy_result_no_si_2_4.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nose-cli-master/nose/schemas/2_4_schemas/rubis_write_heavy_result_si_2_4.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nose-cli-master/nose/schemas/2_4_schemas/rubis_write_medium_result_no_si_2_4.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nose-cli-master/nose/schemas/2_4_schemas/rubis_write_medium_result_si_2_4.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nose-cli-master/nose/schemas/rubis_secondary_bidding_160000000.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nose-cli-master/nose/schemas/rubis_secondary_bidding_result_no_si.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nose-cli-master/nose/schemas/rubis_secondary_bidding_result_si.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nose-cli-master/nose/schemas/rubis_secondary_browsing_result_no_si.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nose-cli-master/nose/schemas/rubis_secondary_browsing_result_si.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nose-cli-master/nose/schemas/rubis_secondary_write_heavy_result_no_si.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nose-cli-master/nose/schemas/rubis_secondary_write_heavy_result_si.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nose-cli-master/nose/schemas/space_const_bidding_2_9_result/rubis_secondry_bidding_160000000.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nose-cli-master/nose/schemas/write_heavy_cf.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nose-cli-master/nose/workloads/minimam.rb" beforeDir="false" afterPath="$PROJECT_DIR$/../nose-cli-master/nose/workloads/minimam.rb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../nose-cli-master/nose/workloads/rubis_secondary.rb" beforeDir="false" afterPath="$PROJECT_DIR$/../nose-cli-master/nose/workloads/rubis_secondary.rb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../size_constraint_bench/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nose-cli-master/up_cass_dbs_bidding_space_const.sh" beforeDir="false" afterPath="$PROJECT_DIR$/../nose-cli-master/up_cass_dbs_bidding_space_const.sh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nose-cli-master/up_cass_dbs_real_rubis.sh" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../rubis_result_2_4/rubis_bidding_result_no_si_2_4.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../rubis_result_2_4/rubis_bidding_result_no_si_2_4.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../rubis_result_2_4/rubis_bidding_result_si_2_4.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../rubis_result_2_4/rubis_bidding_result_si_2_4.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../rubis_result_2_4/rubis_browsing_result_no_si_2_4.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../rubis_result_2_4/rubis_browsing_result_no_si_2_4.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../rubis_result_2_4/rubis_browsing_result_si_2_4.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../rubis_result_2_4/rubis_browsing_result_si_2_4.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../rubis_result_2_4/rubis_secondary_bidding_result_no_si.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../rubis_result_2_4/rubis_secondary_bidding_result_no_si_2_8.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../rubis_result_2_4/rubis_secondary_bidding_result_si.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../rubis_result_2_4/rubis_secondary_bidding_result_si_2_8.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../rubis_result_2_4/rubis_secondary_browsing_result_no_si.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../rubis_result_2_4/rubis_secondary_browsing_result_no_si_2_8.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../rubis_result_2_4/rubis_secondary_browsing_result_si.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../rubis_result_2_4/rubis_secondary_browsing_result_si_2_8.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../rubis_result_2_4/rubis_secondary_write_heavy_result_no_si.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../rubis_result_2_4/rubis_secondary_write_heavy_result_no_si_2_8.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../rubis_result_2_4/rubis_secondary_write_heavy_result_si.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../rubis_result_2_4/rubis_secondary_write_heavy_result_si_2_8.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../rubis_result_2_4/rubis_write_extreme_result_no_si_2_4.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../rubis_result_2_4/rubis_write_extreme_result_no_si_2_4.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../rubis_result_2_4/rubis_write_extreme_result_si_2_4.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../rubis_result_2_4/rubis_write_extreme_result_si_2_4.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../rubis_result_2_4/rubis_write_hard_result_no_si_2_4.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../rubis_result_2_4/rubis_write_hard_result_no_si_2_4.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../rubis_result_2_4/rubis_write_hard_result_si_2_4.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../rubis_result_2_4/rubis_write_hard_result_si_2_4.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../rubis_result_2_4/rubis_write_heavy_result_no_si_2_4.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../rubis_result_2_4/rubis_write_heavy_result_no_si_2_4.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../rubis_result_2_4/rubis_write_heavy_result_si_2_4.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../rubis_result_2_4/rubis_write_heavy_result_si_2_4.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../rubis_result_2_4/rubis_write_medium_result_no_si_2_4.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../rubis_result_2_4/rubis_write_medium_result_no_si_2_4.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../rubis_result_2_4/rubis_write_medium_result_si_2_4.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../rubis_result_2_4/rubis_write_medium_result_si_2_4.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../rubis_result_2_4/size_constraint_bench/11_07/size_constraint_bench_54074445.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../rubis_result_2_4/size_constraint_bench/11_07/size_constraint_bench_57074445.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../rubis_result_2_4/size_constraint_bench/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../rubis_result_2_4/size_constraint_bench/run_size_const_bench.sh" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../tpcc_result/full_tpcc.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../tpcc_result/full_tpcc_38003000_enu.txt" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -29,8 +142,8 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="CoverageDataManager">
-    <SUITE FILE_PATH="coverage/bidding_161000000_bench_result@script.rcov" NAME="script Coverage Results" MODIFIED="1550741111462" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="bidding_161000000_bench_result" />
-    <SUITE FILE_PATH="coverage/bidding_161000000_bench_result@scalability.rcov" NAME="scalability Coverage Results" MODIFIED="1550741293688" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" MODULE_NAME="bidding_161000000_bench_result" />
+    <SUITE FILE_PATH="coverage/bidding_161000000_bench_result@script.rcov" NAME="script Coverage Results" MODIFIED="1568029939148" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="bidding_161000000_bench_result" />
+    <SUITE FILE_PATH="coverage/bidding_161000000_bench_result@scalability.rcov" NAME="scalability Coverage Results" MODIFIED="1568029047141" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" MODULE_NAME="bidding_161000000_bench_result" />
     <SUITE FILE_PATH="coverage/bidding_161000000_bench_result@record_num.rcov" NAME="record_num Coverage Results" MODIFIED="1550658198284" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" MODULE_NAME="bidding_161000000_bench_result" />
   </component>
   <component name="FileEditorManager">
@@ -38,7 +151,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/record_impac.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1424">
+            <state relative-caret-position="1335">
               <caret line="89" selection-start-line="89" selection-end-line="89" />
             </state>
           </provider>
@@ -47,7 +160,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/bidding_161_5iter_one_node/baseline_bench_result.csv">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="48">
+            <state relative-caret-position="45">
               <caret line="3" column="59" selection-start-line="3" selection-start-column="59" selection-end-line="3" selection-end-column="59" />
             </state>
           </provider>
@@ -56,7 +169,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/bidding_161_5iter_one_node/bidding_161_si.csv">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1504">
+            <state relative-caret-position="1410">
               <caret line="94" column="55" selection-start-line="94" selection-start-column="55" selection-end-line="94" selection-end-column="55" />
             </state>
           </provider>
@@ -67,11 +180,11 @@
           <provider selected="true" editor-type-id="text-editor" />
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/script.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1360">
-              <caret line="85" column="87" selection-start-line="85" selection-start-column="87" selection-end-line="85" selection-end-column="87" />
+            <state relative-caret-position="509">
+              <caret line="83" column="18" selection-start-line="83" selection-start-column="18" selection-end-line="83" selection-end-column="18" />
             </state>
           </provider>
         </entry>
@@ -86,11 +199,11 @@
           <provider selected="true" editor-type-id="text-editor" />
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/scalability.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="398">
-              <caret line="47" column="28" selection-start-line="47" selection-start-column="28" selection-end-line="47" selection-end-column="28" />
+            <state relative-caret-position="17">
+              <caret line="47" column="26" selection-start-line="47" selection-start-column="26" selection-end-line="47" selection-end-column="26" />
             </state>
           </provider>
         </entry>
@@ -111,16 +224,15 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/record_impac.rb" />
-        <option value="$PROJECT_DIR$/script.rb" />
         <option value="$PROJECT_DIR$/scalability.rb" />
+        <option value="$PROJECT_DIR$/script.rb" />
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="4">
-    <option name="x" value="2800" />
-    <option name="y" value="190" />
-    <option name="width" value="1720" />
-    <option name="height" value="1442" />
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="y" value="25" />
+    <option name="width" value="1080" />
+    <option name="height" value="1895" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -128,7 +240,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -145,6 +256,7 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -152,6 +264,7 @@
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
+    <property name="settings.editor.selected.configurable" value="org.jetbrains.plugins.ruby.settings.RubyActiveModuleSdkConfigurable" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -165,7 +278,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Ruby.scalability">
+  <component name="RunManager" selected="Ruby.script">
     <configuration name="record_num" type="RubyRunConfigurationType" factoryName="Ruby">
       <module name="bidding_161000000_bench_result" />
       <RUBY_RUN_CONFIG NAME="RUBY_ARGS" VALUE="" />
@@ -191,7 +304,7 @@
       <RUBY_RUN_CONFIG NAME="SHOULD_USE_SDK" VALUE="false" />
       <RUBY_RUN_CONFIG NAME="ALTERN_SDK_NAME" VALUE="" />
       <RUBY_RUN_CONFIG NAME="myPassParentEnvs" VALUE="true" />
-      <EXTENSION ID="BundlerRunConfigurationExtension" bundleExecEnabled="false" />
+      <EXTENSION ID="BundlerRunConfigurationExtension" bundleExecEnabled="true" />
       <EXTENSION ID="JRubyRunConfigurationExtension" NailgunExecEnabled="false" />
       <EXTENSION ID="RubyCoverageRunConfigurationExtension" track_test_folders="true" runner="rcov">
         <COVERAGE_PATTERN ENABLED="true">
@@ -199,7 +312,7 @@
         </COVERAGE_PATTERN>
       </EXTENSION>
       <RUBY_RUN_CONFIG NAME="SCRIPT_PATH" VALUE="$MODULE_DIR$/scalability.rb" />
-      <RUBY_RUN_CONFIG NAME="SCRIPT_ARGS" VALUE="./bidding_161_5iter_one_node/bidding_161_no_si.csv ./bidding_161_5iter_one_node/bidding_161_si.csv  ./bidding_161_10/bidding_161_no_si.csv ./bidding_161_10/bidding_161_si.csv ./bidding_161_20/bidding_161_no_si.csv ./bidding_161_20/bidding_161_si.csv" />
+      <RUBY_RUN_CONFIG NAME="SCRIPT_ARGS" VALUE="./bidding_161_5iter_one_node/bidding_161_no_si.csv ./bidding_161_5iter_one_node/bidding_161_si.csv  ./bidding_161_10/bidding_161_no_si.csv ./bidding_161_10/bidding_161_si.csv ./bidding_161_20/bidding_161_no_si.csv ./bidding_161_20/bidding_161_si.csv ./bidding_161_30/bidding_161_no_si.csv ./bidding_161_30/bidding_161_si.csv" />
       <method v="2" />
     </configuration>
     <configuration name="script" type="RubyRunConfigurationType" factoryName="Ruby">
@@ -256,23 +369,24 @@
       <workItem from="1550669439433" duration="17000" />
       <workItem from="1550733276584" duration="5143000" />
       <workItem from="1550764307826" duration="34000" />
+      <workItem from="1568008884112" duration="6108000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="21301000" />
+    <option name="totallyTimeSpent" value="27409000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="2800" y="190" width="1720" height="1442" extended-state="4" />
+    <frame x="0" y="25" width="1080" height="1895" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.21744324" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.23307544" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.9375" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.6199543" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.29671574" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.17288652" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
@@ -325,21 +439,6 @@
           <option name="timeStamp" value="2" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="ruby-line">
-          <url>file://$PROJECT_DIR$/scalability.rb</url>
-          <line>82</line>
-          <option name="timeStamp" value="3" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="ruby-line">
-          <url>file://$PROJECT_DIR$/scalability.rb</url>
-          <line>93</line>
-          <option name="timeStamp" value="4" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="ruby-line">
-          <url>file://$PROJECT_DIR$/scalability.rb</url>
-          <line>58</line>
-          <option name="timeStamp" value="5" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="ruby-line">
           <url>file://$PROJECT_DIR$/script.rb</url>
           <line>170</line>
           <option name="timeStamp" value="6" />
@@ -364,18 +463,65 @@
           <line>62</line>
           <option name="timeStamp" value="10" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" type="ruby-line">
+          <url>file://$PROJECT_DIR$/scalability.rb</url>
+          <line>63</line>
+          <option name="timeStamp" value="17" />
+        </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
     <watches-manager>
       <configuration name="RubyRunConfigurationType">
-        <watch expression="half_nose_csv[&quot;mean&quot;].zip(half_nose_index_csv[&quot;mean&quot;]).select{|tup| tup[0] &gt; }" language="ruby" />
-        <watch expression="one_half_nose / half_nose" language="ruby" />
-        <watch expression="one_half_nose_index / half_nose_index" language="ruby" />
+        <watch expression="group_weight_hash.values.map{|w| w.to_f}.sum / group_weight_hash.values.to_set.size()" language="ruby" />
+        <watch expression="mean_by_freq / group_weight_hash.values.map{|w| w.to_f}.sum" language="ruby" />
+        <watch expression="mean_by_freq" language="ruby" />
+        <watch expression="csv.map{|row| row[&quot;mean&quot;].to_f}.mean" language="ruby" />
+        <watch expression="csv.map{}" language="ruby" />
       </configuration>
     </watches-manager>
   </component>
   <component name="debuggerHistoryManager">
     <expressions id="watch">
+      <expression>
+        <expression-string>group_weight_hash.values.map{|w| w.to_f}.sum / group_weight_hash.values.to_set.size()</expression-string>
+        <language-id>ruby</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>csv.map{}</expression-string>
+        <language-id>ruby</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>mean_by_freq</expression-string>
+        <language-id>ruby</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>group_weight_hash.values.map{|w| w.to_f}.sum</expression-string>
+        <language-id>ruby</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>csv.map{|row| row[&quot;mean&quot;].to_f}.mean</expression-string>
+        <language-id>ruby</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>mean_by_freq / group_weight_hash.values.map{|w| w.to_f}.sum</expression-string>
+        <language-id>ruby</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>group_weight_hash.values</expression-string>
+        <language-id>ruby</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>group_weight_hash.values.sum</expression-string>
+        <language-id>ruby</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
       <expression>
         <expression-string>one_half_nose_index / half_nose_index</expression-string>
         <language-id>ruby</language-id>
@@ -383,31 +529,6 @@
       </expression>
       <expression>
         <expression-string>one_half_nose / half_nose</expression-string>
-        <language-id>ruby</language-id>
-        <evaluation-mode>EXPRESSION</evaluation-mode>
-      </expression>
-      <expression>
-        <expression-string>normal_nose_index / half_nose_index</expression-string>
-        <language-id>ruby</language-id>
-        <evaluation-mode>EXPRESSION</evaluation-mode>
-      </expression>
-      <expression>
-        <expression-string>normal_nose / half_nose</expression-string>
-        <language-id>ruby</language-id>
-        <evaluation-mode>EXPRESSION</evaluation-mode>
-      </expression>
-      <expression>
-        <expression-string>half_nose_csv[&quot;mean&quot;].zip(half_nose_index_csv[&quot;mean&quot;]).select{|tup| tup[0] &gt; }</expression-string>
-        <language-id>ruby</language-id>
-        <evaluation-mode>EXPRESSION</evaluation-mode>
-      </expression>
-      <expression>
-        <expression-string>half_nose_csv[&quot;mean&quot;].zip(half_nose_index_csv[&quot;mean&quot;].ma)</expression-string>
-        <language-id>ruby</language-id>
-        <evaluation-mode>EXPRESSION</evaluation-mode>
-      </expression>
-      <expression>
-        <expression-string>half_nose_csv[&quot;mean&quot;].zip(half_nose_index_csv[&quot;mean&quot;])</expression-string>
         <language-id>ruby</language-id>
         <evaluation-mode>EXPRESSION</evaluation-mode>
       </expression>
@@ -423,21 +544,21 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/record_impac.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1424">
+        <state relative-caret-position="1335">
           <caret line="89" selection-start-line="89" selection-end-line="89" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/bidding_161_5iter_one_node/baseline_bench_result.csv">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="48">
+        <state relative-caret-position="45">
           <caret line="3" column="59" selection-start-line="3" selection-start-column="59" selection-end-line="3" selection-end-column="59" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/bidding_161_5iter_one_node/bidding_161_si.csv">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1504">
+        <state relative-caret-position="1410">
           <caret line="94" column="55" selection-start-line="94" selection-start-column="55" selection-end-line="94" selection-end-column="55" />
         </state>
       </provider>
@@ -445,23 +566,23 @@
     <entry file="file://$PROJECT_DIR$/bidding_161_5iter_one_node/output_latency.eps">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/script.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1360">
-          <caret line="85" column="87" selection-start-line="85" selection-start-column="87" selection-end-line="85" selection-end-column="87" />
-        </state>
-      </provider>
+    <entry file="file://$PROJECT_DIR$/get_latency.sh">
+      <provider selected="true" editor-type-id="text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/output_record_impac.eps">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/get_latency.sh">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/scalability.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="398">
-          <caret line="47" column="28" selection-start-line="47" selection-start-column="28" selection-end-line="47" selection-end-column="28" />
+        <state relative-caret-position="17">
+          <caret line="47" column="26" selection-start-line="47" selection-start-column="26" selection-end-line="47" selection-end-column="26" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/script.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="509">
+          <caret line="83" column="18" selection-start-line="83" selection-start-column="18" selection-end-line="83" selection-end-column="18" />
         </state>
       </provider>
     </entry>
