@@ -15,9 +15,8 @@ class Array
 end
 
 def plot_scalability(x,y,z)
-  Gnuplot.open() do |gp|
-    Gnuplot::Plot.new( gp ) do |plot|
-      plot.ylabel "平均応答時間 [s]"
+  Gnuplot.open() do |gp| Gnuplot::Plot.new( gp ) do |plot|
+      plot.ylabel "頻度による重み付き平均応答時間 [s]"
       plot.xlabel "Cassandra ノード数"
       #      plot.set "terminal 'aqua'"
       plot.xrange "[:]"
@@ -30,7 +29,7 @@ def plot_scalability(x,y,z)
       #plot.set 'terminal postscript color eps enhanced font "Helvetica,13" size 12cm,6cm'
       #      plot.set 'terminal pdf'
       plot.set 'boxwidth 0.8'
-      plot.set "output 'output_scalability.eps'"
+      plot.set "output 'output_scalability.pdf'"
       plot.set "style histogram clustered"
       #plot.set "logscale y"
       #plot.set "autoscale fixmin"
@@ -56,14 +55,14 @@ end
 
 
 def get_mean(csv,group_weight_hash)
-  #weight_sum = 0
-  #mean_by_freq = csv.map do |row|
-  #  weight = group_weight_hash[row["group"]].to_f
-  #  weight_sum += weight
-  #  row["mean"].to_f * weight
-  #end.sum
-  #return mean_by_freq / weight_sum
-   return csv.map{|row| row["mean"].to_f}.mean
+ # weight_sum = 0
+ # mean_by_freq = csv.map do |row|
+ #   weight = group_weight_hash[row["group"]].to_f
+ #   weight_sum += weight
+ #   row["mean"].to_f * weight
+ # end.sum
+ # return mean_by_freq / weight_sum
+ return csv.map{|row| row["mean"].to_f}.mean
 end
 
 def get_group_weight_hash(csv)
@@ -72,16 +71,18 @@ def get_group_weight_hash(csv)
   end.inject(:merge)
 end
 
-def get_scalabiilty(nose_1_csv,nose_index_1_csv,nose_10_csv,nose_index_10_csv,nose_20_csv,nose_index_20_csv)
+def get_scalabiilty(nose_1_csv,nose_index_1_csv,nose_10_csv,nose_index_10_csv,nose_20_csv,nose_index_20_csv, nose_30_csv,nose_index_30_csv)
   group_weight_hash = get_group_weight_hash nose_1_csv
-  nose_1=  get_mean(nose_1_csv,group_weight_hash)
-  nose_index_1=  get_mean(nose_index_1_csv,group_weight_hash)
-  nose_10=  get_mean(nose_10_csv,group_weight_hash)
-  nose_index_10=  get_mean(nose_index_10_csv,group_weight_hash)
-  nose_20=  get_mean(nose_20_csv,group_weight_hash)
-  nose_index_20=  get_mean(nose_index_20_csv,group_weight_hash)
+  nose_1 =  get_mean(nose_1_csv,group_weight_hash)
+  nose_index_1 = get_mean(nose_index_1_csv,group_weight_hash)
+  nose_10 = get_mean(nose_10_csv,group_weight_hash)
+  nose_index_10 = get_mean(nose_index_10_csv,group_weight_hash)
+  nose_20 = get_mean(nose_20_csv,group_weight_hash)
+  nose_index_20 = get_mean(nose_index_20_csv,group_weight_hash)
+  nose_30 = get_mean(nose_30_csv,group_weight_hash)
+  nose_index_30 =  get_mean(nose_index_30_csv,group_weight_hash)
 
-  plot_scalability([1,10,20],[nose_index_1,nose_index_10,nose_index_20],[nose_1,nose_10,nose_20])
+  plot_scalability([1,10,20,30],[nose_index_1,nose_index_10,nose_index_20, nose_index_30],[nose_1,nose_10,nose_20, nose_30])
 end
 
 
@@ -91,5 +92,7 @@ nose_10_node = CSV.read(ARGV[2],headers: true)
 nose_index_10_node = CSV.read(ARGV[3],headers: true)
 nose_20_node = CSV.read(ARGV[4],headers: true)
 nose_index_20_node = CSV.read(ARGV[5],headers: true)
+nose_30_node = CSV.read(ARGV[6],headers: true)
+nose_index_30_node = CSV.read(ARGV[7],headers: true)
 
-get_scalabiilty(nose_1_node,nose_index_1_node,nose_10_node,nose_index_10_node,nose_20_node,nose_index_20_node)
+get_scalabiilty(nose_1_node,nose_index_1_node,nose_10_node,nose_index_10_node,nose_20_node,nose_index_20_node, nose_30_node, nose_index_30_node)

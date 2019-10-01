@@ -1,6 +1,6 @@
 #!/bin/bash
 
-set -e  
+set -e
 cass_db_ip=$1
 recho(){ echo -e "\e[1;31m $* \e[m"; }
 
