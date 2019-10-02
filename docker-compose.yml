@@ -3,17 +3,11 @@ version: '3'
 services:
   nose_index:
     container_name: nose_index_wakuta
-    build: nose-cli-master
+    image: yusukew/nose_index
     tty: true
-    #nose_basic:
-    #nocontainer_name: nose_basic
-    #nobuild:
-    #no  context: nose-cli-master
-    #no  dockerfile: DockerfileBasicNose
-    #notty: true
   mysql:
     container_name: mysql_nose
-    build: ./mysql
+    build: ./backend/mysql
     environment:
       MYSQL_ROOT_PASSWORD: root
     ports:
