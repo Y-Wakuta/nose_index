@@ -6,7 +6,7 @@ require 'representable/json'
 require 'representable/json/hash'
 require 'representable/yaml'
 
-#yusuke 参考
+
 # https://github.com/trailblazer/representable
 # http://trailblazer.to/gems/representable/3.0/api.html#tohash-and-fromhash
 
@@ -30,7 +30,7 @@ module NoSE
     # Validate a string of JSON based on the schema
     def validate_json(json)
       schema_file = File.join File.dirname(__FILE__), '..', '..',
-                              'data', 'nose', 'nose-schema.json'#yusuke ここfile名ベタ書きだけど大丈夫か？
+                              'data', 'nose', 'nose-schema.json'
       schema = JSON.parse File.read(schema_file)
 
       data = JSON.parse json
@@ -159,7 +159,7 @@ module NoSE
 
     end
 
-    #yusuke ここに追加することでjsonに出力されるか確認
+    
     class HasIndexRepresenter < Representable::Decorator
       include Representable::YAML
       include Representable::Uncached
@@ -724,7 +724,7 @@ module NoSE
                                       class: Object,
                                       deserialize: IndexBuilder.new
 
-      #yusuke has_index_hashの表示を試みる
+      
       collection :has_index_hash, decorator: HasIndexRepresenter,
                                       class: Object,
                                       deserialize: HasIndexBuilder.new

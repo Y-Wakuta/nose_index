@@ -113,7 +113,7 @@ module NoSE
         @nodes.empty?
       end
 
-      #yusuke edgeがあるかどうか確認する
+      
       def edges_empty?
         @edges.empty?
       end

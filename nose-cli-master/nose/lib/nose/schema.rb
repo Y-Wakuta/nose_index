@@ -13,7 +13,7 @@ module NoSE
     # Find the schema with the given name
     def self.load(name)
 
-      #yusuke ここいじったが本来いじらなくて良さそうな気がする(こんな方法でしかjsonファイルが取り込めないとは思いにくい)
+      
       filename = ""
       dir_name = "../../../schemas/"
       if File.exist? File.expand_path dir_name + "#{name}.rb", __FILE__ then

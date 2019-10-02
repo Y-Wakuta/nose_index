@@ -202,7 +202,7 @@ Group 'RegisterItem', bidding: 0.53,
   end
 
   Plan 'AddToRegion' do
-    Support do #yusuke これはworkload内に対応するクエリはない
+    Support do 
       Plan 'GetRegion' do
         Select regions.id
         Param  users.id, :==
@@ -224,7 +224,7 @@ Group 'RegisterUser', bidding: 1.07,
       write_heavy: 1.07 * 100 do
   Plan 'AddUser' do
     Support do
-      Plan 'GetRegionName' do #yusuke これはワークロード内に対応するクエリは無い。
+      Plan 'GetRegionName' do 
         Select regions.name
         Param  regions.id, :==
         Lookup 'regions', [regions.id, :==]
@@ -293,7 +293,7 @@ Group 'StoreBuyNow', bidding: 1.10,
       write_medium: 1.10 * 10,
       write_heavy: 1.10 * 100 do
   Plan 'ReduceQuantity' do
-    Support do #yusuke これもworkload内に対応するクエリは無い
+    Support do 
       Plan 'OldQuantity' do
         Select items.quantity
         Param items.id, :==
@@ -394,7 +394,7 @@ Group 'StoreBid', bidding: 3.74,
 
   Plan 'AddBid' do
     Support do
-      Plan 'GetMaxBid' do #yusuke これも対応するクエリはワークロード内に無い
+      Plan 'GetMaxBid' do 
         Select items.max_bid
         Param  items.id, :==
         Lookup 'items', [items.id, :==]
@@ -496,7 +496,7 @@ Group 'StoreComment', bidding: 0.45,
       write_heavy: 0.45 * 100 do
   Plan 'UpdateRating' do
     Support do
-      Plan 'GetRating' do #yusuke これは対応するクエリはワークロード内にあったので、外に同じものを追加
+      Plan 'GetRating' do 
         Select users.rating, regions.id
         Param  users.id, :==
         Lookup 'users', [users.id, :==]

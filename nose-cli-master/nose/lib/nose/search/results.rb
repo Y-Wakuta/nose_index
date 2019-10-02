@@ -18,8 +18,8 @@ module NoSE
         @query_indexes = Hash.new { |h, k| h[k] = Set.new }
         @problem.query_vars.each do |index, query_vars|
           query_vars.each do |query, var|
-            next unless var.value #yusuke おそらくここで最適化の結果使用しないことになったものを蹴っている.Mipper.Variable.valueで定義されていて、最適化の結果弾くものはvalue==0.0で弾くことができるみたい.SIを使用するものは全てvar.value==0.0になっているっぽい。
-            @query_indexes[query].add index #yusuke query_indexがqueryとそれに対応するindexを紐付けているっぽい
+            next unless var.value 
+            @query_indexes[query].add index 
           end
         end
         @query_indexes
@@ -93,7 +93,7 @@ module NoSE
 
       # Set the query plans which should be used based on the entire tree
       # @return [void]
-      def plans_from_trees(trees) #yusuke このmethodでtreeの経路の選択をしている.返すのは引数で渡した複数のtreeの中の１つのtreeのさらに１つの経路
+      def plans_from_trees(trees) 
         @plans = trees.map do |tree|
           # Exclude support queries since they will be in update plans
           query = tree.query
@@ -117,7 +117,7 @@ module NoSE
         plan
       end
 
-      #yusuke 最適化の結果secondary indexの生成元であるcolumn familyが最適化の結果消えている可能性が高いため、secondary indexに対してその実テーブルとなるcolumn familyを再設定する
+      
       def set_has_index_hash
         @has_index_hash = @plans.select{|plan| plan.any?{|step| step.is_a? Plans::IndexLookupPlanStep and step.index.is_secondary_index}}.map do |plan|
           plan.steps.select{|step| step.is_a? Plans::IndexLookupPlanStep and step.index.is_secondary_index }.map do |si_step|
@@ -141,7 +141,7 @@ module NoSE
         end.flatten
       end
 
-      #yusuke secondary indexの実column familyとして使用できるかをfieldの包含関係のみから判定する
+      
       def is_valid_base_cf(si, base_cf)
         base_cf.hash_fields >= si.extra and base_cf.all_fields >= si.all_fields
       end

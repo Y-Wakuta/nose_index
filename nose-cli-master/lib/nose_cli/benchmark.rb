@@ -36,7 +36,7 @@ module NoSE
                       desc: 'the format of the output data'
 
       def benchmark(plan_file)
-        plan_file = './nose/' + plan_file #yusuke tmpこれも必要じゃなさそうな気がする変更
+        plan_file = './nose/' + plan_file 
         label = File.basename plan_file, '.*'
         result = load_results plan_file, options[:mix]
         is_rb_file =File.extname(plan_file) == ".rb"
@@ -71,7 +71,7 @@ module NoSE
           end
           measurement = bench_query backend, indexes, plan, index_values,
                                     options[:num_iterations], options[:repeat],result.has_index_hash,
-                                    weight: weight #yusuke 各クエリに対して正しいplan を渡しているか確認できれば妥当性検証は十分だろう
+                                    weight: weight 
           next if measurement.empty?
 
           measurement.estimate = plan.cost

@@ -1,6 +1,6 @@
-# NoSE_Index
+# NoSE Index
 
-## インストール手順
+## installation
 
 ```
 git clone https://github.com/Y-Wakuta/NoSE_Index.git

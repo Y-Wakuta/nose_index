@@ -122,7 +122,7 @@ NoSE::Schema.new do
     Path    users.id, users.bids
   end
 
-  #yusuke 以下secondary index用に新規作成
+  
   #
   Index 'comments_by_rating' do
     Hash    comments.rating

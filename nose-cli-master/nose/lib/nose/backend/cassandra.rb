@@ -28,13 +28,13 @@ module NoSE
       def indexes_ddl(execute = false, skip_existing = false,
                       drop_existing = false)
         Enumerator.new do |enum|
-          @indexes.select{|index| !index.is_secondary_index}.map do |index| #yusuke cfから先に生成するようにする
+          @indexes.select{|index| !index.is_secondary_index}.map do |index| 
             ddl = index_cql index
             enum.yield ddl
 
             begin
               drop_index(index) if drop_existing && index_exists?(index)
-              client.execute(ddl) if execute #yusuke ここのclientはホストのcassandra client
+              client.execute(ddl) if execute 
             rescue Cassandra::Errors::AlreadyExistsError => exc
               next if skip_existing
 
@@ -88,12 +88,12 @@ module NoSE
 
       # Check if the given index is empty
       def index_empty?(index)
-        begin #yusuke ここはもっとしっかりした確認方法があると思う
+        begin 
         query = "SELECT COUNT(*) FROM \"#{index.key}\" LIMIT 1"
         client.execute(query).first.values.first.zero?
         rescue => e
           p e
-          return false #yusuke　この関数は空かどうかを確認する関数なので、この確認方法はNG
+          return false 
         end
       end
 
@@ -151,10 +151,10 @@ module NoSE
         end
       end
 
-      #yusuke このfunctionにhas_indexのハッシュも渡す？
+      
       # Produce the CQL to create the definition for a given index
       # @return [String]
-      def index_cql(index) #yusuke ここでplan_fileの内容からCQLを生成している
+      def index_cql(index) 
         ddl = "CREATE COLUMNFAMILY \"#{index.key}\" (" \
           "#{field_names index.all_fields, true}, " \
           "PRIMARY KEY((#{field_names index.hash_fields})"
@@ -228,7 +228,7 @@ module NoSE
           results.each do |result|
             fields = @index.all_fields.select { |field| result.key? field.id }
 
-            #yusuke cqlのinsert句で指定している属性順にパラメータをソートしなおす
+            
             fields.sort_by!{|field| @prepared.cql.index(field.id)}
 
             values = fields.map do |field|

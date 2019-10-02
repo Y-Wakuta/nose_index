@@ -14,7 +14,7 @@ module NoSE
       def initialize(query, model)
         @query = query
         @model = model
-        @fields = query.select #yusuke ここでselect句の中身のみを入れているからwhere句の条件にselect句の中身が含まれない物への対処が必要
+        @fields = query.select 
         @eq = query.eq_fields.dup
         @range = query.range_field
         @graph = query.graph
@@ -52,7 +52,7 @@ module NoSE
       # @return [Boolean]
       def answered?(check_limit: true)
         done = @fields.empty? && @eq.empty? && @range.nil? &&
-               @order_by.empty? && @joins.empty? && @graph.empty? #yusuke なぜ、応答が完了したらここがtrueになるのか確認したい。
+               @order_by.empty? && @joins.empty? && @graph.empty? 
 
         # Check if the limit has been applied
         done &&= @cardinality <= @query.limit unless @query.limit.nil? ||
@@ -232,7 +232,7 @@ module NoSE
       end
 
       # Find a tree of plans for the given query
-      #yusuke このmethodが１つのtreeの作成に対応
+      
       # @return [QueryPlanTree]
       # @raise [NoPlanException]
       def find_plans_for_query(query)
@@ -240,8 +240,8 @@ module NoSE
         state.freeze
         tree = QueryPlanTree.new state, @cost_model
 
-        indexes_by_joins = indexes_for_query(query, state.joins) #yusuke 複数のentityをクエリに答えれるようにhashの形でjoinしているみたい
-        find_plans_for_step tree.root, indexes_by_joins #yusuke このmethodの中で再帰的にtreeを作成している。step.children.children.childrenみたいな感じで辿れるみたい
+        indexes_by_joins = indexes_for_query(query, state.joins) 
+        find_plans_for_step tree.root, indexes_by_joins 
 
         if tree.root.children.empty?
           tree = QueryPlanTree.new state, @cost_model
@@ -301,20 +301,20 @@ module NoSE
 
       # Find possible query plans for a query starting at the given step
       # @return [void]
-      def find_plans_for_step(step, indexes_by_joins, prune: true) #yusuke １つ１つのplanを作成しているのはこのmethod.第一引数のstepにrootを渡したら全体のplanが取れるっぽい
+      def find_plans_for_step(step, indexes_by_joins, prune: true) 
         return if step.state.answered?
 
-        steps = find_steps_for_state step, step.state, indexes_by_joins #yusuke 第一引数のstepをparentとしてそのchildrenとなりうるindexlookupのstepsを取得する
+        steps = find_steps_for_state step, step.state, indexes_by_joins 
 
         if !steps.empty?
           step.children = steps
           steps.each { |new_step| new_step.calculate_cost @cost_model }
           steps.each do |child_step|
-            find_plans_for_step child_step, indexes_by_joins #yusuke ここで再帰
+            find_plans_for_step child_step, indexes_by_joins 
 
             # Remove this step if finding a plan from here failed
             if child_step.children.empty? && !child_step.state.answered?
-              step.children.delete child_step #yusuke SIのplanを生成してもここで蹴られる場合が多い。
+              step.children.delete child_step 
             end
           end
         elsif prune
@@ -335,19 +335,19 @@ module NoSE
         steps.flatten!
         steps.compact!
 
-        steps #yusuke sort,filter,limit処理の時以外はsteps==[]で返す
+        steps 
       end
 
       # Get a list of possible next steps for a query in the given state
       # @return [Array<PlanStep>]
       def find_steps_for_state(parent, state, indexes_by_joins)
         steps = find_nonindexed_steps parent, state
-        return steps unless steps.empty? #yusuke find_noindexed_stepsでparentがrootではなく、sort,filter,limit処理の時はここでstepsを返す。
+        return steps unless steps.empty? 
 
         # Don't allow indices to be used multiple times
         indexes = (indexes_by_joins[state.joins.first] || Set.new).to_set
 
-        #yusuke 親がSIならその次にはSIを使用しないようにする
+        
         if parent.is_a? Plans::IndexLookupPlanStep and parent.index.is_secondary_index
           indexes = indexes.to_a.select{|index| !index.is_secondary_index}.to_set
         end

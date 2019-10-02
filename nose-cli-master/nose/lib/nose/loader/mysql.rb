@@ -22,7 +22,7 @@ module NoSE
       # Load a generated set of indexes with data from MySQL
       def load(indexes,has_index_hash, config, show_progress = false, limit = nil,
                skip_existing = true)
-        indexes.map!(&:to_id_graph).uniq! if @backend.by_id_graph #yusuke このid_graph周りがわかってない
+        indexes.map!(&:to_id_graph).uniq! if @backend.by_id_graph 
 
         # XXX Assuming backend is thread-safe
         # yusuke ここで一気にprocessesでCFを作ろうとすると create column family が干渉してエラーが出る

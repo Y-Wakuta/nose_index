@@ -138,8 +138,8 @@ module NoSE
         file = File.read(plan_file)
 
         case File.extname(plan_file)
-        when '.json' #yusuke ここでjsonを読み込んでる！多分searchの結果を受けれるのはここだけ！
-          result = representer.from_json(file) #yusuke ここからplan_fileを読み込む
+        when '.json' 
+          result = representer.from_json(file) 
         when '.rb'
           result = Search::Results.new
           workload = binding.eval file, plan_file
@@ -162,7 +162,7 @@ module NoSE
       # Load plans either from an explicit file or the name
       # of something in the plans/ directory
       def load_plans(plan_file, options,is_create_or_load: false)
-        plan_file = './nose/schemas/' + plan_file #yusuke こここんなに泥臭いことしなくてもいいと思いたい
+        plan_file = './nose/schemas/' + plan_file 
         if File.exist? plan_file
           result = load_results(plan_file, options[:mix],is_create_or_load: is_create_or_load)
         else
@@ -259,13 +259,13 @@ module NoSE
 
         # Output selected indexes
         header = "Indexes\n" + '━' * 50
-        output_indexes_txt header, result.indexes, file #yusuke 出力ファイルの上半分のIndexesはここ
+        output_indexes_txt header, result.indexes, file 
 
         file.puts Formatador.parse('  Total size: ' \
                                    "[blue]#{result.total_size}[/]\n\n")
 
         # Output query plans for the discovered indices
-        header = "Query plans\n" + '━' * 50 #yusuke 出力ファイルの下半分のQuery plansはここ
+        header = "Query plans\n" + '━' * 50 
         file.puts Formatador.parse("[blue]#{header}[/]")
         weights = result.workload.statement_weights
         weights = result.weights if weights.nil? || weights.empty?
@@ -315,7 +315,7 @@ module NoSE
           result.delete_field :enumerated_indexes
         end
 
-        #yusuke serialize周りをいじるとここで何も表示されなくなる
+        
         file.puts JSON.pretty_generate \
           Serialize::SearchResultRepresenter.represent(result).to_hash
 

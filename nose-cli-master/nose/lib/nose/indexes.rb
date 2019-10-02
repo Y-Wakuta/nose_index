@@ -9,11 +9,11 @@ module NoSE
     attr_accessor :has_index,:base_cf_key
 
     def initialize(hash_fields, order_fields, extra, graph,
-                   saved_key= nil,base_cf_key: nil, base_si_key: nil) #yusuke ここの:を=に変更した。
+                   saved_key= nil,base_cf_key: nil, base_si_key: nil) 
       order_set = order_fields.to_set
-      @hash_fields = hash_fields.to_set #yusuke これがpartition key
-      @order_fields = order_fields.delete_if { |e| hash_fields.include? e } #yusuke これがclustering key
-      @extra = extra.to_set.delete_if do |e| #yusuke これがvalue
+      @hash_fields = hash_fields.to_set 
+      @order_fields = order_fields.delete_if { |e| hash_fields.include? e } 
+      @extra = extra.to_set.delete_if do |e| 
         @hash_fields.include?(e) || order_set.include?(e)
       end
       @all_fields = Set.new(@hash_fields).merge(order_set).merge(@extra)
@@ -34,12 +34,12 @@ module NoSE
       @path = graph.longest_path
       @path = nil unless @path.length == graph.size
 
-      validate_graph if !self.is_secondary_index #yusuke ここでvalidateを飛ばしてしまったが正しいのか自信はない
+      validate_graph if !self.is_secondary_index 
 
       build_hash saved_key
     end
 
-    #yusuke has_indexを作成
+    
   #  def set_has_index(has_index)
   #    @has_index = has_index
    # end
@@ -114,7 +114,7 @@ module NoSE
         @hash_fields.map(&:id).sort!,
         @order_fields.map(&:id),
         @extra.map(&:id).sort!,
-        @graph.unique_edges.map(&:canonical_params).sort! #yusuke secondary indexはgraphをベースのindexのをそのまま使ってしまっているのがここにも反映されてしまっている。問題がないといいが。
+        @graph.unique_edges.map(&:canonical_params).sort! 
       ].to_s.freeze
     end
 
@@ -138,7 +138,7 @@ module NoSE
       hash
       key
       calculate_size
-      freeze #yusuke もしsizeを再計算したりするなら、このfreezeは取り除く必要があるかも
+      freeze 
     end
 
     # Check for valid hash fields in an index
@@ -173,7 +173,7 @@ module NoSE
         unless entities == @graph.entities.to_set
     end
 
-    #yusuke hash_fieldsに含まれていないとだめなのはなんとなく分かる気はするが、なんでorder_fieldsに含まれていても良いのだろう。
+    
     # 少なくともsecondary indexにするindexについてこのvalidationを通るためにorder_fieldsにkeyを追加するよりは、このvalidation自体を行わないようにする方が筋がいいだろう
     # We must have the primary keys of the all entities in the graph
     # @return [void]
@@ -190,12 +190,12 @@ module NoSE
     # Precalculate the size of the index
     # @return [void]
     def calculate_size
-      @hash_count = @hash_fields.product_by(&:cardinality) #yusuke hash_fields内の各属性のcardinalityの積を返す。つまりはhash_fieldの種類の数か。
+      @hash_count = @hash_fields.product_by(&:cardinality) 
 
       # XXX This only works if foreign keys span all possible keys
       #     Take the maximum possible count at each join and multiply
-      @entries = @graph.entities.map(&:count).max #yusuke 概算値のようだが、概念データモデル内の各entityのレコード数のよう
-      @per_hash_count = (@entries * 1.0 / @hash_count) #yusuke あくまで予想だが、あるhashの条件でヒットしうるレコードの件数と思われる。
+      @entries = @graph.entities.map(&:count).max 
+      @per_hash_count = (@entries * 1.0 / @hash_count) 
 
       @entry_size = @all_fields.sum_by(&:size)
       @size = @entries * @entry_size

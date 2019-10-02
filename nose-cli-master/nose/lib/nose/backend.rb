@@ -72,7 +72,7 @@ module NoSE
       end
       # :nocov:
 
-      #yusuke SI を持つstepsが来た場合に適切にクエリが発行できるように
+      
       def update_steps_for_secondary_index(steps,has_index_hash)
         si_step = steps.select{|step| step.is_a? Plans::IndexLookupPlanStep and step.index.is_secondary_index}[0]
         si_indexof = steps.index(si_step)
@@ -461,7 +461,7 @@ module NoSE
         # Stop if we have nothing to insert, otherwise insert
         return if support.empty?
 
-        #yusuke 挿入に使用するパラメータに対して十分な属性を提供できていない場合、nilを入れることになるので、ここで弾く
+        
         return if !(@insert_step.fields.to_set - support[0].keys.to_set).empty?
 
         @insert_step.process support
