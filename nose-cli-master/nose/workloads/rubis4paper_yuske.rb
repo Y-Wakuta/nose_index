@@ -15,10 +15,10 @@ NoSE::Workload.new do
                             bidding: 7.65,
                             write_medium: 7.65,
                             write_heavy: 7.65 do
- #   Q 'SELECT users.* FROM users WHERE users.password = ? AND users.lastname = ? -- 1' #yusuke secondary indexの例が欲しかったので追加
+ #   Q 'SELECT users.* FROM users WHERE users.password = ? AND users.lastname = ? -- 1' 
  #   Q 'SELECT users.* FROM users WHERE users.id = ? -- 1'
- #   Q 'SELECT users.* FROM users WHERE users.lastname = ? -- 1' #yusuke secondary indexの例が欲しかったので追加
- #   Q 'SELECT users.firstname,users.lastname, users.nickname FROM users WHERE users.firstname = ? -- 1' #yusuke secondary indexの例が欲しかったので追加
+ #   Q 'SELECT users.* FROM users WHERE users.lastname = ? -- 1' 
+ #   Q 'SELECT users.firstname,users.lastname, users.nickname FROM users WHERE users.firstname = ? -- 1' 
  #   # XXX Must have at least one equality predicate
  #   Q 'SELECT categories.id, categories.name FROM categories WHERE ' \
  #     'categories.dummy = 1 -- 2'
@@ -46,7 +46,7 @@ NoSE::Workload.new do
  #   Q 'SELECT items.* FROM items WHERE items.quantity = ? -- 5'
  #   Q 'SELECT items.* FROM items WHERE items.max_bid = ? -- 5'
  #   Q 'SELECT items.* FROM items WHERE items.start_date = ? -- 5'
- #   #Q 'SELECT items.* FROM items WHERE items.end_date = ? -- 5' #yusuke このクエリを戻すとエラーが出る。一体なんだ。
+ #   #Q 'SELECT items.* FROM items WHERE items.end_date = ? -- 5' 
  #   Q 'SELECT items.* FROM items WHERE items.initial_price = ? -- 5'
  #   Q 'SELECT bids.* FROM items.bids WHERE items.id = ? -- 6'
  # end
@@ -95,7 +95,7 @@ NoSE::Workload.new do
                   write_heavy: 1.16 do
     Q 'SELECT users.nickname FROM users WHERE users.id=? -- 12'
     Q 'SELECT items.* FROM items WHERE items.id=? -- 13'
-    Q 'SELECT items.* FROM items WHERE items.name=? -- 13' #yusuke secondary indexの例が欲しかったので追加
+    Q 'SELECT items.* FROM items WHERE items.name=? -- 13' 
   end
 
   Group 'StoreBuyNow', bidding: 1.10,

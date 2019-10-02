@@ -63,7 +63,6 @@ NoSE::Model.new do
     Date       'date'
   end) * 40_000
 
-  #=>の左が多,右が1.両方が1の時は気にせずどちらかにしているみたい
   HasOne 'region',       'users',
          'users'      => 'regions'
 

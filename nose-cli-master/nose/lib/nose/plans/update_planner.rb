@@ -213,7 +213,7 @@ module NoSE
         indexes = indexes.map(&:to_id_graph).to_set if @by_id_graph
 
         indexes.map do |index|
-          next unless statement.modifies_index?(index) #yusuke indexに対して変更を加えない場合はnextで次に行く。例えば、どのクエリもSELECTしていないエンティティに単独でINSERTしている場合はそのINSERT句は結果に影響を与えないので、出力されない。
+          next unless statement.modifies_index?(index) 
 
           if (@query_plans[statement] &&
               @query_plans[statement][index]).nil?

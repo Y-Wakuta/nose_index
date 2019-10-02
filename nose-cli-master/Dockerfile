@@ -18,20 +18,13 @@ RUN echo 'eval "$(rbenv init -)"' >> /etc/profile.d/rbenv.sh # or /etc/profile
 ENV CONFIGURE_OPTS --disable-install-doc
 RUN xargs -L 1 rbenv install 2.6.0
 
-# Install Bundler for each version of ruby
-#RUN echo 'gem: --no-rdoc --no-ri' >> /.gemrc
-#RUN bash -l -c 'for v in $(cat /root/versions.txt); do rbenv global $v; gem install bundler; done'
-
 ENV PATH /root/.rbenv/shims:$PATH
 
 #install cassandra for cqlsh
 RUN apt-get update -qq
 RUN apt-get install software-properties-common python-software-properties -y
-RUN add-apt-repository -y ppa:webupd8team/java
-RUN apt-get update -qq
 RUN echo debconf shared/accepted-oracle-license-v1-1 select true | debconf-set-selections
-#RUN echo debconf shared/accepted-oracle-license-v1-1 seen true | sudo debconf-set-selections
-RUN apt-get install oracle-java8-installer -y
+RUN apt-get install openjdk-8-jdk -y
 RUN echo "deb http://www.apache.org/dist/cassandra/debian 311x main" | tee -a /etc/apt/sources.list.d/cassandra.sources.list
 RUN curl https://www.apache.org/dist/cassandra/KEYS | apt-key add -
 RUN apt-get update -qq
@@ -54,7 +47,6 @@ libmagickwand-dev \
 libmysqlclient-dev \
 libpq-dev \
 && apt-get clean
-
 
 ADD . /nose
 

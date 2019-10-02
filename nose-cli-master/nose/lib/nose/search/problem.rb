@@ -34,7 +34,7 @@ module NoSE
         @queries = queries
         @updates = updates
         @data = data
-        @indexes = @data[:costs].flat_map { |_, ic| ic.keys }.uniq #yusuke ここで@indexesにcostを計算したindexの
+        @indexes = @data[:costs].flat_map { |_, ic| ic.keys }.uniq 
         @logger = Logging.logger['nose::search::problem']
         @status = nil
         @objective_type = objective
@@ -42,7 +42,7 @@ module NoSE
         setup_model
       end
 
-      #yusuke ここでsolverを走らせている
+      
       # Run the solver and make the selected indexes available
       # @return [void]
       def solve(previous_type = nil)
@@ -79,7 +79,7 @@ module NoSE
         return @selected_indexes if @selected_indexes
 
         @selected_indexes = @index_vars.each_key.select do |index|
-          @index_vars[index].value #yusuke ここのvalueはbool型で、solverによってtrueに設定されたものがselected_indexっぽい.これが最適化のどこでtrueになっているのか確認したい
+          @index_vars[index].value 
         end.to_set
 
       end
@@ -109,7 +109,7 @@ module NoSE
         end.reduce(&:+)
       end
 
-      #yusuke ここで計算したcostの合計値を出している。最適化の箇所からも参照されている
+      
       # Get the cost of all queries in the workload
       # @return [MIPPeR::LinExpr]
       def total_cost
@@ -215,8 +215,8 @@ module NoSE
       # Initialize query and index variables
       # @return [void]
       def add_variables
-        @index_vars = {} #yusuke まだ確信があるわけではないが、論文内のδ_iだろうか
-        @query_vars = {} #yusuke まだ確信があるわけではないが、論文内のδ_i,jだろうか
+        @index_vars = {} 
+        @query_vars = {} 
         @indexes.each do |index|
           @query_vars[index] = {}
           @queries.each_with_index do |query, q|
@@ -253,7 +253,7 @@ module NoSE
 
         @index_vars.each_value do |var|
           @model << var # yusuke model.pending_variables(Mipper::VariableのArray)に要素が１つ増える.<<はmipper/model.rbの中で定義されている。
-        end #yusuke ここで最適なの対象になるmodelにindexのsolver用のvalueを入れている。
+        end 
         @model
       end
 
@@ -307,7 +307,7 @@ module NoSE
       def add_update_costs(min_cost)
         @updates.each do |update|
 
-          #yusuke update対象にsiは含まれていないので、cost計算からも除外する。
+          
           @indexes.each do |index|
             index = index.to_id_graph if data[:by_id_graph]
             next unless update.modifies_index?(index)

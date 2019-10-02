@@ -6,23 +6,16 @@ NoSE::Workload.new do
   # Define queries and their relative weights, weights taken from below
   # http://rubis.ow2.org/results/SB-BMP/Bidding/JBoss-SB-BMP-Bi-1500/perf.html#run_stat
   # http://rubis.ow2.org/results/SB-BMP/Browsing/JBoss-SB-BMP-Br-1500/perf.html#run_stat
-  DefaultMix :write_heavy#ここのbrowsingをbiddingとかに書き換えることでより多くのqueryに対してテストできそう
-#biddingの容量下限は 108000000
-  # browsingは52676935
+  DefaultMix :browsing
 
   Group 'BrowseCategories', browsing: 4.44,
                             bidding: 7.65,
                             write_medium: 7.65,
                             write_heavy: 7.65 do
-    Q 'SELECT users.* FROM users WHERE users.password = ? AND users.lastname = ? -- 1' #yusuke secondary indexの例が欲しかったので追加
-    Q 'SELECT users.* FROM users WHERE users.id = ? -- 1'
-    Q 'SELECT users.* FROM users WHERE users.lastname = ? -- 1' #yusuke secondary indexの例が欲しかったので追加
-    Q 'SELECT users.firstname,users.lastname, users.nickname FROM users WHERE users.firstname = ? -- 1' #yusuke secondary indexの例が欲しかったので追加
- #   # XXX Must have at least one equality predicate
+    Q 'SELECT users.nickname, users.password FROM users WHERE users.id = ? -- 1'
+    # XXX Must have at least one equality predicate
     Q 'SELECT categories.id, categories.name FROM categories WHERE ' \
-     'categories.dummy = 1 -- 2'
-   # Q 'SELECT users.id, users.firstname,users.lastname,users.password FROM users WHERE users.id = ?'
-  #  Q 'SELECT users.id, users.firstname,users.lastname,users.password,users.email FROM users WHERE users.firstname = ?'
+      'categories.dummy = 1 -- 2'
   end
 
   Group 'ViewBidHistory', browsing: 2.38,
@@ -30,7 +23,6 @@ NoSE::Workload.new do
                           write_medium: 1.54,
                           write_heavy: 1.54 do
     Q 'SELECT items.name FROM items WHERE items.id = ? -- 3'
-    Q 'SELECT items.* FROM items WHERE items.name = ? -- 3'
     Q 'SELECT users.id, users.nickname, bids.id, item.id, bids.qty, ' \
       'bids.bid, bids.date FROM users.bids.item WHERE item.id = ? ' \
       'ORDER BY bids.date -- 4'
@@ -41,12 +33,6 @@ NoSE::Workload.new do
                     write_medium: 14.17,
                     write_heavy: 14.17 do
     Q 'SELECT items.* FROM items WHERE items.id = ? -- 5'
-    Q 'SELECT items.* FROM items WHERE items.name = ? -- 5'
-    Q 'SELECT items.* FROM items WHERE items.quantity = ? -- 5'
-    Q 'SELECT items.* FROM items WHERE items.max_bid = ? -- 5'
-    Q 'SELECT items.* FROM items WHERE items.start_date = ? -- 5'
- #   #Q 'SELECT items.* FROM items WHERE items.end_date = ? -- 5' #yusuke このクエリを戻すとエラーが出る。一体なんだ。
-    Q 'SELECT items.* FROM items WHERE items.initial_price = ? -- 5'
     Q 'SELECT bids.* FROM items.bids WHERE items.id = ? -- 6'
   end
 
@@ -63,14 +49,10 @@ NoSE::Workload.new do
                         bidding: 2.48,
                         write_medium: 2.48,
                         write_heavy: 2.48 do
- #   # XXX Not including region name below
-    #Q 'SELECT users.* FROM users WHERE users.id = ? -- 8'
+    # XXX Not including region name below
+    Q 'SELECT users.* FROM users WHERE users.id = ? -- 8'
     Q 'SELECT comments.id, comments.rating, comments.date, comments.comment ' \
       'FROM comments.to_user WHERE to_user.id = ? -- 9'
-    Q 'SELECT comments.id, comments.rating, comments.date, comments.comment ' \
-      'FROM comments.to_user WHERE to_user.firstname = ? -- 9'
-    Q 'SELECT comments.id, comments.rating, comments.date, comments.comment ' \
-      'FROM comments.to_user WHERE to_user.lastname = ? -- 9'
   end
 
   Group 'RegisterItem', bidding: 0.53,
@@ -94,7 +76,6 @@ NoSE::Workload.new do
                   write_heavy: 1.16 do
     Q 'SELECT users.nickname FROM users WHERE users.id=? -- 12'
     Q 'SELECT items.* FROM items WHERE items.id=? -- 13'
-    Q 'SELECT items.* FROM items WHERE items.name=? -- 13' #yusuke secondary indexの例が欲しかったので追加
   end
 
   Group 'StoreBuyNow', bidding: 1.10,
@@ -114,17 +95,6 @@ NoSE::Workload.new do
     Q 'SELECT items.* FROM items WHERE items.id=? -- 18'
     Q 'SELECT bids.qty, bids.date FROM bids.item WHERE item.id=? ' \
       'ORDER BY bids.bid LIMIT 2 -- 19'
-    Q 'SELECT bids.* FROM bids.item WHERE bids.id=? ' \
-      'ORDER BY bids.bid LIMIT 2 -- 19'
-    Q 'SELECT bids.* FROM bids.item WHERE item.id=? ' \
-      'ORDER BY bids.bid LIMIT 2 -- 19'
-    Q 'SELECT bids.* FROM bids.item WHERE item.initial_price=? ' \
-      'ORDER BY bids.bid LIMIT 2 -- 19'
-    Q 'SELECT bids.* FROM bids.item WHERE item.max_bid=? ' \
-      'ORDER BY bids.bid LIMIT 2 -- 19'
-    Q 'SELECT bids.* FROM bids.item WHERE item.start_date=? ' \
-      'ORDER BY bids.bid LIMIT 2 -- 19'
-
   end
 
   Group 'StoreBid', bidding: 3.74,
@@ -182,12 +152,8 @@ NoSE::Workload.new do
                          bidding: 5.39,
                          write_medium: 5.39,
                          write_heavy: 5.39 do
- #   # XXX Must have at least one equality predicate
+    # XXX Must have at least one equality predicate
     Q 'SELECT regions.id, regions.name FROM regions ' \
       'WHERE regions.dummy = 1 -- 36'
-    Q 'SELECT regions.* FROM regions ' \
-      'WHERE regions.id = 1 -- 36'
-    Q 'SELECT regions.* FROM regions ' \
-      'WHERE regions.name = 1 -- 36'
   end
 end

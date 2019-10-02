@@ -35,20 +35,20 @@ module NoSE
 
         # Get the costs of all queries and updates
         query_weights = combine_query_weights indexes
-        costs, trees = query_costs query_weights, indexes #yusuke ここで渡しているindexesまではSIが含まれているが、costsにはほとんどSIが含まれていない
+        costs, trees = query_costs query_weights, indexes 
         update_costs, update_plans = update_costs trees, indexes
 
         log_search_start costs, query_weights
 
         solver_params = {
           max_space: max_space,
-          costs: costs, #yusuke costsは{query=>query_cost}のhash
+          costs: costs, 
           update_costs: update_costs,
           cost_model: @cost_model,
           by_id_graph: @by_id_graph
         }
 
-        #show_trees(trees) #yusuke 木の内容を表示
+        #show_trees(trees) 
 
         search_result query_weights, indexes, solver_params, trees,
                       update_plans
@@ -56,7 +56,7 @@ module NoSE
 
       private
 
-      #yusuke 木の形でquery planを表示
+      
       def show_trees(trees)
         trees.each do |tree|
           p tree
@@ -92,16 +92,16 @@ module NoSE
       # Run the solver and get the results of search
       # @return [Results]
       def search_result(query_weights, indexes, solver_params, trees,
-                        update_plans) #yusuke indexesは呼び出し元のenumerated_indexes
+                        update_plans) 
         STDERR.print("start solve\n")
         # Solve the LP using MIPPeR
         result = solve_mipper query_weights.keys, indexes, **solver_params
 
         result.workload = @workload
-        result.plans_from_trees trees #yusuke この中でresult.plansが追加されてる
-        result.set_has_index_hash #yusuke base_cf_keyはindexがfreezeされていていじれないので、has_index_hashを使用することで代用する
+        result.plans_from_trees trees 
+        result.set_has_index_hash 
 
-        result.cost_model = @cost_model #yusuke この代入処理をcost_modelの代入演算子をoverrideしている都合上代入時にcostの再計算が走っているが、これはresult.cost_modelに代入する都合上起こっているものであり、ここで再計算する意図は元々ないものとして変更を進める
+        result.cost_model = @cost_model 
 
 
         # Select the relevant update plans
@@ -111,7 +111,7 @@ module NoSE
         update_plans.each do |plan|
           plan.select_query_plans(&result.method(:select_plan))
         end
-        result.update_plans = update_plans.select{|uplan| !uplan.index.is_secondary_index} #yusuke secondary index に対するupdate planは推薦しない
+        result.update_plans = update_plans.select{|uplan| !uplan.index.is_secondary_index} 
 
         result.validate
 
@@ -131,7 +131,7 @@ module NoSE
         end.compact
       end
 
-      #yusuke ここでsolverを使って解いてるみたい
+      
       # Solve the index selection problem using MIPPeR
       # @return [Results]
       def solve_mipper(queries, indexes, data)
@@ -142,11 +142,11 @@ module NoSE
       #  hoge = Hash.new { |h, k| h[k] = Set.new }
       #  problem.query_vars.each do |index, query_vars|
       #    query_vars.each do |query, var|
-      #      next unless var.value #yusuke おそらくここで最適化の結果使用しないことになったものを蹴っている.Mipper.Variable.valueで定義されていて、最適化の結果弾くものはvalue==0.0で弾くことができるみたい.SIを使用するものは全てvar.value==0.0になっているっぽい。
+      #      next unless var.value 
       #      if hoge[query].empty?
       #        hoge[query] = Set.new
       #      end
-      #      hoge[query].add index #yusuke query_indexがqueryとそれに対応するindexを紐付けているっぽい
+      #      hoge[query].add index 
       #    end
       #  end
       #  hoge
@@ -198,29 +198,29 @@ module NoSE
       def query_costs(query_weights, indexes)
         planner = Plans::QueryPlanner.new @workload, indexes, @cost_model
 
-        STDERR.print("get query plan\n")
+        STDERR.print("enumerate query plan\n")
         results = Parallel.map(query_weights) do |query, weight|
           query_cost planner, query, weight
         end
         costs = Hash[query_weights.each_key.map.with_index do |query, q|
-          [query, results[q].first] #yusuke results[q].firstはquery_cost
+          [query, results[q].first] 
         end]
 
-        [costs, results.map(&:last)] #yusuke results[q].lastはtree。
+        [costs, results.map(&:last)] 
       end
 
       # Get the cost for indices for an individual query
       def query_cost(planner, query, weight)
         query_costs = {}
 
-        tree = planner.find_plans_for_query(query) #yusuke このmethodがquery用の１つのtreeを返す
-        tree.each do |plan| #yusuke query_plannerの中でeachおoverrideしているので、これでtree内の１つ１つのplanを取得することが出来ている。
-          steps_by_index = [] #yusuke あるplanを構成する(stepの配列)を１つの要素として配列を構成する二次元配列
+        tree = planner.find_plans_for_query(query) 
+        tree.each do |plan| 
+          steps_by_index = [] 
           plan.each do |step|
-            if step.is_a? Plans::IndexLookupPlanStep #yusuke secondary index用にSecondaryIndexLookupPlanStepも宣言した方がいいかも
+            if step.is_a? Plans::IndexLookupPlanStep 
               steps_by_index.push [step]
             else
-              steps_by_index.last.push step #yusuke indexlookup以外(sort,limit,filter)を最後に持ってくる.filterが最後なのは改善の余地があるかも？
+              steps_by_index.last.push step 
             end
           end
 
@@ -230,7 +230,7 @@ module NoSE
         [query_costs, tree]
       end
 
-      #yusuke treeの中にsecondary indexを使用するstepが存在するかを取得する
+      
       def is_include_secondary_index_step(tree)
         tree.each do |plan|
           plan.each do |step|
@@ -253,7 +253,7 @@ module NoSE
         # the cost of all plan steps for the part of the query graph
         steps_by_index.each do |steps|
           # Get the indexes for these plan steps
-          index_step = steps.first #yusuke 各planの最初はIndexLookUp
+          index_step = steps.first 
 
           # Calculate the cost for just these steps in the plan
           cost = steps.sum_by(&:cost) * weight
@@ -265,8 +265,8 @@ module NoSE
           if query_costs.key? index_step.index
             current_cost = query_costs[index_step.index].last
 
-            # We must always have the same cost #yusuke NoSEではあるindexが使われる場面によってcostが違うのはバグだと判定しているようだが、SIと組み合わせて通信コストまで考慮するとそうではない。
-            #yusuke treeの中にSIを持つplanはどうしてもplanによって各indexのcostが変化してしまう。
+            # We must always have the same cost 
+            
             # yusuke planの中にfilterがあるものもcardinalityがfilterによって変化することで、costが変化するので通す
             if (current_cost - cost).abs >= 10E-6 and !is_include_secondary_index_step tree and !steps.any?{|step| step.is_a? Plans::FilterPlanStep} and !query_costs[index_step.index].first.any?{ |s| s.is_a? Plans::FilterPlanStep }
               index = index_step.index

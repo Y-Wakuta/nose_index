@@ -37,7 +37,7 @@ module NoSE
       end.uniq << query.materialize_view
     end
 
-    #yusuke query plan生成時にindexes_by_joinsからentityをキーとして次のstepで使用できる可能性のあるindexを取得しているが、siに含まれるfield以外のentityを持っているとquery plan生成時に問題が起きる
+    
     def get_si_graph(fields, base_graph)
       si_graph = base_graph.dup
       used_entities = fields.to_a.map{|field| field.parent}
@@ -45,10 +45,10 @@ module NoSE
       if si_graph.edges_empty? and si_graph.nodes.length > 1 #siに含まれないnodeを削除した結果edgeが無くなってしまう場合がある。その時は#39に書いたようにquery planで枝切りされる事になりそうだが元のindexのgraphを返して処理は続ける
         return base_graph
       end
-      si_graph#yusuke さらにここでsi_graphのみが返るようにしても必ずしも問題が起きるわけではなく、secondary indexも使用されるようになる
+      si_graph
     end
 
-    #yusuke 引数で入力されたsiのbase_cfとして使用可能なcfを列挙する
+    
     def get_additional_cf_by_si(si,indexes)
       indexes.select{|index| index.hash_fields == si.extra}.map do |cf|
         ex = cf.extra + si.hash_fields
@@ -56,21 +56,21 @@ module NoSE
       end
     end
 
-    #yusuke 引数で受け取ったindexを元にSIとSIの属性を抜いたりしたCFを列挙する。
+    
     def get_secondary_indexes_by_indexes(base_cf_candidates,indexes)
       STDERR.print("enumerate si\n")
       Parallel.map(base_cf_candidates) do |index|
         (index.order_fields.to_set  + index.extra).to_a.map do |ex_field|
           # hashフィールドの中に元テーブルのprimary keyが含まれていないといけないみたい。なぜこの制約があるのかを論文から確認する->nose2016のp185
           index.hash_fields.map do |hf|
-            sole_si = generate_index([hf], [], [ex_field], get_si_graph([hf] + [ex_field],index.graph),base_cf_key: index.key) #yusuke CFを複数使う場合のみを考えるならpartition keyに対するSIのみで良いが、単独で応答するSIを考えるのであれば、これも残しておく
+            sole_si = generate_index([hf], [], [ex_field], get_si_graph([hf] + [ex_field],index.graph),base_cf_key: index.key) 
             id_si = nil
             id_si_additional_cf = nil
             ex_id_si = nil
             ex_id_si_additional_cf = nil
 
             if hf != ex_field.parent.id_field then
-                id_si = generate_index([hf],[], [ex_field.parent.id_field],get_si_graph([hf] + [ex_field.parent.id_field],index.graph), base_cf_key: index.key) #yusuke entityをまたぐSIを作成
+                id_si = generate_index([hf],[], [ex_field.parent.id_field],get_si_graph([hf] + [ex_field.parent.id_field],index.graph), base_cf_key: index.key) 
                 id_si_additional_cf = generate_index(id_si.extra,index.order_fields + index.hash_fields.to_a,index.extra.to_a + id_si.hash_fields.to_a,index.graph)
             end
 
@@ -86,14 +86,14 @@ module NoSE
     end
 
     # Produce all possible indices for a given workload
-    #yusuke secondary indexを足すならここのsupportクエリのような感じになりそう
+    
     # @return [Set<Index>]
     def indexes_for_workload(additional_indexes = [], by_id_graph = false)
       queries = @workload.queries
       base_cf_candidates = []
       indexes = queries.map do |query|
-        base_cfs = indexes_for_query(query).to_a #yusuke このbase_cfsをfield数とかで部分的にだけ使用すると、
-        base_cf_candidates += base_cfs.sort_by { |index | index.all_fields.length }.reverse.take(3) #yusuke #46 queryに単独で応答するcfを探したい。今はひとまず一番field数の多いものがそうだろうということで対処
+        base_cfs = indexes_for_query(query).to_a 
+        base_cf_candidates += base_cfs.sort_by { |index | index.all_fields.length }.reverse.take(3) 
         base_cfs
       end.inject(additional_indexes, &:+)
 
@@ -146,11 +146,11 @@ module NoSE
       end
     end
 
-    #yusuke 複数のindexから１つのindexを生成するという点において,(１つのindexから複数を生成するsecondary indexとは逆だが、参考にできそう　)
+    
     # Combine the data of indices based on matching hash fields
     def combine_indexes(indexes)
       no_order_indexes = indexes.select do |index|
-        index.order_fields.empty? && !index.is_secondary_index #yusuke secondary indexは他のindexと結合させる必要がないため、ここではじく
+        index.order_fields.empty? && !index.is_secondary_index 
       end
       no_order_indexes = no_order_indexes.group_by do |index|
         [index.hash_fields, index.graph]

@@ -24,7 +24,7 @@ module NoSE
 
         return if state.nil?
         @state = state.dup
-        update_state parent #yusuke ここでfieldの残りとかをupdateしている
+        update_state parent 
         @state.freeze
       end
 
@@ -59,8 +59,8 @@ module NoSE
           check_forward_lookup parent, index, state
           check_parent_index parent, index, state
           check_all_hash_fields parent, index, state
-          check_graph_fields parent, index, state #yusuke 1段階目で使用されるSIはparent_indexが無いのでcheck_parent_indexでは蹴られないがここで蹴られている
-          check_last_fields parent, index, state #yusuke ここで弾かれてる1段階目のSIも結構ある
+          check_graph_fields parent, index, state 
+          check_last_fields parent, index, state 
         rescue InvalidIndex
           return nil
         end
@@ -92,10 +92,10 @@ module NoSE
       end
       private_class_method :check_forward_lookup
 
-      #yusuke 作成する価値のあるstepである場合はfalseを返す
+      
       def self.is_useless_parent?(state,index,parent_index)
 
-        #yusuke return true below condition
+        
         #SELECT * FROM entity WHERE A = ? AND B = ?
         # parent: [A][B]->[C,D]
         # index:  [B][A]->[C,D,E]
@@ -103,13 +103,13 @@ module NoSE
                           state.query.eq_fields >= (parent_index.hash_fields + parent_index.order_fields.to_set) and \
                           parent_index.hash_fields == index.order_fields.to_set and parent_index.order_fields.to_set == index.hash_fields
 
-        #yusuke return true below condition
+        
         #SELECT * FROM entity WHERE A = ? AND B = ?
         # parent: [A][B]->[C,D]
         # index:  [A,B][F]->[C,D,E]
         return true if index.hash_fields >= state.query.eq_fields and index.all_fields >= parent_index.all_fields
 
-        #yusuke return true below condition
+        
         #SELECT E FROM entity WHERE A = ? AND B = ?
         # parent: [A,B][B]->[C,D]
         # index:  [A][B,F]->[E]
@@ -122,15 +122,15 @@ module NoSE
       # Check if this index can be used after the current parent
       # @return [Boolean]
       def self.invalid_parent_index?(state, index, parent_index)
-        return false if parent_index.nil? #yusuke そもそもSIは1段階目で使用したいので、ここで返る場合をまず考えるが、
+        return false if parent_index.nil? 
         #SIの次のstepがここで返るとすると子供がいないことになり、SIのクエリプランが提案されないことにつながる
 
-        #yusuke ここでSIが返されているっぽい。parent_indexが一度primary keyでentityに検索をかけてたら、このindexでは同じentityに対するqueryは許さないということか。
+        
         # We don't do multiple lookups by ID for the same entity set
         return true if parent_index.identity? &&
                        index.graph == parent_index.graph
 
-        #yusuke indexのみでクエリに応答可能で、parent_indexが必要でない場合のための処理に冗長にparent_indexを使用する場合を蹴るための処理。
+        
         # CF単独でクエリに応答できるにも関わらず、あるparent_indexの下に入ってしまうと、
         # cost modelでcardinalityが変化する分、同じindexなのにcostが違うことになってしまいvalidateで蹴られる。この動作は素のNoSEにRUBiSの１つのクエリを発行した場合で発生することを確認済み。
         # WHERE条件の中にprimary keyとそうでないものがそれぞれ１つずつ以上含まれていると発生する。
@@ -168,8 +168,8 @@ module NoSE
       def self.check_all_hash_fields(parent, index, state)
         fail InvalidIndex unless index.hash_fields.all? do |field|
           (parent.fields + state.given_fields).include? field
-          # (parent.is_a?(IndexLookupPlanStep) and parent.index.is_secondary_index) ? parent.index.extra.include?(field) : (parent.fields + state.given_fields).include?(field) #yusuke siの次はparentのextraをhash_fieldに持たないといけないという制約を入れる
-          #yusuke 上のは and (!parent.index.is_secondary_index or parent.index.ex_field.include?(field))
+          # (parent.is_a?(IndexLookupPlanStep) and parent.index.is_secondary_index) ? parent.index.extra.include?(field) : (parent.fields + state.given_fields).include?(field) 
+          
         end
       end
       private_class_method :check_all_hash_fields
@@ -182,7 +182,7 @@ module NoSE
         hash_entity = index.hash_fields.first.parent
         graph_fields = state.fields_for_graph(index.graph, hash_entity).to_set
         graph_fields -= parent.fields # exclude fields already fetched
-        fail InvalidIndex unless graph_fields.subset?(index.all_fields) #yusuke graph_fieldsがindex.all_fieldsの部分集合である
+        fail InvalidIndex unless graph_fields.subset?(index.all_fields) 
       end
       private_class_method :check_graph_fields
 
@@ -199,7 +199,7 @@ module NoSE
           state.graph.leaf_entity?(entity)
         end
         res =  leaf_entities.all? do |entity|
-          index_includes.call([entity.id_field]) || #yusuke ここでid_fieldを持っているか全てのfieldを持っているかの二択でIndexを評価している。
+          index_includes.call([entity.id_field]) || 
             (index.is_secondary_index and parent.is_a? Plans::RootPlanStep) ||
             index_includes.call(state.fields.select { |f| f.parent == entity })
         end
@@ -338,7 +338,7 @@ module NoSE
         indexed_by_id = resolve_order
         strip_graph
         update_cardinality parent, indexed_by_id
-        @state.fields += @index.hash_fields if @index.is_secondary_index and !@state.answered? #yusuke SIの時は次のindexにsiのhash_fieldが含まれて居なければならない。ただし、SI単体で応答が終了する場合は除く。
+        @state.fields += @index.hash_fields if @index.is_secondary_index and !@state.answered? 
       end
     end
 
