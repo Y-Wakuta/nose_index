@@ -14,3 +14,4 @@ yard_extensions.rb
 CONTRIBUTING.md
 LICENSE.md
 README.md
+.devcontainer/
