@@ -2,7 +2,11 @@ poklet/cassandra:latestはベースになっているlinuxが最小構成版でa
 
 ### dockerを直に使う時のコマンド
 
-docker run -it --rm --net container:cassone poklet/cassandra cqlsh
+```sh
+docker run -it --rm --net container:cassandra -v `pwd`:/data nuvo/docker-cqlsh bash
+
+# cqlsh cassandra
+```
 
 ### 参考
 
