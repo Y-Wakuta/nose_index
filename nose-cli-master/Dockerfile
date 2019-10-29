@@ -52,4 +52,4 @@ WORKDIR /nose
 FROM builder
 
 COPY . /nose
-RUN bundle install
+RUN bundle install --with=development

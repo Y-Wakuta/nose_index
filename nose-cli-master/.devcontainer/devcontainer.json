@@ -13,7 +13,6 @@
 	"runArgs": [
 		// Uncomment the next line to use Docker from inside the container. See https://aka.ms/vscode-remote/samples/docker-in-docker for details.
 		// "-v","/var/run/docker.sock:/var/run/docker.sock",
-		"-v", "${localWorkspaceFolder}:/nose"
 
 		// Uncomment the next line if you will be using a ptrace-based debugger like C++, Go, and Rust.
 		// "--cap-add=SYS_PTRACE", "--security-opt", "seccomp=unconfined"
