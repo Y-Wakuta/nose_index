@@ -91,7 +91,7 @@ module NoSE
   module Identifiers
     include Parslet
 
-    rule(:identifier)    { match('[A-z]').repeat(1).as(:identifier) }
+    rule(:identifier)    { match('[A-z0-9]').repeat(1).as(:identifier) }
     rule(:field)         { identifier >> (str('.') >> identifier).repeat(1) }
     rule(:fields)        { field >> (comma >> field).repeat }
     rule(:select_field)  {
