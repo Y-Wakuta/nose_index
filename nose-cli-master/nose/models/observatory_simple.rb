@@ -1518,7 +1518,7 @@ NoSE::Model.new do
     Integer 'y_cmodel_dev_flag_apcorr', count: 2
     Integer 'y_cmodel_exp_flag_apcorr', count: 2
     Integer 'y_cmodel_flag_apcorr', count: 2
-    end) * 10_000
+    end) * 712_126_710
 
     (Entity 'pdr2_wide_forced2' do
     Integer 'dummy', count: 1
@@ -2173,7 +2173,7 @@ NoSE::Model.new do
     Integer 'y_undeblended_kronflux_flag_small_radius', count: 2
     Integer 'y_undeblended_kronflux_flag_bad_shape', count: 2
     Integer 'y_undeblended_kronflux_flag_badinitialcentroid', count: 2
-    end) * 10_000
+    end) * 712_126_710
 
     (Entity 'pdr2_wide_random' do
     Integer 'dummy', count: 1
@@ -2402,7 +2402,7 @@ NoSE::Model.new do
     String 'ctype1a'
     String 'ctype2a'
     String 'cunit1a'
-    String 'cunit2a'    
+    String 'cunit2a'
     end) * 1_533_978
 end
 
