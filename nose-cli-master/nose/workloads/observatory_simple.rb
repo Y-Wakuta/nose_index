@@ -33,7 +33,7 @@ NoSE::Workload.new do
   # meas
   Group 'Group2', basic: 530 do
     # orig
-    # Q 'SELECT pdr2_wide_meas.y_ra FROM pdr2_wide_meas WHERE pdr2_wide_meas.object_id > ? ORDER BY pdr2_wide_meas.object_id LIMIT 100000 -- 530'
+    # Q 'SELECT * FROM pdr2_wide_meas WHERE pdr2_wide_meas.object_id > ? ORDER BY pdr2_wide_meas.object_id LIMIT 100000 -- 530'
 
     # simplified
     ## NOTE: Lacking ORDER BY
