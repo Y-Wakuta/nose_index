@@ -2404,6 +2404,15 @@ NoSE::Model.new do
     String 'cunit1a'
     String 'cunit2a'
     end) * 1_533_978
+
+    (Entity 'pdr2_wide_objects' do
+    ID object_id
+    end) * 712_126_710
+
+    HasOne 'object', 'pdr2_wide_forced', 'pdr2_wide_forced' => 'pdr2_wide_objects'
+    HasOne 'object', 'pdr2_wide_forced2', 'pdr2_wide_forced2' => 'pdr2_wide_objects'
+    HasOne 'object', 'pdr2_wide_meas', 'pdr2_wide_meas' => 'pdr2_wide_objects'
+    HasOne 'object', 'pdr2_wide_random', 'pdr2_wide_random' => 'pdr2_wide_objects'
 end
 
 # rubocop:enable all
