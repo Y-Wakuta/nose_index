@@ -10,7 +10,10 @@
             "request": "launch",
             "program": "${workspaceRoot}/bin/nose",
             "useBundler": true,
-            "args": ["search", "rubis"],
+            "args": [
+                "search",
+                "rubis"
+            ],
         },
         {
             "name": "Search - observatory_simple",
@@ -18,7 +21,23 @@
             "request": "launch",
             "program": "${workspaceRoot}/bin/nose",
             "useBundler": true,
-            "args": ["search", "observatory_simple"],
+            "args": [
+                "search",
+                "observatory_simple"
+            ],
+        },
+        {
+            "name": "Search - !observatory_simple",
+            "type": "Ruby",
+            "request": "launch",
+            "program": "${workspaceRoot}/bin/nose",
+            "useBundler": true,
+            "args": [
+                "search",
+                "observatory_simple",
+                "--max_space",
+                "5900000000000" // fail: 5850000000000
+            ],
         }
     ]
 }
