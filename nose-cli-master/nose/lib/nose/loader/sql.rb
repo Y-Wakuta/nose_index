@@ -23,10 +23,10 @@ module NoSE
           client = new_client config
 
           # Skip this index if it's not empty
-          if skip_existing && !@backend.index_empty?(index)
-            @logger.info "Skipping index #{index.inspect}" if show_progress
-            next
-          end
+          # if skip_existing && !@backend.index_empty?(index)
+          #   @logger.info "Skipping index #{index.inspect}" if show_progress
+          #   next
+          # end
           @logger.info index.inspect if show_progress
 
           query = index_sql client, index, limit
