@@ -99,7 +99,6 @@ module NoSE
         query = query.select(*select)
         query = query.limit limit unless limit.nil?
 
-        p query.sql
         @logger.debug { query.sql }
         query
       end

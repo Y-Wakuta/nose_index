@@ -13,8 +13,6 @@ NoSE::Workload.new do
     # simplified
     # Q 'SELECT pdr2_wide.forced.object_id, pdr2_wide.forced.ra, pdr2_wide.forced.dec, pdr2_wide.forced2.r_kronflux_mag, pdr2_wide.forced2.r_kronflux_magsigma, pdr2_wide.forced2.i_kronflux_mag, pdr2_wide.forced2.i_kronflux_magsigma, pdr2_wide.forced2.y_kronflux_mag, pdr2_wide.forced2.y_kronflux_magsigma, pdr2_wide.forced2.r_kronflux_mag, pdr2_wide.forced2.i_kronflux_mag, pdr2_wide.forced2.i_kronflux_mag, pdr2_wide.forced2.y_kronflux_mag FROM pdr2_wide.forced LEFT JOIN pdr2_wide.forced2 USING (object_id) WHERE pdr2_wide.forced.ra > ? AND pdr2_wide.forced.ra < ? AND pdr2_wide.forced.dec > ? AND pdr2_wide.forced.dec < ? AND pdr2_wide.forced2.i_kronflux_mag < ? AND pdr2_wide.forced.i_extendedness_value = ? -- 1922'
 
-  #   Q 'SELECT foo.bar.id FROM foo.bar WHERE foo.bar.name = ?'
-  # end
     # decomposed,
     Q 'SELECT pdr2_wide.forced.object_id, pdr2_wide.forced.ra, pdr2_wide.forced.dec ' \
       'FROM pdr2_wide.forced ' \
