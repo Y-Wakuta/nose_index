@@ -59,8 +59,7 @@ module NoSE
 
         fields.map do |field|
           table = field.parent.name.split(".").last # w/o schema
-          "#{table}__#{field.name}___" \
-            "#{table}_#{field.name}".to_sym
+          Sequel.qualify(table, field.name).as("#{table}_#{field.name}")
         end
       end
 
