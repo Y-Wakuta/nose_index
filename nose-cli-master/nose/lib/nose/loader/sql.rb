@@ -58,8 +58,9 @@ module NoSE
         fields = index.hash_fields.to_a + index.order_fields + index.extra.to_a
 
         fields.map do |field|
-          "#{field.parent.name}__#{field.name}___" \
-            "#{field.parent.name}_#{field.name}".to_sym
+          table = field.parent.name.split(".").last # w/o schema
+          "#{table}__#{field.name}___" \
+            "#{table}_#{field.name}".to_sym
         end
       end
 
@@ -89,7 +90,8 @@ module NoSE
         # Construct the join condition
         tables, keys = index_sql_tables index
 
-        query = client[tables.first]
+        from_field = tables.first.to_s.split(".")
+        query = client[Sequel[from_field[0].to_sym][from_field[1].to_sym]]
         keys.map.with_index do |key, i|
           query = query.join tables[i + 1], key
         end
@@ -97,6 +99,7 @@ module NoSE
         query = query.select(*select)
         query = query.limit limit unless limit.nil?
 
+        p query.sql
         @logger.debug { query.sql }
         query
       end

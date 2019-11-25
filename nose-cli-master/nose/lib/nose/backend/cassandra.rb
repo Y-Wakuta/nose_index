@@ -133,12 +133,14 @@ module NoSE
       # @return [Array]
       def index_row(row, fields)
         fields.map do |field|
-          value = row[field.id]
+          value = row[field.id.split(".").last]
           if field.is_a?(Fields::IDField)
             value = case value
                     when Numeric
                       Cassandra::Uuid.new value.to_i
                     when String
+                      value = value.gsub(Cassandra::Uuid::HYPHEN, Cassandra::Uuid::EMPTY_STRING)
+                      value = value.rjust(16)[0, 16].unpack("C*").join
                       Cassandra::Uuid.new value
                     when nil
                       Cassandra::Uuid::Generator.new.uuid
@@ -179,8 +181,8 @@ module NoSE
       # @return [String]
       def field_names(fields, types = false)
         fields.map do |field|
-          name = "\"#{field.id}\""
-          name += ' ' + cassandra_type(field.class).to_s if types
+          name = "\"#{field.id.split('.').last}\""
+          name += ' ' + cassandra_type(field).to_s if types
           name
         end.join ', '
       end
@@ -195,8 +197,11 @@ module NoSE
 
       # Return the datatype to use in Cassandra for a given field
       # @return [Symbol]
-      def cassandra_type(field_class)
+      def cassandra_type(field)
+        field_class = field.class
         case [field_class]
+        when [Fields::BooleanField]
+          :boolean
         when [Fields::IntegerField]
           :int
         when [Fields::FloatField]
@@ -208,6 +213,14 @@ module NoSE
         when [Fields::IDField],
              [Fields::ForeignKeyField]
           :uuid
+          # case field.name # FIXME: Only for observatory
+          # when 'object_id'
+          #   :int
+          # when 'filter01'
+          #   :text
+          # else
+          #   :uuid
+          # end
         end
       end
 
