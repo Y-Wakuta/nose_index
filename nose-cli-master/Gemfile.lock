@@ -75,6 +75,9 @@ GEM
     cucumber-expressions (6.0.1)
     cucumber-tag_expressions (1.1.1)
     cucumber-wire (0.0.1)
+    debase (0.2.4.1)
+      debase-ruby_core_source (>= 0.10.2)
+    debase-ruby_core_source (0.10.6)
     debug_inspector (0.0.3)
     declarative (0.0.10)
     descriptive_statistics (2.5.1)
@@ -142,6 +145,8 @@ GEM
       diff-lcs (>= 1.2.0, < 2.0)
       rspec-support (~> 3.6.0)
     rspec-support (3.6.0)
+    ruby-debug-ide (0.7.0)
+      rake (>= 0.8.1)
     ruby-graphviz (1.2.3)
     ruby-mysql (2.9.14)
     scrutinizer-ocular (1.0.1)
@@ -165,6 +170,7 @@ PLATFORMS
 DEPENDENCIES
   aruba (~> 0.14.2)
   binding_of_caller (~> 0.7.2)
+  debase (~> 0.2.4.1)
   fakefs (~> 0.11.0)
   mysql2 (~> 0.4.10)
   nose (= 0.1.0pre5)!
@@ -175,6 +181,7 @@ DEPENDENCIES
   rspec (~> 3.6.0, >= 3.5.0)
   rspec-collection_matchers (~> 1.1.3, >= 1.1.0)
   rspec-core (~> 3.6.0, >= 3.6.0)
+  ruby-debug-ide (~> 0.7.0)
   scrutinizer-ocular (~> 1.0.1, >= 1.0.0)
   simplecov (~> 0.14.1)
   yard

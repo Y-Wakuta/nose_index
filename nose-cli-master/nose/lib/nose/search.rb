@@ -101,7 +101,6 @@ module NoSE
         result.plans_from_trees trees 
         result.set_has_index_hash 
 
-        result.cost_model = @cost_model 
 
 
         # Select the relevant update plans
@@ -113,6 +112,7 @@ module NoSE
         end
         result.update_plans = update_plans.select{|uplan| !uplan.index.is_secondary_index} 
 
+        result.cost_model = @cost_model
         result.validate
 
         result

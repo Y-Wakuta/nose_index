@@ -31,4 +31,8 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'rspec-collection_matchers', '~> 1.1.3', '>= 1.1.0'
   s.add_development_dependency 'scrutinizer-ocular', '~> 1.0.1', '>= 1.0.0'
   s.add_development_dependency 'simplecov', '~> 0.14.1'
+
+  # Debugger
+  s.add_development_dependency 'ruby-debug-ide', '~> 0.7.0'
+  s.add_development_dependency 'debase', '~> 0.2.4.1'
 end
