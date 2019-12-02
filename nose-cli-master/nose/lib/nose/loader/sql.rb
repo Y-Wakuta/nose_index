@@ -34,6 +34,13 @@ module NoSE
           result_chunk = []
           query.each do |result|
             result = Hash[result.map { |k, v| [k.to_s, v] }]
+
+            result = result.inject({}) do |h, (k, v)|
+              keys = index.hash_fields + index.order_fields
+              h[k] = (keys.include?(k) and v.nil? ? "nan" : v)
+              h
+            end
+
             result_chunk.push result
             if result_chunk.length >= 100
               @backend.index_insert_chunk index, result_chunk
