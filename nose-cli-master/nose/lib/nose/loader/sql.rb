@@ -31,9 +31,21 @@ module NoSE
 
           query = index_sql client, index, limit
 
+          not_null_fields = index.hash_fields + index.order_fields
+          not_null_col_names = not_null_fields.to_a.map{|field|
+            field.id.split(".").slice(1..).join("_")
+          }
+
           result_chunk = []
           query.each do |result|
             result = Hash[result.map { |k, v| [k.to_s, v] }]
+
+            result.each{|k, v|
+              if not_null_col_names.include?(k) and v.nil?
+                result[k] = Float::NAN
+              end
+            }
+
             result_chunk.push result
             if result_chunk.length >= 100
               @backend.index_insert_chunk index, result_chunk
