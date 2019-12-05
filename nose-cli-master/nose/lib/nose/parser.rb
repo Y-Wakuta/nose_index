@@ -92,13 +92,18 @@ module NoSE
     include Parslet
 
     rule(:identifier)    { match('[A-z0-9]').repeat(1).as(:identifier) }
-    rule(:field)         { identifier >> (str('.') >> identifier).repeat(1) }
+    # rule(:field)         { identifier >> (str('.') >> identifier).repeat(1) }
+    rule(:field)         { (match('[A-z0-9]').repeat(1) >> str('.') >> match('[A-z0-9]').repeat(1)).as(:identifier) >> (str('.') >> identifier).repeat(1) }
     rule(:fields)        { field >> (comma >> field).repeat }
+    # rule(:select_field)  {
+    #   field.as_array(:field) | (identifier >> str('.') >>
+    #                             str('*').repeat(1, 2).as(:identifier2)) }
     rule(:select_field)  {
-      field.as_array(:field) | (identifier >> str('.') >>
+      field.as_array(:field) | ((match('[A-z0-9]').repeat(1) >> str('.') >> match('[A-z0-9]').repeat(1)).as(:identifier) >> str('.') >>
                                 str('*').repeat(1, 2).as(:identifier2)) }
     rule(:select_fields) { select_field >> (comma >> select_field).repeat }
-    rule(:path)          { identifier >> (str('.') >> identifier).repeat }
+    # rule(:path)          { identifier >> (str('.') >> identifier).repeat }
+    rule(:path)          { (match('[A-z0-9]').repeat(1) >> str('.') >> match('[A-z0-9]').repeat(1)).as(:identifier) >> (str('.') >> identifier).repeat }
   end
 
   # Field settings for update and insert statements
@@ -138,7 +143,7 @@ module NoSE
       limit.maybe.capture(:limit) >> comment.maybe.as(:comment) }
 
     rule(:update) {
-      str('UPDATE') >> space >> identifier.as(:entity) >> space >>
+      str('UPDATE') >> space >> (match('[A-z0-9]').repeat(1) >> str('.') >> match('[A-z0-9]').repeat(1)).as(:entity) >> space >>
       (str('FROM') >> space >> path.as_array(:path) >> space).maybe >>
       str('SET') >> space >> settings.as_array(:settings) >>
       where.maybe.as(:where).capture_source(:where) >>
@@ -155,7 +160,7 @@ module NoSE
     }
 
     rule(:insert) {
-      str('INSERT INTO') >> space >> identifier.as(:entity) >> space >>
+      str('INSERT INTO') >> space >> (match('[A-z0-9]').repeat(1) >> str('.') >> match('[A-z0-9]').repeat(1)).as(:entity) >> space >>
       str('SET') >> space >> settings.as_array(:settings) >>
       (space >> str('AND') >> space >> str('CONNECT') >> space >>
        str('TO') >> space >> connect_list.as_array(:connections)).maybe >>

@@ -23,17 +23,29 @@ module NoSE
           client = new_client config
 
           # Skip this index if it's not empty
-          if skip_existing && !@backend.index_empty?(index)
-            @logger.info "Skipping index #{index.inspect}" if show_progress
-            next
-          end
+          # if skip_existing && !@backend.index_empty?(index)
+          #   @logger.info "Skipping index #{index.inspect}" if show_progress
+          #   next
+          # end
           @logger.info index.inspect if show_progress
 
           query = index_sql client, index, limit
 
+          not_null_fields = index.hash_fields + index.order_fields
+          not_null_col_names = not_null_fields.to_a.map{|field|
+            field.id.split(".").slice(1..).join("_")
+          }
+
           result_chunk = []
           query.each do |result|
             result = Hash[result.map { |k, v| [k.to_s, v] }]
+
+            result.each{|k, v|
+              if not_null_col_names.include?(k) and v.nil?
+                result[k] = Float::NAN
+              end
+            }
+
             result_chunk.push result
             if result_chunk.length >= 100
               @backend.index_insert_chunk index, result_chunk
@@ -58,8 +70,8 @@ module NoSE
         fields = index.hash_fields.to_a + index.order_fields + index.extra.to_a
 
         fields.map do |field|
-          "#{field.parent.name}__#{field.name}___" \
-            "#{field.parent.name}_#{field.name}".to_sym
+          table = field.parent.name.split(".").last # w/o schema
+          Sequel.qualify(table, field.name).as("#{table}_#{field.name}")
         end
       end
 
@@ -89,7 +101,8 @@ module NoSE
         # Construct the join condition
         tables, keys = index_sql_tables index
 
-        query = client[tables.first]
+        from_field = tables.first.to_s.split(".")
+        query = client[Sequel[from_field[0].to_sym][from_field[1].to_sym]]
         keys.map.with_index do |key, i|
           query = query.join tables[i + 1], key
         end
