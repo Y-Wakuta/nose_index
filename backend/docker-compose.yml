@@ -1,21 +1,21 @@
-version: '2'
+version: '3'
 services:
-  db_data:
-    image: busybox
-    volumes:
-      - /var/lib/mysql
-  mysql:
-    container_name: mysql_nose
-    build: ./mysql
-    volumes_from:
-      - db_data
-    environment:
-      MYSQL_ROOT_PASSWORD: root
-    ports:
-      - "3306:3306"
-    command: --max_allowed_packet=32505856 
+#  db_data:
+#    image: busybox
+#    volumes:
+#      - /var/lib/mysql
+#  mysql:
+#    container_name: mysql_nose
+#    build: ./mysql
+#    volumes_from:
+#      - db_data
+#    environment:
+#      MYSQL_ROOT_PASSWORD: root
+#    ports:
+#      - "3306:3306"
+#    command: --max_allowed_packet=32505856
   cassandra:
-    container_name: cassandra_nose
+    container_name: cassandra
     build: ./cassandra
     ports:
       - '7000:7000'
@@ -23,7 +23,21 @@ services:
       - '7199:7199'
       - '9042:9042'
       - '9160:9160'
-  tpccmysql:
-    container_name: tpcc_mysql_nose
-    build: ./tpcc-mysql/tpcc-mysql
-    tty: true
+    security_opt:
+      - seccomp:unconfined
+    volumes:
+      - /mnt/f/r-ito/data/cassandra:/var/lib/cassandra
+  cassandra-ui:
+    container_name: cassandra_ui
+    build: ./cassandra-ui
+    ports:
+      - '8888:80'
+    environment:
+      - CASSANDRA_HOST=cassandra
+      - CASSANDRA_USER=cassandra
+      - CASSANDRA_PASSWORD=cassandra
+      - WEB_UI_PORT=80
+#  tpccmysql:
+#    container_name: tpcc_mysql_nose
+#    build: ./tpcc-mysql/tpcc-mysql
+#    tty: true

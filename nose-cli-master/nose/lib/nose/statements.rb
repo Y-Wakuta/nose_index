@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require 'parslet/convenience'
+
 module NoSE
   # A single condition in a where clause
   class Condition
@@ -333,8 +335,11 @@ module NoSE
 
       # If parsing fails, re-raise as our custom exception
       begin
-        tree = CQLT.new.apply(CQLP.new.method(type).call.parse(text))
+        tree = CQLT.new.apply(CQLP.new.method(type).call.parse_with_debug(text))
       rescue Parslet::ParseFailed => exc
+        p '-----'
+        p exc.parse_failure_cause.ascii_tree
+        p '-----'
         new_exc = ParseFailed.new exc.cause.ascii_tree
         new_exc.set_backtrace exc.backtrace
         raise new_exc

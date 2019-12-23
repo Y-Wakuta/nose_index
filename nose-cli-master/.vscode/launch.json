@@ -1,0 +1,80 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Search - rubis",
+            "type": "Ruby",
+            "request": "launch",
+            "program": "${workspaceRoot}/bin/nose",
+            "useBundler": true,
+            "args": [
+                "search",
+                "rubis"
+            ],
+        },
+        {
+            "name": "Search - observatory_simple",
+            "type": "Ruby",
+            "request": "launch",
+            "program": "${workspaceRoot}/bin/nose",
+            "useBundler": true,
+            "args": [
+                "search",
+                "observatory_simple"
+            ],
+        },
+        {
+            "name": "Search - !observatory_simple",
+            "type": "Ruby",
+            "request": "launch",
+            "program": "${workspaceRoot}/bin/nose",
+            "useBundler": true,
+            "args": [
+                "search",
+                "observatory_simple",
+                "--max_space",
+                "5900000000000" // fail: 5850000000000
+            ],
+        },
+        {
+            "name": "Search (JSON) - observatory_simple",
+            "type": "Ruby",
+            "request": "launch",
+            "program": "${workspaceRoot}/bin/nose",
+            "useBundler": true,
+            "args": [
+                "search",
+                "observatory_simple",
+                "--format",
+                "json",
+                // ">",
+                // "nose/schema/observatory_simple.json"
+            ],
+        },
+        {
+            "name": "Create - observatory_simple",
+            "type": "Ruby",
+            "request": "launch",
+            "program": "${workspaceRoot}/bin/nose",
+            "useBundler": true,
+            "args": [
+                "create",
+                "observatory_simple.json"
+            ],
+        },
+        {
+            "name": "Load - observatory_simple",
+            "type": "Ruby",
+            "request": "launch",
+            "program": "${workspaceRoot}/bin/nose",
+            "useBundler": true,
+            "args": [
+                "load",
+                "observatory_simple.json"
+            ],
+        }
+    ]
+}

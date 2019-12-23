@@ -2,9 +2,11 @@
 backend:
   name: cassandra
   hosts:
-    - 10.0.16.7
-  port: 9042
-  keyspace: rubis_secondary_bidding_161000000_si
+    - 172.27.102.228 # eth0 on wsl
+    # - 172.16.1.75
+  port: 19042
+  # port: 9042
+  keyspace: pdr2
 
 # Cost model name and parameters
 cost_model:
@@ -22,17 +24,24 @@ cost_model:
 # Loader-specific configuration
 # The mysql loader is recommended, but csv might work as well if
 # your generated indexes all have path length one
+# loader:
+#   name: mysql
+#   host: 172.22.90.232
+#   database: pdr2
+#   username: 
+#   port: 15432
+
 loader:
-  name: mysql
-  host: 10.0.16.7
-  database: rubis
-  username: root
-  password: root
+  name: sql
+  uri: "postgresql://:@172.27.102.228:15432/pdr2"
+  # uri: "postgresql://:@172.17.1.76:5432/pdr2"
+
+limit: 10
 
 # Query proxy
-proxy:
-  name: mysql
-  port: 3307
+# proxy:
+#   name: mysql
+#   port: 3307
 
 # vim: set syntax=yaml:
 
